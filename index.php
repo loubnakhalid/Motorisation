@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<?php header("location:identifier.html") ?>
+<head>
+    <title>Client's Website</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="feuilles_css/styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo"> <img src="images/logo.png" alt="Client's Logo" id="logo"></div>
+        <div class="navigation">
+            <nav>
+                <h1>test</h1>
+                <ul>
+                    <li>
+                        <a href="identifier.html"> <i class="fa-solid fa-user"></i></a>
+                        <a href=""> <i class="fa-solid fa-magnifying-glass"></i></a>
+                        <a href=""> <i class="fa-solid fa-cart-shopping"></i></a>
+
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="menu">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="">Motorisation portail garage</a>
+                        <a href="">Motorisation portail coulissant</a>
+                        <a href="">Motorisation volet roulant</a>
+                        <a href="">Motorisation portail battant</a>
+                        <a href="">Interphonie & alarme</a>
+                        <a href="">Accessoires </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+
+    </header>
+    <main>
+        <div id="main-content">
+            <div class="column">
+                <a href="">
+                    <img src="images/image1.jpg" alt="Column Image" id="image1">
+                    <h4>Motorisation porte</h4>
+                </a>
+
+            </div>
+            <div class="column">
+                <a href="">
+                    <img src="images/image2.jpg" alt="Column Image" id="image2">
+                    <h4>Motorisation garage</h4>
+                </a>
+
+            </div>
+
+            <div class="column">
+                <a href="">
+                    <img src="images/image3.jpg" alt="Column Image" id="image3">
+                    <h4>Motorisation volet</h4>
+                </a>
+
+            </div>
+            <div class="column">
+                <a href="">
+                    <img src="images/image4.jpg" alt="Column Image" id="image4">
+                    <h4>interphonie</h4>
+                </a>
+            </div>
+            <div class="column">
+                <a href="">
+                    <img src="images/image5.jpg" alt="Column Image" id="image5">
+                    <h4>Motorisation camera</h4>
+                </a>
+
+            </div>
+            <div class="column">
+                <a href="">
+                    <img src="images/image6.jpg" alt="Column Image" id="image6">
+                    <h4>portail coulissant</h4>
+                </a>
+
+            </div>
+
+        </div>
+        <div class="information">
+            <div class="text">
+
+                <h1> <span style="font-weight: 400;">Pourquoi</span> NovaMotorisation <span style="font-weight: 400;">?</span></h1>
+
+
+
+                <p style="font-weight: bold;">NovaMotorisation offre des solutions de motorisation pour les portails, volets, garages et systèmes d'alarme et de vidéosurveillance pour améliorer le confort, la sécurité et les économies d'énergie de votre maison.</p>
+                <p>NovaMotorisation offre des solutions de motorisation pour les portails, volets, garages et systèmes d'alarme et de vidéosurveillance pour améliorer le confort, la sécurité et les économies d'énergie de votre maison.</p>
+                <p>Nous proposons également des solutions éco-responsables grâce à la possibilité de relier nos équipements à des panneaux solaires pour réduire votre facture d'énergie. En tant que numéro 1 en automatisme de portail au Maroc, nous vous garantissons
+                    des produits de qualité aux meilleurs rapports qualité-prix. <span style="color: #e46301;">N'hésitez pas à nous contacter 
+                            pour découvrir nos solutions sur mesure adaptées à vos besoins.</span></p>
+            </div>
+            <div class="photo">
+                <img src="images/main_image.jpg" alt="" id="imad">
+            </div>
+        </div>
+
+    </main>
+    <footer>
+        <div class="footer-column">
+            <div class="nous">
+                <a href="">
+                    <i class="fa-solid fa-users"></i>
+
+                    <p class="p">Qui sommes-nous</p>
+                </a>
+
+            </div>
+            <div class="contacter">
+                <a href="">
+                    <i class="fa-solid fa-comment-dots"></i>
+
+                    <p class="p">Nous contacter</p>
+                </a>
+
+            </div>
+            <div class="Guide">
+                <a href="">
+                    <i class="fa-solid fa-sheet-plastic"></i>
+                    <p class="p">Guide d’achat</p>
+                </a>
+
+
+            </div>
+            <div class="Livraison">
+                <a href=""><i class="fa-solid fa-truck-fast"></i>
+                <p class="p">Livraison sur-mesure</p>
+              </a>
+
+            </div>
+        </div>
+
+    </footer>
+</body>
+
+</html>
