@@ -15,7 +15,6 @@
         <div class="logo"> <img src="images/logo.png" alt="Client's Logo" id="logo"></div>
         <div class="navigation">
             <nav>
-                <h1>test</h1>
                 <ul>
                     <li>
                         <a href="identifier.html"> <i class="fa-solid fa-user"></i></a>
