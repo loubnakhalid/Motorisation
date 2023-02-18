@@ -32,7 +32,7 @@ if($_GET['action']=='inscription'){
 	$mdp2= isset($_COOKIE['login']['mdp2']) ? $_COOKIE['login']['mdp2'] : "";
 	$email= isset($_COOKIE['login']['email']) ? $_COOKIE['login']['email'] : "";
 	if(isset($_GET['erreur'])){
-		echo '<h5>'.$_GET['erreur'].'</h5>';
+		echo $_GET['erreur'];
 	}
 	echo "
 	<form method='post' action='controller.php'>
@@ -47,6 +47,9 @@ if($_GET['action']=='inscription'){
 	";
 }
 if($_GET['action']=='forgot'){
+	if(isset($_GET['erreur'])){
+		echo $_GET['erreur'];
+	}
 	echo"
     <h2>Entrez votre email :</h2>
     <form action='controller.php' method='POST' autocomplete='off'>
@@ -56,6 +59,9 @@ if($_GET['action']=='forgot'){
 	";
 }
 if($_GET['action']=='verifEmail'){
+	if(isset($_GET['erreur'])){
+		echo $_GET['erreur'];
+	}
 	echo"
 	<div id='container'>
 	<h2>Entrez le code : </h2>
@@ -67,6 +73,9 @@ if($_GET['action']=='verifEmail'){
 ";
 }
 if($_GET['action']=='nvPass'){
+	if(isset($_GET['erreur'])){
+		echo $_GET['erreur'];
+	}
 	echo"
     <h2>Entrez un nouveau mot de passe : </h2>
     <form action='controller.php' method='POST' autocomplete='off'>

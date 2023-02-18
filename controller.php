@@ -24,7 +24,7 @@ if(isset($_POST['con']))
                 header("location:./admin/index.php");
             }
             else{
-                header("location:profil.php");
+                header("location:index.php");
             }
             
         }
@@ -84,7 +84,7 @@ if(isset($_POST['inscr']))
 			}
 			$header="From: Motorify.com <supportMotorify@test.com>\r\n";
 			$header.="Content-Type: text/html\r\n";
-			$message='<html><head></head><body style="font-size:13pt;color:#3a3a3a;"><fieldset style="padding: 25px;border-color: #0870b5;text-align: justify;"><legend><img src="https://loubnakhalid.github.io/Motorisation/logo3.png" width="150px"></legend>Bienvenue sur <b>Motorify</b>, votre destination en ligne pour tout ce qui concerne la motorisation !<br><br> Nous sommes là pour vous fournir toutes les informations, les conseils et les produits dont vous avez besoin pour améliorer votre expérience de motorisation et interphonie.<br><br>
+			$message='<html><head></head><body style="font-size:13pt;color:#3a3a3a;"><fieldset style="padding: 25px;border-color: #0870b5;text-align: justify;"><legend><img src="https://loubnakhalid.github.io/Motorisation/inc/img/logo3.png" width="150px"></legend>Bienvenue sur <b>Motorify</b>, votre destination en ligne pour tout ce qui concerne la motorisation !<br><br> Nous sommes là pour vous fournir toutes les informations, les conseils et les produits dont vous avez besoin pour améliorer votre expérience de motorisation et interphonie.<br><br>
 			Nous sommes une équipe de professionnels de la motorisation, avec des années d\'expérience dans l\'industrie. Nous sommes déterminés à fournir les meilleurs produits et services à nos clients, afin que vous puissiez profiter pleinement de votre projet de motorisation.<br><br>
 			Parcourez notre site <a href="Motorify.com" style="color:#26788e;decoration:none;font-weight:bold">Motorify.com</a> pour découvrir notre vaste sélection de produits de motorisation, y compris des pièces détachées, des accessoires, des télécommandes, ainsi que des outils et des équipements de motorisation. Nous sommes fiers de proposer une large gamme de produits de qualité supérieure, à des prix compétitifs.<br><br>
 			N\'hésitez pas à nous contacter si vous avez des questions ou si vous avez besoin d\'aide pour trouver le produit parfait pour votre projet. Nous sommes là pour vous aider à chaque étape du processus.
@@ -110,7 +110,7 @@ if (isset($_POST['forgotPass'])) {
             $code = rand(999999, 111111);
                 $_SESSION['code']=$code;
                 $subject = 'Email Verification Code';
-                $message = "our verification code is". $_SESSION['code'];
+                $message = "Le code de vérification est <b>". $_SESSION['code']."</b>";
                 $sender = 'From: Motorify.com';
 
                 if (mail($email, $subject, $message, $sender)) {
@@ -133,16 +133,16 @@ if(isset($_POST['verifEmail'])){
         header("location: identification.php?action=nvPass");
     }
     else{
-        header("location: identification.php?action=verfEmail&erreur=Code invalide ! Veuillez réssayer .");
+        header("location: identification.php?action=verifEmail&erreur=Code invalide ! Veuillez réssayer .");
     }
 }
-if(isset($_POST['nvPass'])){
-    $verif_mdp=preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/', $_POST['password']);
+if(isset($_POST['changePass'])){
+    $verif_mdp=preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/', $_POST['pass']);
     if (!$verif_mdp ||strlen($_POST['pass']) < 8) {
         header("location:identification.php?action=nvPass&erreur=Votre mot de passe doit contenir au minimum : 8 caractères, 1 chiffre, 1 caractère spécial, 1 majuscule");
     } else {
         if ($_POST['pass'] != $_POST['confirmPass']) {
-            header("location:identification.php?action=inscription&erreur=Les mots de passe ne sont pas identiques ! Veuillez réssayer svp.");
+            header("location:identification.php?action=nvPass&erreur=Les mots de passe ne sont pas identiques ! Veuillez réssayer svp.");
         } else {
             $password = password_hash( $_POST['pass'] ,PASSWORD_DEFAULT);
             $email = $_SESSION['email'];
