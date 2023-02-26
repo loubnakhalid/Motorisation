@@ -3,82 +3,103 @@ include("./inc/init.inc.php");
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Motorify</title>
+    <title>header</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css">
-    <link rel="stylesheet" href="./inc/css/header.css">
-    <script src="./inc/js/header.js"></script>
+    <link rel="stylesheet" href="inc/css/header.css">
 </head>
 
 <body>
 
 
     <header>
+
         <div class="logo">
-            <a href="./index.php"><img src="./inc/img/logo3.png" alt="" class="logo3"></a>
+            <a href="index.html"><img src="inc/img/logo3.png" alt="" class="logo3"></a>
         </div>
 
         <div class="recherche">
             <div class="div_input">
-                <form action="" name="form_recherche" class="recherche_form">
-                    <input type="text" name="chercher" id="cherche_input" value="Article, produit, marque..." onfocus="click_cherche_input(n)">
+                <form action="" name="form_racherche" class="recherche_form">
+                    <input type="text" name="chercher" id="cherche_input" value="Article, produit, marque..." onclick="click_cherche_input(this.name)">
                     <button type="submit" class="btn_recherche"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
                 </form>
             </div>
         </div>
 
         <div class="navigation">
-            <div class="info_travaille">
-                <p class="tele">0705189060</p>
-                <p class="heurs">Lundi à Vendredi 9h-12h </p>
+            <div class="login_hover hover">
+                <h2>indentifiez-vous</h2>
+                <form action="" class="form_hover_identifier">
+                    <div class="input_hover_identifier">
+                        <input type="text" name="" id="" placeholder="Email">
+                    </div>
+                    <div class="input_hover_identifier">
+                        <input type="text" name="" id="" placeholder="mot de pas">
+                    </div>
+                    <div class="input_hover_identifier">
+                        <input type="submit" name="" id="btn">
+                    </div>
+                    <div class="login_hover_grp">
+                        <a href="">mot de pas oublie</a>
+                        <a href="">cree compte</a>
+                    </div>
 
-
+                </form>
             </div>
-            <nav>
+            <div class="info_travaille">
+                <p class="tele"><span style="color:#ff7e00;">07 </span>05 18 90 60</p>
+                <p class="heurs">Lundi à Vendredi <span style="color:#ff7e00;">9</span><span style="color: #015e9b;">h</span> -<span style="color:#ff7e00;">18</span><span style="color: #015e9b;">h</span></p>
+            </div>
+
+
+            <nav class="panier_identifier">
                 <ul>
                     <li>
-                        <a href=
-                        <?php 
-                            if(Connecte()){
-                                echo "./index.php";
-                            }
-                            else{
-                                echo "./identification.php?action=login";
-                            }
-                        ?>
-                        ><img src="./inc/img/user.svg" alt="" class="icon_user"> </a>
+                        <a href="" class="icon_user">
+                            <lord-icon src="https://cdn.lordicon.com/dxjqoygy.json" trigger="loop" state="hover-nodding" stroke="70" colors="primary:#1663c7,secondary:#ff840a" style="width:52px;height:52px">
+                            </lord-icon>
+                        </a>
                     </li>
                     <li>
-                        <a href=
-                        <?php 
-                            if(Connecte()){
-                                echo "./panier.php";
-                            }
-                            else{
-                                echo "./identification.php?action=login";
-                            }
-                        ?>
-                        > <img src="./inc/img/shopping-cart.svg" alt="" class="icon_panier"> </a>
+                        <a href="">
+                            <lord-icon src="https://cdn.lordicon.com/slkvcfos.json" trigger="hover" colors="primary:#1663c7,secondary:#ff840a" stroke="70" style="width:52px;height:52px">
+                            </lord-icon>
+                            </i>
+                        </a>
                     </li>
+
+
                 </ul>
             </nav>
         </div>
 
         <div class="menu">
-            <ul>
-                <?php
-                $rqt="SELECT * FROM catégorie";
-                $rslt=mysqli_execute_query($mysqli,$rqt);
-                while($row=mysqli_fetch_assoc($rslt)){
-                    echo '<li><a href="produit.php?id_catégorie='.$row['Id_Catégorie'].'">'.$row['Nom_Catégorie'].'</a></li>';
-                }
-                ?>
-            </ul>|
+            <nav>
+                <ul>
+                    <?php
+                        $rqt="SELECT * FROM catégorie";
+                        $rslt=mysqli_execute_query($mysqli,$rqt);
+                        while($row=mysqli_fetch_assoc($rslt)){
+                            echo '<li><a href="produit.php?id_catégorie='.$row['Id_Catégorie'].'">'.$row['Nom_Catégorie'].'</a></li>';
+                        }
+                        ?>
+                </ul>
+
+            </nav>
+
         </div>
+
     </header>
-    <main>
+    <footer>
+    </footer>
+    <script src="inc/js/header.js"></script>
+</body>
+
+</html>
