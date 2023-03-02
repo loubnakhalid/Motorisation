@@ -1,3 +1,4 @@
+<?php include("../inc/init.inc.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,18 +6,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="menu_ADMIN/styles.css">
+    <link rel="stylesheet" href="./inc_ADMIN/css/style.css">
     <title>Document</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
+    <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" > 
+    <script src="./inc_ADMIN/js/function.js"></script>
 </head>
 
 <body>
     <nav class="menu ">
         <header>
             <div class="logo">
-                <img src="menu_ADMIN/logo1.png" alt="" id="logo1">
-                <img src="menu_ADMIN/logo2.png" alt="" id="logo2">
+                <img src="./inc_ADMIN/img/logo1.png" alt="" id="logo1">
+                <img src="./inc_ADMIN/img/logo2.png" alt="" id="logo2">
             </div>
             <i class='bx bx-chevron-left change'></i>
         </header>
@@ -26,30 +29,27 @@
                     <a href="">
                         <i class='bx bx-home  icon'></i>
                         <span class="text">Acceuil</span>
-
                     </a>
                 </li>
                 <li class="lien">
-                    <a href="">
+                    <a href="gestion.php?table=catégorie">
                         <i class='bx bx-category icon'></i>
-                        <span class="text">Categories</span>
+                        <span class="text">Catégories</span>
                     </a>
                 </li>
                 <li class="lien">
-                    <a href="">
+                    <a href="gestion.php?table=produit">
                         <i class='bx bxl-product-hunt icon'></i>
                         <span class="text">Produits</span>
                     </a>
                 </li>
-
                 <li class="lien">
-                    <a href="">
+                    <a href="gestion.php?table=commande">
                         <i class='bx bx-cart-alt icon'></i>
                         <span class="text">Commandes</span>
 
                     </a>
                 </li>
-
                 <li class="lien">
                     <a href="">
                         <i class='bx bx-phone-call icon'></i>
@@ -64,12 +64,8 @@
 
                     </a>
                 </li>
-
-
-
-
                 <li class="lien dec">
-                    <a href="">
+                    <a href="../controller.php?action=déconnexion">
                         <i class='bx bx-log-out icon'></i>
                         <span class="text">Deconexion</span>
 
@@ -82,7 +78,6 @@
     <section class="home">
         <header>
             <div class="header_header">
-
             </div>
             <div class="case"></div>
             <div class="case"></div>
@@ -90,11 +85,4 @@
             <div class="case"></div>
         </header>
         <main>
-        </main>
-    </section>
-
-
-    <script src="menu_ADMIN/main.js"></script>
-</body>
-
-</html>
+            

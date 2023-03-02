@@ -12,22 +12,19 @@ include("./inc/init.inc.php");
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css">
-    <link rel="stylesheet" href="inc/css/header.css">
+    <link rel="stylesheet" href="inc/css/style.css">
 </head>
 
 <body>
-
-
     <header>
-
         <div class="logo">
             <a href="index.html"><img src="inc/img/logo3.png" alt="" class="logo3"></a>
         </div>
 
         <div class="recherche">
             <div class="div_input">
-                <form action="" name="form_racherche" class="recherche_form">
-                    <input type="text" name="chercher" id="cherche_input" value="Article, produit, marque..." onclick="click_cherche_input(this.name)">
+                <form action="" name="form_recherche" class="recherche_form">
+                    <input type="text" name="chercher" id="cherche_input" value="" placeholder="Article, produit, marque..." onclick="click_cherche_input()">
                     <button type="submit" class="btn_recherche"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
                 </form>
             </div>
@@ -36,19 +33,19 @@ include("./inc/init.inc.php");
         <div class="navigation">
             <div class="login_hover hover">
                 <h2>indentifiez-vous</h2>
-                <form action="" class="form_hover_identifier">
+                <form action="controller.php" method="post" class="form_hover_identifier">
                     <div class="input_hover_identifier">
-                        <input type="text" name="" id="" placeholder="Email">
+                        <input type="text" name="email" id="" placeholder="Email">
                     </div>
                     <div class="input_hover_identifier">
-                        <input type="text" name="" id="" placeholder="mot de pas">
+                        <input type="text" name="mdp" id="" placeholder="Mot de passe">
                     </div>
                     <div class="input_hover_identifier">
-                        <input type="submit" name="" id="btn">
+                        <input type="submit" name="con" id="btn">
                     </div>
                     <div class="login_hover_grp">
-                        <a href="">mot de pas oublie</a>
-                        <a href="">cree compte</a>
+                        <a href="">Mot de passe oublié ?</a>
+                        <a href="">Créer un compte</a>
                     </div>
 
                 </form>
@@ -63,7 +60,7 @@ include("./inc/init.inc.php");
                 <ul>
                     <li>
                         <a href="" class="icon_user">
-                            <lord-icon src="https://cdn.lordicon.com/dxjqoygy.json" trigger="loop" state="hover-nodding" stroke="70" colors="primary:#1663c7,secondary:#ff840a" style="width:52px;height:52px">
+                            <lord-icon src="https://cdn.lordicon.com/dxjqoygy.json" trigger="hover" state="hover-nodding" stroke="70" colors="primary:#1663c7,secondary:#ff840a" style="width:52px;height:52px">
                             </lord-icon>
                         </a>
                     </li>
@@ -74,12 +71,9 @@ include("./inc/init.inc.php");
                             </i>
                         </a>
                     </li>
-
-
                 </ul>
             </nav>
         </div>
-
         <div class="menu">
             <nav>
                 <ul>
@@ -87,19 +81,12 @@ include("./inc/init.inc.php");
                         $rqt="SELECT * FROM catégorie";
                         $rslt=mysqli_execute_query($mysqli,$rqt);
                         while($row=mysqli_fetch_assoc($rslt)){
-                            echo '<li><a href="produit.php?id_catégorie='.$row['Id_Catégorie'].'">'.$row['Nom_Catégorie'].'</a></li>';
+                            echo '<li><a href="produit.php?id_catégorie='.$row['IdCt'].'">'.$row['NomCt'].'</a></li>';
                         }
-                        ?>
+                    ?>
                 </ul>
-
             </nav>
-
         </div>
-
+        <script src="inc/js/header.js"></script>
     </header>
-    <footer>
-    </footer>
-    <script src="inc/js/header.js"></script>
-</body>
-
-</html>
+    <main>

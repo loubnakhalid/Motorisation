@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "motorify-2023",
+  "private_key_id": "bad296ea02d848731334214236bdba538ddbc959",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCwtBmUM8xPjDiQ\nUBT32YppfrHTXZUs3BtRGjSxsEMpcS08INMUZ9U9iupMMHE4qjQXPqgh1/UoaLmn\nY1yUYDlNYv9yWVXXHxTO/LO3C1Tg0OikdRO+2G1qxrd010A0SYzvD6nG1daXL1Wn\nW2LbixF5b5N2mkbJbxcU733E12WMk6lttujZxv2aOjCr26VbiV3ZiydWHLVUWmk9\ntYy29TtHQ7n8oeXJCrlQn0PGG3FwFNArbOH3mQaJsSK1O4nLoTAIW/AFbXJowORH\n9QJAVrsdfLLKHGcA1apUGWoh9LpwrbtAC8+++0uOJm998bsgScztv1O49j4+oDBr\nvV4QrvCRAgMBAAECggEABMncp5d/wega4E5LQywyBAna589xa3XLh7ceFnKgX08h\n2q9JCRSHQtOw5b+qUc7K+pZIGCKyEhZEcbTPnXW+F8rHAWJKYToGZlWSyTMVacI/\ni7Vgg5t525rm/dOXedNEbnYOM8U3u4Ec4Rwo4aozHwdXB6/Gm07XYUncLqlnpxeN\npyVj8vUTSTwoOtlfe5LgjPaYf5L6tRfG1GiA73qmiQVrjU5ZbJqliC5b51zr+/X3\nOBXcN4GjsKfj+0mSeDvkRX3eS94JV0rgkyWlpqtJwzdBZYdXaITDMt2LOmw0LlOD\n+gAeoj0mtLJfgLlFj9GeOCi+nuc44vvQKGbrAa/5AQKBgQD3VWCBuPvxj9C2/YM9\nQUzJQrxKbq7qyX42ysf/aUGwe2akgdY+6tCgRhCfY75LRj0Wbj8W7CZx6Sajxa2k\ndL+dkcpb9EOlOiBxZp0eTqis+DYI0ZRgIKgsPrFR4i0r1H/KqXf8rj3guDyOf6JF\nIpMdF5WkK1o2PK3J4UHnFy4WZQKBgQC25Sj71bDHGFSB5Xc0ppTHWdBhx8reIrfi\nRzRG9rKs3Jc8Sz3/PDLe+dopU0D9rQVkr8MVOeH5xhQ0rQYlp9aLWEc7BikM/ZYW\n6av0noR6wfVHQ2FC3B33N+To+YTgHoeNxmtfaPy0Xvu5Vv3Vi6twKC+gnOlSpQRl\n7vCYVCxIvQKBgQC6I4zv0/H4iE2BiiU88moBhbIDKm2F0YKlZdNCi0qesSA8amJ9\nE2dTV6em7QAH0qKiwPHGJI+CZv9nfZwDCsIyqcfrkFdgf/Bup9VTO8uB8YNo+6F4\n/trSAZSdlWR9ef163jOo/NEg0Ebyz2emNDEXUeqSlPXdn6kDJ/3bFvzeaQKBgGXR\nu/g/ZdPhGqLaIXwBRRCaUqUs+iaig2aIp3TeQGh1wghCBzjBxbxWsnqRK7xOB5Of\nOebmO4S3HmaY8LQj9Q/MTJNygYYG4vjMi/t6CFzi/+71dv8m1dPcnSaKSswOkv59\nuSb7pruvqUnsQRISWJXu+VzcHhTxYzpwRCc5rRGtAoGBANz3CqGaPPPGwAhK1gJg\nmoc6x0wlW6wg13DKoP9Arf+i37QL2Z+63ZXY4645UP9RdhxP92/V3azmS8epQ0t7\ngnCQds+XK5LCbuRUQKjViY/qc/MDUmJYOvr7gH+3zaudmeaUxq0VUyUw8uR9IEW6\nStwIyUvjmobtev6DUdc3X0ij\n-----END PRIVATE KEY-----\n",
+  "client_email": "motorify-2023@motorify-2023.iam.gserviceaccount.com",
+  "client_id": "118278622914866413949",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/motorify-2023%40motorify-2023.iam.gserviceaccount.com"
+}

@@ -1,69 +1,54 @@
 <?php require_once("./inc/init.inc.php"); ?>
 <?php
-if(isset($_GET['action']) && $_GET['action'] == "deconnexion") 
+if(isset($_GET['action']) && $_GET['action'] == "déconnexion") 
 {
 	session_destroy(); 
+    header("location:index.php");
 }
 if(isset($_POST['con']))
 {
-    $resultat = mysqli_execute_query($mysqli,"SELECT * FROM client WHERE pseudo='$_POST[pseudo]'");
+    $resultat = mysqli_execute_query($mysqli,"SELECT * FROM membre WHERE EmailMb='$_POST[email]'");
     if($resultat->num_rows != 0)
     {
         $membre = $resultat->fetch_assoc();
         $pass =$_POST['mdp'];
-        if(password_verify($pass,$membre['Mot_De_passe']))
+        if(password_verify($pass,$membre['MDPS']))
         {
             foreach($membre as $indice => $element)
             {
-                if($indice != 'Mot_De_passe')
+                if($indice != 'MDPS')
                 {
-                    $_SESSION['client'][$indice] = $element; 
+                    $_SESSION['membre'][$indice] = $element; 
                 }
             }
             if(Admin()){
                 header("location:./admin/index.php");
             }
-            else{
+            elseif(Client()){
                 header("location:index.php");
             }
             
         }
         else
         {
-            header("location:identification.php?action=login&erreur=Mot de passe incorrecte");
+            header("location:identification.php?action=login&erreur=Mot de passe incorrecte ! Veuillez réssayer .");
         }
     }
     else
     {
-        header("location:identification.php?action=login&erreur=Pseudo incorrecte");
+        header("location:identification.php?action=login&erreur=Email incorrecte ! Veillez réssayer .");
     }
 }
-echo $contenu;
 if(isset($_POST['inscr']))
 {
-    setcookie('login[pseudo]',$_POST['pseudo'],time()+60);
     setcookie('login[nom]',$_POST['nom'],time()+60);
     setcookie('login[prenom]',$_POST['prenom'],time()+60);
     setcookie('login[mdp1]',$_POST['mdp1'],time()+60);
     setcookie('login[mdp2]',$_POST['mdp2'],time()+60);
     setcookie('login[email]',$_POST['email'],time()+60);
     $verif_mdp=preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/', $_POST['mdp1']);
-	$verif_pseudo = preg_match('#^[a-zA-Z0-9._-]+$#', $_POST['pseudo']); 
-	if(!$verif_pseudo || strlen($_POST['pseudo']) < 1 || strlen($_POST['pseudo']) > 20 )
-	{
-        setcookie('login[pseudo]','',time()-1);
-		header("location:identification.php?action=inscription&erreur=Votre pseudo doit contenir entre 1 et 20 caractères ! (Caractère accepté : Lettre de A à Z et chiffre de 0 à 9)");
-	}
-	else
-	{
-		$verifPseudo = mysqli_execute_query($mysqli,"SELECT * FROM client WHERE pseudo='$_POST[pseudo]'"); 
-		$verifEmail=mysqli_execute_query($mysqli,"SELECT * FROM client WHERE email_client='$_POST[email]'");
-		if($verifPseudo->num_rows > 0)
-		{
-            setcookie('login[pseudo]','',time()-1);
-            header("location:identification.php?action=inscription&erreur=Pseudo indisponible ! Veuillez en choisir un autre svp.");
-		}
-		elseif($verifEmail->num_rows > 0){
+	$verifEmail=mysqli_execute_query($mysqli,"SELECT * FROM membre WHERE EmailMb='$_POST[email]'");
+		if($verifEmail->num_rows > 0){
             setcookie('login[email]','',time()-1);
             header("location:identification.php?action=inscription&erreur=Email déjà utilisé ! Veuillez en choisir un autre svp.");
 		}
@@ -93,11 +78,11 @@ if(isset($_POST['inscr']))
 			$to=$_POST['email'];
 			mail($to,$subject,$message,$header);
             $_POST['mdp1']=password_hash($_POST['mdp1'],PASSWORD_DEFAULT,['cost'=>14]);
-			mysqli_execute_query($mysqli,"INSERT INTO client (pseudo, mot_de_passe,nom_client, prénom_client, email_client) VALUES ('$_POST[pseudo]', '$_POST[mdp1]', '$_POST[nom]', '$_POST[prenom]', '$_POST[email]')");
+			mysqli_execute_query($mysqli,"INSERT INTO membre (MDPS,NomMb,PrénomMb,EmailMb) VALUES ('$_POST[mdp1]', '$_POST[nom]', '$_POST[prenom]', '$_POST[email]')");
 			header("location:identification.php?action=login");
 		}
 	}
-}
+
 if (isset($_POST['forgotPass'])) {
     $email = $_POST['email'];
     $_SESSION['email'] = $email;

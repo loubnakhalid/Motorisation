@@ -15,7 +15,7 @@ if($_GET['action']=='login'){
 	echo "
 	<form method='post' action='controller.php'>
     	<label for='pseudo'>Pseudo</label><br/>
-    	<input type='text' id='pseudo' name='pseudo'><br><br>
+    	<input type='text' id='pseudo' name='email'><br><br>
     	<label for='mdp'>Mot de passe</label><br>
     	<input type='text' id='mdp' name='mdp'><br><br>
     	<a href='identification.php?action=forgot'>Forgot password?</a><br>
@@ -25,7 +25,6 @@ if($_GET['action']=='login'){
 	";
 }
 if($_GET['action']=='inscription'){
-	$pseudo= isset($_COOKIE['login']['pseudo']) ? $_COOKIE['login']['pseudo'] : "";
 	$nom= isset($_COOKIE['login']['nom']) ? $_COOKIE['login']['nom'] : "";
 	$prenom= isset($_COOKIE['login']['prenom']) ? $_COOKIE['login']['prenom'] : "";
 	$mdp1= isset($_COOKIE['login']['mdp1']) ? $_COOKIE['login']['mdp1'] : "";
@@ -36,7 +35,6 @@ if($_GET['action']=='inscription'){
 	}
 	echo "
 	<form method='post' action='controller.php'>
-		Pseudo : <input type='text' name='pseudo' value='$pseudo'><br>
 		Nom : <input type='text' name='nom' value='$nom'><br>
 		Prenom : <input type='text' name='prenom' value='$prenom'><br>
 		Mot de pass : <input type='text' name='mdp1' value='$mdp1'><br>
@@ -86,4 +84,4 @@ if($_GET['action']=='nvPass'){
 	";
 }
 ?>
-<?php require_once("./inc/bas.inc.php"); ?>
+<?php require_once("./inc/bas.inc.html"); ?>
