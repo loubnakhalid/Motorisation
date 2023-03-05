@@ -12,6 +12,7 @@
     <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" > 
     <script src="./inc_ADMIN/js/function.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body>
@@ -26,7 +27,7 @@
         <div class="main_menu">
             <ul>
                 <li class="lien acceuil">
-                    <a href="">
+                    <a href="./index.php">
                         <i class='bx bx-home  icon'></i>
                         <span class="text">Acceuil</span>
                     </a>
@@ -67,7 +68,7 @@
                 <li class="lien dec">
                     <a href="../controller.php?action=déconnexion">
                         <i class='bx bx-log-out icon'></i>
-                        <span class="text">Deconexion</span>
+                        <span class="text">Déconnexion</span>
 
                     </a>
                 </li>
@@ -75,14 +76,3 @@
 
         </div>
     </nav>
-    <section class="home">
-        <header>
-            <div class="header_header">
-            </div>
-            <div class="case"></div>
-            <div class="case"></div>
-            <div class="case"></div>
-            <div class="case"></div>
-        </header>
-        <main>
-            

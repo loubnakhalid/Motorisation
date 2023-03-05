@@ -1,77 +1,306 @@
-section.home {
+/* *======================================    menu   ================================================= **/
+
+.body {
+    background-color: #00154db7;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.div_form_modification_produit {
+    position: fixed;
+    padding: 30px 0 0 0;
+    width: 80%;
+    background-color: #ffffff;
+    z-index: 100;
+    top: 50%;
+    left: 58.3%;
+    box-shadow: rgba(12, 9, 9, 0.39) 0px 0px 11px 0px;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+}
+
+.div_form_modification_produit form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.div_form_modification_produit form .form_left {
+    width: 70%;
+    height: 250px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.div_form_modification_produit form .form_left .case,
+.div_form_modification_produit form .form_left .case_text_area {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-left: 25px;
+    width: 45%;
+    height: 66px;
     position: relative;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 200px auto;
-    grid-template-areas: "header" "main";
-    grid-gap: 20px;
-    min-height: 100vh;
-    left: 210px;
-    width: calc(100% - 210px);
-    transition: all 0.5s ease;
+    margin-top: 10px;
 }
 
-nav.menu.fermer~section.home {
-    left: 90px;
-    width: calc(100% - 90px);
-    transition: all 0.5s ease;
+.div_form_modification_produit form label {
+    font-size: 14px;
 }
 
-.home header {
-    grid-area: header;
+.div_form_modification_produit form .form_left .case .input_text,
+.div_form_modification_produit form .form_left .case_prix_qauntite .input_text {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #e6f4ff;
+}
+
+.div_form_modification_produit form .form_left .case .input_text input,
+.div_form_modification_produit form .form_left .case_prix_qauntite .input_text input,
+.div_form_modification_produit form .form_left .case_text_area .input_text_area textarea {
+    background-color: #e6f4ff;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    padding: 0 0 0 8px;
+}
+
+.div_form_modification_produit form .form_left .case_prix_qauntite {
+    margin-left: 24px;
+    height: 58px;
+    background-color: #ffffff;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.div_form_modification_produit form .form_left .case_text_area {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-left: 25px;
+    width: 94%;
+    height: 58px;
+    background-color: #ffffff;
+    margin-top: 10px;
+}
+
+.div_form_modification_produit form .form_left .case_text_area .input_text_area {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #e6f4ff;
+}
+
+.div_form_modification_produit form .form_left .case .input_select {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #e6f4ff;
+    cursor: pointer;
+}
+
+.div_form_modification_produit form .form_left .case .input_select select {
+    width: 100%;
+    height: 100%;
+    padding-left: 4px;
+    background-color: inherit;
+    border: none;
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.div_form_modification_produit form .form_left .case .input_select .icon_select {
+    position: absolute;
+    right: 1px;
+    z-index: 0;
+}
+
+.div_form_modification_produit form .form_left .case .input_select .bxs-down-arrow {
+    color: #515151;
+    font-size: 14px;
+    padding: 0 2px 0 2px;
+    margin-right: 10px;
+}
+
+.div_form_modification_produit form .form_right {
+    width: 30%;
+    height: 258px;
+    display: flex;
+    flex-direction: column;
+}
+
+.div_form_modification_produit form .form_right .case_image {
+    margin-top: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    background-color: #ffffff;
+}
+
+.div_form_modification_produit form .form_right .case_image .zone_image {
+    width: 94%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 10px solid #e6f4ff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.div_form_modification_produit form .form_right .case_image .zone_image img#image_telecharger {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.div_form_modification_produit form .form_right .case_image .zone_image h3 {
+    color: #515151;
+    margin-bottom: 25px;
+}
+
+.div_form_modification_produit form .form_right .case_image .zone_image .bxs-cloud-upload {
+    font-size: 105px;
+    color: #515151;
+}
+
+.div_form_modification_produit form .form_right .case_image .zone_image .input_image {
+    width: 100%;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 204px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.div_form_modification_produit form .form_bas {
+    height: 60px;
+    width: 100%;
+    background-color: #ffffff;
+    border-top: 1px solid rgb(211, 211, 211);
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.div_form_modification_produit form .form_bas .retour_form_modifier_produit {
+    width: 110px;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f1f7fa;
 }
 
-.home main {
-    grid-area: main;
+.div_form_modification_produit form .form_bas .retour_form_modifier_produit input.btn_retour_form_modifier_produit {
+    font-size: 14px;
+    width: 60px;
+    cursor: pointer;
+    height: 27px;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    background: #ef2a41;
+}
+
+.div_form_modification_produit form .form_bas .submit_form {
+    width: 170px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    height: 100%;
+    align-items: center;
+    margin-right: 5px;
 }
 
-.home main .table {
+.div_form_modification_produit form .form_bas .submit_form input.btn_modifier_form_modifier_produit {
+    width: 65px;
+    font-size: 14px;
+    height: 27px;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    background: #2cafbe;
+    cursor: pointer;
+}
+
+.div_form_modification_produit form .form_bas .submit_form input.btn_effacer_form_modifier_produit {
+    width: 60px;
+    background: #512cbe;
+    font-size: 14px;
+    height: 27px;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+
+/* *======================================  home  ======================================================= */
+
+.home main .table_produit {
     box-shadow: rgba(163, 163, 163, 0.39) 0px 0px 11px 0px;
     height: auto;
     margin-bottom: 30px;
     border-radius: 5px;
-    overflow: hidden;
+    /* overflow: hidden; */
     width: 95%;
     transition: all 0.8s ease;
     position: relative;
 }
 
-.home main .table table {
+.home main .table_produit table {
     width: 100%;
     border: 1px solid whitesmoke;
     overflow-y: auto;
     height: auto;
     background-color: #ffffff;
-    overflow: hidden;
+    /* overflow: hidden; */
     transition: all 0.7s ease;
 }
 
-.home main .table table thead {
+.home main .table_produit table thead {
     font-weight: normal;
     color: #2368cf;
     height: 50px;
     font-size: 13px;
 }
 
-.home main .table table tbody {
+.home main .table_produit table tbody {
     overflow-y: auto;
     height: auto;
     margin-top: 10px;
 }
 
 
-/* .home main .table table tr{
+/* .home main .table_produit table tr{
 	border-left: 4px solid rgb(132, 9, 9);
 	cursor: pointer;
 } */
 
-.home main .table table td {
+.home main .table_produit table td {
     height: 50px;
     background-color: inherit;
     text-align: center;
@@ -80,28 +309,27 @@ nav.menu.fermer~section.home {
     color: rgb(69, 87, 106);
 }
 
-.home main .table table td img {
+.home main .table_produit table td img {
     height: 50px;
-    width: 50px;
     background-color: inherit;
     margin: 0 4px 0 4px;
 }
 
-.home main .table table td.action {
+.home main .table_produit table td.action {
     display: flex;
     justify-content: space-around;
     align-items: center;
     cursor: pointer;
 }
 
-.home main .table table td.action .modifier {
+.home main .table_produit table td.action .icon_modifier_produit {
     font-size: 25px;
     color: #0833a7;
 }
 
 
 /* 
-.home main .table table td input{
+.home main .table_produit table td input{
 	background-color: inherit;
 	font-size: 13px;
 	color: #365380;
@@ -115,7 +343,7 @@ nav.menu.fermer~section.home {
 	white-space: pre-wrap;
 } */
 
-.home main .table .entete {
+.home main .table_produit .entete {
     width: 100%;
     height: 50px;
     background-color: #ffffff;
@@ -124,7 +352,7 @@ nav.menu.fermer~section.home {
     grid-row: auto;
 }
 
-.home main .table .entete .element {
+.home main .table_produit .entete .element {
     height: 100%;
     width: 100%;
     display: flex;
@@ -132,7 +360,7 @@ nav.menu.fermer~section.home {
     justify-content: center;
 }
 
-.home main .table .entete .element .chercher {
+.home main .table_produit .entete .element .chercher {
     width: 90%;
     height: 75%;
     background-color: #d4e1ff;
@@ -143,14 +371,14 @@ nav.menu.fermer~section.home {
     overflow: hidden;
 }
 
-.home main .table .entete .element .chercher form {
+.home main .table_produit .entete .element .chercher form {
     display: flex;
     width: 100%;
     height: 100%;
     justify-content: space-between;
 }
 
-.home main .table .entete .element .chercher button {
+.home main .table_produit .entete .element .chercher button {
     width: 10%;
     background: inherit;
     border: none;
@@ -159,20 +387,20 @@ nav.menu.fermer~section.home {
     font-size: 17px;
 }
 
-.home main .table .entete .element .chercher input {
+.home main .table_produit .entete .element .chercher input {
     background: inherit;
     border: none;
     width: 80%;
     height: 100%;
 }
 
-.home main .table .entete .element .chercher input:focus {
+.home main .table_produit .entete .element .chercher input:focus {
     outline: none;
     border: none;
 }
 
-.home main .table .entete .element .trie,
-.home main .table .entete .element .statut {
+.home main .table_produit .entete .element .trie,
+.home main .table_produit .entete .element .statut {
     display: flex;
     width: 100%;
     height: 100%;
@@ -181,8 +409,8 @@ nav.menu.fermer~section.home {
     position: relative;
 }
 
-.home main .table .entete .element .trie .input_trie,
-.home main .table .entete .element .statut .input_statut {
+.home main .table_produit .entete .element .trie .input_trie,
+.home main .table_produit .entete .element .statut .input_statut {
     display: flex;
     border: 1px solid rgb(220, 220, 220);
     width: 90%;
@@ -194,13 +422,13 @@ nav.menu.fermer~section.home {
     cursor: pointer;
 }
 
-.home main .table .entete .element .trie .cacher,
-.home main .table .entete .element .statut .cacher {
+.home main .table_produit .entete .element .trie .cacher,
+.home main .table_produit .entete .element .statut .cacher {
     display: none;
 }
 
-.home main .table .entete .element .trie .input_trie span.icon_select_trie,
-.home main .table .entete .element .statut .input_statut span.icon_select_statut {
+.home main .table_produit .entete .element .trie .input_trie span.icon_select_trie,
+.home main .table_produit .entete .element .statut .input_statut span.icon_select_statut {
     height: 100%;
     border-left: 1px solid rgb(220, 220, 220);
     display: flex;
@@ -209,30 +437,30 @@ nav.menu.fermer~section.home {
     width: 19px;
 }
 
-.home main .table .entete .element .statut .input_statut p {
+.home main .table_produit .entete .element .statut .input_statut p {
     padding-bottom: 2.5px;
 }
 
-.home main .table .entete .element .trie .input_trie p {
+.home main .table_produit .entete .element .trie .input_trie p {
     padding-bottom: 2.5px;
 }
 
-.home main .table .entete .element .trie .input_trie span.trie_par,
-.home main .table .entete .element .statut .input_statut span.statut_par {
+.home main .table_produit .entete .element .trie .input_trie span.trie_par,
+.home main .table_produit .entete .element .statut .input_statut span.statut_par {
     font-size: 13px;
     font-weight: 600;
     color: #919ba8;
 }
 
-.home main .table .entete .element .trie .input_trie span.name_trie,
-.home main .table .entete .element .statut .input_statut span.name_statut {
+.home main .table_produit .entete .element .trie .input_trie span.name_trie,
+.home main .table_produit .entete .element .statut .input_statut span.name_statut {
     font-weight: bold;
     color: #43465e;
     font-size: 14px;
 }
 
-.home main .table .entete .element .trie .display_trie,
-.home main .table .entete .element .statut .display_statut {
+.home main .table_produit .entete .element .trie .display_trie,
+.home main .table_produit .entete .element .statut .display_statut {
     position: absolute;
     background-color: rgb(255, 255, 255);
     width: 82%;
@@ -241,13 +469,13 @@ nav.menu.fermer~section.home {
     padding: 10px 0 10px 0;
 }
 
-.home main .table .entete .element .trie .display_trie ul,
-.home main .table .entete .element .statut .display_statut ul {
+.home main .table_produit .entete .element .trie .display_trie ul,
+.home main .table_produit .entete .element .statut .display_statut ul {
     margin: 0 5px 0 5px;
 }
 
-.home main .table .entete .element .trie .display_trie ul li,
-.home main .table .entete .element .statut .display_statut ul li {
+.home main .table_produit .entete .element .trie .display_trie ul li,
+.home main .table_produit .entete .element .statut .display_statut ul li {
     list-style: none;
     margin-top: 5px;
     padding-left: 10px;
@@ -259,32 +487,32 @@ nav.menu.fermer~section.home {
     border-radius: 3px;
 }
 
-.home main .table .entete .element .trie .display_trie ul li::before,
-.home main .table .entete .element .statut .display_statut ul li::before {
+.home main .table_produit .entete .element .trie .display_trie ul li::before,
+.home main .table_produit .entete .element .statut .display_statut ul li::before {
     content: "•";
     padding-right: 10px;
     color: rgb(100, 101, 206);
 }
 
-.home main .table .entete .element .trie .display_trie ul li:hover,
-.home main .table .entete .element .statut .display_statut ul li:hover {
+.home main .table_produit .entete .element .trie .display_trie ul li:hover,
+.home main .table_produit .entete .element .statut .display_statut ul li:hover {
     background-color: #eaf0ff;
 }
 
-.home main .table .entete .element .trie .display_trie ul li a,
-.home main .table .entete .element .statut .display_statut ul li a {
+.home main .table_produit .entete .element .trie .display_trie ul li a,
+.home main .table_produit .entete .element .statut .display_statut ul li a {
     text-decoration: none;
     font-size: 14px;
     color: #404586;
 }
 
-.home main .table .entete .element .trie .display_trie ul li:hover a,
-.home main .table .entete .element .statut .display_statut ul li:hover a {
+.home main .table_produit .entete .element .trie .display_trie ul li:hover a,
+.home main .table_produit .entete .element .statut .display_statut ul li:hover a {
     text-decoration: none;
     color: #202cd1;
 }
 
-.home main .table .entete .produit {
+.home main .table_produit .entete .produit {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -294,14 +522,14 @@ nav.menu.fermer~section.home {
     color: #2cafbe;
 }
 
-.home main .table .entete .produit button {
+.home main .table_produit .entete .produit button {
     background-color: #0833a7;
     height: 35px;
     border: none;
     outline: none;
     border-radius: 10px;
     color: #ffffff;
-    width: 134px;
+    width: 115px;
     margin-right: 10px;
     font-weight: bold;
     cursor: pointer;

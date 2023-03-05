@@ -12,3 +12,4 @@ $contenu = '';
  
 //--------- AUTRES INCLUSIONS
 require_once("fonction.inc.php");
+?>

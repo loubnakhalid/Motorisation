@@ -1,10 +1,50 @@
 <?php include('./inc_ADMIN/menu.inc.php'); ?>
 <?php
+if(isset($_GET['icon_modifier_produit'])){
+    $id=$_GET['id'];
+    $rslt=mysqli_query($mysqli,"select * from produit natural join catégorie where IdPr=$id");
+    $row=mysqli_fetch_assoc($rslt);
+    include("./inc_ADMIN/modifier_produit.php");
+}
+if(isset($_GET['icon_ajouter_produit'])){
+    include("./inc_ADMIN/ajouter_produit.php");
+}
+
 if (isset($_GET['table'])) {
     if ($_GET['table'] == 'produit') {
+        $CountProduct=mysqli_query($mysqli,"select * from produit");
+        $nbreProduct=mysqli_num_rows($CountProduct);
+        $countProductSell=mysqli_query($mysqli,"select * from détails_commande natural join produit natural join commande where StatutCmd='Livrée'");
+        $sum=0;
+        while($row=mysqli_fetch_assoc($countProductSell)){
+            $sum=$sum+$row['qt'];
+        }
+        $countPrix=mysqli_query($mysqli,"select * from détails_commande natural join produit natural join commande where StatutCmd='Livrée'");
+        $sumPrix=0;
+        while($row=mysqli_fetch_assoc($countPrix)){
+            $sumPrix=$sumPrix+($row['PrixPr']*$row['qt']);
+        }
+        $countCoutStock=mysqli_query($mysqli,"select * from produit");
+        $sumCout=0;
+        while($row=mysqli_fetch_assoc($countCoutStock)){
+            $sumCout=$sumCout+($row['PrixPr']*$row['StockPr']);
+        }
+        $rsltPlus=mysqli_query($mysqli,"select NomPr,SUM(qt) as Somme from détails_commande NATURAL JOIN commande NATURAL JOIN produit GROUP BY IdPr ORDER BY somme DESC LIMIT 1;");
+        $plusVendu=mysqli_fetch_assoc($rsltPlus);
         echo "
-        <div class='table' >
-                
+        <section class='home'>
+        <header>
+        <div class='header_header'>
+        </div>
+        <div class='case'>Nombre de produits : $nbreProduct </div>
+        <div class='case'>Nombre de produits vendus : $sum </div>
+        <div class='case'>Produit populaire : ".$plusVendu['NomPr'] ."</div>
+        <div class='case'>Chiffre d'affaires : $sumPrix DH </div>
+        <div class='case'>Côut des produits en stock : $sumCout DH </div>
+
+        </header>
+        <main>
+        <div class='table_produit' >
         <div class='entete'>
             <div class='element'>
                 <div class='chercher'>
@@ -58,7 +98,7 @@ if (isset($_GET['table'])) {
                 </div>
             </div>
             <div class='produit'>
-               <button><i class='fa-solid fa-plus'></i> Ajouter produit</button>
+               <button onclick='document.location.href=\"gestion.php?table=produit&icon_ajouter_produit=true\"'><i class='fa-solid fa-plus'></i> Ajouter produit</button>
             </div>
         </div>
                     <table cellspacing='0' >
@@ -92,14 +132,14 @@ if (isset($_GET['table'])) {
         while ($row = mysqli_fetch_assoc($rslt)) {
             $id=$row['IdPr'];
             echo "<tr> 
-                            <td><img src='../inc/img/produits/".$row['ImagePr']."'  alt=''></td>
+                            <td><img src='../inc/img/produits/".$row['ImagePr']."'alt=''></td>
                             <td>" . $row['NomPr'] . "</td>
                             <td>" . $row['NomCt'] . "</td>
                             <td>" . $row['PrixPr'] ."DH</td>
                             <td>" . $row['StatutPr'] . "</td>
                             <td>" . $row['StockPr'] . "</td>
                             <td class=\"action\">
-                                <i class=\"bx bx-edit modifier\"></i>
+                                <i class=\"bx bx-edit icon_modifier_produit\" onclick='document.location.href=\"gestion.php?table=produit&icon_modifier_produit=true&id=$id\"'></i>
                                 <lord-icon
                                 src=\"https://cdn.lordicon.com/qjwkduhc.json\"
                                 trigger=\"hover\"
@@ -107,8 +147,7 @@ if (isset($_GET['table'])) {
                                 state=\"hover-empty\"
                                 style=\"width:35px;height:35px\" onClick=\"confirmSupp('produit','supprimer','IdPr',$id)\">
                             </lord-icon></td>
-                          </tr>";
-        }
+                          </tr>";        }
         echo "
                         </tbody>
                       </table>
@@ -119,11 +158,27 @@ if (isset($_GET['table'])) {
         ";
     }
     elseif($_GET['table']=='catégorie'){
-        echo "<div class='containner_main'>
+        $CountCt=mysqli_query($mysqli,"select * from catégorie");
+        $nbreCt=mysqli_num_rows($CountCt);
+        $countCtPop=mysqli_query($mysqli,"select NomCt,count(*) as nbre from détails_commande natural join produit natural join commande NATURAL JOIN catégorie group by IdCt order by nbre desc LIMIT 1;");
+        $CtPop=mysqli_fetch_assoc($countCtPop);
+        $countCtMoinsPop=mysqli_query($mysqli,"select NomCt,count(*) as nbre from détails_commande natural join produit natural join commande NATURAL JOIN catégorie group by IdCt order by nbre asc LIMIT 1;");
+        $CtMoinsPop=mysqli_fetch_assoc($countCtMoinsPop);
+        echo "
+        <section class='home'>
+        <header>
+        <div class='header_header'>
+        </div>
+        <div class='case'>Nombre de catégories : $nbreCt</div>
+        <div class='case'>Catégorie la plus populaire : $CtPop[NomCt]</div>
+        <div class='case'>Catégorie la moins populaire : $CtMoinsPop[NomCt]</div>
+        <div class='case'></div>
+        </header>
+        <main>
+        <div class='containner_main'>
         <div class='ajouter_category'>
-              
         <button><i class='fa-solid fa-plus'></i> Ajouter catégorie</button>
-</div>
+        </div>
             ";
             $rslt = mysqli_query($mysqli, 'select * from catégorie order by NomCt');
         while ($row = mysqli_fetch_assoc($rslt)) {
@@ -147,7 +202,17 @@ if (isset($_GET['table'])) {
     }
     elseif($_GET['table']=='commande'){
         echo "
-    <div class='table'>
+        <section class='home'>
+        <header>
+        <div class='header_header'>
+        </div>
+        <div class='case'></div>
+        <div class='case'></div>
+        <div class='case'></div>
+        <div class='case'></div>
+        </header>
+        <main>
+    <div class='table_commande'>
     <div class='entete'>
     <div class='element'>
     <div class='chercher'>
@@ -250,7 +315,7 @@ if (isset($_GET['table'])) {
             <td>".$row['StatutCmd']."</td>
             <td class=\"action\">
             <input type='button' value='détails'>
-                    <i class=\"bx bx-edit modifier\"></i>
+                    <i class=\"bx bx-edit icon_modifier_commande\"></i>
                     <lord-icon
                     src=\"https://cdn.lordicon.com/qjwkduhc.json\"
                     trigger=\"hover\"

@@ -1,37 +1,4 @@
-section.home {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 200px auto;
-    grid-template-areas: "header" "main";
-    grid-gap: 20px;
-    min-height: 100vh;
-    left: 210px;
-    width: calc(100% - 210px);
-    transition: all 0.5s ease;
-}
-
-nav.menu.fermer~section.home {
-    left: 90px;
-    width: calc(100% - 90px);
-    transition: all 0.5s ease;
-}
-
-.home header {
-    grid-area: header;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f1f7fa;
-}
-
-.home main {
-    grid-area: main;
-    display: flex;
-    justify-content: center;
-}
-
-.home main .table {
+.home main .table_commande {
     box-shadow: rgba(163, 163, 163, 0.39) 0px 0px 11px 0px;
     height: auto;
     margin-bottom: 30px;
@@ -41,7 +8,7 @@ nav.menu.fermer~section.home {
     transition: all 0.8s ease;
 }
 
-.home main .table table {
+.home main .table_commande table {
     width: 100%;
     border: 1px solid whitesmoke;
     overflow-y: auto;
@@ -51,26 +18,26 @@ nav.menu.fermer~section.home {
     transition: all 0.7s ease;
 }
 
-.home main .table table thead {
+.home main .table_commande table thead {
     font-weight: normal;
     color: #2368cf;
     height: 50px;
     font-size: 13px;
 }
 
-.home main .table table tbody {
+.home main .table_commande table tbody {
     overflow-y: auto;
     height: auto;
     margin-top: 10px;
 }
 
 
-/* .home main .table table tr{
+/* .home main .table_commande table tr{
 	border-left: 4px solid rgb(132, 9, 9);
 	cursor: pointer;
 } */
 
-.home main .table table td {
+.home main .table_commande table td {
     height: 50px;
     background-color: inherit;
     text-align: center;
@@ -79,7 +46,7 @@ nav.menu.fermer~section.home {
     color: rgb(69, 87, 106);
 }
 
-.home main .table table td input {
+.home main .table_commande table td input {
     padding: 5px 10px 5px 10px;
     color: #ffffff;
     background-color: #0833a7;
@@ -88,7 +55,7 @@ nav.menu.fermer~section.home {
     border-radius: 5px;
 }
 
-.home main .table .entete {
+.home main .table_commande .entete {
     width: 100%;
     height: 50px;
     background-color: #ffffff;
@@ -97,7 +64,7 @@ nav.menu.fermer~section.home {
     grid-row: auto;
 }
 
-.home main .table .entete .element {
+.home main .table_commande .entete .element {
     height: 100%;
     width: 100%;
     display: flex;
@@ -105,7 +72,7 @@ nav.menu.fermer~section.home {
     justify-content: center;
 }
 
-.home main .table .entete .element .chercher {
+.home main .table_commande .entete .element .chercher {
     width: 90%;
     height: 75%;
     background-color: #d4e1ff;
@@ -116,14 +83,14 @@ nav.menu.fermer~section.home {
     overflow: hidden;
 }
 
-.home main .table .entete .element .chercher form {
+.home main .table_commande .entete .element .chercher form {
     display: flex;
     width: 100%;
     height: 100%;
     justify-content: space-between;
 }
 
-.home main .table .entete .element .chercher button {
+.home main .table_commande .entete .element .chercher button {
     width: 10%;
     background: inherit;
     border: none;
@@ -132,20 +99,20 @@ nav.menu.fermer~section.home {
     font-size: 17px;
 }
 
-.home main .table .entete .element .chercher input {
+.home main .table_commande .entete .element .chercher input {
     background: inherit;
     border: none;
     width: 80%;
     height: 100%;
 }
 
-.home main .table .entete .element .chercher input:focus {
+.home main .table_commande .entete .element .chercher input:focus {
     outline: none;
     border: none;
 }
 
-.home main .table .entete .element .trie,
-.home main .table .entete .element .statut {
+.home main .table_commande .entete .element .trie,
+.home main .table_commande .entete .element .statut {
     display: flex;
     width: 100%;
     height: 100%;
@@ -154,8 +121,8 @@ nav.menu.fermer~section.home {
     position: relative;
 }
 
-.home main .table .entete .element .trie .input_trie,
-.home main .table .entete .element .statut .input_statut {
+.home main .table_commande .entete .element .trie .input_trie,
+.home main .table_commande .entete .element .statut .input_statut {
     display: flex;
     border: 1px solid rgb(220, 220, 220);
     width: 90%;
@@ -167,13 +134,13 @@ nav.menu.fermer~section.home {
     cursor: pointer;
 }
 
-.home main .table .entete .element .trie .cacher,
-.home main .table .entete .element .statut .cacher {
+.home main .table_commande .entete .element .trie .cacher,
+.home main .table_commande .entete .element .statut .cacher {
     display: none;
 }
 
-.home main .table .entete .element .trie .input_trie span.icon_select_trie,
-.home main .table .entete .element .statut .input_statut span.icon_select_statut {
+.home main .table_commande .entete .element .trie .input_trie span.icon_select_trie,
+.home main .table_commande .entete .element .statut .input_statut span.icon_select_statut {
     height: 100%;
     border-left: 1px solid rgb(220, 220, 220);
     display: flex;
@@ -182,30 +149,30 @@ nav.menu.fermer~section.home {
     width: 19px;
 }
 
-.home main .table .entete .element .statut .input_statut p {
+.home main .table_commande .entete .element .statut .input_statut p {
     padding-bottom: 2.5px;
 }
 
-.home main .table .entete .element .trie .input_trie p {
+.home main .table_commande .entete .element .trie .input_trie p {
     padding-bottom: 2.5px;
 }
 
-.home main .table .entete .element .trie .input_trie span.trie_par,
-.home main .table .entete .element .statut .input_statut span.statut_par {
+.home main .table_commande .entete .element .trie .input_trie span.trie_par,
+.home main .table_commande .entete .element .statut .input_statut span.statut_par {
     font-size: 13px;
     font-weight: 600;
     color: #919ba8;
 }
 
-.home main .table .entete .element .trie .input_trie span.name_trie,
-.home main .table .entete .element .statut .input_statut span.name_statut {
+.home main .table_commande .entete .element .trie .input_trie span.name_trie,
+.home main .table_commande .entete .element .statut .input_statut span.name_statut {
     font-weight: bold;
     color: #43465e;
     font-size: 14px;
 }
 
-.home main .table .entete .element .trie .display_trie,
-.home main .table .entete .element .statut .display_statut {
+.home main .table_commande .entete .element .trie .display_trie,
+.home main .table_commande .entete .element .statut .display_statut {
     position: absolute;
     background-color: rgb(255, 255, 255);
     width: 82%;
@@ -214,13 +181,13 @@ nav.menu.fermer~section.home {
     padding: 10px 0 10px 0;
 }
 
-.home main .table .entete .element .trie .display_trie ul,
-.home main .table .entete .element .statut .display_statut ul {
+.home main .table_commande .entete .element .trie .display_trie ul,
+.home main .table_commande .entete .element .statut .display_statut ul {
     margin: 0 5px 0 5px;
 }
 
-.home main .table .entete .element .trie .display_trie ul li,
-.home main .table .entete .element .statut .display_statut ul li {
+.home main .table_commande .entete .element .trie .display_trie ul li,
+.home main .table_commande .entete .element .statut .display_statut ul li {
     list-style: none;
     margin-top: 5px;
     padding-left: 10px;
@@ -232,42 +199,50 @@ nav.menu.fermer~section.home {
     border-radius: 3px;
 }
 
-.home main .table .entete .element .trie .display_trie ul li::before,
-.home main .table .entete .element .statut .display_statut ul li::before {
+.home main .table_commande .entete .element .trie .display_trie ul li::before,
+.home main .table_commande .entete .element .statut .display_statut ul li::before {
     content: "•";
     padding-right: 10px;
     color: rgb(100, 101, 206);
 }
 
-.home main .table .entete .element .trie .display_trie ul li:hover,
-.home main .table .entete .element .statut .display_statut ul li:hover {
+.home main .table_commande .entete .element .trie .display_trie ul li:hover,
+.home main .table_commande .entete .element .statut .display_statut ul li:hover {
     background-color: #eaf0ff;
 }
 
-.home main .table .entete .element .trie .display_trie ul li a,
-.home main .table .entete .element .statut .display_statut ul li a {
+.home main .table_commande .entete .element .trie .display_trie ul li a,
+.home main .table_commande .entete .element .statut .display_statut ul li a {
     text-decoration: none;
     font-size: 14px;
     color: #404586;
 }
 
-.home main .table .entete .element .trie .display_trie ul li:hover a,
-.home main .table .entete .element .statut .display_statut ul li:hover a {
+.home main .table_commande .entete .element .trie .display_trie ul li:hover a,
+.home main .table_commande .entete .element .statut .display_statut ul li:hover a {
     text-decoration: none;
     color: #202cd1;
 }
 
-.home main .table .entete .produit {
+.home main .table_commande .entete .produit {
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 
-.bxs-chevron-down {
-    color: #2cafbe;
+.home main .table_commande table td.action {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
 }
 
-.home main .table .entete .produit button {
+.icon_modifier_commande {
+    font-size: 25px;
+    color: #0833a7;
+}
+
+.home main .table_commande .entete .produit button {
     background-color: #0833a7;
     height: 35px;
     border: none;
