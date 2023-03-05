@@ -38,7 +38,7 @@ if (isset($_GET['table'])) {
         </div>
         <div class='case'>Nombre de produits : $nbreProduct </div>
         <div class='case'>Nombre de produits vendus : $sum </div>
-        <div class='case'>Produit populaire : ".$plusVendu['NomPr'] ."</div>
+        <div class='case'>Produit populaire : $plusVendu[NomPr] </div>
         <div class='case'>Chiffre d'affaires : $sumPrix DH </div>
         <div class='case'>Côut des produits en stock : $sumCout DH </div>
 

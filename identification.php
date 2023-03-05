@@ -49,7 +49,6 @@ if($_GET['action']=='forgot'){
 		echo $_GET['erreur'];
 	}
 	echo"
-	
     <h2>Entrez votre email :</h2>
     <form action='controller.php' method='POST' autocomplete='off'>
         <input type='email' name='email' placeholder='Email'><br>
