@@ -1,3 +1,6 @@
+<style>
+
+</style>
 <?php
 include("./inc_ADMIN/menu.inc.php");
 require_once "../vendor/autoload.php";

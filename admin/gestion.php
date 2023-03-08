@@ -9,7 +9,9 @@ if(isset($_GET['icon_modifier_produit'])){
 if(isset($_GET['icon_ajouter_produit'])){
     include("./inc_ADMIN/ajouter_produit.php");
 }
-
+if(isset($_GET['icon_ajouter_commande'])){
+    include("./inc_ADMIN/ajouter_commande.php");
+}
 if (isset($_GET['table'])) {
     if ($_GET['table'] == 'produit') {
         $CountProduct=mysqli_query($mysqli,"select * from produit");
@@ -170,8 +172,8 @@ if (isset($_GET['table'])) {
         <div class='header_header'>
         </div>
         <div class='case'>Nombre de catégories : $nbreCt</div>
-        <div class='case'>Catégorie la plus populaire : $CtPop[NomCt]</div>
-        <div class='case'>Catégorie la moins populaire : $CtMoinsPop[NomCt]</div>
+        <div class='case'>Catégorie la plus populaire :".$CtPop['NomCt']."</div>
+        <div class='case'>Catégorie la moins populaire :". $CtMoinsPop['NomCt']."</div>
         <div class='case'></div>
         </header>
         <main>
@@ -272,7 +274,7 @@ if (isset($_GET['table'])) {
             </div>
         </div>
         <div class='produit'>
-            <button><i class='fa-solid fa-plus '></i> Ajouter produit</button>
+            <button onclick='document.location.href=\"gestion.php?table=commande&icon_ajouter_commande=true\"'><i class='fa-solid fa-plus '></i> Ajouter commande</button>
         </div>
     </div>
     <table cellspacing='0 '>

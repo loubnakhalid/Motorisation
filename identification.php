@@ -1,13 +1,5 @@
 <?php include('./inc/haut.inc.php'); ?>
 <?php
-if(Admin()){
-    header('location:./admin/index.php');
-}
-elseif(Client()){
-    header('location:index.php');
-}
-?>
-<?php
 if($_GET['action']=='login'){
 	if(isset($_GET['erreur'])){
 		echo $_GET['erreur'];

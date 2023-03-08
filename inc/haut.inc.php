@@ -29,7 +29,6 @@ include("./inc/init.inc.php");
                 </form>
             </div>
         </div>
-
         <div class="navigation">
             <div class="login_hover hover">
                 <h2>indentifiez-vous</h2>
@@ -47,15 +46,12 @@ include("./inc/init.inc.php");
                         <a href="">Mot de passe oublié ?</a>
                         <a href="">Créer un compte</a>
                     </div>
-
                 </form>
             </div>
             <div class="info_travaille">
                 <p class="tele"><span style="color:#ff7e00;">07 </span>05 18 90 60</p>
                 <p class="heurs">Lundi à Vendredi <span style="color:#ff7e00;">9</span><span style="color: #015e9b;">h</span> -<span style="color:#ff7e00;">18</span><span style="color: #015e9b;">h</span></p>
             </div>
-
-
             <nav class="panier_identifier">
                 <ul>
                     <li>

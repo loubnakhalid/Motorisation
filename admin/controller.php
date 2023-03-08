@@ -81,6 +81,22 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             echo "<script>alert('Erreur à l'ajout'! Veuillez réssayer.');document.location.href='gestion?php?table=produit';</script>";
         }
     }
+    elseif($_GET['table']=='commande'){
+        $IdCmd=$_POST['IdCmd'];
+        $IdMb=$_POST['IdMb'];
+        $DateCmd=$_POST['DateCmd'];
+        $prixTT=$_POST['prixTT'];
+        $modePaiement=$_POST['modePaiement'];
+        $StatutCmd=$_POST['StatutCmd'];
+        $NoteCmd =$_POST['NoteCmd'];
+        $rslt=mysqli_query($mysqli,"insert into commande (DateCmd,IdMb,StatutCmd,prixTT,modePaiement,NoteCmd) values ('$DateCmd',$IdMb,'$StatutCmd','$prixTT','$modePaiement','$NoteCmd')");
+        if($rslt){
+            echo "<script>document.location.href='gestion.php?table=commande';</script>";
+        }
+        else{
+            echo "<script>alert('Erreur à l'ajout'! Veuillez réssayer.');document.location.href='gestion?php?table=commande';</script>";
+        }
+    }
 }
 }
 ?>
