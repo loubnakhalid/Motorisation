@@ -1,4 +1,5 @@
-<?php include('./inc_ADMIN/menu.inc.php'); ?>
+<?php
+ include('./inc_ADMIN/menu.inc.php'); ?>
 <?php
 if(isset($_GET['icon_modifier_produit'])){
     $id=$_GET['id'];
@@ -11,6 +12,12 @@ if(isset($_GET['icon_ajouter_produit'])){
 }
 if(isset($_GET['icon_ajouter_commande'])){
     include("./inc_ADMIN/ajouter_commande.php");
+}
+if(isset($_GET['icon_modifier_commande'])){
+    $id=$_GET['id'];
+    $rslt=mysqli_query($mysqli,"select * from commande natural join membre where IdCmd=$id");
+    $row=mysqli_fetch_assoc($rslt);
+    include("./inc_ADMIN/modifier_commande.php");
 }
 if (isset($_GET['table'])) {
     if ($_GET['table'] == 'produit') {
@@ -102,10 +109,10 @@ if (isset($_GET['table'])) {
             <div class='produit'>
                <button onclick='document.location.href=\"gestion.php?table=produit&icon_ajouter_produit=true\"'><i class='fa-solid fa-plus'></i> Ajouter produit</button>
             </div>
-        </div>
-                    <table cellspacing='0' >
-                        <thead>
-                          <tr>
+            </div>
+                <table cellspacing='0' >
+                    <thead>
+                        <tr>
                             <th>Image</th>
                             <th>Nom</th>
                             <th>Catégorie</th>
@@ -113,9 +120,9 @@ if (isset($_GET['table'])) {
                             <th>Statut</th>
                             <th>Quantité</th> 
                             <th>Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>";
+                        </tr>
+                    </thead>
+                    <tbody>";
         if(isset($_GET['tri'])){
             $tri=$_GET['tri'];
             $rslt = mysqli_query($mysqli, "select * from produit natural join catégorie order by $tri");
@@ -134,30 +141,23 @@ if (isset($_GET['table'])) {
         while ($row = mysqli_fetch_assoc($rslt)) {
             $id=$row['IdPr'];
             echo "<tr> 
-                            <td><img src='../inc/img/produits/".$row['ImagePr']."'alt=''></td>
-                            <td>" . $row['NomPr'] . "</td>
-                            <td>" . $row['NomCt'] . "</td>
-                            <td>" . $row['PrixPr'] ."DH</td>
-                            <td>" . $row['StatutPr'] . "</td>
-                            <td>" . $row['StockPr'] . "</td>
-                            <td class=\"action\">
-                                <i class=\"bx bx-edit icon_modifier_produit\" onclick='document.location.href=\"gestion.php?table=produit&icon_modifier_produit=true&id=$id\"'></i>
-                                <lord-icon
-                                src=\"https://cdn.lordicon.com/qjwkduhc.json\"
-                                trigger=\"hover\"
-                                colors=\"primary:#e83a30,secondary:#e83a30,tertiary:#ffffff\"
-                                state=\"hover-empty\"
-                                style=\"width:35px;height:35px\" onClick=\"confirmSupp('produit','supprimer','IdPr',$id)\">
-                            </lord-icon></td>
-                          </tr>";        }
-        echo "
-                        </tbody>
-                      </table>
-                </form>
-              
-                  
+                    <td><img src='../inc/img/produits/".$row['ImagePr']."'alt=''></td>
+                    <td>" . $row['NomPr'] . "</td>
+                    <td>" . $row['NomCt'] . "</td>
+                    <td>" . $row['PrixPr'] ."DH</td>
+                    <td>" . $row['StatutPr'] . "</td>
+                    <td>" . $row['StockPr'] . "</td>
+                    <td class=\"action\">
+                        <i class=\"bx bx-edit icon_modifier_produit\" onclick='document.location.href=\"gestion.php?table=produit&icon_modifier_produit=true&id=$id\"'></i>
+                        <lord-icon src=\"https://cdn.lordicon.com/qjwkduhc.json\" trigger=\"hover\" colors=\"primary:#e83a30,secondary:#e83a30,tertiary:#ffffff\" state=\"hover-empty\" style=\"width:35px;height:35px\" onClick=\"confirmSupp('produit','supprimer','IdPr',$id)\"></lord-icon>
+                    </td>
+                    </tr>";
+            }
+            echo "
+                    </tbody>
+                </table>
             </div>
-        ";
+            ";
     }
     elseif($_GET['table']=='catégorie'){
         $CountCt=mysqli_query($mysqli,"select * from catégorie");
@@ -203,15 +203,26 @@ if (isset($_GET['table'])) {
         echo '</div>';
     }
     elseif($_GET['table']=='commande'){
+        $totale=mysqli_query($mysqli,"select * from commande");
+        $row=mysqli_num_rows($totale);
+        $enCrs=mysqli_query($mysqli,"select * from commande where StatutCmd='En cours'");
+        $row1=mysqli_num_rows($enCrs);
+        $exp=mysqli_query($mysqli,"select * from commande where StatutCmd='Expédiée'");
+        $row2=mysqli_num_rows($exp);
+        $liv=mysqli_query($mysqli,"select * from commande where StatutCmd='Livrée'");
+        $row3=mysqli_num_rows($liv);
+        $ann=mysqli_query($mysqli,"select * from commande where StatutCmd='Annulée'");
+        $row4=mysqli_num_rows($ann);
         echo "
         <section class='home'>
         <header>
         <div class='header_header'>
         </div>
-        <div class='case'></div>
-        <div class='case'></div>
-        <div class='case'></div>
-        <div class='case'></div>
+        <div class='case'> Total commandes : $row </div>
+        <div class='case'> En cours : $row1 </div>
+        <div class='case'> Expédiée : $row2 </div>
+        <div class='case'> Livrée : $row3 </div>
+        <div class='case'> Annulée : $row4 </div>
         </header>
         <main>
     <div class='table_commande'>
@@ -239,12 +250,10 @@ if (isset($_GET['table'])) {
             <li><a href='gestion.php?table=commande&tri=DateCmd'>Date commande</a></li>
             <li><a href='gestion.php?table=commande&tri=prixTT'>Totale</a></li>
             <li><a href='gestion.php?table=commande&tri=modePaiement'>Mode paiement</a></li>
-            <li><a href='gestion.php?table=commande&tri=Statut'>Statut</a></li>
+            <li><a href='gestion.php?table=commande&tri=StatutCmd'>Statut</a></li>
             </ul>
         </div>
-       
     </div>
-
 </div>
 <div class='element'>
     <div class='statut'>
@@ -270,7 +279,6 @@ if (isset($_GET['table'])) {
 </div>
         <div class='element'>
             <div class=''>
-
             </div>
         </div>
         <div class='produit'>
@@ -293,13 +301,13 @@ if (isset($_GET['table'])) {
         ";
         if(isset($_GET['tri'])){
             $tri=$_GET['tri'];
-            $rslt = mysqli_query($mysqli, "select * from commande natural join membre order by $tri");
+            $rslt = mysqli_query($mysqli, "select * from commande natural join membre order by $tri ");
         }
         elseif(isset($_GET['statut'])){
             $statut=$_GET['statut'];
             $rslt = mysqli_query($mysqli, "select * from commande natural join membre where StatutCmd='$statut' order by IdCmd");
         }
-        elseif(isset($_GET['rechercher'])){
+        elseif(isset($_GET['rechercher']) && isset($_POST['mot'])){
             $mot=$_POST['mot'];
             $rslt = mysqli_query($mysqli, "select * from commande natural join membre where IdCmd like '$mot%' order by IdCmd");
         }
@@ -317,13 +325,13 @@ if (isset($_GET['table'])) {
             <td>".$row['StatutCmd']."</td>
             <td class=\"action\">
             <input type='button' value='détails'>
-                    <i class=\"bx bx-edit icon_modifier_commande\"></i>
+                    <i class=\"bx bx-edit icon_modifier_commande\" onclick='document.location.href=\"gestion.php?table=commande&icon_modifier_commande=true&id=$id\"' ></i>
                     <lord-icon
                     src=\"https://cdn.lordicon.com/qjwkduhc.json\"
                     trigger=\"hover\"
                     colors=\"primary:#e83a30,secondary:#e83a30,tertiary:#ffffff\"
                     state=\"hover-empty\"
-                    style=\"width:35px;height:35px\" onClick=\"confirmSupp('commande','supprimer','IdCmd',$id)\">
+                    style=\"width:35px;height:35px\" onClick=\"confirmSupp('commande','supprimer',$id)\">
                     </lord-icon>
                 </td>
         </tr>";
@@ -332,9 +340,109 @@ if (isset($_GET['table'])) {
         </tbody>
     </table>
     </form>
-
-
 </div>";
+}
+elseif($_GET['table']=='RDV'){
+echo "
+    <section class='home '>
+        <header>
+            <div class='header_header '>
+            </div>
+            <div class='case '></div>
+            <div class='case '></div>
+            <div class='case '></div>
+            <div class='case '></div>
+        </header>
+        <main>
+            <div class='table_rdv '>
+                <div class='entete '>
+                    <div class='element '>
+                        <div class='chercher '>
+                        <form action=''>
+                        <button type='submit' class='btn_recherche'><i class='fa-solid fa-magnifying-glass' aria-hidden='true'></i></button>
+                        <input type='text' name=' id=' placeholder='chercher produit ...'>
+                        </form>
+                        </div>
+                        </div>
+                        <div class='element'>
+                        <div class='trie'>
+                        <div class='input_trie'>
+                        <p><span class='trie_par'>Trie par :</span> <span class='name_trie'> Name</span></p>
+                        <span class='icon_select_trie'>
+                            <i class='bx bxs-chevron-down'></i>
+                        </span>
+                </div>
+                <div class='display_trie cacher'>
+                    <ul>
+                        <li><a href='>nom produit</a></li>
+                        <li><a href='>category</a></li>
+                        <li><a href='>prix</a></li>
+                        <li><a href='>quantite</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class='element'>
+            <div class='statut'>
+                <div class='input_statut'>
+                    <p><span class='statut_par'>statut :</span> <span class='name_statut'> Name</span></p>
+                    <span class='icon_select_statut'>
+                        <i class='bx bxs-chevron-down'></i>
+                    </span>
+                </div>
+                <div class='display_statut cacher'>
+                    <ul>
+                        <li><a href=''>nom produit</a></li>
+                        <li><a href=''>category</a>
+                        </li>
+                        <li><a href=''>prix</a></li>
+                        <li><a href=''>quantite</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class='element'>
+            <div class=''>
+            </div>
+            </div>
+            <div class='produit'>
+            <button><i class='fa-solid fa-plus '></i> Ajouter RDV</button>
+            </div>
+            </div>
+            <table cellspacing='0'>
+                <thead>
+                <tr>
+                    <th>N° RDV</th>
+                    <th>Client</th>
+                    <th>Type de projet</th>
+                    <th>Date</th>
+                    <th>Message</th>
+                    <th>Statut</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+";
+                $rslt=mysqli_query($mysqli,"select * from rdv natural join membre");
+                while($row=mysqli_fetch_assoc($rslt)){
+                    $id=$row['IdRDV'];
+                    echo "<tr><td>$row[IdRDV]</td><td>$row[NomMb] $row[PrénomMb]</td><td>$row[TypePrjt]</td><td>$row[DateRDV]</td><td>$row[MessageRDV]</td><td>$row[StatutRDV]</td>
+                    <td class='action'>
+                    <i class='bx bx-edit modifier'></i>
+                    <lord-icon
+                    src='https://cdn.lordicon.com/qjwkduhc.json'
+                    trigger='hover'
+                    colors='primary:#e83a30,secondary:#e83a30,tertiary:#ffffff'
+                    state='hover-empty'
+                    style='width:35px;height:35px' onClick=\"confirmSupp('RDV','supprimer','IdRDV',$id)\">
+                </lord-icon></td></tr>";
+                }
+echo "
+                </tbody>
+                </table>
+            </div>
+";
 }
 }
 ?>

@@ -52,24 +52,21 @@
                     </a>
                 </li>
                 <li class="lien">
-                    <a href="">
+                    <a href="gestion.php?table=RDV">
                         <i class='bx bx-phone-call icon'></i>
                         <span class="text">RDV</span>
-
                     </a>
                 </li>
                 <li class="lien ">
                     <a href="">
-                        <i class='bx bx-message-dots icon'></i>
-                        <span class="text">Messages</span>
-
+                        <i class='bx bx-store icon'></i>
+                        <span class="text">Boutique</span>
                     </a>
                 </li>
                 <li class="lien dec">
                     <a href="../controller.php?action=déconnexion">
                         <i class='bx bx-log-out icon'></i>
                         <span class="text">Déconnexion</span>
-
                     </a>
                 </li>
             </ul>

@@ -17,6 +17,7 @@ include("./inc/init.inc.php");
 
 <body>
     <header>
+
         <div class="logo">
             <a href="index.html"><img src="inc/img/logo3.png" alt="" class="logo3"></a>
         </div>
@@ -83,6 +84,5 @@ include("./inc/init.inc.php");
                 </ul>
             </nav>
         </div>
-        <script src="inc/js/header.js"></script>
     </header>
     <main>

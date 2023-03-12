@@ -70,6 +70,11 @@ form label {
     padding: 0 0 0 8px;
 }
 
+.case_cocher {
+    margin-left: 35px;
+    margin-top: 10px;
+}
+
 .case_select {
     display: flex;
     flex-direction: column;

@@ -1,6 +1,3 @@
-<style>
-
-</style>
 <?php
 include("./inc_ADMIN/menu.inc.php");
 require_once "../vendor/autoload.php";
@@ -88,7 +85,7 @@ $percentNewSessions = getResults($analytics, $profile, 'percentNewSessions');
 function getChartResults($analytics, $profileId, $metric) {
 	return $analytics->data_ga->get(
 		'ga:' . $profileId,
-		'30daysAgo',
+		'14daysAgo',
 		'today',
 		$metric,
 		array(
@@ -142,14 +139,14 @@ $result2=printResults($resultsesision)-$result1;
 			},
 			vAxes: {
 				0: {
-					gridlines: {},
+					gridlines: {color: 'transparent'},
 					textStyle : {
 					fontSize: 10, // or the number you want
 					fontName: 'Nunito'
 					}
 				},
 				1: {
-					gridlines: {},
+					gridlines: {color: 'transparent'},
 					textStyle : {
 					fontSize: 10, // or the number you want
 					fontName: 'Nunito'
@@ -205,6 +202,8 @@ $result2=printResults($resultsesision)-$result1;
   Nouvelles sessions : <?= round(printResults($percentNewSessions),2); ?> %
 </div>
 </div>
+<div>
 <div id="chart"></div>
 <div id="pieChart"></div>
+</div>
 <?php include("./inc_ADMIN/footer.html"); ?>
