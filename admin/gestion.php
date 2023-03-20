@@ -133,7 +133,7 @@ if (isset($_GET['table'])) {
         }
         elseif(isset($_GET['recherche'])){
             $mot=$_POST['mot'];
-            $rslt = mysqli_query($mysqli, "select * from produit natural join catégorie where NomPr like '$mot%' order by NomPr");
+            $rslt = mysqli_query($mysqli, "select * from produit natural join catégorie where NomPr like '%$mot%' order by NomPr");
         }
         else{
             $rslt = mysqli_query($mysqli, 'select * from produit natural join catégorie');
@@ -144,12 +144,19 @@ if (isset($_GET['table'])) {
                     <td><img src='../inc/img/produits/".$row['ImagePr']."'alt=''></td>
                     <td>" . $row['NomPr'] . "</td>
                     <td>" . $row['NomCt'] . "</td>
-                    <td>" . $row['PrixPr'] ."DH</td>
+            ";
+            if(verifPromo($id)){
+                echo "<td style='color:red'>" . nvPrix($id) ."DH</td>";
+            }
+            else{
+                echo "<td>" . $row['PrixPr'] ."DH</td>";
+            }
+            echo "
                     <td>" . $row['StatutPr'] . "</td>
                     <td>" . $row['StockPr'] . "</td>
                     <td class=\"action\">
                         <i class=\"bx bx-edit icon_modifier_produit\" onclick='document.location.href=\"gestion.php?table=produit&icon_modifier_produit=true&id=$id\"'></i>
-                        <lord-icon src=\"https://cdn.lordicon.com/qjwkduhc.json\" trigger=\"hover\" colors=\"primary:#e83a30,secondary:#e83a30,tertiary:#ffffff\" state=\"hover-empty\" style=\"width:35px;height:35px\" onClick=\"confirmSupp('produit','supprimer','IdPr',$id)\"></lord-icon>
+                        <lord-icon src=\"https://cdn.lordicon.com/qjwkduhc.json\" trigger=\"hover\" colors=\"primary:#e83a30,secondary:#e83a30,tertiary:#ffffff\" state=\"hover-empty\" style=\"width:35px;height:35px\" onClick=\"confirmSupp('produit','supprimer',$id)\"></lord-icon>
                     </td>
                     </tr>";
             }
@@ -309,7 +316,7 @@ if (isset($_GET['table'])) {
         }
         elseif(isset($_GET['rechercher']) && isset($_POST['mot'])){
             $mot=$_POST['mot'];
-            $rslt = mysqli_query($mysqli, "select * from commande natural join membre where IdCmd like '$mot%' order by IdCmd");
+            $rslt = mysqli_query($mysqli, "select * from commande natural join membre where IdCmd like '%$mot%' order by IdCmd");
         }
         else{
             $rslt = mysqli_query($mysqli, 'select * from commande natural join membre ');
@@ -360,14 +367,14 @@ echo "
                         <div class='chercher '>
                         <form action=''>
                         <button type='submit' class='btn_recherche'><i class='fa-solid fa-magnifying-glass' aria-hidden='true'></i></button>
-                        <input type='text' name=' id=' placeholder='chercher produit ...'>
+                        <input type='text' name=' id=' placeholder='N° RDV ...'>
                         </form>
                         </div>
                         </div>
                         <div class='element'>
                         <div class='trie'>
                         <div class='input_trie'>
-                        <p><span class='trie_par'>Trie par :</span> <span class='name_trie'> Name</span></p>
+                        <p><span class='trie_par'>Trie par :</span> <span class='name_trie'></span></p>
                         <span class='icon_select_trie'>
                             <i class='bx bxs-chevron-down'></i>
                         </span>
@@ -385,7 +392,7 @@ echo "
         <div class='element'>
             <div class='statut'>
                 <div class='input_statut'>
-                    <p><span class='statut_par'>statut :</span> <span class='name_statut'> Name</span></p>
+                    <p><span class='statut_par'>statut :</span> <span class='name_statut'></span></p>
                     <span class='icon_select_statut'>
                         <i class='bx bxs-chevron-down'></i>
                     </span>
@@ -443,6 +450,116 @@ echo "
                 </table>
             </div>
 ";
+}
+elseif($_GET['table']=='promos'){
+    echo "
+    <section class='home'>
+    <header>
+    <div class='header_header'>
+    </div>
+    <div class='case'>  </div>
+    <div class='case'> </div>
+    <div class='case'>  </div>
+    <div class='case'>  </div>
+    <div class='case'>  </div>
+    </header>
+    <main>
+<div class='table_commande'>
+<div class='entete'>
+<div class='element'>
+<div class='chercher'>
+    <form action='gestion.php?table=commande&rechercher=true' method='post'>
+        <button type='submit' name='recherche' class='btn_recherche'><i class='fa-solid fa-magnifying-glass' aria-hidden='true'></i></button>
+    <input type='text' name='mot' id='' placeholder='N° commande...'>
+    </form>
+</div>
+</div>
+<div class='element'>
+<div class='trie'>
+    <div class='input_trie'>
+        <p><span class='trie_par'>Trier par :</span> <span class='name_trie'></span></p>
+        <span class='icon_select_trie'>
+            <i class='bx bxs-chevron-down'></i>
+        </span>
+    </div>
+    <div class='display_trie cacher'>
+        <ul>
+        <li><a href='gestion.php?table=promos&tri=DateDéb'>Date début</a></li>
+        <li><a href='gestion.php?table=promos&tri=DateFin'>Date fin</a></li>
+        <li><a href='gestion.php?table=promos&tri=Taux'>Taux</a></li>
+        <li><a href='gestion.php?table=promos&tri=StatutPromo'>Statut</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+<div class='element'>
+<div class='statut'>
+    <div class='input_statut'>
+    <p><span class='statut_par'>Statut : </span></p>
+        <span class='icon_select_statut'>
+            <i class='bx bxs-chevron-down'></i>
+        </span>
+    </div>
+    <div class='display_statut cacher'>
+        <ul>
+            <li><a href='gestion.php?table=promos'>Tout</a></li>
+            <li><a href='gestion.php?table=promos&statut=En cours'>En cours</a></li>
+            <li><a href='gestion.php?table=promos&statut=Terminée'>Terminée</a></li>
+        </ul>
+    </div>
+   
+</div>
+
+</div>
+    <div class='element'>
+        <div class=''>
+        </div>
+    </div>
+    <div class='produit'>
+        <button onclick='document.location.href=\"gestion.php?table=promos&icon_ajouter_promo=true\"'><i class='fa-solid fa-plus '></i> Ajouter promotion</button>
+    </div>
+</div>
+<table cellspacing='0 '>
+    <thead>
+        <tr>
+            <th>N° promo</th>
+            <th>Taux</th>
+            <th>Date début</th>
+            <th>Date fin</th>
+            <th>Statut</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    ";
+
+    $rslt = mysqli_query($mysqli, 'select * from promos');
+    while ($row = mysqli_fetch_assoc($rslt)) {
+        $id=$row['IdPromo'];
+        echo " <tr>
+        <td>".$row['IdPromo']."</td>
+        <td>".$row['Taux']."</td>
+        <td>".$row['DateDéb']."</td>
+        <td>".$row['DateFin']."</td>
+        <td>".$row['StatutPromo']."</td>
+        <td class=\"action\">
+        <input type='button' value='détails'>
+                <i class=\"bx bx-edit icon_modifier_commande\" onclick='document.location.href=\"gestion.php?table=promos&icon_modifier_promo=true&id=$id\"' ></i>
+                <lord-icon
+                src=\"https://cdn.lordicon.com/qjwkduhc.json\"
+                trigger=\"hover\"
+                colors=\"primary:#e83a30,secondary:#e83a30,tertiary:#ffffff\"
+                state=\"hover-empty\"
+                style=\"width:35px;height:35px\" onClick=\"confirmSupp('promo','supprimer',$id)\">
+                </lord-icon>
+            </td>
+    </tr>";
+    }
+    echo"
+    </tbody>
+</table>
+</form>
+</div>";
 }
 }
 ?>

@@ -58,9 +58,9 @@
                     </a>
                 </li>
                 <li class="lien ">
-                    <a href="">
-                        <i class='bx bx-store icon'></i>
-                        <span class="text">Boutique</span>
+                    <a href="gestion.php?table=promos">
+                    <i class="fa-solid fa-percent icon"></i>
+                        <span class="text">Promos</span>
                     </a>
                 </li>
                 <li class="lien dec">

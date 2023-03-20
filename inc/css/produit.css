@@ -1,0 +1,159 @@
+main {
+    width: 100%;
+    overflow: hidden;
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f6f7;
+    scroll-behavior: smooth;
+    font-family: 'Kumbh Sans', sans-serif;
+    padding: 50px;
+}
+
+section.fiche_produit {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #ecedf0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+    overflow: hidden;
+    padding: 50px;
+}
+
+.fiche_produit_left {
+    width: 50%;
+    height: 400px;
+    padding-right: 50px;
+}
+
+.fiche_produit_left img {
+    width: 100%;
+    height: 100%;
+    object-fit: revert;
+    border-radius: 20px;
+    border: 1px solid #ecedf0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+}
+
+.fiche_produit_right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    gap: 20px;
+}
+
+.fiche_produit_right .nom_produit {
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.fiche_produit_right .nom_produit h1 {
+    font-family: 'Kumbh Sans', sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    color: #0f204d;
+}
+
+.fiche_produit_right .description {
+    font-family: 'Kumbh Sans', sans-serif;
+}
+
+.fiche_produit_right .prix {
+    display: flex;
+}
+
+.fiche_produit_right .prix .prix_dh {
+    font-family: 'Kumbh Sans', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.fiche_produit_right .prix .promo {
+    height: 24px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 50px;
+    font-family: 'Kumbh Sans', sans-serif;
+    border: 1px solid #fcd1ac;
+    border-radius: 5px;
+    background-color: #fff1e3;
+    color: #f77f15;
+}
+
+.fiche_produit_right form {
+    display: flex;
+    align-items: center;
+}
+
+.add_panier {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+}
+
+.add_panier .controle {
+    width: 150px;
+    height: 34px;
+    border: 1px solid rgb(255, 251, 251);
+    padding: 0 10px;
+    border-radius: 7px;
+    background-color: #ebedf1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add_panier .controle .plus,
+.moins {
+    cursor: pointer;
+    color: #f77f15;
+    font-weight: 900;
+    font-size: 17px;
+}
+
+.add_panier .controle .nombre input {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: inherit;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+
+.add_panier .panier {
+    height: 40px;
+    width: 194px;
+    background-color: #f77f15;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 17px;
+    margin-left: 20px;
+}
+
+.add_panier .panier input {
+    display: flex;
+    width: 130px;
+    align-items: center;
+    padding-left: 20px;
+    color: #ffffff;
+    font-size: 17px;
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.add_panier .panier i.bx-cart {
+    font-weight: 600;
+    font-size: 22px;
+    cursor: pointer;
+}

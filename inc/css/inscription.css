@@ -1,0 +1,75 @@
+header {
+    background-color: white;
+}
+
+section#inscription {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    margin: 35px;
+}
+
+section#inscription .form {
+    display: inline-block;
+    height: 680px;
+    width: 60.6%;
+    border-radius: 70px;
+    background-color: white;
+    box-shadow: 6px 2px 7em rgb(238, 237, 237);
+    border: 1.5px solid rgb(238, 232, 232);
+}
+
+section#inscription .form h3 {
+    font-size: 2em;
+    margin-left: 250px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: #015E9B;
+}
+
+section#inscription .form input {
+    margin: 20px 55px;
+    padding: 8px;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #E0E0E0;
+}
+
+section#inscription .form input.nom,
+section#inscription .form input.prenom,
+section#inscription .form input.date,
+section#inscription .form input.tele,
+section#inscription .form input.ville,
+section#inscription .form input.cp {
+    width: 35%;
+}
+
+section#inscription .form input.adresse,
+section#inscription .form input.email,
+section#inscription .form input.mtdps,
+section#inscription .form input.confmdtps {
+    width: 85%;
+}
+
+section#inscription .form button.boutton_submit {
+    width: 190px;
+    height: 40px;
+    border-radius: 15px;
+    border: none;
+    background: linear-gradient(to bottom right, rgb(5, 5, 144), rgb(65, 86, 223));
+    color: white;
+    font-weight: bold;
+    font-size: larger;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+section#inscription .form .boutton {
+    width: 100%;
+    text-align: center;
+}
+
+section#inscription .form input:hover {
+    border: 2px solid #060665;
+    border-radius: 20px;
+}

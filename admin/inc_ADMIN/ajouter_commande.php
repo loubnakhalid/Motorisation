@@ -1,9 +1,10 @@
 <?php
+$lienPr= $_SERVER['HTTP_REFERER'];
 echo "
 <div class='body_cmd'>
         
         <div class='div_form_modification_cmd'>
-            <i class='bx bxs-x-square icon_x_exit' onclick='document.location.href=\"gestion.php?table=commande\"'></i>
+            <i class='bx bxs-x-square icon_x_exit' onclick='document.location.href=\"$lienPr\"'></i>
             <form action='controller.php?table=commande&action=ajouter' method='post' enctype='multipart/form-data'>
 
                 <div class='case_text'>
@@ -84,7 +85,7 @@ echo "
                 <div class='bas_form'>
                     <div class='submit_form_modification_cmd'>
                         <input type='reset' value='Effacer' class='btn_effacer_form_modifier_cmd'>
-                        <input type='submit' value='Modifier' class='btn_modifier_form_modifier_cmd'>
+                        <input type='submit' value='Ajouter' class='btn_modifier_form_modifier_cmd'>
                     </div>
                 </div>
             </form>

@@ -20,6 +20,7 @@ function blur_cherche_input(n) {
 function click_cherche_input() {
     if (document.form_recherche.chercher.value == 'Article, produit, marque...') document.form_cherche.rechercher.value = "";
 }
+/* ------------------------------------------------------------------------------- */
 var fleche_pub_left = document.getElementById("fleche_pub_left"),
     fleche_pub_right = document.getElementById("fleche_pub_right"),
     rd = document.getElementsByClassName("rd");
@@ -52,6 +53,7 @@ fleche_pub_right.addEventListener("click", () => {
     }
 
 });
+/* ------------------------------------------------------------------------------- */
 let fleche_left_btn = document.querySelector(".fleche_left_btn")
 fleche_right_btn = document.querySelector(".fleche_right_btn"),
     tout_produit_categorie = document.querySelector(".tout_produit_categorie")
@@ -66,3 +68,21 @@ fleche_left_btn.addEventListener("click", () => {
     tout_produit_categorie.scrollLeft = tout_produit_categorie.scrollLeft - 250;
 
 });
+/* ------------------------------------------------------------------------------- */
+/*const max = document.querySelector('.incrementer'),
+    min = document.querySelector('.decrementer'),
+    num = document.querySelector('.num');
+let a = 1;
+max.addEventListener('click', () => {
+    a++;
+    a = (a < 10) ? "0" + a : a;
+    num.innerText = a
+});
+min.addEventListener('click', () => {
+    if (a > 1) {
+        a--;
+        a = (a < 10) ? "0" + a : a;
+        num.innerText = a;
+    }
+});*/
+/* ------------------------------------------------------------------------------- */

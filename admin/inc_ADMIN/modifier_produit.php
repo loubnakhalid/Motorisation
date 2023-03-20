@@ -1,7 +1,9 @@
 <?php
+$lienPr= $_SERVER['HTTP_REFERER'];
 echo "
     <div class='body'>
         <div class='div_form_modification_produit'>
+            <i class='bx bxs-x-square icon_x_exit' onclick='document.location.href=\"$lienPr\"'></i>
             <form name='formModif' action='controller.php?table=produit&action=modifier&id=$id' method='post' enctype='multipart/form-data' onsubmit='return confirm(\"Voulez-vous vraiment effectuer la modification?\");'>
                 <div class='form_left'>
                     <div class='case'>
@@ -81,9 +83,6 @@ echo "
                     </div>
                 </div>
                 <div class='form_bas'>
-                    <div class='retour_form_modifier_produit'>
-                        <input type='button' value='Retour' class='btn_retour_form_modifier_produit'>
-                    </div>
                     <div class='submit_form'>
                         <input type='reset' value='Effacer' class='btn_effacer_form_modifier_produit'>
                         <input type='submit' value='Modifier' class='btn_modifier_form_modifier_produit'>

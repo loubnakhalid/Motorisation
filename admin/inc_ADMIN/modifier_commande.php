@@ -1,8 +1,9 @@
 <?php
+$lienPr= $_SERVER['HTTP_REFERER'];
 echo "
 <div class='body_cmd'>
         <div class='div_form_modification_cmd'>
-            <i class='bx bxs-x-square icon_x_exit' onclick='document.location.href=\"gestion.php?table=commande\"'></i>
+            <i class='bx bxs-x-square icon_x_exit' onclick='document.location.href=\"$lienPr\"'></i>
             <form action='controller.php?table=commande&action=modifier' method='post' enctype='multipart/form-data'>
 
                 <div class='case_text'>

@@ -1,0 +1,144 @@
+#panier {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-top: 40px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#Total {
+    width: 325px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+    margin-right: 5px;
+    background-color: white;
+    border: 1px solid #e2e9e1;
+    padding: 30px;
+    height: 260px;
+    position: relative;
+    /* border-radius: 25px; */
+    /* box-shadow: 10px 5px 5px rgb(199, 194, 194); */
+}
+
+#Total table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 15px;
+}
+
+#Total table td {
+    width: 50%;
+    border: 1px solid #e2e9e1;
+    padding: 10px;
+    font-size: 13px;
+}
+
+#Total h3 {
+    padding-bottom: 15px;
+    color: #014a6e;
+}
+
+#Total button {
+    background: linear-gradient(to bottom right, rgb(2, 2, 80), rgb(23, 49, 215));
+    color: #fff;
+    width: 150px;
+    height: 35px;
+    border: none;
+    border-radius: 25px;
+    margin-left: 60px;
+}
+
+#Produits table {
+    width: 100%;
+}
+
+#Produits {
+    display: flex;
+    width: 930Px;
+    height: 200px;
+    border: 1px solid #e2e9e1;
+    /* box-shadow: 0 5px 10px rgba(110, 108, 108, 0.2); */
+    /* border-radius: 25px; */
+    margin-left: 10px;
+    background-color: white;
+    margin-bottom: 13px;
+}
+
+#Produits img {
+    width: 220px;
+    height: 190px;
+    margin-left: 5px;
+    margin-right: 55px;
+}
+
+.ImagePr {
+    width: 320px;
+    position: relative;
+    left: 35px;
+}
+
+.NomPR {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+#btnSup {
+    color: #015e9b;
+    font-size: 24px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    left: 50px;
+    bottom: 15px;
+}
+
+.lienSup {
+    text-decoration: none;
+}
+
+.prixPanier {
+    font-size: 20px;
+    font-weight: 505;
+    text-align: right;
+    position: relative;
+    right: 40px;
+    bottom: 10px;
+}
+
+.wrapper {
+    height: 40px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: 1px solid rgba(144, 142, 142, 0.2);
+    position: relative;
+    left: 467px;
+    background-color: rgb(243, 243, 243);
+}
+
+.wrapper span {
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.wrapper span.num {
+    font-size: 17px;
+    border-left: 0.2px solid rgba(195, 192, 192, 0.2);
+    border-right: 0.2px solid rgba(195, 192, 192, 0.2);
+    pointer-events: none;
+}
+
+.wrapper span.incrementer,
+.wrapper span.decrementer {
+    color: #015e9b;
+    ;
+}

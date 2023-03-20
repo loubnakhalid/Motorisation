@@ -6,8 +6,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
     if($table=='catégorie'){
         if($action=='supprimer'){
             $id=$_GET['id'];
-            $rqt1="delete from produit whete IdCt=$id";
-            $rqt2="delete from catégorie where IdCt=$id";
+            $rqt="delete from catégorie where IdCt=$id";
         }
         else{
             $NomCt=$_POST['NomCt'];
@@ -53,8 +52,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
     elseif($table=='commande'){
         if($action=='supprimer'){
             $id=$_GET['id'];
-            $rqt1="delete from détails_commande where IdCmd=$id";
-            $rqt2="delete from commande where IdCmd=$id";
+            $rqt="delete from commande where IdCmd=$id";
         }
         else{
             $DateCmd=$_POST['DateCmd'];
@@ -91,15 +89,6 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             }
         }
     }
-    if(($table=='catégorie' && $action=='supprimer') ||($table=='commande' && $action=='supprimer')){
-        if($rslt=mysqli_query($mysqli,$rqt1) && $rslt1=mysqli_query($mysqli,$rqt2)){
-            header("location:gestion.php?table=$table");
-        }
-        else{
-            echo mysqli_error($mysqli);
-        }
-    }
-    else{
         if($rslt=mysqli_query($mysqli,$rqt)){
             if($table=='commande' && $action=='modifier'){
                 if(isset($_POST['envEmail'])){
@@ -136,5 +125,4 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             echo mysqli_error($mysqli);
         }
     }
-}
 ?>

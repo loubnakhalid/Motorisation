@@ -27,7 +27,6 @@ if(isset($_POST['con']))
             elseif(Client()){
                 header("location:index.php");
             }
-            
         }
         else
         {
@@ -79,10 +78,9 @@ if(isset($_POST['inscr']))
 			mail($to,$subject,$message,$header);
             $_POST['mdp1']=password_hash($_POST['mdp1'],PASSWORD_DEFAULT,['cost'=>14]);
 			mysqli_execute_query($mysqli,"INSERT INTO membre (MDPS,NomMb,PrénomMb,EmailMb) VALUES ('$_POST[mdp1]', '$_POST[nom]', '$_POST[prenom]', '$_POST[email]')");
-			header("location:identification.php?action=login");
+			header("location:index.php");
 		}
 	}
-
 if (isset($_POST['forgotPass'])) {
     $email = $_POST['email'];
     $_SESSION['email'] = $email;
@@ -138,5 +136,32 @@ if(isset($_POST['changePass'])){
             header('location:./identification.php?action=login');
         }
     }
+}
+if(isset($_GET['supPan'])){
+    $id=$_GET['id'];
+    $posPr = array_search($id, $_SESSION['panier']['IdPr']);
+	if ($posPr !== false)
+    {
+		array_splice($_SESSION['panier']['NomPr'], $posPr, 1);
+		array_splice($_SESSION['panier']['ImagePr'] ,$posPr,1);
+		array_splice($_SESSION['panier']['IdPr'], $posPr, 1);
+		array_splice($_SESSION['panier']['qt'], $posPr, 1);
+		array_splice($_SESSION['panier']['PrixPr'], $posPr, 1);
+	}
+    header("location:panier.php");
+}
+if(isset($_GET['envEml'])){
+    $lien=$_SERVER['HTTP_REFERER'];
+    $subject=$_POST['subject'];
+    $from=$_POST['from'];
+	$headers = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$headers .= 'From: <' . $from .'>'." \r\n".
+                'Reply-To: '.  $from . "\r\n".
+                'X-Mailer: PHP/' . phpversion();
+    $to="motorify23@gmail.com";
+    $message=$_POST['message'];
+    mail($to,$subject,$message,$headers);
+    header("location:$lien");
 }
 ?>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;300;400;500;600;800;900&family=Open+Sans:wght@300;800&family=Poppins:wght@100;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100;200;300;400;500;600;700;800;900&family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;300;400;500;600;800;900&family=Open+Sans:wght@300;800&family=Poppins:wght@100;300;400;500;600;700&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -32,6 +32,7 @@ header {
     grid-template-rows: 80px 30px;
     background-color: #fff;
     padding-top: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
 }
 
 
@@ -231,7 +232,7 @@ nav.panier_identifier ul li a {
 .menu {
     grid-column: 1 / 4;
     width: 100%;
-    background-color: #015e9b;
+    background-color: #ffffff;
 }
 
 .menu ul {
@@ -245,7 +246,7 @@ nav.panier_identifier ul li a {
 .menu ul li a {
     position: relative;
     text-decoration: none;
-    color: #ffffff;
+    color: #015e9b;
     display: flex;
     align-items: center;
     height: 30px;
@@ -268,6 +269,8 @@ nav.panier_identifier ul li a {
     transform-origin: left;
 }
 
-.menu ul li a:hover {
+
+/*.menu ul li a:hover {
     color: #ffffff;
 }
+*/

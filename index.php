@@ -12,10 +12,10 @@ include("inc/haut.inc.php");
                     <input type="radio" name="radio" class="rd" id="r4">
 
                     <div class="img first">
-                        <img src="./inc/img/pub_liv3.png" alt="">
+                        <img src="./inc/img/test.png" alt="">
                     </div>
                     <div class="img">
-                        <img src="./inc/img/help3.png" alt="">
+                        <img src="./inc/img/help4.png" alt="">
                     </div>
                     <div class="img">
                         <img src="./inc/img/index/a.jpg" alt="">
@@ -40,6 +40,7 @@ include("inc/haut.inc.php");
                 </div>
             
             </div>
+        
         </section>
         <section class="categorie">
             <div class="entete_categorie">
@@ -57,11 +58,54 @@ include("inc/haut.inc.php");
             <?php
             $rsltPlus=mysqli_query($mysqli,"select *,SUM(qt) as Somme from détails_commande NATURAL JOIN commande NATURAL JOIN produit GROUP BY IdPr ORDER BY somme DESC LIMIT 10;");
             while($row=mysqli_fetch_assoc($rsltPlus)){
-                echo "<a href='produit.php?id=$row[IdPr]' class='produit'><div class='photo_produit'><img src='./inc/img/produits/$row[ImagePr]'></div><div class='nom_prix_produit'><div class='nom_prod'>$row[NomPr]</div><div class='prix_prod'>$row[PrixPr] DH</div></div></a>";
+                if(verifPromo($row['IdPr'])){
+                    $nvPrix=nvPrix($row['IdPr']);
+                    echo "<a href='produits.php?id=$row[IdPr]' class='produit'><div class='photo_produit'><img src='./inc/img/produits/$row[ImagePr]'></div><div class='nom_prod'>$row[NomPr]</div><div class='prix_prod'>$nvPrix DH <sup ><strike>$row[PrixPr] DH</strike> </sup></div></a>";
+                }
+                elseif($row['StockPr'] <= 0){
+                    echo "<a href='produits.php?id=$row[IdPr]' class='produit'><div class='photo_produit'><img src='./inc/img/produits/$row[ImagePr]'></div><div class='nom_prod'>$row[NomPr]</div><div class='prix_prod' style='color:red;font-size:1.3em'>Rupture de stock</div></a>";
+    
+                }
+                else{
+                    echo "<a href='produits.php?id=$row[IdPr]' class='produit'><div class='photo_produit'><img src='./inc/img/produits/$row[ImagePr]'></div><div class='nom_prod'>$row[NomPr]</div><div class='prix_prod'>$row[PrixPr] DH</div></a>";
+                }
             }
             ?>
             </div>
         </section>
+        <?php
+        $rslt=mysqli_query($mysqli,"select * from catégorie");
+        while($row=mysqli_fetch_assoc($rslt)){
+            echo "
+            <section class='categorie'>
+                <div class='entete_categorie'>
+                    <div class='titre_categorie'>
+                        <h2>$row[NomCt]</h2>
+                    </div>
+                    <div class='flech_categorie'>
+                        <button class='fleche_left_btn'><i class='bx bx-chevron-left'></i></button>
+                        <button class='fleche_right_btn'><i class='bx bx-chevron-right'></i></button>
+                    </div>
+                </div>
+                <div class='tout_produit_categorie'>
+            ";
+            $rslt2=mysqli_query($mysqli,"select * from produit where IdCt=$row[IdCt]");
+            while($row2=mysqli_fetch_assoc($rslt2)){
+            if(verifPromo($row2['IdPr'])){
+                $nvPrix=nvPrix($row2['IdPr']);
+                echo "<a href='produits.php?id=$row2[IdPr]' class='produit'><div class='photo_produit'><img src='./inc/img/produits/$row2[ImagePr]'></div><div class='nom_prod'>$row2[NomPr]</div><div class='prix_prod'>$nvPrix DH <sup ><strike>$row2[PrixPr] DH</strike> </sup></div></a>";
+            }
+            elseif($row2['StockPr'] <= 0){
+                echo "<a href='produits.php?id=$row2[IdPr]' class='produit'><div class='photo_produit'><img src='./inc/img/produits/$row2[ImagePr]'></div><div class='nom_prod'>$row2[NomPr]</div><div class='prix_prod' style='color:red;font-size:1.3em'>Rupture de stock</div></a>";
+
+            }
+            else{
+                echo "<a href='produits.php?id=$row2[IdPr]' class='produit'><div class='photo_produit'><img src='./inc/img/produits/$row2[ImagePr]'></div><div class='nom_prod'>$row2[NomPr]</div><div class='prix_prod'>$row2[PrixPr] DH</div></a>";
+            }
+            }
+            echo "</div></section>";
+        }
+        ?>
         <section class="information_pourquoi">
             <div class="text_pourquoi">
                 <h1> <span style="font-weight: 400;">Pourquoi </span><span style="font-weight: 900;">Motorify</span>  <span style="font-weight: 400;">?</span></h1>

@@ -2,34 +2,36 @@
 <footer>
     <div class="footer_entete">
 
-        <div class="livraison">
-            <lord-icon class="icon_footer" src="https://cdn.lordicon.com/uetqnvvg.json" trigger="loop" colors="primary:#d1ecff,secondary:#d1ecff" style="width:70px;height:70px">
-            </lord-icon>
+        <div class="dkchi">
+            <div class="livraison">
+                <h3>Livraison sur-mesure</h3>
 
-            <span class="title">Livraison sur-mesure</span>
+            </div>
+
+
+            <div class="guide_achat">
+                <h3>Guide d'achats</h3>
+            </div>
+
+            <div class="qui_somme_nous">
+                <h3>Qui sommes-nous</h3>
+            </div>
 
         </div>
-        <div class="livraison">
-            <lord-icon src="https://cdn.lordicon.com/yyecauzv.json" trigger="loop" colors="primary:#0091ff,secondary:#0091ff" state="hover-1" style="width:70px;height:70px">
-            </lord-icon>
-            <span class="title">Guide d'achat</span>
-
+        <div class="contacter_nous">
+            <h3>Contactez-nous</h3>
+            <div class="contacter">
+                <form action="controller.php?envEml=true" method="post">
+                    <input type="text" name="subject" placeholder="Objet" class="inpp">
+                    <input type="text" name="from" placeholder="Email" class="inpp">
+                    <textarea name="message" id="" cols="30" rows="10" placeholder="Description"></textarea>
+                    <input type="submit" name="envEml" value="Envoyer" class="envoyer">
+                </form>
+            </div>
         </div>
-        <div class="livraison">
-            <lord-icon src="https://cdn.lordicon.com/uukerzzv.json" trigger="loop" colors="primary:#0091ff,secondary:#0091ff" style="width:70px;height:70px">
-            </lord-icon>
-            <span class="title">Qui somme-nous</span>
-        </div>
-        <div class="livraison">
-            <lord-icon src="https://cdn.lordicon.com/rhvddzym.json" trigger="loop" colors="primary:#0091ff,secondary:#0091ff" style="width:70px;height:80px">
-            </lord-icon>
-            <span class="title">Nous contacter</span>
-        </div>
-
     </div>
-
     <div class="bas_footer">
-        <img src="logo6.png" alt="">
+        <img src="./inc/img/logo6.png" alt="">
         <span class="copyright"><span style="font-size: 15px;">Copyright </span> © 2022-2023 Motorify Company Tous droits réservés.</span>
         <div class="reseux_sociaux">
             <a href=""><i class='bx bxl-facebook'></i></a>
@@ -37,9 +39,13 @@
             <a href=""><i class='bx bxl-twitter' ></i></a>
             <a href=""><i class='bx bxl-gmail' ></i></a>
         </div>
+        <div class="arrow_bas">
+            <a href="#h"> <i class="fa-solid fa-arrow-up-long"></i></a>
+        </div>
     </div>
 
 </footer>
+
 <script src="inc/js/header.js"></script>
 </body>
 
