@@ -76,11 +76,11 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             $rqt="delete from rdv where IdRDV=$id";
         }
         else{
+            $TypePrjt=$_POST['TypePrjt'];
+            $MessageRDV=$_POST['MessageRDV'];
+            $DateRDV=$_POST['DateRDV'];
+            $StatutRDV=$_POST['StatutRDV'];
             if($action=='ajouter'){
-                $TypePrjt=$_POST['TypePrjt'];
-                $MessageRDV=$_POST['MessageRDV'];
-                $DateRDV=$_POST['DateRDV'];
-                $StatutRDV=$_POST['StatutRDV'];
                 $rqt="insert into rdv (TypePrjt,MessageRDV,DateDRV,StatutRDV) values ('$TypePrjt','$MessageRDV','$DateDRV','$StatutRDV)'";
             }
             elseif($action=='modifier'){
@@ -89,6 +89,69 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             }
         }
     }
+    elseif($table=='promos'){
+        if($action=='supprimer'){
+            $id=$_GET['id'];
+            $rqt="delete from promos where IdPromo=$id";
+        }
+        else{
+            $Taux=$_POST['Taux'];
+            $DateDéb=$_POST['DateDéb'];
+            $DateFin=$_POST['DateFin'];
+            $StatutPromo=$_POST['StatutPromo'];
+            if($action=='ajouter'){
+                $rqt="insert into promos (Taux,DateDéb,DateFin,StatutPromo) values('$Taux','$DateDéb','$DateFin','$StatutPromo')";
+            }
+            elseif($action=='modifier'){
+                $id=$_GET['id'];
+                $rqt="update promos set Taux=$Taux,DateDéb=$DateDéb,DateFin=$DateFin,StatutPromo=$StatutPromo where IdPromo=$id";
+            }
+        }
+    }
+    if($table=='promo_produit'){
+        if($action=='supprimer'){
+            $id=$_GET['id'];
+            $rqt="delete from promo_produit where IdPrmPrdt=$id";
+        }
+        elseif($action=='ajouter'){
+            $IdPromo=$_POST['IdPromo'];
+            $IdPr=$_POST['IdPr'];
+            for($i=0;$i<count($IdPr);$i++){
+                $rqt4="insert into promo_produit (IdPromo,IdPr) values('$IdPromo','$IdPr[$i]')";
+                $rslt=mysqli_query($mysqli,$rqt4);
+            }
+        }
+    }
+    elseif($table=='détails_commande'){
+        if($action=='supprimer'){
+            $id=$_GET['id'];
+            $rqt="delete from détails_commande where IdDétailsCmd=$id";
+        }
+        elseif($action=='modifier'){
+            $rqt="update détails_commande set qt=$_POST[qt]";
+        }
+        elseif($action=='ajouter'){
+            $IdCmd=$_POST['IdCmd'];
+            $IdPr=$_POST['IdPr'];
+            for($i=0;$i<count($IdPr);$i++){
+                $rqt4="insert into détails_commande (IdCmd,IdPr,qt) values('$IdCmd','$IdPr[$i]',1)";
+                $rslt=mysqli_query($mysqli,$rqt4);
+            }
+        }
+        elseif($action=='ajouterCmd'){
+            $IdCmd=$_POST['IdCmd'];
+            $IdCmdAjt=$_POST['IdCmdAjt'];
+            for($i=0;$i<count($IdCmdAjt);$i++){
+                $rslt1=mysqli_query($mysqli,"select * from détails_commande where IdCmd=$IdCmdAjt[$i]");
+                while($row1=mysqli_fetch_assoc($rslt1)){
+                    $rslt4=mysqli_query($mysqli,"insert into détails_commande (IdCmd,IdPr,qt) values ($IdCmd,$row1[IdPr],$row1[qt])");
+                    mysqli_query($mysqli,"delete from commande where IdCmd=$IdCmdAjt[$i]");
+                }
+            }
+        }
+
+    }
+    if(isset($rqt)){
         if($rslt=mysqli_query($mysqli,$rqt)){
             if($table=='commande' && $action=='modifier'){
                 if(isset($_POST['envEmail'])){
@@ -125,4 +188,5 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             echo mysqli_error($mysqli);
         }
     }
+}
 ?>

@@ -15,7 +15,7 @@ $url='';
 // emplacement de la ressource (nom de la page affichée). Utiliser $_SERVER['PHP_SELF'] si vous ne voulez pas afficher les paramètres de la requête
 $url .= $_SERVER['REQUEST_URI'];
 // on affiche l'URL de la page courante
-if(isset($_SERVER['HTTP_REFER'])){
-$lienPr= $_SERVER['HTTP_REFERER'];
+if(isset($_SERVER['HTTP_REFERER'])){
+    $lienPr= $_SERVER['HTTP_REFERER'];
 }
 ?>
