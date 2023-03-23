@@ -57,7 +57,7 @@ if (isset($_GET['table'])) {
         <div class='entete'>
             <div class='element'>
                 <div class='chercher'>
-                    <form action='gestion.php?table=produit&recherche=true' method='post'>
+                    <form action='gestion.php?table=produit&recherche=true&mot= ' method='post'>
                         <button type='submit' name='rechercher' class='btn_recherche'><i class='fa-solid fa-magnifying-glass' aria-hidden='true'></i></button>
                         <input type='text' name='mot' id='' placeholder='chercher produit ...'>
                     </form>

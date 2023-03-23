@@ -106,7 +106,12 @@ function ajouterProduitDansPanier($IdPr,$NomPr,$qt,$PrixPr,$ImagePr)
 		$_SESSION['panier']['ImagePr'][] =$ImagePr;
         $_SESSION['panier']['IdPr'][] = $IdPr;
         $_SESSION['panier']['qt'][] = $qt;
+		if(verifPromo($IdPr)){
+			$_SESSION['panier']['PrixPr'][] = nvPrix($IdPr);
+		}
+		else{
 		$_SESSION['panier']['PrixPr'][] = $PrixPr;
+		}
     }
 }
 //------------------------------------

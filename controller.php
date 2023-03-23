@@ -151,7 +151,6 @@ if(isset($_GET['supPan'])){
     header("location:panier.php");
 }
 if(isset($_GET['envEml'])){
-    $lien=$_SERVER['HTTP_REFERER'];
     $subject=$_POST['subject'];
     $from=$_POST['from'];
 	$headers = 'MIME-Version: 1.0' . "\r\n";
@@ -161,7 +160,11 @@ if(isset($_GET['envEml'])){
                 'X-Mailer: PHP/' . phpversion();
     $to="motorify23@gmail.com";
     $message=$_POST['message'];
-    mail($to,$subject,$message,$headers);
-    header("location:$lien");
+    if(mail($to,$subject,$message,$headers)){
+        echo "<script>alert('message envoyé avec succés');document.location.href='$lienPr';</script>";
+    }
+    else{
+        echo "<script>alert('echec de l'envoi.);document.location.href='$lienPr';</script>";
+    }
 }
 ?>

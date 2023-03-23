@@ -1,3 +1,11 @@
+document.addEventListener("DOMContentLoaded", function(event) {
+    var scrollpos = localStorage.getItem('scrollpos');
+    if (scrollpos) window.scrollTo(0, scrollpos);
+});
+
+window.onbeforeunload = function(e) {
+    localStorage.setItem('scrollpos', window.scrollY);
+};
 let login_hover = document.querySelector(".login_hover");
 let icon_user = document.querySelector(".icon_user");
 
