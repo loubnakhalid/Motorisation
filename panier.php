@@ -54,9 +54,9 @@
                         <td><strong>$total DH</strong></td>
                     </tr>
                 </table>
-            <button class='bouttonCmd'>Passer à la caisse</button>
+            <button class='bouttonCmd' onclick='document.location.href=\"finalisationcommande.php\"'>Passer à la caisse</button>
         </div>
-        "; 
+            "; 
     }
     ?>
 </section>

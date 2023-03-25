@@ -150,6 +150,26 @@ if(isset($_GET['supPan'])){
 	}
     header("location:panier.php");
 }
+if(isset($_POST['Finaliser'])){
+    $DateCmd=Date("20y-m-d");
+    $IdMb=$_SESSION['membre']['IdMb'];
+    $StatutCmd='En cours';
+    $prixTT=montantTotal();
+    $modePaiement=$_POST['modePaiement'];
+    $rslt=mysqli_query($mysqli,"insert into commande (DateCmd,IdMb,StatutCmd,prixTT,modePaiement) values('$DateCmd',$IdMb,'$StatutCmd',$prixTT,'$modePaiement')");
+    $IdCmd = $mysqli->insert_id;
+		for($i = 0; $i < count($_SESSION['panier']['IdPr']); $i++)
+		{
+			$rslt1=mysqli_query($mysqli,"INSERT INTO détails_commande (IdCmd, IdPr,qt) VALUES ($IdCmd, " . $_SESSION['panier']['IdPr'][$i] . "," . $_SESSION['panier']['qt'][$i] . ")");
+		}
+		//unset($_SESSION['panier']);
+    $NomMb=$_POST['NomMb'];
+    $PrénomMb=$_POST['PrénomMb'];
+    $NumTélé=$_POST['NumTélé'];
+    $AdresseMb=$_POST['AdresseMb'];
+    $rslt2=mysqli_query($mysqli,"UPDATE membre set NomMb='$NomMb',PrénomMb='$PrénomMb',NumTélé='$NumTélé',AdresseMb='$AdresseMb' where IdMb=$IdMb");
+    
+}
 if(isset($_GET['envEml'])){
     $subject=$_POST['subject'];
     $from=$_POST['from'];

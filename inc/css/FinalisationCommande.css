@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100;200;300;400;500;600;700;800;900&family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;300;400;500;600;800;900&family=Open+Sans:wght@300;800&family=Poppins:wght@100;300;400;500;600;700&display=swap');
+.container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*border: 1px solid black;*/
+    border-radius: 21px;
+    z-index: 10;
+    background-color: white;
+    width: 650px;
+    height: 550px;
+    max-width: 80%;
+    font-size: 15px;
+    font-family: 'Lato', sans-serif;
+}
+
+.container-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*border-bottom: 1px solid black;*/
+}
+
+.container-header .title {
+    font-size: 1.25rem;
+    font-weight: bolder;
+    position: relative;
+    left: 190px;
+    color: rgb(5, 5, 120);
+    margin-top: 15px;
+}
+
+.container-header .close-boutton {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 21px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: rgb(232, 86, 33);
+}
+
+.container-body {
+    padding-top: 12px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 28px;
+}
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.title-sec1,
+.title-sec2,
+.title-sec3 {
+    padding: 8px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.title-sec2 {
+    margin-top: 0px;
+}
+
+.title-sec3 {
+    margin-top: 19px;
+    margin-bottom: 10px;
+}
+
+.input-perso {
+    margin-left: 20px;
+}
+
+.nom-input,
+.tele-input,
+.prénom-input {
+    width: 180px;
+    padding: 5px;
+    margin: 8px;
+    border-radius: 13px;
+    border: 1px solid rgb(233, 230, 230);
+    height: 25px
+}
+
+.tele-input {
+    width: 220px;
+}
+
+.tele {
+    margin-left: 150px;
+    margin-bottom: 3px;
+}
+
+.prénom {
+    margin-left: 45px
+}
+
+.adresse-input {
+    width: 450px;
+    padding: 5px;
+    margin-left: 20px;
+    margin-top: 10px;
+    border-radius: 13px;
+    border: 1px solid rgb(233, 230, 230);
+    height: 25px
+}
+
+.lienModif {
+    text-decoration: none;
+    color: black;
+    font-size: 12px;
+    margin-left: 50px;
+}
+
+.Modifier {
+    font-size: 12px;
+    font-family: 'Times new Roman';
+    font-weight: 500;
+    margin-right: 12px;
+}
+
+.qst {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+}
+
+#paypal {
+    margin-top: 20px;
+    margin-bottom: 18px;
+    margin-left: 35Px;
+}
+
+#espece {
+    margin-left: 35Px;
+}
+
+.input-fin {
+    padding-left: 45px;
+    margin-top: 29px;
+}
+
+.input-Conf {
+    width: 140px;
+    padding: 8px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    background: linear-gradient(to bottom right, rgb(2, 2, 80), rgb(23, 49, 215));
+    color: white;
+}
+
+.input-Annul {
+    width: 140px;
+    padding: 8px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 20px;
+    border: 1px solid rgb(233, 230, 230);
+}
+
+input[type="text"]:focus {
+    border: 1px solid rgb(2, 2, 80);
+}
+
+.btn-Paypal {
+    width: 150px;
+    margin-left: 80px;
+}
+
+.btn-Paypal {
+    display: none;
+}

@@ -11,7 +11,7 @@ $profile = getFirstProfileId($analytics); // Récupère le profil Google Analyti
 // Fonction d'initialisation et d'authentification
 function initializeAnalytics(){
 	// Précise où trouver la clé du compte de service
-	$KEY_FILE_LOCATION = '../motorify-2023-bad296ea02d8.json';
+	$KEY_FILE_LOCATION = '../vendor/motorify-2023-bad296ea02d8.json';
 
 	// Crée et configure le client
 	$client = new Google_Client();
