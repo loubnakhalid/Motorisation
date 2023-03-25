@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
-    margin-top: 40px;
+    /* margin-top: 40px; */
     margin-left: 5px;
     margin-right: 5px;
 }
@@ -38,16 +38,17 @@
 #Total h3 {
     padding-bottom: 15px;
     color: #014a6e;
+    margin-left: 54px;
 }
 
 #Total button {
-    background: linear-gradient(to bottom right, rgb(2, 2, 80), rgb(23, 49, 215));
+    background-color: #FF7E00;
     color: #fff;
     width: 150px;
     height: 35px;
     border: none;
-    border-radius: 25px;
-    margin-left: 60px;
+    border-radius: 2px;
+    margin-left: 54px;
 }
 
 #Produits table {
@@ -56,7 +57,7 @@
 
 #Produits {
     display: flex;
-    width: 930Px;
+    width: 850Px;
     height: 200px;
     border: 1px solid #e2e9e1;
     /* box-shadow: 0 5px 10px rgba(110, 108, 108, 0.2); */
@@ -68,7 +69,7 @@
 
 #Produits img {
     width: 220px;
-    height: 190px;
+    height: 150px;
     margin-left: 5px;
     margin-right: 55px;
 }
@@ -82,18 +83,44 @@
 .NomPR {
     font-weight: 500;
     font-size: 18px;
+    position: relative;
+    bottom: 45px;
 }
 
 #btnSup {
-    color: #015e9b;
+    color: #f77a00;
     font-size: 24px;
     width: 100px;
     display: flex;
     justify-content: center;
     text-align: center;
     position: relative;
-    left: 50px;
-    bottom: 15px;
+    left: 20px;
+    bottom: 20px;
+    top: 0.2px;
+}
+
+.Supprimer {
+    font-size: 13px;
+    position: relative;
+    top: 9.7px;
+    margin-left: 10px;
+}
+
+.promo {
+    font-size: 13px;
+    font-weight: 450;
+    margin-top: 5px;
+    text-decoration: line-through;
+    color: #FF7E00
+}
+
+.prcntg {
+    font-size: 12px;
+    /*border: 1px solid #eebb88;*/
+    background-color: #e8e1da;
+    color: #FF7E00;
+    margin-left: 5px;
 }
 
 .lienSup {
@@ -106,7 +133,16 @@
     text-align: right;
     position: relative;
     right: 40px;
-    bottom: 10px;
+    bottom: 29px;
+}
+
+.btnQte {
+    width: 20px;
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+    border: none;
+    background: transparent;
 }
 
 .wrapper {
@@ -118,8 +154,9 @@
     border-radius: 20px;
     border: 1px solid rgba(144, 142, 142, 0.2);
     position: relative;
-    left: 467px;
+    left: 392px;
     background-color: rgb(243, 243, 243);
+    bottom: 8px;
 }
 
 .wrapper span {
