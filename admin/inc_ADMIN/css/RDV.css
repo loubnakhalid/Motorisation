@@ -321,10 +321,10 @@ nav.menu.fermer~section.home {
 
 .case {
     background-color: white;
-    height: 55px;
+    height: 58px;
     display: flex;
     align-items: center;
-    width: 180px;
+    width: 200px;
     justify-content: center;
     border: none;
     /* border-radius: 20px; */

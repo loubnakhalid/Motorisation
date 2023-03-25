@@ -340,7 +340,7 @@ if (isset($_GET['table'])) {
                             <div class='chercher '>
                                 <form action='gestion.php' method='get'>
                                     <input type='hidden' name='table' value='RDV'>
-                                    <button type='submit' name='recherche' value='true' class='btn_recherche'><i class='fa-solid fa-magnifying-glass' aria-hidden='true'></i></button>
+                                    <button type='submit' name='recherche' value='true' class='btn_recherche'><i class='fa-solid fa-magnifying-glass' aria-hidden='true' style='color: #2380dd;'></i></button>
                                     <input type='text' name='mot' id='' placeholder='N° RDV'>
                                 </form>
                             </div>
