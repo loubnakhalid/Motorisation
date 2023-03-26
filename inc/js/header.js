@@ -28,6 +28,22 @@ function blur_cherche_input(n) {
 function click_cherche_input() {
     if (document.form_recherche.chercher.value == 'Article, produit, marque...') document.form_cherche.rechercher.value = "";
 }
+
+function diminuerQt(pos) {
+    let inpt = document.getElementsByClassName("btnQte");
+    if (inpt[pos].value > 0) {
+        inpt[pos].value--;
+    }
+    document.location.href = 'controller.php?qtPan=true&pos=' + pos + '&nbre=' + inpt[pos].value;
+}
+
+function augmenterQt(pos) {
+    let inpt = document.getElementsByClassName("btnQte");
+    if (inpt[pos].value >= 0) {
+        inpt[pos].value++;
+    }
+    document.location.href = 'controller.php?qtPan=true&pos=' + pos + '&nbre=' + inpt[pos].value;
+}
 /* ------------------------------------------------------------------------------- */
 var fleche_pub_left = document.getElementById("fleche_pub_left"),
     fleche_pub_right = document.getElementById("fleche_pub_right"),
@@ -76,6 +92,7 @@ fleche_left_btn.addEventListener("click", () => {
     tout_produit_categorie.scrollLeft = tout_produit_categorie.scrollLeft - 250;
 
 });
+
 /* ------------------------------------------------------------------------------- */
 /*const max = document.querySelector('.incrementer'),
     min = document.querySelector('.decrementer'),

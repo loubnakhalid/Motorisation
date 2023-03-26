@@ -1,0 +1,295 @@
+.home header.promos {
+    grid-area: header;
+    display: flex;
+    align-items: start;
+    justify-content: flex-start;
+    /* background-color: #f1f7fa; */
+    background-color: rgb(234 237 255);
+    padding: 0px 27px;
+    flex-wrap: wrap;
+}
+
+.case_promos {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    justify-content: center;
+    border: none;
+    /* border-radius: 20px; */
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, .08);
+    cursor: pointer;
+    border-left: 5px solid #2368cf;
+    margin-right: 17px;
+}
+
+.case_promos:hover {
+    background-color: #010535;
+    color: white;
+    transition: all 0.3s;
+}
+
+.header_header_promos {
+    width: 100%;
+    /* background: white; */
+    height: 40px;
+}
+
+.home main .table_promos {
+    box-shadow: rgba(163, 163, 163, 0.39) 0px 0px 11px 0px;
+    height: auto;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    width: 95%;
+    transition: all 0.8s ease;
+}
+
+.home main .table_promos table {
+    width: 100%;
+    border: 1px solid whitesmoke;
+    overflow-y: auto;
+    height: auto;
+    background-color: #ffffff;
+    overflow: hidden;
+    transition: all 0.7s ease;
+}
+
+.home main .table_promos table thead {
+    font-weight: normal;
+    color: #2368cf;
+    height: 50px;
+    font-size: 13px;
+}
+
+.home main .table_promos table tbody {
+    overflow-y: auto;
+    height: auto;
+    margin-top: 10px;
+}
+
+
+/* .home main .table_promos table tr{
+	border-left: 4px solid rgb(132, 9, 9);
+	cursor: pointer;
+} */
+
+.home main .table_promos table td {
+    height: 50px;
+    background-color: inherit;
+    text-align: center;
+    border-top: 1px solid rgb(240, 240, 240);
+    font-size: 14px;
+    color: rgb(69, 87, 106);
+}
+
+.home main .table_promos table td input {
+    padding: 5px 10px 5px 10px;
+    color: #ffffff;
+    background-color: #0833a7;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+.home main .table_promos .entete {
+    width: 100%;
+    height: 50px;
+    background-color: #ffffff;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-row: auto;
+}
+
+.home main .table_promos .entete .element {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home main .table_promos .entete .element .chercher {
+    width: 90%;
+    height: 75%;
+    background-color: #d4e1ff;
+    padding-left: 15px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.home main .table_promos .entete .element .chercher form {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.home main .table_promos .entete .element .chercher button {
+    width: 10%;
+    background: inherit;
+    border: none;
+    outline: none;
+    color: rgb(47, 141, 199);
+    font-size: 17px;
+}
+
+.home main .table_promos .entete .element .chercher input {
+    background: inherit;
+    border: none;
+    width: 80%;
+    height: 100%;
+}
+
+.home main .table_promos .entete .element .chercher input:focus {
+    outline: none;
+    border: none;
+}
+
+.home main .table_promos .entete .element .trie,
+.home main .table_promos .entete .element .statut {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.home main .table_promos .entete .element .trie .input_trie,
+.home main .table_promos .entete .element .statut .input_statut {
+    display: flex;
+    border: 1px solid rgb(220, 220, 220);
+    width: 90%;
+    height: 70%;
+    padding: 0 0 0 9px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.home main .table_promos .entete .element .trie .cacher,
+.home main .table_promos .entete .element .statut .cacher {
+    display: none;
+}
+
+.home main .table_promos .entete .element .trie .input_trie span.icon_select_trie,
+.home main .table_promos .entete .element .statut .input_statut span.icon_select_statut {
+    height: 100%;
+    border-left: 1px solid rgb(220, 220, 220);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 19px;
+}
+
+.home main .table_promos .entete .element .statut .input_statut p {
+    padding-bottom: 2.5px;
+}
+
+.home main .table_promos .entete .element .trie .input_trie p {
+    padding-bottom: 2.5px;
+}
+
+.home main .table_promos .entete .element .trie .input_trie span.trie_par,
+.home main .table_promos .entete .element .statut .input_statut span.statut_par {
+    font-size: 13px;
+    font-weight: 600;
+    color: #919ba8;
+}
+
+.home main .table_promos .entete .element .trie .input_trie span.name_trie,
+.home main .table_promos .entete .element .statut .input_statut span.name_statut {
+    font-weight: bold;
+    color: #43465e;
+    font-size: 14px;
+}
+
+.home main .table_promos .entete .element .trie .display_trie,
+.home main .table_promos .entete .element .statut .display_statut {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    width: 82%;
+    top: 43px;
+    box-shadow: rgba(163, 163, 163, 0.39) 0px 3px 11px 0px;
+    padding: 10px 0 10px 0;
+}
+
+.home main .table_promos .entete .element .trie .display_trie ul,
+.home main .table_promos .entete .element .statut .display_statut ul {
+    margin: 0 5px 0 5px;
+}
+
+.home main .table_promos .entete .element .trie .display_trie ul li,
+.home main .table_promos .entete .element .statut .display_statut ul li {
+    list-style: none;
+    margin-top: 5px;
+    padding-left: 10px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+}
+
+.home main .table_promos .entete .element .trie .display_trie ul li::before,
+.home main .table_promos .entete .element .statut .display_statut ul li::before {
+    content: "•";
+    padding-right: 10px;
+    color: rgb(100, 101, 206);
+}
+
+.home main .table_promos .entete .element .trie .display_trie ul li:hover,
+.home main .table_promos .entete .element .statut .display_statut ul li:hover {
+    background-color: #eaf0ff;
+}
+
+.home main .table_promos .entete .element .trie .display_trie ul li a,
+.home main .table_promos .entete .element .statut .display_statut ul li a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #404586;
+}
+
+.home main .table_promos .entete .element .trie .display_trie ul li:hover a,
+.home main .table_promos .entete .element .statut .display_statut ul li:hover a {
+    text-decoration: none;
+    color: #202cd1;
+}
+
+.home main .table_promos .entete .produit {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.home main .table_promos table td.action {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+}
+
+.icon_modifier_promos {
+    font-size: 25px;
+    color: #0833a7;
+}
+
+.home main .table_promos .entete .produit button {
+    background-color: #0833a7;
+    height: 35px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    color: #ffffff;
+    width: 134px;
+    margin-right: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}

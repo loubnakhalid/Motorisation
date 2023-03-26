@@ -15,7 +15,6 @@
     <script src="https://www.paypal.com/sdk/js?client-id=ASPxcd5frMaueHLGEQxTi2BO9tpV77s51-fKg1XduObyJyLXB4VrlZ0j0CprL9tb0CHg43b2GZW1Jpab&currency=USD"></script>
     <script>
         paypal.Buttons({
-            
             //sets up the transaction when a payment button is clicked 
             createOrder: (data, actions) => {
                 return actions.order.create({
@@ -25,7 +24,6 @@
                         }
                     }]
                 });
-
             },
             //Finalize the transaction after payer approval 
             onApprove: (data, actions) => {
@@ -66,12 +64,12 @@
 </head>
 
 <body>
-    <form action="controller.php" method="post">
         <div class="container" id="FinirCommande">
             <div class="container-header">
                 <div class="title">Finalisation de la commande</div>
-                <button class="close-boutton">&times;</button>
+                <button class="close-boutton" onclick="document.location.href='panier.php'">&times;</button>
             </div>
+            <form action="controller.php" method="post">
             <?php
             $id=$_SESSION['membre']['IdMb'];
             $rslt=mysqli_query($mysqli,"select * from membre where IdMb=$id");
@@ -82,11 +80,9 @@
                 <div class="input-perso">
                     <label>Nom :<input type="text" name="NomMb" value="<?=$row['NomMb'];?>" class="nom-input"></label>
                     <span class="prénom"><label>Prénom :<input type="text" name="PrénomMb" value="<?=$row['PrénomMb'];?>"  class="prénom-input"></label><br></span>
-                    <span class="tele"><label>Télé :<input type="tel" name="NumTélé" value="<?=$row['NumTélé'];?>"  class="tele-input"></label></span>
-                </div>
-                <div class="title-sec2">Adresse :</div>
-                <div class="input-adrs">
-                    <label><input type="text" name="AdresseMb" value="<?=$row['AdresseMb'];?>" class="adresse-input"></label>
+                    <span class="tele"><label>Email :<input type="tel" name="EmailMb" value="<?=$row['EmailMb'];?>"  class="tele-input"></label></span>
+                    <span class="tele"><label> Téléphone :<input type="tel" name="NumTélé" value="<?=$row['NumTélé'];?>"  class="tele-input"></label></span>
+                    <div class="adresse"><label>Adresse :<input type="text" name="AdresseMb" value="<?=$row['AdresseMb'];?>"  class="adresse-input"></label></div>
                 </div>
                 <div class="title-sec3">Mode de paiement :</div>
                 <div class="input-paim">
@@ -105,9 +101,10 @@
                     <input type="reset" value="Annuler" name="Annuler" class="input-Annul">
                    </div>
                 </div>
+                </form>
             </div>
             <div class="active" id="overlay"></div>
-    </form>
+    
 </body>
 
 </html>

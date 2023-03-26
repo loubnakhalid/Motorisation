@@ -79,6 +79,13 @@ function verifPromo($IdPr){
 		return false;
 	}
 }
+function Taux($IdPr){
+	include("connect.inc.php");
+	$rslt2=mysqli_query($mysqli,"select * from promos natural join promo_produit where IdPr=$IdPr");
+    $row2=mysqli_fetch_assoc($rslt2);
+	$taux=$row2['Taux'];
+    return $taux;
+}
 function creationDuPanier()
 {
    if (!isset($_SESSION['panier']))

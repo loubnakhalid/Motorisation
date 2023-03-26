@@ -118,5 +118,5 @@ moins.addEventListener("click", () => {
         quantite_panier.value--;
     }
 });
-    </script>
+</script>
 <?php include("./inc/bas.inc.html");?>

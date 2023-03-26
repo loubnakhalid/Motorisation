@@ -39,16 +39,16 @@ if (isset($_GET['table'])) {
             $sumCout=$sumCout+($row['PrixPr']*$row['StockPr']);
         }
         $rsltPlus=mysqli_query($mysqli,"select NomPr,SUM(qt) as Somme from détails_commande NATURAL JOIN commande NATURAL JOIN produit GROUP BY IdPr ORDER BY somme DESC LIMIT 1;");
+        $plusVendu=0;
         $plusVendu=mysqli_fetch_assoc($rsltPlus);
         echo "
         <section class='home'>
-            <header>
-                <div class='header_header'></div>
-                <div class='case'>Nombre de produits : $nbreProduct </div>
-                <div class='case'>Nombre de produits vendus : $sum </div>
-                <div class='case'>Produit populaire : $plusVendu[NomPr] </div>
-                <div class='case'>Chiffre d'affaires : $sumPrix DH </div>
-                <div class='case'>Côut des produits en stock : $sumCout DH </div>
+            <header class='produit'>
+                <div class='header_header_produit'></div>
+                <div class='case_produit'>Nombre de produits : $nbreProduct </div>
+                <div class='case_produit'>Nombre de produits vendus : $sum </div>
+                <div class='case_produit'>Chiffre d'affaires : $sumPrix DH </div>
+                <div class='case_produit'>Côut des produits en stock : $sumCout DH </div>
             </header>
             <main>
                 <div class='table_produit' >
@@ -157,11 +157,11 @@ if (isset($_GET['table'])) {
         $CtMoinsPop=mysqli_fetch_assoc($countCtMoinsPop);
         echo "
         <section class='home'>
-            <header>
-                <div class='header_header'></div>
-                <div class='case'>Nombre de catégories : $nbreCt</div>
-                <div class='case'>Catégorie la plus populaire :".$CtPop['NomCt']."</div>
-                <div class='case'>Catégorie la moins populaire :". $CtMoinsPop['NomCt']."</div>
+            <header class='categorie'>
+                <div class='header_header_categorie'></div>
+                <div class='case_categorie'>Nombre de catégories : $nbreCt</div>
+                <div class='case_categorie'>Catégorie la plus populaire :".$CtPop['NomCt']."</div>
+                <div class='case_categorie'>Catégorie la moins populaire :". $CtMoinsPop['NomCt']."</div>
             </header>
             <main>
                 <div class='containner_main'>
@@ -205,13 +205,13 @@ if (isset($_GET['table'])) {
         $row4=mysqli_num_rows($ann);
         echo "
         <section class='home'>
-            <header>
-                <div class='header_header'></div>
-                <div class='case'> Total commandes : $row </div>
-                <div class='case'> En cours : $row1 </div>
-                <div class='case'> Expédiée : $row2 </div>
-                <div class='case'> Livrée : $row3 </div>
-                <div class='case'> Annulée : $row4 </div>
+            <header class='commande'>
+                <div class='header_header_commande'></div>
+                <div class='case_commande'> Total commandes : $row </div>
+                <div class='case_commande'> En cours : $row1 </div>
+                <div class='case_commande'> Expédiée : $row2 </div>
+                <div class='case_commande'> Livrée : $row3 </div>
+                <div class='case_commande'> Annulée : $row4 </div>
             </header>
             <main>
                 <div class='table_commande'>
@@ -327,11 +327,11 @@ if (isset($_GET['table'])) {
         $nbreNonTr=mysqli_num_rows($rslt3);
         echo "
         <section class='home '>
-            <header>
-                <div class='header_header'></div>
-                <div class='case'>Nombre de RDV : $nbre</div>
-                <div class='case'>RDV Traité : $nbreTr</div>
-                <div class='case'>RDV Non traité : $nbreNonTr</div>
+            <header class='rdv'>
+                <div class='header_header_rdv'></div>
+                <div class='case_rdv'>Nombre de RDV : $nbre</div>
+                <div class='case_rdv'>RDV Traité : $nbreTr</div>
+                <div class='case_rdv'>RDV Non traité : $nbreNonTr</div>
             </header>
             <main>
                 <div class='table_rdv'>
@@ -340,7 +340,7 @@ if (isset($_GET['table'])) {
                             <div class='chercher '>
                                 <form action='gestion.php' method='get'>
                                     <input type='hidden' name='table' value='RDV'>
-                                    <button type='submit' name='recherche' value='true' class='btn_recherche'><i class='fa-solid fa-magnifying-glass' aria-hidden='true' style='color: #2380dd;'></i></button>
+                                    <button type='submit' name='recherche' value='true' class='btn_recherche'><i class='fa-solid fa-magnifying-glass' aria-hidden='true'></i></button>
                                     <input type='text' name='mot' id='' placeholder='N° RDV'>
                                 </form>
                             </div>
@@ -441,14 +441,14 @@ if (isset($_GET['table'])) {
         $nbreTerm=mysqli_num_rows($rslt3);
         echo "
         <section class='home'>
-            <header>
-                <div class='header_header'></div>
-                <div class='case'>Nombre de promos : $nbre</div>
-                <div class='case'>Promos En cours : $nbreEnCrs</div>
-                <div class='case'>Promos Terminées : $nbreTerm</div>
+            <header class='promos'>
+                <div class='header_header_promos'></div>
+                <div class='case_promos'>Nombre de promos : $nbre</div>
+                <div class='case_promos'>Promos En cours : $nbreEnCrs</div>
+                <div class='case_promos'>Promos Terminées : $nbreTerm</div>
             </header>
             <main>
-                <div class='table_commande'>
+                <div class='table_promos'>
                     <div class='entete'>
                         <div class='element'>
                             <div class='chercher'>

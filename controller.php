@@ -1,12 +1,10 @@
 <?php require_once("./inc/init.inc.php"); ?>
 <?php
-if(isset($_GET['action']) && $_GET['action'] == "déconnexion") 
-{
+if(isset($_GET['action']) && $_GET['action'] == "déconnexion") {
 	session_destroy(); 
     header("location:index.php");
 }
-if(isset($_POST['con']))
-{
+if(isset($_POST['con'])){
     $resultat = mysqli_execute_query($mysqli,"SELECT * FROM membre WHERE EmailMb='$_POST[email]'");
     if($resultat->num_rows != 0)
     {
@@ -38,26 +36,25 @@ if(isset($_POST['con']))
         header("location:identification.php?action=login&erreur=Email incorrecte ! Veillez réssayer .");
     }
 }
-if(isset($_POST['inscr']))
-{
-    setcookie('login[nom]',$_POST['nom'],time()+60);
-    setcookie('login[prenom]',$_POST['prenom'],time()+60);
-    setcookie('login[mdp1]',$_POST['mdp1'],time()+60);
-    setcookie('login[mdp2]',$_POST['mdp2'],time()+60);
-    setcookie('login[email]',$_POST['email'],time()+60);
-    $verif_mdp=preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/', $_POST['mdp1']);
-	$verifEmail=mysqli_execute_query($mysqli,"SELECT * FROM membre WHERE EmailMb='$_POST[email]'");
+if(isset($_POST['inscr'])){
+    setcookie('login[nom]',$_POST['NomMb'],time()+60);
+    setcookie('login[prenom]',$_POST['PrénomMb'],time()+60);
+    setcookie('login[mdp1]',$_POST['MDPS'],time()+60);
+    setcookie('login[confMDPS]',$_POST['confMDPS'],time()+60);
+    setcookie('login[email]',$_POST['EmailMb'],time()+60);
+    $verif_mdp=preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/', $_POST['MDPS']);
+	$verifEmail=mysqli_execute_query($mysqli,"SELECT * FROM membre WHERE EmailMb='$_POST[EmailMb]'");
 		if($verifEmail->num_rows > 0){
-            setcookie('login[email]','',time()-1);
+            setcookie('login[EmailMb]','',time()-1);
             header("location:identification.php?action=inscription&erreur=Email déjà utilisé ! Veuillez en choisir un autre svp.");
 		}
-        elseif(!$verif_mdp || strlen($_POST['mdp1']) < 8 ){
-            setcookie('login[mdp1]','',time()-1);
-            setcookie('login[mdp2]','',time()-1);
+        elseif(!$verif_mdp || strlen($_POST['MDPS']) < 8 ){
+            setcookie('login[MDPS]','',time()-1);
+            setcookie('login[confMDPS]','',time()-1);
             header("location:identification.php?action=inscription&erreur=Votre mot de passe doit contenir au minimum : 8 caractères, 1 chiffre, 1 caractère spécial, 1 majuscule");
         }
-        elseif($_POST['mdp1'] != $_POST['mdp2']){
-            setcookie('login[mdp2]','',time()-1);
+        elseif($_POST['MDPS'] != $_POST['confMDPS']){
+            setcookie('login[confMDPS]','',time()-1);
             header("location:identification.php?action=inscription&erreur=Les mots de passe ne sont pas identiques ! Veuillez réssayer svp.");
         }
         else
@@ -73,14 +70,14 @@ if(isset($_POST['inscr']))
 			Parcourez notre site <a href="Motorify.com" style="color:#26788e;decoration:none;font-weight:bold">Motorify.com</a> pour découvrir notre vaste sélection de produits de motorisation, y compris des pièces détachées, des accessoires, des télécommandes, ainsi que des outils et des équipements de motorisation. Nous sommes fiers de proposer une large gamme de produits de qualité supérieure, à des prix compétitifs.<br><br>
 			N\'hésitez pas à nous contacter si vous avez des questions ou si vous avez besoin d\'aide pour trouver le produit parfait pour votre projet. Nous sommes là pour vous aider à chaque étape du processus.
 			Nous sommes ravis de vous avoir parmi nous sur Motorify, et nous espérons que vous trouverez tout ce dont vous avez besoin pour améliorer votre expérience de conduite.</fieldset></body></html>';
-			$subject="Bonjour ".$_POST['nom']." ".$_POST['prenom'];
-			$to=$_POST['email'];
+			$subject="Bonjour ".$_POST['NomMb']." ".$_POST['PrénomMb'];
+			$to=$_POST['EmailMb'];
 			mail($to,$subject,$message,$header);
-            $_POST['mdp1']=password_hash($_POST['mdp1'],PASSWORD_DEFAULT,['cost'=>14]);
-			mysqli_execute_query($mysqli,"INSERT INTO membre (MDPS,NomMb,PrénomMb,EmailMb) VALUES ('$_POST[mdp1]', '$_POST[nom]', '$_POST[prenom]', '$_POST[email]')");
+            $_POST['MDPS']=password_hash($_POST['MDPS'],PASSWORD_DEFAULT,['cost'=>14]);
+			mysqli_execute_query($mysqli,"INSERT INTO membre (NomMb,PrénomMb,NumTélé,DateNc,Ville,CP,AdresseMb,EmailMb,MDPS) VALUES ('$_POST[NomMb]','$_POST[PrénomMb]','$_POST[NumTélé]','$_POST[DateNc]','$_POST[Ville]','$_POST[CP]','$_POST[AdresseMb]','$_POST[EmailMb]','$_POST[MDPS]')");
 			header("location:index.php");
 		}
-	}
+}
 if (isset($_POST['forgotPass'])) {
     $email = $_POST['email'];
     $_SESSION['email'] = $email;
@@ -148,6 +145,10 @@ if(isset($_GET['supPan'])){
 		array_splice($_SESSION['panier']['qt'], $posPr, 1);
 		array_splice($_SESSION['panier']['PrixPr'], $posPr, 1);
 	}
+    header("location:panier.php");
+}
+if(isset($_GET['qtPan']) && isset($_GET['pos'])&& isset($_GET['nbre'])){
+    $_SESSION['panier']['qt'][$_GET['pos']]=$_GET['nbre'];
     header("location:panier.php");
 }
 if(isset($_POST['Finaliser'])){

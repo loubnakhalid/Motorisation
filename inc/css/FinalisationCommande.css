@@ -99,22 +99,24 @@
 }
 
 .tele-input {
-    width: 220px;
+    width: 180px;
+    /* margin-left: 12px; */
 }
 
 .tele {
-    margin-left: 150px;
+    /* margin-left: 150px; */
     margin-bottom: 3px;
+    /* margin-left: 12px; */
 }
 
 .prénom {
-    margin-left: 45px
+    margin-left: 22px;
 }
 
 .adresse-input {
     width: 450px;
     padding: 5px;
-    margin-left: 20px;
+    margin-left: 6px;
     margin-top: 10px;
     border-radius: 13px;
     border: 1px solid rgb(233, 230, 230);

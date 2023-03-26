@@ -7,6 +7,7 @@
     }
     else{
         for($i = 0; $i < count($_SESSION['panier']['IdPr']); $i++){
+            $IdPr=$_SESSION['panier']['IdPr'][$i];
             echo "
             <div id='Produits'>
                 <table>
@@ -15,10 +16,23 @@
                             <img  src='./inc/img/produits/".$_SESSION['panier']['ImagePr'][$i]."' alt=''>
                         </td>
                         <td class='NomPR' >".$_SESSION['panier']['NomPr'][$i]."</td>
+            ";
+                    if(verifPromo($IdPr)){
+                        $rslt=mysqli_query($mysqli,"select * from produit where IdPr=$IdPr");
+                        $row=mysqli_fetch_assoc($rslt);
+                        echo"
                         <td class='prixPanier'>".$_SESSION['panier']['PrixPr'][$i]." DH <br>
-                           <span class='promo'>1005DH</span>
-                           <span class='prcntg'>-30%</span>
+                           <span class='promo'>".$row['PrixPr']." DH</span>
+                           <span class='prcntg'>-".Taux($IdPr)."%</span>
                         </td>
+                        ";
+                    }
+                    else{
+                        echo"
+                        <td class='prixPanier'>".$_SESSION['panier']['PrixPr'][$i]." DH <br></td>
+                        ";
+                    }
+            echo"
                     </tr>
                     <tr>
                        <td></td>
@@ -30,15 +44,17 @@
                         </td>
                         <td colspan='2' class='qte'>
                             <div class='wrapper'>
-                                <span class='incrementer'>-</span>
-                                <span class='num'> <input type='text' name='quantite' value=".$_SESSION['panier']['qt'][$i]."  readonly class='btnQte'></span>
-                                <span class='decrementer'>+</span>
+                                <span class='decrementer' onclick='diminuerQt($i)'>-</span>
+                                <span class='num'> <input type='text' name='quantite' class='btnQte' value=".$_SESSION['panier']['qt'][$i]."  readonly ></span>
+                                <span class='incrementer' onclick='augmenterQt($i)'>+</span>
                             </div>
                         </td>
                     </tr>
                 </table>
             </div>
         ";
+        ?>
+        <?php
         }
         $total=montantTotal();
         echo"
@@ -65,4 +81,26 @@
     }
     ?>
 </section>
+<script>
+        /*let plus = document.getElementsByClassName("incrementer"),
+        moins = document.getElementsByClassName("decrementer"),
+        quantite_panier = document.getElementsByClassName("btnQte");
+        for(let j=0;j<plus.length;j++){
+        plus[j].addEventListener("click", () => {
+        if (quantite_panier[j].value >= 0) {
+            quantite_panier[j].value++;
+        }
+        document.location.href='controller.php?qtPan=true&pos=<?=$i?>&nbre='+quantite_panier[j].value;
+        });
+    }
+    for(let j=0;j<moins.length;j++){
+        moins[j].addEventListener("click", () => {
+        if (quantite_panier[j].value > 0) {
+            quantite_panier[j].value--;
+        }
+        document.location.href='controller.php?qtPan=true&pos=<?=$i?>&nbre='+quantite_panier[j].value;
+        });
+        }*/
+        
+        </script>
 <?php include("./inc/bas.inc.html") ?>
