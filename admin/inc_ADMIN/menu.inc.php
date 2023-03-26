@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./inc_ADMIN/css/style.css">
     <title>Document</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="./inc_ADMIN/img/logo1.png">
     <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" > 
     <script src="./inc_ADMIN/js/function.js"></script>

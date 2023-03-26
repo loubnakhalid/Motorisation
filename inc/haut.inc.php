@@ -46,7 +46,7 @@ include('./inc/init.inc.php');
                     </div>
                     <div class='login_hover_grp'>
                         <a href=''>Mot de passe oublié ?</a>
-                        <a href='inscription.php'>Créer un compte</a>
+                        <a href='controller.php?action=inscription'>Créer un compte</a>
                     </div>
                 </form>
             </div>

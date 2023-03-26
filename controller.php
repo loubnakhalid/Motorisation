@@ -36,7 +36,7 @@ if(isset($_POST['con'])){
         header("location:identification.php?action=login&erreur=Email incorrecte ! Veillez réssayer .");
     }
 }
-if(isset($_POST['inscr'])){
+if(isset($_POST['inscr']) || (isset($_GET['action'])) && $_GET['action'] == "inscription"){
     setcookie('login[nom]',$_POST['NomMb'],time()+60);
     setcookie('login[prenom]',$_POST['PrénomMb'],time()+60);
     setcookie('login[mdp1]',$_POST['MDPS'],time()+60);
