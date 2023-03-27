@@ -1,4 +1,9 @@
 <?php include('./inc/haut.inc.php'); ?>
+<?php
+if(! Client()){
+    echo "<script>document.location.href='identification.php?action=connexion&panVide=true';</script>";
+}
+?>
 <section id="panier" class="pagePanier"> 
     <div>
     <?php

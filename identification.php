@@ -1,19 +1,39 @@
 <?php include('./inc/haut.inc.php'); ?>
 <?php
-if(isset($_GET['action'])&&$_GET['action']=='login'){
+if(isset($_GET['action'])&&$_GET['action']=='connexion'){
+	if(isset($_GET['panVide'])){
+		echo "Veuillez vous connecter pour remplir votre panier ! ";
+	}
 	if(isset($_GET['erreur'])){
 		echo $_GET['erreur'];
 	}
 	echo "
-	<form method='post' action='controller.php'>
-    	<label for='pseudo'>Pseudo</label><br/>
-    	<input type='text' id='pseudo' name='email'><br><br>
-    	<label for='mdp'>Mot de passe</label><br>
-    	<input type='text' id='mdp' name='mdp'><br><br>
-    	<a href='identification.php?action=forgot'>Forgot password?</a><br>
-    	<input type='submit' value='Se connecter' name='con'><br>
-		<a href='identification.php?action=inscription'>S\'inscrire</a><br>
-	</form>
+	<section id='connexion'>
+  		<div class='formCnx'>
+  			<h2 class='titleIden'>Identifiez-vous </h2>
+    		<form name='connexion' action='controller.php' method='post'>
+        		<div class='input-Email'> 
+             		<input type='email' name='EmailMb' placeholder='Email' class='inpCnx'>
+       			</div>
+       			<div class='input-Cnx'>
+             		<input type='password' name='MDPS' placeholder='Mot de passe' class='inpCnx'>
+       			</div>
+       			<div class='btn-Cnx'>
+             		<input type='submit' name='con' value='Se connecter' class='btnGn'>
+       			</div>
+       			<div class='MtdpsOubl'>
+           			<a href='identification.php?action=mdpsOubl' class='TextOubl'>Mot de passe oublié ?</a>
+        		</div>
+    		</form>
+  		</div>
+  		<div class='CreerCmpt'>
+        	<h2 class='TitleCmpt'>Créez votre compte</h2>
+        	<h4 class='descCmpt'>Créer un compte a de nombreux avantages : commander plus rapidement, enregistrer plusieurs adresses, suivre vos commandes et plus encore.</h4>
+        	<div class='BtnCmpt'>
+           		<input type='button' value='Créer votre Compte' class='Cnx' onclick='document.location.href=\"identification.php?action=inscription\"'>
+        	</div>
+  		</div>
+	</section>
 	";
 }
 if(isset($_GET['action'])&&$_GET['action']=='inscription'){
@@ -59,44 +79,81 @@ if(isset($_GET['action'])&&$_GET['action']=='inscription'){
 	</section>
 	";
 }
-if(isset($_GET['action'])&&$_GET['action']=='forgot'){
+if(isset($_GET['action'])&&$_GET['action']=='mdpsOubl'){
 	if(isset($_GET['erreur'])){
 		echo $_GET['erreur'];
 	}
 	echo"
-    <h2>Entrez votre email :</h2>
-    <form action='controller.php' method='POST' autocomplete='off'>
-        <input type='email' name='email' placeholder='Email'><br>
-        <input type='submit' name='forgotPass' value='Check'>
-    </form>
+    <section id='MtdpsOubl'>
+      	<div class='FormOubl'>
+        	<h2 class='TitleMtdpsOub'>MOT DE PASSE OUBLIÉ ?</h2>
+        	<h4 class='Prg'>Veuillez entrer votre adresse email ci-dessous pour recevoir le code de réinitialisation du mot de passe.</h4>
+        	<form name='MtdpsOublié' action='controller.php' method='post'>
+        		<div class='InputMtdpsOUb'>
+                	<input type='email' name='EmailMb' placeholder='Votre Email'  class='inputEmail'>
+            	</div>
+            	<div class='BtnRnst'>
+                	<input type='submit' name='mdpsOubl' value='Réinitialiser mon mot de passe' class='btnMtdps'>
+                	<input type='submit' value='Retour' class='btnRetour'>
+            	</div>
+          	</form>
+      	</div>
+	</section>
 	";
 }
 if(isset($_GET['action'])&&$_GET['action']=='verifEmail'){
-	if(isset($_GET['erreur'])){
-		echo $_GET['erreur'];
+	if(! isset($_SESSION['EmailMb'])){
+        echo "<script>document.location.href='identification.php?action=mdpsOubl'</script>";
+    }
+	else{
+		if(isset($_GET['erreur'])){
+			echo $_GET['erreur'];
+		}
+		echo"
+		<section id='CodeSec'>
+			<div class='FormCode'>
+				<h2 class='TitleCodeSec'>Entrez votre code de sécurité</h2>
+				<h4 class='PrgCode'>Merci de vérifier dans vos e-mails que vous avez reçu un message avec votre code. Celui-ci est composé de 8 chiffres.</h4>
+				<form name='Code' action='controller.php' method='post'>
+					<div class='InputCode'>
+						<input type='text' name='verifCode' placeholder='Votre Code'  class='inputCodeSec'>
+					</div>
+					<div class='BtnCode'>
+						<input type='submit' name='verifEmail' value='Continuer' class='btnCode'>
+						<input type='button' value='Retour' class='btnRetour'>
+					</div>
+				</form>
+			</div>
+		</section>
+		";
 	}
-	echo"
-	<div id='container'>
-	<h2>Entrez le code : </h2>
-	<form action='controller.php' method='POST' autocomplete='off'>
-		<input type='number' name='verifCode' placeholder='Verification Code' required><br>
-		<input type='submit' name='verifEmail' value='Verify'>
-	</form>
-	</div>
-	";
 }
 if(isset($_GET['action'])&&$_GET['action']=='nvPass'){
-	if(isset($_GET['erreur'])){
-		echo $_GET['erreur'];
+	if(! isset($_SESSION['EmailMb']) || ! isset($_SESSION['code'])){
+        echo "<script>document.location.href='identification.php?action=mdpsOubl'</script>";
+    }
+	else{
+		if(isset($_GET['erreur'])){
+			echo $_GET['erreur'];
+		}
+		echo"
+		<section id='ReinMdps'>
+			  <div class='FormRein'>
+				<h2 class='TitleReinc'>Choisissez votre mot de passe</h2>
+				 <form name='Reini' action='controller.php' method='post'>
+					<div class='InputRein'>
+						<input type='password' name='MDPS' placeholder='Entrez votre nouveau mot de passe'  class='inputReinMdps'><br>
+						<input type='password' name='confMDPS' placeholder='Confirmer votre mot de passe '  class='ConfRein'>
+					</div>
+					<div class='BtnRein'>
+						<input type='submit' name='nvPass' value='Soumettre' class='btnReinMdps'>
+						<input type='reset' value='Annuler' class='btnAnnul'>
+					</div>
+				  </form>
+			  </div>
+		</section>
+		";
 	}
-	echo"
-    <h2>Entrez un nouveau mot de passe : </h2>
-    <form action='controller.php' method='POST' autocomplete='off'>
-        <input type='password' name='pass' placeholder='Password' required><br>
-        <input type='password' name='confirmPass' placeholder='Confirm Password' required><br>
-        <input type='submit' name='changePass' value='Save'>
-    </form>
-	";
 }
 ?>
 <?php require_once("./inc/bas.inc.html"); ?>

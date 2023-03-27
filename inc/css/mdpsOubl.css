@@ -1,0 +1,67 @@
+#MtdpsOubl {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+.TitleMtdpsOub {
+    font-size: 25px;
+    color: #015E9B;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 29px;
+}
+
+.inputEmail {
+    width: 423px;
+    padding: 12px;
+    border: 1px solid rgb(215 214 214);
+}
+
+.InputMtdpsOUb {
+    margin-top: 39px;
+    margin-bottom: 10px;
+    margin-left: 103px
+}
+
+.MtdpsOublié {
+    margin-top: 10px;
+}
+
+.Prg {
+    font-weight: 400;
+}
+
+.BtnRnst {
+    margin-left: 105px;
+    margin-top: 40px;
+}
+
+.btnMtdps,
+.btnRetour {
+    padding: 12px;
+}
+
+.btnMtdps {
+    background: #015E9B;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.btnRetour {
+    background: #ff6702;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    margin-left: 101px;
+    width: 105px;
+}

@@ -174,18 +174,21 @@ if (isset($_GET['table'])) {
                     $id=$row['IdCt'];
                     $rslt2=mysqli_query($mysqli,"select * from produit where IdCt = $id");
                     echo"
+                    <form action='controller.php?table=catégorie&action=modifier&id=$id' method='post'>
                     <div class='category'>
                         <div class='name_category'>
-                            <span>".$row['NomCt']."</span>
+                            <input type='text' name='NomCt' value='".$row['NomCt']."' readonly class='nom_categorie'>
                         </div> 
                         <div class='nbr_produit'>
                             <p>Nombre de produits :</p> <span>".mysqli_num_rows($rslt2)."</span>
                         </div>
                         <div class='action_category'>
-                            <i class='bx bx-edit modifier_category'></i>
-                            <i class='bx bxs-x-square supprimer_category' onclick='confirmSupp(\"catégorie\",\"supprimer\",\"$id\")'></i>
+                            <input  type='submit' value='Valider' class='btn_valider_categorie cacher'>
+                            <input  type='button' value='Modifier' class='btn_modifier_categorie'>
+                            <input type='button' value='Supprimer' class='btn_supprimer_categorie' onclick='confirmSupp(\"catégorie\",\"supprimer\",\"$id\")'>
                         </div> 
                     </div>
+                    </form>
                     ";
                     }
                 echo "
@@ -534,4 +537,21 @@ if (isset($_GET['table'])) {
     }
 }
 ?>
+<script>
+    const nom_categorie=document.querySelector(".nom_categorie"),
+    btn_valider_categorie=document.querySelector(".btn_valider_categorie"),
+    btn_modifier_categorie=document.querySelector(".btn_modifier_categorie"),
+    btn_supprimer_categorie=document.querySelector(".btn_supprimer_categorie");
+
+    btn_modifier_categorie.addEventListener("click",()=>{
+        nom_categorie.removeAttribute("readonly");
+        btn_modifier_categorie.classList.add("cacher");
+        btn_valider_categorie.classList.remove("cacher");
+    });
+    btn_valider_categorie.addEventListener("click",()=>{
+        nom_categorie.setAttribute("readonly", true);
+        btn_valider_categorie.classList.add("cacher");
+        btn_modifier_categorie.classList.remove("cacher");
+    });
+</script>
 <?php include('./inc_ADMIN/footer.html');?>

@@ -5,11 +5,11 @@ if(isset($_GET['action']) && $_GET['action'] == "déconnexion") {
     header("location:index.php");
 }
 if(isset($_POST['con'])){
-    $resultat = mysqli_execute_query($mysqli,"SELECT * FROM membre WHERE EmailMb='$_POST[email]'");
+    $resultat = mysqli_execute_query($mysqli,"SELECT * FROM membre WHERE EmailMb='$_POST[EmailMb]'");
     if($resultat->num_rows != 0)
     {
         $membre = $resultat->fetch_assoc();
-        $pass =$_POST['mdp'];
+        $pass =$_POST['MDPS'];
         if(password_verify($pass,$membre['MDPS']))
         {
             foreach($membre as $indice => $element)
@@ -28,12 +28,12 @@ if(isset($_POST['con'])){
         }
         else
         {
-            header("location:identification.php?action=login&erreur=Mot de passe incorrecte ! Veuillez réssayer .");
+            header("location:identification.php?action=connexion&erreur=Mot de passe incorrecte ! Veuillez réssayer .");
         }
     }
     else
     {
-        header("location:identification.php?action=login&erreur=Email incorrecte ! Veillez réssayer .");
+        header("location:identification.php?action=connexion&erreur=Email incorrecte ! Veillez réssayer .");
     }
 }
 if(isset($_POST['inscr']) || (isset($_GET['action'])) && $_GET['action'] == "inscription"){
@@ -78,11 +78,11 @@ if(isset($_POST['inscr']) || (isset($_GET['action'])) && $_GET['action'] == "ins
 			header("location:index.php");
 		}
 }
-if (isset($_POST['forgotPass'])) {
-    $email = $_POST['email'];
-    $_SESSION['email'] = $email;
+if (isset($_POST['mdpsOubl']) || (isset($_GET['action'])) && $_GET['action'] == "mdpsOubl") {
+    $email = $_POST['EmailMb'];
+    $_SESSION['EmailMb'] = $email;
 
-    $emailCheckQuery = "SELECT * FROM client WHERE email_client = '$email'";
+    $emailCheckQuery = "SELECT * FROM membre WHERE EmailMb = '$email'";
     $emailCheckResult = mysqli_query($mysqli, $emailCheckQuery);
 
     if ($emailCheckResult) {
@@ -116,21 +116,21 @@ if(isset($_POST['verifEmail'])){
         header("location: identification.php?action=verifEmail&erreur=Code invalide ! Veuillez réssayer .");
     }
 }
-if(isset($_POST['changePass'])){
-    $verif_mdp=preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/', $_POST['pass']);
-    if (!$verif_mdp ||strlen($_POST['pass']) < 8) {
+if(isset($_POST['nvPass'])){
+    $verif_mdp=preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/', $_POST['MDPS']);
+    if (!$verif_mdp ||strlen($_POST['MDPS']) < 8) {
         header("location:identification.php?action=nvPass&erreur=Votre mot de passe doit contenir au minimum : 8 caractères, 1 chiffre, 1 caractère spécial, 1 majuscule");
     } else {
-        if ($_POST['pass'] != $_POST['confirmPass']) {
+        if ($_POST['MDPS'] != $_POST['confMDPS']) {
             header("location:identification.php?action=nvPass&erreur=Les mots de passe ne sont pas identiques ! Veuillez réssayer svp.");
         } else {
-            $password = password_hash( $_POST['pass'] ,PASSWORD_DEFAULT);
-            $email = $_SESSION['email'];
-            $updatePassword = "UPDATE client SET mot_de_passe = '$password' WHERE email_client = '$email'";
+            $MDPS = password_hash( $_POST['MDPS'] ,PASSWORD_DEFAULT);
+            $EmailMb = $_SESSION['EmailMb'];
+            $updatePassword = "UPDATE membre SET MDPS = '$MDPS' WHERE EmailMb = '$EmailMb'";
             $updatePass = mysqli_query($mysqli, $updatePassword) or die("Query Failed");
             session_unset();
             session_destroy();
-            header('location:./identification.php?action=login');
+            header('location:./identification.php?action=connexion');
         }
     }
 }

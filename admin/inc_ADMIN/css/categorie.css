@@ -11,17 +11,24 @@
     flex-wrap: wrap;
 }
 
+.home main {
+    grid-area: main;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: flex-start;
+    padding: 0 27px;
+}
+
 .case_categorie {
     background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
-    /* border-radius: 20px; */
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, .08);
     cursor: pointer;
     border-left: 5px solid #2368cf;
-    /* margin-right: 15px; */
     padding: 20px 10px;
 }
 
@@ -33,12 +40,11 @@
 
 .header_header_categorie {
     width: 100%;
-    /* background: white; */
     height: 40px;
 }
 
 .home main .containner_main {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -68,12 +74,8 @@
     height: 60px;
     background-color: #ffffff;
     display: flex;
-    /* border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px; */
     border-left: 8px solid blue;
-    cursor: pointer;
-    /* display: grid;
-	grid-template-columns: 1fr 1fr 1fr; */
+    cursor: auto;
 }
 
 .home main .containner_main .category:hover {
@@ -81,7 +83,7 @@
 }
 
 .home main .category .name_category {
-    width: auto;
+    width: 33%;
     height: 100%;
     display: flex;
     align-items: center;
@@ -90,18 +92,19 @@
     margin-left: 20px;
 }
 
-.home main .category .name_category span {
-    padding-right: 30px;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    border-right: 1px solid rgb(200, 200, 200);
+.home main .category .name_category input.nom_categorie {
+    padding-left: 10px;
+    border: none;
+    outline: none;
+    font-weight: 700;
+    font-size: 16px;
+    width: 100%;
 }
 
 .home main .category .nbr_produit {
     margin-left: 30px;
     height: 100%;
+    width: 36%;
     display: flex;
     align-items: center;
 }
@@ -121,10 +124,45 @@
     display: flex;
     align-self: flex-end;
     align-items: center;
-    justify-content: end;
     height: 100%;
     position: relative;
-    width: 100%;
+    width: 30%;
+    justify-content: space-around;
+}
+
+.home main .category .action_category input {
+    color: #ffffff;
+    background-color: #5353ff;
+    padding: 5px 10px 5px 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin-right: 50px;
+    z-index: 5;
+    cursor: pointer;
+}
+
+
+/* .home main .category .action_category input.btn_modifier_categorie{
+   visibility: hidden;
+} */
+
+.home main .category .action_category input .cacher {
+    visibility: hidden;
+}
+
+.cacher {
+    visibility: hidden;
+}
+
+.home main .category .action_category input.btn_valider_categorie {
+    position: absolute;
+    right: 57.4%;
+    z-index: 0;
+}
+
+.home main .category .action_category input.btn_supprimer_categorie {
+    background-color: red;
 }
 
 .home main .containner_main .ajouter_category button {

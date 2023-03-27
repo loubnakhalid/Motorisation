@@ -1,6 +1,9 @@
 <?php include('./inc/haut.inc.php'); ?>
 <?php
 if(isset($_POST['ajoutPan'])){
+    if(! Client()){
+        echo "<script>document.location.href='identification.php?action=connexion&panVide=true';</script>";
+    }
     $id=$_POST['IdPr'];
     $qt=$_POST['qt'];
     $rslt=mysqli_query($mysqli,"select * from produit where IdPr=$id");

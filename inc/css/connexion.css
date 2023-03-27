@@ -1,0 +1,104 @@
+#connexion {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-top: 46px;
+    margin-bottom: 22px;
+}
+
+.formCnx {
+    margin-left: 161px;
+}
+
+.titleIden {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: #015E9B;
+    margin-bottom: 24px;
+    font-weight: 800;
+}
+
+.btnGn {
+    width: 130px;
+    padding: 13px;
+    background: #015E9B;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 9px;
+}
+
+.btn-Cnx {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inpCnx {
+    width: 309px;
+    padding: 12px;
+    margin-bottom: 21px;
+    border: 1px solid rgb(215 214 214);
+}
+
+.input-Email {
+    margin-top: 10px;
+}
+
+.CreerCmpt {
+    width: 391px;
+    margin-right: 66px;
+}
+
+.MtdpsOubl {
+    margin-left: 92px;
+    margin-top: 8px;
+}
+
+.TextOubl {
+    text-decoration: none;
+    color: black;
+}
+
+.descCmpt {
+    font-size: 13px;
+    font-weight: 485;
+    margin-top: 37px;
+    line-height: 1.5;
+    display: flex;
+    justify-content: center
+}
+
+.TitleCmpt {
+    font-size: 25px;
+    color: #015E9B;
+    margin-bottom: 24px;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 28px;
+}
+
+.BtnCmpt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 41px;
+}
+
+.Cnx {
+    width: 153px;
+    padding: 13px;
+    background: #015E9B;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 9px px;
+}

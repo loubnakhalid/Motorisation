@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Motorify</title>
     <link rel="stylesheet" href="./inc/css/FinalisationCommande.css">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>

@@ -1,6 +1,5 @@
 <?php
-function Connecte()
-{  
+function Connecte(){  
 	if(!isset($_SESSION['membre'])) 
 	{
 		return false;
@@ -19,8 +18,7 @@ function Client(){
 		return false;
 	}
 }
-function Admin()
-{ 
+function Admin(){ 
 	if(Connecte() && ($_SESSION['membre']['Statut'] == 1)) 
 	{
 			return true;
@@ -30,12 +28,12 @@ function Admin()
 	}
 }
 function addZero($nbre){
-if ($nbre<10){
+	if ($nbre<10){
 	return "0".$nbre;
-}
-else{
-	return $nbre;
-}
+	}
+	else{
+		return $nbre;
+	}
 }
 function seconds($seconds){
 	$getHours = floor($seconds / 3600);
@@ -86,8 +84,7 @@ function Taux($IdPr){
 	$taux=$row2['Taux'];
     return $taux;
 }
-function creationDuPanier()
-{
+function creationDuPanier(){
    if (!isset($_SESSION['panier']))
    {
       $_SESSION['panier']=array();
@@ -98,9 +95,7 @@ function creationDuPanier()
       $_SESSION['panier']['PrixPr'] = array();
    }
 }
-
-function ajouterProduitDansPanier($IdPr,$NomPr,$qt,$PrixPr,$ImagePr)
-{
+function ajouterProduitDansPanier($IdPr,$NomPr,$qt,$PrixPr,$ImagePr){
 	creationDuPanier(); 
     $posPr = array_search($IdPr,  $_SESSION['panier']['IdPr']); 
     if ($posPr !== false)
@@ -121,9 +116,7 @@ function ajouterProduitDansPanier($IdPr,$NomPr,$qt,$PrixPr,$ImagePr)
 		}
     }
 }
-//------------------------------------
-function montantTotal()
-{
+function montantTotal(){
    $total=0;
    for($i = 0; $i < count($_SESSION['panier']['IdPr']); $i++) 
    {
@@ -131,9 +124,7 @@ function montantTotal()
    }
    return round($total,2);
 }
-//------------------------------------
-function retirerproduitDuPanier($id_produit_a_supprimer)
-{
+function retirerproduitDuPanier($id_produit_a_supprimer){
 	$posPr = array_search($id_produit_a_supprimer,  $_SESSION['panier']['IdPr']);
 	if ($posPr !== false)
     {

@@ -6,7 +6,7 @@ include('./inc/init.inc.php');
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>header</title>
+    <title>Motorify</title>
     <meta name='description' content=''>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="icon" type="png" href="./inc/img/logo5.png">
@@ -45,7 +45,7 @@ include('./inc/init.inc.php');
                         <input type='submit' name='con' id='btn'>
                     </div>
                     <div class='login_hover_grp'>
-                        <a href=''>Mot de passe oublié ?</a>
+                        <a href='controller.php?action=mdpsOubl'>Mot de passe oublié ?</a>
                         <a href='controller.php?action=inscription'>Créer un compte</a>
                     </div>
                 </form>
@@ -57,7 +57,7 @@ include('./inc/init.inc.php');
             <nav class='panier_identifier'>
                 <ul>
                     <li>
-                        <a href='' class='icon_user'>
+                        <a href='identification.php?action=connexion' class='icon_user'>
                             <lord-icon src='https://cdn.lordicon.com/dxjqoygy.json' trigger='hover' state='hover-nodding' stroke='70' colors='primary:#1663c7,secondary:#ff840a' style='width:52px;height:52px'>
                             </lord-icon>
                         </a>
