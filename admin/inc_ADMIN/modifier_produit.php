@@ -2,8 +2,8 @@
 echo "
 <div class='body'>
     <div class='div_form_modification_produit'>
-        <i class='bx bxs-x-square icon_x_exit' onclick='document.location.href=\"$lienPr\"'></i>
-        <form name='formModif' action='controller.php?table=produit&action=modifier&id=$id' method='post' enctype='multipart/form-data' onsubmit='return confirm(\"Voulez-vous vraiment effectuer la modification?\");'>
+        <i class='bx bxs-x-square icon_x_exit' onclick='history.back();'></i>
+        <form name='formModif' action='controller.php?table=produit&action=modifier&id=$id' method='post' enctype='multipart/form-data' onsubmit='return confirmModif();'>
             <div class='form_left'>
                 <div class='case'>
                     <label for=''>Nom produit</label>

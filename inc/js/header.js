@@ -78,21 +78,24 @@ fleche_pub_right.addEventListener("click", () => {
 
 });
 /* ------------------------------------------------------------------------------- */
-let fleche_left_btn = document.querySelector(".fleche_left_btn")
-fleche_right_btn = document.querySelector(".fleche_right_btn"),
-    tout_produit_categorie = document.querySelector(".tout_produit_categorie")
+let fleche_left_btn = document.getElementsByClassName("fleche_left_btn")
+fleche_right_btn = document.getElementsByClassName("fleche_right_btn"),
+    tout_produit_categorie = document.getElementsByClassName("tout_produit_categorie");
 
+for (let index = 0; index < fleche_left_btn.length; index++) {
+    fleche_left_btn[index].addEventListener("click", () => {
+        tout_produit_categorie[index].scrollLeft = tout_produit_categorie[index].scrollLeft - 250;
 
-fleche_right_btn.addEventListener("click", () => {
-    tout_produit_categorie.scrollLeft = tout_produit_categorie.scrollLeft + 250;
+    });
 
-});
+}
+for (let index = 0; index < fleche_right_btn.length; index++) {
+    fleche_right_btn[index].addEventListener("click", () => {
+        tout_produit_categorie[index].scrollLeft = tout_produit_categorie[index].scrollLeft + 250;
 
-fleche_left_btn.addEventListener("click", () => {
-    tout_produit_categorie.scrollLeft = tout_produit_categorie.scrollLeft - 250;
+    });
 
-});
-
+}
 /* ------------------------------------------------------------------------------- */
 /*const max = document.querySelector('.incrementer'),
     min = document.querySelector('.decrementer'),

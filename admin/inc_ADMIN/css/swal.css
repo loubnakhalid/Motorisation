@@ -1,0 +1,22 @@
+    .swal-modal {
+        width: 575px;
+        margin-left: 180px;
+    }
+    
+    .swal-overlay {
+        background-color: #00154db7;
+    }
+    
+    .swal2-container.swal2-backdrop-show,
+    .swal2-container.swal2-noanimation {
+        background: rgb(1 3 32 / 72%) !important;
+    }
+    
+    .swal2-title {
+        /* font-size: 0.875em; */
+        font-size: 20px !important;
+    }
+    
+    .swal-footer {
+        text-align: center;
+    }

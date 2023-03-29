@@ -95,3 +95,19 @@ body.addEventListener("click", (event) => {
     }
 
 });
+/*
+const nom_categorie = document.querySelector(".nom_categorie"),
+    btn_valider_categorie = document.querySelector(".btn_valider_categorie"),
+    btn_modifier_categorie = document.querySelector(".btn_modifier_categorie"),
+    btn_supprimer_categorie = document.querySelector(".btn_supprimer_categorie");
+
+btn_modifier_categorie.addEventListener("click", () => {
+    nom_categorie.removeAttribute("readonly");
+    btn_modifier_categorie.classList.add("cacher");
+    btn_valider_categorie.classList.remove("cacher");
+});
+btn_valider_categorie.addEventListener("click", () => {
+    nom_categorie.setAttribute("readonly", true);
+    btn_valider_categorie.classList.add("cacher");
+    btn_modifier_categorie.classList.remove("cacher");
+});*/

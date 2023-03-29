@@ -2,8 +2,8 @@
 echo "
 <div class='body_cmd'>
     <div class='div_form_modification_cmd'>
-        <i class='bx bxs-x-square icon_x_exit' onclick='document.location.href=\"$lienPr\"'></i>
-        <form action='controller.php?table=commande&action=modifier' method='post' enctype='multipart/form-data'>
+        <i class='bx bxs-x-square icon_x_exit' onclick='history.back()'></i>
+        <form action='controller.php?table=commande&action=modifier' method='post' id='modifCMD' enctype='multipart/form-data' >
             <div class='case_text'>
                 <label for=''>N° commande</label>
                 <div class='input_text'>
@@ -100,7 +100,7 @@ echo "
             <div class='bas_form'>
                 <div class='submit_form_modification_cmd'>
                     <input type='reset' value='Effacer' class='btn_effacer_form_modifier_cmd'>
-                    <input type='submit' value='Modifier' class='btn_modifier_form_modifier_cmd'>
+                    <input type='button' value='Modifier' class='btn_modifier_form_modifier_cmd' onclick='confirmModif(\"modifCMD\");'>
                 </div>
             </div>
         </form>

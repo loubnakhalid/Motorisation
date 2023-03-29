@@ -169,7 +169,21 @@ if(isset($_POST['Finaliser'])){
     $NumTélé=$_POST['NumTélé'];
     $AdresseMb=$_POST['AdresseMb'];
     $rslt2=mysqli_query($mysqli,"UPDATE membre set NomMb='$NomMb',PrénomMb='$PrénomMb',NumTélé='$NumTélé',AdresseMb='$AdresseMb' where IdMb=$IdMb");
-    
+    $rslt2=mysqli_query($mysqli,"select * from membre where IdMb='$IdMb'");
+    $row2=mysqli_fetch_assoc($rslt2);
+    $to=$row2['EmailMb'];
+    $header="From: Motorify.com <supportMotorify@test.com>\r\n";
+    $header.="Content-Type: text/html\r\n";
+    $tablePr="<table border='1' cellspacing='0' width='500px'><tr><th>Image</th><th>Nom</th><th>Prix</th><th>Quantité</th></tr>";
+    for($i = 0; $i < count($_SESSION['panier']['IdPr']); $i++){
+        $tablePr.="<tr><td><img src='https://motorify.000webhostapp.com/inc/img/produits/".$_SESSION['panier']['ImagePr'][$i]."' height='50px'></td><td>".$_SESSION['panier']['NomPr'][$i]."</td><td>".$_SESSION['panier']['PrixPr'][$i]."</td><td>".$_SESSION['panier']['qt'][$i]."</td></tr>";
+    }
+    $tablePr.="<tr><td colspan='4' align='center'>Total :".montantTotal()."DH</td></tr></table>";
+    $date= date("d/m/Y H:i:s");
+    $message="<html><head><style>span.im{color:black;} </style></head><body style='font-size:12pt;color:#3a3a3a;'<fieldset style='padding: 25px;border-color: #0870b5;text-align: justify;'><legend><img src='https://motorify.000webhostapp.com/inc/img/logo3.png' width='150px'></legend>Cher(e)<b> $row2[NomMb] $row2[PrénomMb] </b>,<br><br> Nous sommes heureux de vous informer que nous avons bien reçu votre commande. Vous trouverez ci-dessous les détails de votre commande :<br><br> <b>Date d'expédition</b> : $date <br><b>Numéro de suivi</b> : $IdCmd <br> <b>Adresse de livraison</b> : $row2[AdresseMb]<br> <b>Articles expédiés</b> : <br>$tablePr <br><br>Veuillez noter que le numéro de suivi vous permettra de suivre l'avancement de votre colis.<br>Nous avons bien pris en compte votre commande et nous la traiterons dès que possible. Vous recevrez une notification dès que votre commande sera expédiée.<br> Si vous avez des questions ou des préoccupations concernant votre commande, n'hésitez pas à nous contacter. <br>Nous espérons que vous apprécierez vos achats et nous vous remercions de votre confiance.<br><br> Cordialement, <br><br> L'équipe d'expédition</fieldset></body></html>";
+    $subject="Confirmation de commande";
+    mail($to,$subject,$message,$header);
+    header("location:index.php");
 }
 if(isset($_GET['envEml'])){
     $subject=$_POST['subject'];

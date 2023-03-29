@@ -3,26 +3,31 @@
 if(isset($_GET['table']) && isset($_GET['action'])){
     $table=$_GET['table'];
     $action=$_GET['action'];
-    if($table=='catégorie'){
+    switch($table){
+    case 'catégorie' :
         if($action=='supprimer'){
             $id=$_GET['id'];
             $rqt="delete from catégorie where IdCt=$id";
+            $success="Vous-avez supprimé la catégorie avec succés ! ";
         }
         else{
             $NomCt=$_POST['NomCt'];
             if($action=='ajouter'){
                 $rqt="insert into catégorie (NomCt) values ('$NomCt')";
+                $success="Vous-avez ajouté la catégorie avec succés ! ";
             }
             elseif($action=='modifier'){
                 $id=$_GET['id'];
                 $rqt="update catégorie set NomCt='$NomCt' where IdCt=$id";
+                $success="Vous-avez modifié la catégorie avec succés ! ";
             }
         }
-    }
-    elseif($table=='produit'){
+    ;break;
+    case 'produit':
         if($action=='supprimer'){
             $id=$_GET['id'];
             $rqt="delete from produit where IdPr=$id";
+            $success="Vous-avez supprimé le produit avec succés ! ";
         }
         else{
             $NomPr=$_POST['NomPr'];
@@ -40,19 +45,22 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                 }while(file_exists($chemin));
                 move_uploaded_file($ImagePr['tmp_name'],$chemin);
                 $rqt="insert into produit (NomPr,DescriptionPr,PrixPr,StatutPr,StockPr,IdCt,ImagePr) values ('$NomPr','$DescriptionPr',$PrixPr,$StatutPr,$StockPr,'$IdCt','$NomImage')";
+                $success="Vous-avez ajouté le produit avec succés ! ";
             }
             elseif($action=='modifier'){
                 $id=$_GET['id'];
                 $NomImage=$_POST['NomImage'];
                 move_uploaded_file($ImagePr['tmp_name'],"../inc/img/produits/$NomImage");
-                $rqt="update produit set NomPr='$NomPr',DescriptionPr='$DescriptionPr',PrixPr=$PrixPr,StatutPr=$StatutPr,StockPr=$StockPr,IdCt='$IdCt' where IdPr=$id ";
+                $rqt="update produit set NomPr='$NomPr',DescriptionPr='$DescriptionPr',PrixPr='$PrixPr',StatutPr='$StatutPr',StockPr='$StockPr',IdCt='$IdCt' where IdPr=$id ";
+                $success="Vous-avez modifié le produit avec succés ! ";
             }
         }
-    }
-    elseif($table=='commande'){
+    ;break;
+    case 'commande' :
         if($action=='supprimer'){
             $id=$_GET['id'];
             $rqt="delete from commande where IdCmd=$id";
+            $success="Vous-avez supprimé la commande avec succés ! ";
         }
         else{
             $DateCmd=$_POST['DateCmd'];
@@ -63,17 +71,20 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             if($action=='ajouter'){
                 $IdMb=$_POST['IdMb'];
                 $rqt="insert into commande (DateCmd,IdMb,StatutCmd,prixTT,modePaiement,NoteCmd) values ('$DateCmd',$IdMb,'$StatutCmd','$prixTT','$modePaiement','$NoteCmd')";
+                $success="Vous-avez ajouté la commande avec succés ! ";
             }
             elseif($action=='modifier'){
                 $id=$_POST['IdCmd'];
                 $rqt="update commande set DateCmd='$DateCmd',prixTT=$prixTT,modePaiement='$modePaiement',StatutCmd='$StatutCmd',NoteCmd='$NoteCmd' where IdCmd='$id'";
+                $success="Vous avez modifié la commande avec succés ! ";
             }
         }
-    }
-    elseif($table=='RDV'){
+    ;break;
+    case 'RDV':
         if($action=='supprimer'){
             $id=$_GET['id'];
             $rqt="delete from rdv where IdRDV=$id";
+            $success="Vous-avez supprimé le rendez-vous avec succés ! ";
         }
         else{
             $TypePrjt=$_POST['TypePrjt'];
@@ -82,17 +93,20 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             $StatutRDV=$_POST['StatutRDV'];
             if($action=='ajouter'){
                 $rqt="insert into rdv (TypePrjt,MessageRDV,DateDRV,StatutRDV) values ('$TypePrjt','$MessageRDV','$DateDRV','$StatutRDV)'";
+                $success="Vous-avez ajouté le rendez-vous avec succés ! ";
             }
             elseif($action=='modifier'){
                 $id=$_GET['id'];
                 $rqt="update rdv set TypePrjt='$TypePrjt', MessageRDV='$MessageRDV', DateRDV='$DateRDV', StatutRDV='$StatutRDV'";
+                $success="Vous-avez modifié le rendez-vous avec succés ! ";
             }
         }
-    }
-    elseif($table=='promos'){
+    ;break;
+    case 'promos':
         if($action=='supprimer'){
             $id=$_GET['id'];
             $rqt="delete from promos where IdPromo=$id";
+            $success="Vous-avez supprimé la promotion avec succés ! ";
         }
         else{
             $Taux=$_POST['Taux'];
@@ -101,17 +115,20 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             $StatutPromo=$_POST['StatutPromo'];
             if($action=='ajouter'){
                 $rqt="insert into promos (Taux,DateDéb,DateFin,StatutPromo) values('$Taux','$DateDéb','$DateFin','$StatutPromo')";
+                $success="Vous-avez ajouté la promotion avec succés ! ";
             }
             elseif($action=='modifier'){
                 $id=$_GET['id'];
                 $rqt="update promos set Taux=$Taux,DateDéb=$DateDéb,DateFin=$DateFin,StatutPromo=$StatutPromo where IdPromo=$id";
+                $success="Vous-avez modifié la promotion avec succés ! ";
             }
         }
-    }
-    if($table=='promo_produit'){
+    ;break;
+    case 'promo_produit':
         if($action=='supprimer'){
             $id=$_GET['id'];
             $rqt="delete from promo_produit where IdPrmPrdt=$id";
+            $success="Vous-avez annulé la promotion sur ce produit avec succés ! ";
         }
         elseif($action=='ajouter'){
             $IdPromo=$_POST['IdPromo'];
@@ -120,15 +137,18 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                 $rqt4="insert into promo_produit (IdPromo,IdPr) values('$IdPromo','$IdPr[$i]')";
                 $rslt=mysqli_query($mysqli,$rqt4);
             }
+            $success="Vous-avez effectuer la promotion sur les produits avec succés ! ";
         }
-    }
-    elseif($table=='détails_commande'){
+    ;break;
+    case 'détails_commande':
         if($action=='supprimer'){
             $id=$_GET['id'];
             $rqt="delete from détails_commande where IdDétailsCmd=$id";
+            $success="Vous-avez supprimé le produit de cette commande avec succés ! ";
         }
         elseif($action=='modifier'){
             $rqt="update détails_commande set qt=$_POST[qt]";
+            $success="Vous-avez modifié la quantité du produit avec succés ! ";
         }
         elseif($action=='ajouter'){
             $IdCmd=$_POST['IdCmd'];
@@ -137,6 +157,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                 $rqt4="insert into détails_commande (IdCmd,IdPr,qt) values('$IdCmd','$IdPr[$i]',1)";
                 $rslt=mysqli_query($mysqli,$rqt4);
             }
+            $success="Vous-avez ajouté le produit à la commande avec succés ! ";
         }
         elseif($action=='ajouterCmd'){
             $IdCmd=$_POST['IdCmd'];
@@ -148,8 +169,9 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                     mysqli_query($mysqli,"delete from commande where IdCmd=$IdCmdAjt[$i]");
                 }
             }
+            $success="Vous-avez ajouté les détails de la commande avec succés ! ";
         }
-
+    ;break;
     }
     if(isset($rqt)){
         if($rslt=mysqli_query($mysqli,$rqt)){
@@ -182,11 +204,19 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                     mail($to,$subject,$message,$header);
                 }
             }
-            header("location:gestion.php?table=$table");
+            if(isset($success)){
+                header("location:gestion.php?table=$table&success=$success");
+            }
+            else{
+                header("location:gestion.php?table=$table");
+            }
         }
         else{
             echo mysqli_error($mysqli);
         }
     }
+}
+else{
+    echo "<script>history.back();</script>";
 }
 ?>

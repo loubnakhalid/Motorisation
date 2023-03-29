@@ -525,7 +525,7 @@ if (isset($_GET['table'])) {
                             <td class=\"action\">
                                 <input type='button' value='détails'>
                                 <i class=\"bx bx-edit icon_modifier_commande\" onclick='document.location.href=\"gestion.php?table=promos&icon_modifier_promo=true&id=$id\"' ></i>
-                                <lord-icon src=\"https://cdn.lordicon.com/qjwkduhc.json\" trigger=\"hover\" colors=\"primary:#e83a30,secondary:#e83a30,tertiary:#ffffff\" state=\"hover-empty\"style=\"width:35px;height:35px\" onClick=\"confirmSupp('promo','supprimer',$id)\"></lord-icon>
+                                <lord-icon src=\"https://cdn.lordicon.com/qjwkduhc.json\" trigger=\"hover\" colors=\"primary:#e83a30,secondary:#e83a30,tertiary:#ffffff\" state=\"hover-empty\"style=\"width:35px;height:35px\" onClick=\"confirmSupp('promos','supprimer',$id)\"></lord-icon>
                             </td>
                         </tr>
                         ";
@@ -535,6 +535,9 @@ if (isset($_GET['table'])) {
                 </table>
                     ";
     }
+}
+if(isset($_GET['success'])){
+    echo "<script>success('$_GET[success]','$_GET[table]');</script>";
 }
 ?>
 <script>
