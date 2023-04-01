@@ -41,3 +41,28 @@
     margin-top: -8px;
     margin-bottom: -65px;
 }
+
+.ErNomOb,
+.ErPrOb,
+.ErTelOb,
+.ErDtOb,
+.ErVlOb,
+.ErCpOb,
+.ErAdsOb,
+.ErEmlOb,
+.ErPsOb,
+.ErCnfPsOb {
+    position: relative;
+    bottom: 17px;
+    color: red;
+    visibility: hidden;
+}
+
+.ErPrOb,
+.ErDtOb,
+.ErCpOb,
+.ErEmlOb,
+.ErCnfPsOb {
+    position: relative;
+    left: 153px;
+}

@@ -25,6 +25,7 @@ footer .footer_entete .dkchi {
 
 footer .footer_entete .dkchi h3 {
     color: #ffffff;
+    margin-bottom: 35px;
 }
 
 footer .footer_entete .contacter_nous {
@@ -88,6 +89,12 @@ footer .footer_entete .contacter_nous .contacter input.envoyer {
     border: 1px solid white;
     outline: none;
     cursor: pointer;
+}
+
+.guide_achat a {
+    margin-top: 27px;
+    text-decoration: none;
+    color: white;
 }
 
 

@@ -102,3 +102,16 @@
     font-size: 14px;
     margin-top: 9px px;
 }
+
+.ErMsg1,
+.ErMsg2 {
+    margin-top: -20px;
+    margin-bottom: 23px;
+    display: none;
+    margin-left: 0px;
+    color: red;
+}
+
+.ErMsg2 {
+    margin-bottom: 15px;
+}

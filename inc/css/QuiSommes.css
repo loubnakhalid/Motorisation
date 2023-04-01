@@ -1,0 +1,173 @@
+#para2 {
+    border: none;
+}
+
+.img1 {
+    width: 382px;
+    height: 340px;
+    position: relative;
+    left: 138px;
+    bottom: 12px;
+}
+
+.NousSommes,
+.Impact,
+.NosPr,
+.horaires {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.NousSommes {
+    position: relative;
+    top: 4px;
+}
+
+.TitleNs1 {
+    font-size: 29px;
+    font-weight: 900;
+    position: relative;
+    top: 79px;
+    right: 15px;
+    color: #015E9B;
+}
+
+.paraNs1 {
+    font-size: 17px;
+    font-weight: 600;
+    position: relative;
+    top: 118px;
+    color: rgb(46, 46, 46);
+    width: 550px;
+    right: 80px;
+    line-height: 21px;
+}
+
+.img2 {
+    width: 296px;
+    height: 253px;
+    position: relative;
+    right: 158px;
+}
+
+.Impact {
+    margin-top: 32px;
+}
+
+.paraNs2 {
+    width: 600px;
+    line-height: 21px;
+    font-size: 17px;
+    font-weight: 600;
+    color: rgb(46, 46, 46);
+    position: relative;
+    top: 74px;
+    left: 90px;
+}
+
+.TitleNs2 {
+    font-size: 29px;
+    font-weight: 900;
+    color: #015E9B;
+    position: relative;
+    left: 190px;
+    top: 30px;
+}
+
+.SousTitre1 {
+    font-size: 17px;
+    font-weight: 700;
+    color: black;
+    position: relative;
+    top: 50px;
+    left: 131px;
+}
+
+.TitleNs3 {
+    font-size: 29px;
+    font-weight: 900;
+    color: #015E9B;
+    position: relative;
+    right: -164px;
+    top: 53px;
+}
+
+.img3 {
+    width: 380px;
+    height: 365px;
+    position: relative;
+    left: 58px;
+    top: 25px;
+}
+
+.NosPr {
+    margin-top: 50px;
+}
+
+.paraNs3 {
+    width: 600px;
+    line-height: 21px;
+    font-size: 17px;
+    font-weight: 600;
+    color: rgb(46, 46, 46);
+    position: relative;
+    top: 84px;
+    right: 35px;
+}
+
+.img5 {
+    width: 523px;
+    height: 230px;
+    position: relative;
+    right: 1px;
+    top: 1px;
+    border-radius: 35px;
+}
+
+.paraNs4 {
+    width: 550px;
+    position: relative;
+    top: 61px;
+    line-height: 23px;
+    left: 42px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.horaires {
+    margin-top: 120px;
+    margin-left: 107px;
+    position: relative;
+    left: 24px;
+}
+
+.TitleNs4 {
+    font-size: 29px;
+    font-weight: 900;
+    color: #015E9B;
+    position: relative;
+    top: 33px;
+    left: 116px;
+}
+
+.horpar {
+    border: 2px solid #e7e7e7;
+    border-radius: 35px;
+    border-right: none;
+    box-shadow: inset 0 0 1em rgb(235, 235, 235), 0 0 2em rgb(253, 253, 253);
+}
+
+.himg {
+    border: 2px solid #e7e7e7;
+    border-radius: 35px;
+    border-left: none;
+    width: 522px;
+    position: relative;
+    right: 120px;
+    box-shadow: inset 0 0 1em rgb(235, 235, 235), 0 0 2em rgb(253, 253, 253);
+}
+
+.heure {
+    color: orange;
+}

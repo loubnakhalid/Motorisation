@@ -47,3 +47,8 @@
     padding: 12px;
     width: 110px;
 }
+
+.ErCodeSéc {
+    color: red;
+    visibility: hidden;
+}

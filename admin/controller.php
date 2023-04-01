@@ -119,7 +119,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             }
             elseif($action=='modifier'){
                 $id=$_GET['id'];
-                $rqt="update promos set Taux=$Taux,DateDéb=$DateDéb,DateFin=$DateFin,StatutPromo=$StatutPromo where IdPromo=$id";
+                $rqt="update promos set Taux='$Taux',DateDéb='$DateDéb',DateFin='$DateFin',StatutPromo='$StatutPromo' where IdPromo=$id";
                 $success="Vous-avez modifié la promotion avec succés ! ";
             }
         }
@@ -137,27 +137,35 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                 $rqt4="insert into promo_produit (IdPromo,IdPr) values('$IdPromo','$IdPr[$i]')";
                 $rslt=mysqli_query($mysqli,$rqt4);
             }
-            $success="Vous-avez effectuer la promotion sur les produits avec succés ! ";
+            header("location:$lienPr&successDétails=Vous-avez effectuer la promotion sur les produits avec succés !");
         }
     ;break;
     case 'détails_commande':
         if($action=='supprimer'){
             $id=$_GET['id'];
-            $rqt="delete from détails_commande where IdDétailsCmd=$id";
-            $success="Vous-avez supprimé le produit de cette commande avec succés ! ";
+            $rqtdét="delete from détails_commande where IdDétailsCmd=$id";
+            if($rsltdét=mysqli_query($mysqli,$rqtdét)){
+                header("location:$lienPr&successDétails=Vous-avez supprimé le produit avec succés !");
+            }
         }
         elseif($action=='modifier'){
-            $rqt="update détails_commande set qt=$_POST[qt]";
-            $success="Vous-avez modifié la quantité du produit avec succés ! ";
+            $id=$_GET['id'];
+            $rqtdét="update détails_commande set qt=$_POST[qt] where IdDétailsCmd=$id";
+            if($rsltdét=mysqli_query($mysqli,$rqtdét)){
+                header("location:$lienPr&successDétails=Vous-avez modifié la quantité du produit avec succés !");
+            }
         }
         elseif($action=='ajouter'){
             $IdCmd=$_POST['IdCmd'];
             $IdPr=$_POST['IdPr'];
-            for($i=0;$i<count($IdPr);$i++){
-                $rqt4="insert into détails_commande (IdCmd,IdPr,qt) values('$IdCmd','$IdPr[$i]',1)";
-                $rslt=mysqli_query($mysqli,$rqt4);
+            $check=$_POST['check'];
+            for($i=0;$i<count($check);$i++){
+                if($check[$i]==true){
+                    $rqt4="insert into détails_commande (IdCmd,IdPr,qt) values('$IdCmd','$check[$i]','1')";
+                    $rslt=mysqli_query($mysqli,$rqt4);
+                }
             }
-            $success="Vous-avez ajouté le produit à la commande avec succés ! ";
+            header("location:$lienPr&successDétails=Vous-avez ajouté le produit à la commande avec succés !");
         }
         elseif($action=='ajouterCmd'){
             $IdCmd=$_POST['IdCmd'];
@@ -165,11 +173,16 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             for($i=0;$i<count($IdCmdAjt);$i++){
                 $rslt1=mysqli_query($mysqli,"select * from détails_commande where IdCmd=$IdCmdAjt[$i]");
                 while($row1=mysqli_fetch_assoc($rslt1)){
-                    $rslt4=mysqli_query($mysqli,"insert into détails_commande (IdCmd,IdPr,qt) values ($IdCmd,$row1[IdPr],$row1[qt])");
-                    mysqli_query($mysqli,"delete from commande where IdCmd=$IdCmdAjt[$i]");
+                    if($rslt4=mysqli_query($mysqli,"insert into détails_commande (IdCmd,IdPr,qt) values ($IdCmd,$row1[IdPr],$row1[qt])")){
+                        mysqli_query($mysqli,"delete from commande where IdCmd=$IdCmdAjt[$i]");
+                    }
+                    else{
+                        header("location:$lienPr&successDétails=La commande n'a pas de détails ! ");
+                    }
+                    
                 }
             }
-            $success="Vous-avez ajouté les détails de la commande avec succés ! ";
+            header("location:$lienPr&successDétails=Vous-avez ajouté les détails à la commande $IdCmd avec succés ! ");
         }
     ;break;
     }
@@ -181,12 +194,6 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                     $row2=mysqli_fetch_assoc($rslt2);
                     $rslt3=mysqli_query($mysqli,"select * from détails_commande natural join produit natural join commande natural join membre where IdCmd='$id'");
                     $header="From: Motorify.com <supportMotorify@test.com>\r\n";
-                    $header.="Content-Type: text/html\r\n";
-                    $tablePr="<table border='1' cellspacing='0' width='500px'><tr><th>Image</th><th>Nom</th><th>Prix</th><th>Quantité</th></tr>";
-                    while($row3=mysqli_fetch_assoc($rslt3)){
-                        $tablePr.="<tr><td><img src='https://motorify.000webhostapp.com/inc/img/produits/$row3[ImagePr]' height='50px'></td><td>$row3[NomPr]</td><td>$row3[PrixPr]</td><td>$row3[qt]</td></tr>";
-                    }
-                    $tablePr.="<tr><td colspan='4' align='center'>Total : $row2[prixTT] DH</td></tr></table>";
                     $date= date("d/m/Y H:i:s");
                     if($StatutCmd=='Expédiée'){
                         $message="<html><head><style>span.im{color:black;} </style></head><body style='font-size:12pt;color:#3a3a3a;'<fieldset style='padding: 25px;border-color: #0870b5;text-align: justify;'><legend><img src='https://motorify.000webhostapp.com/inc/img/logo3.png' width='150px'></legend>Cher(e)<b> $row2[NomMb] $row2[PrénomMb] </b>,<br><br> Nous avons le plaisir de vous informer que votre commande a été expédiée avec succès. Vous trouverez ci-dessous les détails de votre expédition :<br><br> <b>Date d'expédition</b> : $date <br><b>Numéro de suivi</b> : $id <br> <b>Adresse de livraison</b> : $row2[AdresseMb]<br> <b>Articles expédiés</b> : <br>$tablePr <br><br>Veuillez noter que le numéro de suivi vous permettra de suivre l'avancement de votre colis. Si vous avez des questions ou des préoccupations concernant votre expédition, n'hésitez pas à nous contacter. <br>Nous espérons que vous apprécierez vos achats et nous vous remercions de votre confiance.<br><br> Cordialement, <br><br> L'équipe d'expédition</fieldset></body></html>";

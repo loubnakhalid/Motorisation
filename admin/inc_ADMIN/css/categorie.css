@@ -7,17 +7,7 @@
     justify-content: space-between;
     /* background-color: #f1f7fa; */
     background-color: rgb(234 237 255);
-    padding: 0px 27px;
     flex-wrap: wrap;
-}
-
-.home main {
-    grid-area: main;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    align-items: flex-start;
-    padding: 0 27px;
 }
 
 .case_categorie {

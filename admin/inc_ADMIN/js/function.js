@@ -78,3 +78,15 @@ function success(success, table) {
             document.location.href = "gestion.php?table=" + table;
         });
 }
+
+function successDétails(success) {
+    swal({
+            title: '',
+            text: success,
+            icon: 'success',
+            button: 'Ok',
+        })
+        .then((value) => {
+            history.back();
+        });
+}

@@ -1,0 +1,178 @@
+.Formulaire {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgb(218, 217, 217);
+    border-radius: 10px;
+    z-index: 10;
+    background-color: white;
+    width: 570px;
+    max-width: 80%;
+    height: 532px;
+    /*display:block;*/
+}
+
+.Form-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(218, 217, 217);
+    padding-top: 14px;
+}
+
+.Form-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.btn-ferm {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.Form-content {
+    padding: 10px 15px;
+}
+
+#Sur {
+    position: fixed;
+    /* opacity: 0;*/
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+#Sur.En-gris {
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+/*#Sur {
+    display: none;
+}*/
+
+.PrgDate {
+    color: #8e8eeb;
+    padding: 10px;
+    padding-left: 32px;
+    padding-top: 15px;
+}
+
+.Title1 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #015e9b;
+    padding: 10px;
+    padding-bottom: 15px;
+}
+
+.TypePrjSe {
+    width: 260px;
+    height: 39px;
+    border-radius: 5px;
+    border-color: #adaaaa;
+}
+
+.TypePrj {
+    padding-left: 25px;
+    padding-bottom: 19px;
+}
+
+.Title2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #015e9b;
+    padding-left: 10px;
+    padding-bottom: 15px;
+}
+
+.Rjd {
+    padding-left: 25px;
+}
+
+.RjdNP {
+    padding-bottom: 15px;
+    padding-top: 9px;
+}
+
+.RjdN,
+.RjdP {
+    width: 215px;
+    height: 39px;
+    border-radius: 5px;
+    border: 1px solid #adaaaa;
+    padding-left: 20px;
+}
+
+.RjdP {
+    margin-left: 36px;
+}
+
+.RjdE {
+    padding-bottom: 15px;
+}
+
+.RjdEm,
+.RjdTel {
+    height: 39px;
+    border-radius: 5px;
+    border: 1px solid #adaaaa;
+    padding-left: 20px;
+    width: 469px;
+}
+
+.RjdT {
+    padding-bottom: 15px;
+}
+
+.RjdBt {
+    padding-top: 17px;
+    padding-left: 317px;
+}
+
+.RjdButton {
+    width: 175px;
+    height: 39px;
+    border-radius: 12px;
+    border: 1px solid #adaaaa;
+    background-color: #015e9b;
+    color: white;
+    font-weight: 600;
+}
+
+.Form-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #015e9b;
+    position: relative;
+    left: 175px;
+}
+
+.btn-ferm {
+    color: orange;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.ErRdvNom,
+.ErRdvPr,
+.ErRdvEmail,
+.ErRdvtel {
+    color: red;
+    visibility: hidden;
+}
+
+.ErRdvPr {
+    position: relative;
+    left: 85px;
+}

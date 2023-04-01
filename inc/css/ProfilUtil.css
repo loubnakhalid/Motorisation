@@ -1,0 +1,116 @@
+.profil {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between
+}
+
+.ProfilT1,
+.ProfilT2 {
+    font-size: 24px;
+    font-weight: 900;
+    color: #044570;
+    margin-bottom: 35px;
+    margin-left: 55px;
+}
+
+.ProfilT2 {
+    margin-left: 212px;
+}
+
+.identité {
+    border: 1px solid rgb(192, 191, 191);
+    border-radius: 10px;
+    width: 503px;
+    height: 140px;
+    box-shadow: 20px 20px 20px rgb(229, 229, 229);
+}
+
+.TitleProf1 {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+    border-bottom: 1px solid rgb(192, 191, 191);
+    padding: 10px;
+    padding-left: 173px;
+}
+
+.ProfNm,
+.ProfPr,
+.ProfDt,
+.ProfMps,
+.ProfEmail,
+.Profadrs,
+.ProfTél {
+    border: none;
+    background-color: transparent;
+    margin-top: 11px;
+    margin-left: 53px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.Profadrs,
+.ProfTél {
+    width: 100%;
+}
+
+.ProfMps,
+.ProfEmail {
+    width: 60%;
+}
+
+.NomInp {
+    margin-left: 10px;
+}
+
+.Profadrs {
+    margin-top: 20px;
+}
+
+.lien {
+    margin-left: 330px;
+}
+
+.ContLien {
+    color: blue;
+    margin-top: 10px;
+}
+
+.identifiant,
+.Adresses {
+    margin-top: 32px;
+    border: 1px solid rgb(192, 191, 191);
+    border-radius: 10px;
+    width: 503px;
+    height: 140px;
+    box-shadow: 20px 20px 20px rgb(229, 229, 229);
+}
+
+.Commande {
+    border: 1px solid rgb(192, 191, 191);
+    border-radius: 10px;
+    width: 650px;
+    height: 68px;
+    box-shadow: 20px 20px 20px rgb(229, 229, 229);
+    margin-bottom: 25px;
+}
+
+.ProfIdCmd,
+.ProfStCmd,
+.ProfPrCmd,
+.ProfNtCmd {
+    border: none;
+    background-color: transparent;
+    margin-top: 21px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.ProfIdCmd {
+    font-size: 16px;
+    font-weight: 800;
+    width: 50px;
+    margin-left: 28px;
+    margin-right: 20px;
+    color: orange;
+}

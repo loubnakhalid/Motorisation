@@ -10,22 +10,18 @@ function Connecte(){
 	}
 }
 function Client(){
-	if(Connecte() && ($_SESSION['membre']['Statut'] == 0)) 
+	if(Connecte() && $_SESSION['membre']['Statut'] == 0) 
 	{
 		return true;
 	}
-	else{
-		return false;
-	}
+	return false;
 }
 function Admin(){ 
-	if(Connecte() && ($_SESSION['membre']['Statut'] == 1)) 
+	if(Connecte() && $_SESSION['membre']['Statut'] == 1) 
 	{
 			return true;
 	}
-	else{
-		return false;
-	}
+	return false;
 }
 function addZero($nbre){
 	if ($nbre<10){

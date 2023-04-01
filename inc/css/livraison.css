@@ -1,0 +1,81 @@
+.livrimg1 {
+    width: 850px;
+    height: 198px;
+    position: relative;
+    left: 192px;
+}
+
+.TitleLiv1 {
+    font-size: 29px;
+    font-weight: 900;
+    color: #044570;
+    margin-top: 50px;
+    margin-left: 170px;
+}
+
+.Livpara1 {
+    width: 1229px;
+    position: relative;
+    line-height: 30px;
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.MarocExp {
+    width: 250px;
+    margin-left: 98px;
+}
+
+.typeLiv {
+    margin-top: 33px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.typePara1 {
+    width: 241px;
+    line-height: 19px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-left: 114px;
+    margin-top: 16px;
+}
+
+.Titledetail {
+    font-size: 29px;
+    font-weight: 900;
+    color: #044570;
+    margin-left: 170px;
+    margin-top: 20px;
+}
+
+.paradetail {
+    width: 1080px;
+    line-height: 19px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 23px;
+    margin-left: 20px;
+}
+
+#tableau {
+    border: 1px solid #b9b8b8;
+    border-radius: 0px;
+    margin-top: 40px;
+    margin-left: 190px;
+    width: 913px;
+    height: 344px;
+}
+
+#tableau td {
+    padding: 10px;
+    padding-left: 20px;
+}
+
+#tableau th {
+    padding: 10px;
+    font-size: 16px;
+}

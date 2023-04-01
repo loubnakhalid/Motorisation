@@ -1,3 +1,295 @@
+.body_display_modif_promo {
+    background-color: #051540c4;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.cacher_body_display_modif_promo {
+    display: none;
+}
+
+.cacher {
+    display: none;
+}
+
+.div_modif_promo {
+    position: relative;
+    width: 50%;
+    max-height: 90vh;
+    background-color: #ffffff;
+    box-shadow: rgba(12, 9, 9, 0.39) 0px 0px 11px 0px;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: auto;
+}
+
+.div_modif_promo .haut {
+    height: 20px;
+    width: 100%;
+}
+
+.icon_x_exit_promo {
+    position: absolute;
+    top: -2px;
+    right: 0px;
+    font-size: 30px;
+    color: red;
+    cursor: pointer;
+}
+
+.div_modif_promo form {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+.div_modif_promo form .case {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-left: 25px;
+    width: 43%;
+    height: 66px;
+    position: relative;
+    margin-top: 10px;
+}
+
+.div_modif_promo form .case_nmr {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-left: 25px;
+    width: 19.5%;
+    height: 66px;
+    position: relative;
+    margin-top: 10px;
+}
+
+.div_modif_promo form .case_date {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-left: 25px;
+    width: 42.9%;
+    height: 66px;
+    position: relative;
+    margin-top: 10px;
+}
+
+.div_modif_promo form .case label,
+.div_modif_promo form .case_nmr label,
+.div_modif_promo form .case_date label {
+    font-size: 14px;
+}
+
+.div_modif_promo form .case .input_text,
+.div_modif_promo form .case_nmr .input_text,
+.div_modif_promo form .case_date .input_text {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #e6f4ff;
+}
+
+.div_modif_promo form .case .input_text input,
+.div_modif_promo form .case_date .input_text input {
+    background-color: #e6f4ff;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    padding: 0 0 0 8px;
+}
+
+.div_modif_promo form .case_nmr .input_text input {
+    background-color: #e6f4ff;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    padding: 0 0 0 8px;
+    text-align: center;
+}
+
+.div_modif_promo form .case .input_select {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #e6f4ff;
+    cursor: pointer;
+    padding-right: 6px;
+}
+
+.div_modif_promo form .case .input_select select {
+    width: 100%;
+    height: 100%;
+    padding-left: 4px;
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.div_modif_promo form .form_bas {
+    height: 60px;
+    width: 100%;
+    background-color: #ffffff;
+    border-top: 1px solid rgb(211, 211, 211);
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.div_modif_promo form .form_bas .submit_form {
+    width: 170px;
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.div_modif_promo form .form_bas .submit_form input.btn_modifier_form_modifier_promo {
+    width: 65px;
+    font-size: 14px;
+    height: 27px;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    background: #2cafbe;
+    cursor: pointer;
+    margin-right: 32px;
+}
+
+.div_modif_promo form .form_bas .submit_form input.btn_effacer_form_modifier_promo {
+    width: 60px;
+    background: #512cbe;
+    font-size: 14px;
+    height: 27px;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.div_details_promo {
+    position: relative;
+    width: 50%;
+    max-height: 90vh;
+    background-color: #ffffff;
+    box-shadow: rgba(12, 9, 9, 0.39) 0px 0px 11px 0px;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    border: 1px solid whitesmoke;
+    overflow-y: auto;
+    height: auto;
+    background-color: #ffffff;
+    /* overflow: hidden; */
+    transition: all 0.7s ease;
+}
+
+table thead {
+    font-weight: normal;
+    color: #2368cf;
+    height: 50px;
+    font-size: 13px;
+}
+
+tbody {
+    overflow-y: auto;
+    height: auto;
+    margin-top: 10px;
+}
+
+table td {
+    height: 50px;
+    background-color: inherit;
+    text-align: center;
+    border-top: 1px solid rgb(240, 240, 240);
+    font-size: 14px;
+    color: rgb(69, 87, 106);
+}
+
+label.chek_prd {
+    margin-bottom: 1px;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+table td.td_check {
+    display: flex;
+    align-items: center;
+}
+
+table td input.checkbox {
+    margin-left: 10px;
+    height: 15px;
+}
+
+table td img {
+    height: 50px;
+    background-color: inherit;
+    margin: 0 4px 0 4px;
+}
+
+.bas {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.bas button {
+    background-color: #0833a7;
+    height: 34px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: #ffffff;
+    width: 115px;
+    margin-right: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-bottom: 4px;
+}
+
+.div_ajouter_prd_details_promo {
+    position: relative;
+    width: 40%;
+    max-height: 90vh;
+    background-color: #ffffff;
+    box-shadow: rgba(12, 9, 9, 0.39) 0px 0px 11px 0px;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: auto;
+}
+
 .home header.promos {
     grid-area: header;
     display: flex;
@@ -5,7 +297,6 @@
     justify-content: flex-start;
     /* background-color: #f1f7fa; */
     background-color: rgb(234 237 255);
-    padding: 0px 27px;
     flex-wrap: wrap;
 }
 
@@ -40,7 +331,7 @@
     height: auto;
     margin-bottom: 30px;
     border-radius: 5px;
-    width: 95%;
+    width: 100%;
     transition: all 0.8s ease;
 }
 

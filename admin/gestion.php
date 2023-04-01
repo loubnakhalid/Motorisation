@@ -1,24 +1,830 @@
 <?php
 include('./inc_ADMIN/menu.inc.php'); ?>
 <?php
-if(isset($_GET['icon_modifier_produit'])){
+if(isset($_GET['icon_modifier_produit']) && isset($_GET['id'])){
     $id=$_GET['id'];
     $rslt=mysqli_query($mysqli,"select * from produit natural join catégorie where IdPr=$id");
     $row=mysqli_fetch_assoc($rslt);
-    include("./inc_ADMIN/modifier_produit.php");
+    echo "
+    <div class='body'>
+        <div class='div_form_modification_produit'>
+            <i class='bx bxs-x-square icon_x_exit' onclick='history.back();'></i>
+            <form name='formModif' action='controller.php?table=produit&action=modifier&id=$id' method='post' enctype='multipart/form-data' onsubmit='return confirmModif();'>
+                <div class='form_left'>
+                    <div class='case'>
+                        <label for=''>Nom produit</label>
+                        <div class='input_text'>
+                            <input type='text' name='NomPr' id='' value='$row[NomPr]'>
+                        </div> 
+                    </div>
+                    <div class='case'>
+                        <label for=''>Categorie</label>
+                        <div class='input_select'>
+                            <select name='IdCt' id='' >
+    ";
+                        $rslt2=mysqli_query($mysqli,"select * from catégorie");
+                        while($row2=mysqli_fetch_assoc($rslt2)){
+                            if($row['NomCt']==$row2['NomCt']){
+                                echo "
+                                <option value='$row2[IdCt]' selected>$row2[NomCt]</option>
+                                ";
+                            }
+                            else{
+                                echo "
+                                <option value='.$row2[IdCt].'>$row2[NomCt]</option>
+                                ";
+                            }
+                        }
+                            echo "
+                            </select>
+                            <div class='icon_select'>
+                                <i class='bx bxs-down-arrow'></i>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class='case'>
+                        <label for=''>Statut</label>
+                        <div class='input_select'>
+                            <select name='StatutPr' id='StatutPr'>
+                                <option value='1'>Disponible</option>
+                            ";
+                            if($row['StatutPr']=='0'){
+                                echo "
+                                <option value='0' selected>Indisponible</option>
+                                ";
+                            }
+                            else{
+                                echo "
+                                <option value='0'>Indisponible</option>
+                                ";
+                            }
+                            echo "
+                            </select>
+                            <div class='icon_select'>
+                                <i class='bx bxs-down-arrow'></i>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class='case_prix_qauntite'>
+                        <label for=''>Prix</label>
+                        <div class='input_text'>
+                            <input type='number' name='PrixPr' value='$row[PrixPr]' id=''>
+                        </div> 
+                    </div>
+                    <div class='case_prix_qauntite'>
+                        <label for=''>Quantite</label>
+                        <div class='input_text'>
+                            <input type='number' value='$row[StockPr]' name='StockPr' id='' onChange='dispo()'>
+                        </div> 
+                    </div>
+                    <div class='case_text_area'>
+                        <label for=''>Description</label>
+                        <div class='input_text_area'>
+                            <textarea name='DescriptionPr' id='' cols='96' rows='5'>$row[DescriptionPr]</textarea>
+                        </div> 
+                    </div>
+                </div>
+                <div class='form_right'>
+                    <div class='case_image'>
+                        <label for=''>Image</label>
+                        <div class='zone_image'>
+                            <input type='hidden' name='NomImage' value='$row[ImagePr]'>
+                            <input type='file' class='input_image' name='ImagePr' >
+                            <img src='../inc/img/produits/$row[ImagePr]' id='image_telecharger'>
+                        </div>
+                    </div>
+                </div>
+                <div class='form_bas'>
+                    <div class='submit_form'>
+                        <input type='reset' value='Effacer' class='btn_effacer_form_modifier_produit'>
+                        <input type='submit' value='Modifier' class='btn_modifier_form_modifier_produit'>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    ";
 }
 if(isset($_GET['icon_ajouter_produit'])){
-    include("./inc_ADMIN/ajouter_produit.php");
+    echo "
+    <div class='body'>
+        <div class='div_form_modification_produit'>
+            <i class='bx bxs-x-square icon_x_exit' onclick='document.location.href=\"$lienPr\"'></i>
+            <form action='controller.php?table=produit&action=ajouter' method='post' enctype='multipart/form-data' onsubmit='return confirm(\"Voulez-vous vraiment ajouter le produit?\");'>
+                <div class='form_left'>
+                    <div class='case'>
+                        <label for=''>Nom produit</label>
+                        <div class='input_text'>
+                            <input type='text' name='NomPr' id='' value=''>
+                        </div> 
+                    </div>
+                    <div class='case'>
+                        <label for=''>Categorie</label>
+                        <div class='input_select'>
+                            <select name='IdCt' id=''>
+    ";
+                            $rslt2=mysqli_query($mysqli,"select * from catégorie");
+                            while($row2=mysqli_fetch_assoc($rslt2)){
+                                echo "
+                                <option value='.$row2[IdCt].'>$row2[NomCt]</option>
+                                ";
+                            }
+                            echo "
+                            </select>
+                            <div class='icon_select'>
+                                <i class='bx bxs-down-arrow'></i>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class='case'>
+                        <label for=''>Statut</label>
+                        <div class='input_select'>
+                            <select name='StatutPr' id=''>
+                                <option value='1'>Disponible</option>
+                                <option value='0'>Indisponible</option>
+                            </select>
+                        <div class='icon_select'>
+                            <i class='bx bxs-down-arrow'></i>
+                        </div>
+                    </div> 
+                    </div>
+                    <div class='case_prix_qauntite'>
+                        <label for=''>Prix</label>
+                        <div class='input_text'>
+                            <input type='number' name='PrixPr' value='' id=''>
+                        </div> 
+                    </div>
+                    <div class='case_prix_qauntite'>
+                        <label for=''>Quantite</label>
+                        <div class='input_text'>
+                            <input type='number' value='' name='StockPr' id=''>
+                        </div> 
+                    </div>
+                    <div class='case_text_area'>
+                        <label for=''>Description</label>
+                        <div class='input_text_area'>
+                            <textarea name='DescriptionPr' id='' cols='96' rows='5'></textarea>
+                        </div> 
+                    </div>
+                </div>
+                <div class='form_right'>
+                    <div class='case_image'>
+                        <label for=''>Image</label>
+                        <div class='zone_image'>
+                            <input type='file' class='input_image' name='ImagePr' >
+                            <img src='./inc_ADMIN/img/telecharger_image.png' id='image_telecharger'>
+                        </div>
+                    </div>
+                </div>
+                <div class='form_bas'>
+                    <div class='submit_form'>
+                        <input type='reset' value='Effacer' class='btn_effacer_form_modifier_produit'>
+                        <input type='submit' value='Ajouter' class='btn_modifier_form_modifier_produit'>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    ";
 }
-if(isset($_GET['icon_ajouter_commande'])){
-    include("./inc_ADMIN/ajouter_commande.php");
-}
-if(isset($_GET['icon_modifier_commande'])){
+if(isset($_GET['icon_modifier_commande']) && isset($_GET['id'])){
     $id=$_GET['id'];
     $rslt=mysqli_query($mysqli,"select * from commande natural join membre where IdCmd=$id");
     $row=mysqli_fetch_assoc($rslt);
-    include("./inc_ADMIN/modifier_commande.php");
+    echo "
+    <div class='body_cmd'>
+        <div class='div_form_modification_cmd'>
+            <i class='bx bxs-x-square icon_x_exit' onclick='history.back()'></i>
+            <form action='controller.php?table=commande&action=modifier' method='post' id='modifCMD' enctype='multipart/form-data' >
+                <div class='case_text'>
+                    <label for=''>N° commande</label>
+                    <div class='input_text'>
+                        <input type='text' name='IdCmd' id='' value='$row[IdCmd]' readonly>
+                    </div> 
+                </div>
+                <div class='case_text'>
+                    <label for=''>Nom client</label>
+                    <div class='input_text'>
+                        <input type='text' name='NomMb' id='' value='$row[NomMb]' readonly>
+                    </div> 
+                </div>
+                <div class='case_text'>
+                    <label for=''>Date commande</label>
+                    <div class='input_text'>
+                        <input type='date' name='DateCmd' value='$row[DateCmd]' id=''>
+                    </div> 
+                </div>
+                <div class='case_text'>
+                    <label for=''>Total</label>
+                    <div class='input_text'>
+                        <input type='number' name='prixTT' value='$row[prixTT]' id=''>
+                    </div> 
+                </div>
+                <div class='case_select'>
+                    <label for=''>Mode paiement</label>
+                    <div class='input_select'>
+                        <select name='modePaiement' id='mode'>
+                            <option value='Carte'>Carte</option>
+                            <option value='Chèque'>Chèque</option>
+                            <option value='Espèces'>Espèces</option>
+                            <option value='Paypal'>Paypal</option>
+                        </select>
+                        <script>
+                            selectd='$row[modePaiement]';
+                            if(selectd=='Carte'){
+                                selectd=0;
+                            }
+                            else if(selectd=='Chèque'){
+                                selectd=1;
+                            }
+                            else if(selectd=='Espèces'){
+                                selectd=2;
+                            }
+                            else if(selectd=='Paypal'){
+                                selectd=3;
+                            }
+                            document.getElementById('mode').getElementsByTagName('option')[selectd].selected= 'selected';
+                        </script>
+                        <div class='icon_select'>
+                            <i class='bx bxs-down-arrow'></i>
+                        </div>
+                    </div> 
+                </div>
+                <div class='case_select'>
+                    <label for=''>Statut</label>
+                    <div class='input_select'>
+                        <select name='StatutCmd' id='statut'>
+                            <option value='En cours'>En cours</option>
+                            <option value='Expédiée'>Expédiée</option>
+                            <option value='Livrée'>Livrée</option>
+                            <option value='Annulée'>Annulée</option>
+                        </select>
+                        <div class='icon_select'>
+                            <i class='bx bxs-down-arrow'></i>
+                        </div>
+                    </div> 
+                </div>
+                <script>
+                    selectd='$row[StatutCmd]';
+                    if(selectd=='En cours'){
+                        selectd=0;
+                    }
+                    else if(selectd=='Expédiée'){
+                        selectd=1;
+                    }
+                    else if(selectd=='Livrée'){
+                        selectd=2;
+                    }
+                    else if(selectd=='Annulée'){
+                        selectd=3;
+                    }
+                    document.getElementById('statut').getElementsByTagName('option')[selectd].selected= 'selected';
+                </script>
+                <div class='case_text_area'>
+                    <label for=''>Note</label>
+                    <div class='input_text_area'>
+                        <textarea name='NoteCmd' id='' cols='96' rows='4'>$row[NoteCmd]</textarea>
+                    </div> 
+                </div>
+                <div class='case_cocher'>
+                    <input type='checkbox' name='envEmail'> Renseigner le client par l'état de la commande
+                </div>
+                <div class='bas_form'>
+                    <div class='submit_form_modification_cmd'>
+                        <input type='reset' value='Effacer' class='btn_effacer_form_modifier_cmd'>
+                        <input type='button' value='Modifier' class='btn_modifier_form_modifier_cmd' onclick='confirmModif(\"modifCMD\");'>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    ";
 }
+if(isset($_GET['icon_ajouter_commande'])){
+    echo "
+    <div class='body_cmd'>
+        <div class='div_form_modification_cmd'>
+            <i class='bx bxs-x-square icon_x_exit' onclick='document.location.href=\"$lienPr\"'></i>
+            <form action='controller.php?table=commande&action=ajouter' method='post' enctype='multipart/form-data'>
+                <div class='case_text'>
+                    <label for=''>N° commande</label>
+                    <div class='input_text'>
+                        <input type='text' name='IdCmd' id='' readonly>
+                    </div> 
+                </div>
+                <div class='case_select'>
+                    <label for=''>Nom client</label>
+                    <div class='input_select'>
+                        <select name='IdMb' id=''>
+    ";
+                        $rslt=mysqli_query($mysqli,"select * from membre order by NomMb");
+                        while($row=mysqli_fetch_assoc($rslt)){
+                            echo '
+                            <option value="'.$row['IdMb'].'">'.$row['NomMb'].' '.$row['PrénomMb'].'</option>
+                            ';
+                        }
+                        echo"
+                        </select>
+                        <div class='icon_select'>
+                            <i class='bx bxs-down-arrow'></i>
+                        </div>
+                    </div> 
+                </div>
+                <div class='case_text'>
+                    <label for=''>Date commande</label>
+                    <div class='input_text'>
+                        <input type='date' name='DateCmd' id=''>
+                    </div> 
+                </div>
+                <div class='case_text'>
+                    <label for=''>Total</label>
+                    <div class='input_text'>
+                        <input type='number' name='prixTT' id=''>
+                    </div> 
+                </div>
+                <div class='case_select'>
+                    <label for=''>Mode paiement</label>
+                    <div class='input_select'>
+                        <select name='modePaiement' id=''>
+                            <option value='Paypal'>Paypal</option>
+                            <option value='Carte'>Carte</option>
+                            <option value='Espèces'>Espèces</option>
+                            <option value='Chèque'>Chèque</option>
+                        </select>
+                        <div class='icon_select'>
+                            <i class='bx bxs-down-arrow'></i>
+                        </div>
+                    </div> 
+                </div>
+                <div class='case_select'>
+                    <label for=''>Statut</label>
+                    <div class='input_select'>
+                        <select name='StatutCmd' id=''>
+                            <option value='En cours'>En cours</option>
+                            <option value='Expédiée'>Expédiée</option>
+                            <option value='Livrée'>Livrée</option>
+                            <option value='Annulée'>Annulée</option>
+                        </select>
+                        <div class='icon_select'>
+                            <i class='bx bxs-down-arrow'></i>
+                        </div>
+                    </div> 
+                </div>
+                <div class='case_text_area'>
+                    <label for=''>Note</label>
+                    <div class='input_text_area'>
+                        <textarea name='NoteCmd' id='' cols='96' rows='4'></textarea>
+                    </div> 
+                </div>
+                <div class='bas_form'>
+                    <div class='submit_form_modification_cmd'>
+                        <input type='reset' value='Effacer' class='btn_effacer_form_modifier_cmd'>
+                        <input type='submit' value='Ajouter' class='btn_modifier_form_modifier_cmd'>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    ";
+}
+if(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
+    $id=$_GET['IdCmd'];
+    if(isset($_GET['button_détails_commande']) ){
+        echo "
+        <div class='body_display_commande'>
+        <div class='div_details_display_commande '>
+        <i class='bx bxs-x-square icon_x_exit' onclick='history.back();' style='right: 0'></i>
+        <table cellspacing='0 '>
+            <thead>
+                <tr>
+                    <th>Nom produit</th>
+                    <th>Quantite</th>
+                    <th class='action'>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ";
+        $rslt=mysqli_query($mysqli,"select * from commande natural join détails_commande natural join produit where IdCmd=$id");
+        while($row=mysqli_fetch_assoc($rslt)){
+        $IdDétailsCmd=$row['IdDétailsCmd'];
+        echo"
+               <form action='controller.php?table=détails_commande&action=modifier&id=$IdDétailsCmd' method='post'>
+                <tr>
+                    <td>$row[NomPr]</td>
+                    <td class='td_valider'><input type='text' value='$row[qt]' name='qt' class='input_quantite' readonly autofocus >
+                    <button type='submit' class='valider_modif_display_cmd cacher_icon'><i class='bx bxs-check-square icon_valider_modif_display_cmd '></i></button>
+                    </td>
+                    <td class='action'>
+                        <i class='bx bx-edit icon_modifier_commande_display'  ></i>
+                        <lord-icon src='https://cdn.lordicon.com/qjwkduhc.json' trigger='hover' colors='primary:#e83a30,secondary:#e83a30,tertiary:#ffffff' state='hover-empty' style='width:35px;height:35px' onClick=\"confirmSupp('détails_commande','supprimer',$IdDétailsCmd);\"></lord-icon>
+                    </td>
+               </tr> 
+             </form>
+        ";
+        }
+        echo"
+            </tbody>
+         </table>
+         <div class='bas_table'>
+            <button onclick='document.location.href=\"gestion.php?table=commande&détails_commande=true&button_ajouter_commande=true&IdCmd=$id\"' class='ajouter_cmd_display_cmd'><i class='fa-solid fa-plus '></i> commande</button>
+            <button onclick='document.location.href=\"gestion.php?table=commande&détails_commande=true&button_ajouter_produit=true&IdCmd=$id\"' class='ajouter_prd_display_cmd'><i class='fa-solid fa-plus '></i> produit</button>
+         </div>
+        </div>
+        </div>
+        ";
+
+    }
+    elseif(isset($_GET['button_ajouter_commande'])){
+        echo "
+        <div class='body_display_commande'>
+        <div class='ajouter_cmd_details_cmd'>
+        <i class='bx bxs-x-square icon_x_exit' onclick='history.back();'  style='right: 0'></i>
+        <form action='controller.php?table=détails_commande&action=ajouterCmd' method='post'>
+        <table cellspacing='0 '>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Id</th>
+                    <th>Nom client</th>
+                </tr>
+            </thead>
+            <tbody>
+            ";
+            $rslt=mysqli_query($mysqli,"select * from commande natural join membre");
+            while($row=mysqli_fetch_assoc($rslt)){
+            $IdCmd=$row['IdCmd'];
+            if($IdCmd != $id){
+            echo"
+                <input type='hidden' name='IdCmd' value='$id'>
+                <tr>
+                    <td><input type='checkbox' name='IdCmdAjt[]' value='$IdCmd' id='chek1'></td>
+                    <td>$IdCmd</td>
+                    <td>$row[NomMb] $row[PrénomMb] </td>
+               </tr>
+            ";
+            }
+            }
+            echo"
+            </tbody>
+         </table>
+         <div class='bas'>
+            <button type='submit'>Ajouter</button>
+         </div>
+        </form>
+        </div>
+        </div>
+    ";
+    }
+    elseif(isset($_GET['button_ajouter_produit'])){
+        echo "
+        <div class='body_display_commande'>
+        <div class='ajouter_prd_details_cmd'>
+        <i class='bx bxs-x-square icon_x_exit' onclick='history.back();'  style='right: 0'></i>
+        <form action='controller.php?table=détails_commande&action=ajouter' method='post'>
+            <table cellspacing='0 '>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nom produit</th>
+                    </tr>
+                </thead>
+               
+                <tbody>
+        ";
+        $rslt=mysqli_query($mysqli,"select * from produit order by NomPr");
+        while($row=mysqli_fetch_assoc($rslt)){
+        $IdPr=$row['IdPr'];
+        echo"
+            <tr>
+                        <td class='prd'><input type='checkbox' value='$IdPr' name='check[]' id='chek1'></td>
+                        <td>$row[NomPr]</td>
+                        <input type='hidden' name='IdCmd' value='$id'>
+            </tr>
+        ";
+    }
+        echo"
+                </tbody>
+             </table>
+             <div class='bas'>
+                <button type='submit'>Ajouter</button>
+             </div>
+            </form>
+    </div>
+    </div>";
+    }
+}
+if(isset($_GET['icon_modifier_RDV']) && isset($_GET['id'])){
+    $id=$_GET['id'];
+    $rslt=mysqli_query($mysqli,"select * from rdv where IdRdv= $id");
+    $row=mysqli_fetch_assoc($rslt);
+    echo "
+    <div class='body_display_modif_rdv'>
+        <div class='div_modif_rdv'>  
+            <div class='haut'><i class='bx bxs-x-square icon_x_exit_rdv' onclick='history.back()'></i></div>
+            <form action='controller.php?table=RDV&action=modifier' method='post'>
+                <div class='case_nmr'>
+                    <label for=''>N° RDV</label>
+                    <div class='input_text'>
+                        <input type='text' name='IdRDV' id='' value='$row[IdRDV]' readonly>
+                    </div> 
+                </div>
+                <div class='case_date'>
+                    <label for=''>Date</label>
+                    <div class='input_text'>
+                        <input type='date' name='DateRDV' id='' value='$row[DateRDV]'>
+                    </div> 
+                </div>
+                <div class='case'>
+                    <label for=''>Nom client</label>
+                    <div class='input_text'>
+                        <input type='text' name='NomMb' id='' value='$row[NomMb]'>
+                    </div> 
+                </div>
+                <div class='case'>
+                    <label for=''>Statut</label>
+                    <div class='input_select'>
+                        <select name='StatutRdv' id='StatutRdv' >
+                            <option value='Traité'>Traité</option>
+                            <option value='Non traité'>Non traité</option>
+                        </select>
+                    </div>
+                    <script>
+                        if('$row[StatutRDV]'=='Traité'){
+                            document.getElementById('StatutRdv').getElementsByTagName('option')[0].selected='selected';
+                        }
+                        else{
+                            document.getElementById('StatutRdv').getElementsByTagName('option')[1].selected='selected';
+                        }
+                    </script>
+                </div>
+                <div class='case'>
+                    <label for=''>Télephone</label>
+                    <div class='input_text'>
+                        <input type='tel' name='NumTélé' id='' value='$row[NumTélé]'>
+                    </div> 
+                </div>
+                <div class='case_adress'>
+                    <label for=''>Adress</label>
+                    <div class='input_text'>
+                        <input type='text' name='AdresseMb' id='' value='$row[AdresseMb]'>
+                    </div> 
+                </div>
+                <div class='form_bas'>
+                    <div class='submit_form'>
+                        <input type='reset' value='Effacer' class='btn_effacer_form_modifier_rdv'>
+                        <input type='submit' value='Modifier' class='btn_modifier_form_modifier_rdv'>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    ";
+}
+if(isset($_GET['icon_ajouter_RDV'])){
+    echo "
+    <div class='body_display_modif_rdv'>
+        <div class='div_modif_rdv'>  
+            <div class='haut'><i class='bx bxs-x-square icon_x_exit_rdv' onclick='history.back();'></i></div>
+            <form>
+                <div class='case_nmr'>
+                    <label for=''>N RDV</label>
+                    <div class='input_text'>
+                        <input type='text' name='' id='' value='' readonly>
+                    </div> 
+                </div>
+                <div class='case_date'>
+                    <label for=''>Date</label>
+                    <div class='input_text'>
+                        <input type='date' name='' id='' value=''>
+                    </div> 
+                </div>
+                <div class='case'>
+                    <label for=''>Nom client</label>
+                    <div class='input_text'>
+                        <input type='text' name='' id='' value='JAKHROUTI IMAD'>
+                    </div> 
+                </div>
+                <div class='case'>
+                    <label for=''>Statut</label>
+                    <div class='input_select'>
+                            <select name='' id='' >
+                            <option value='Traité'>Traité</option>
+                            <option value=''Non traité>Non Traité</option>
+                        </select>
+                    </div> 
+                </div>
+                <div class='case'>
+                    <label for=''>Télephone</label>
+                    <div class='input_text'>
+                        <input type='tel' name='' id='' value=''>
+                    </div> 
+                </div>
+                <div class='case_adress'>
+                    <label for=''>Adress</label>
+                    <div class='input_text'>
+                        <input type='text' name='' id='' value='JAKHROUTI IMAD'>
+                    </div> 
+                </div>
+                <div class='form_bas'>
+                    <div class='submit_form'>
+                        <input type='reset' value='Effacer' class='btn_effacer_form_modifier_rdv'>
+                        <input type='submit' value='Ajouter' class='btn_modifier_form_modifier_rdv'>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    ";
+}
+if(isset($_GET['icon_modifier_promos']) && isset($_GET['id'])){
+    $id=$_GET['id'];
+    $rslt=mysqli_query($mysqli,"select * from promos where IdPromo=$id");
+    $row=mysqli_fetch_assoc($rslt);
+    echo" <div class='body_display_modif_promo '>
+    <div class='div_modif_promo '>
+        <div class='haut'><i class='bx bxs-x-square icon_x_exit_promo' onclick='history.back();'></i></div>
+        <form action='controller.php?table=promos&action=modifier&id=$id' method='post'>
+
+            <div class='case_nmr'>
+                <label for=''>N promo</label>
+                <div class='input_text'>
+                    <input type='number' name='IdPromo' id='' value='$row[IdPromo]' readonly>
+                </div>
+            </div>
+            <div class='case_nmr'>
+                <label for=''>Taux</label>
+                <div class='input_text'>
+                    <input type='number' name='Taux' id='' value='$row[Taux]'>
+                </div>
+            </div>
+            <div class='case'>
+                <label for=''>Statut</label>
+                <div class='input_select'>
+                    <select name='StatutPromo' id=''>
+        ";
+        if($row['StatutPromo']=='En cours'){
+            echo "<option value='En cours' selected>En cours </option>
+                <option value='Terminée'>Terminée </option>";
+        }
+        else{
+            echo "<option value='En cours' selected>En cours </option>
+            <option value='Terminée' selected>Terminée </option>";
+        }
+        echo"
+                    </select>
+                </div>
+            </div>
+
+            <div class='case_date'>
+                <label for=''>Date début</label>
+                <div class='input_text'>
+                    <input type='date' name='DateDéb' id='' value='$row[DateDéb]'>
+                </div>
+            </div>
+            <div class='case_date'>
+                <label for=''>Date fin</label>
+                <div class='input_text'>
+                    <input type='date' name='DateFin' id='' value='$row[DateFin]'>
+                </div>
+            </div>
+
+
+            <div class='form_bas'>
+                <div class='submit_form'>
+                    <input type='reset' value='Effacer' class='btn_effacer_form_modifier_promo'>
+                    <input type='submit' value='Modifier' class='btn_modifier_form_modifier_promo'>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>";
+}
+if(isset($_GET['icon_ajouter_promos'])){
+    echo" 
+    <div class='body_display_modif_promo'>
+        <div class='div_modif_promo '>
+            <div class='haut'><i class='bx bxs-x-square icon_x_exit_promo' onclick='history.back();'></i></div>
+            <form action='controlleR.php?table=promos&action=ajouter' method='post'>
+                <div class='case_nmr'>
+                    <label for=''>N promo</label>
+                    <div class='input_text'>
+                        <input type='number' name='IdPromo' id='' value='' readonly>
+                    </div>
+                </div>
+                <div class='case_nmr'>
+                    <label for=''>Taux</label>
+                    <div class='input_text'>
+                        <input type='number' name='Taux' id='' value=''>
+                    </div>
+                </div>
+                <div class='case'>
+                    <label for=''>Statut</label>
+                    <div class='input_select'>
+                        <select name='StatutPromo' id=''>
+                        <option value='En cours'>En cours</option>
+                        <option value='Terminée'>Terminée</option> 
+                        </select>
+                    </div>
+                </div>
+                <div class='case_date'>
+                    <label for=''>Date début</label>
+                    <div class='input_text'>
+                        <input type='date' name='DateDéb' id='' value=''>
+                    </div>
+                </div>
+                <div class='case_date'>
+                    <label for=''>Date fin</label>
+                    <div class='input_text'>
+                        <input type='date' name='DateFin' id='' value=''>
+                    </div>
+                </div>
+                <div class='form_bas'>
+                    <div class='submit_form'>
+                        <input type='reset' value='Effacer' class='btn_effacer_form_modifier_promo'>
+                        <input type='submit' value='Ajouter' class='btn_modifier_form_modifier_promo'>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    ";
+}
+if(isset($_GET['icon_détails_promos']) && isset($_GET['id'])){
+    $id=$_GET['id'];
+    echo "  <div class='body_display_modif_promo '><div class='div_details_promo'>
+    <i class='bx bxs-x-square icon_x_exit' onclick='history.back();'  style='right: 0'></i>
+    <table cellspacing='0'>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Nom produit</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+    ";
+    $rsly=mysqli_query($mysqli,"select * from promo_produit natural join produit where IdPromo=$id");
+    while($row=mysqli_fetch_assoc($rsly)){
+        echo "
+        <tr>
+                <td><img src='../inc/img/produits/$row[ImagePr]'></td>
+                <td>$row[NomPr]</td>
+                <td>
+                    <lord-icon src='https://cdn.lordicon.com/qjwkduhc.json' trigger='hover' colors='primary:#e83a30,secondary:#e83a30,tertiary:#ffffff' state='hover-empty' style='width:35px;height:35px' onclick='confirmSupp(\"promos\",\"supprimer\",$row[IdPrmPrdt])'></lord-icon>
+                </td>
+            </tr>
+        ";
+    }
+    echo" 
+            </tbody>
+        </table>
+        <div class='bas'>
+            <button class='ajouter_prd_details_promo' onclick='document.location.href=\"gestion.php?table=promos&button_ajouter_prmprdt=true&id=$id\"'><i class='fa-solid fa-plus '></i> produit</button>
+        </div>
+        </div>
+        </div>";
+}
+if(isset($_GET['button_ajouter_prmprdt']) && isset($_GET['id'])){
+    $id=$_GET['id'];
+    echo "
+    <div class='body_display_modif_promo '>
+        <div class='div_ajouter_prd_details_promo'>
+            <div class='haut'><i class='bx bxs-x-square icon_x_exit_promo' onclick='history.back();'></i></div>
+            <form action='controller.php?table=promo_produit&action=ajouter' method='post'>
+                <table cellspacing='0 '>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Nom produit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    ";
+                $rslt=mysqli_query($mysqli,"select * from produit order by NomPr");
+                while($row=mysqli_fetch_assoc($rslt)){
+                    $IdPr=$row['IdPr'];
+                    echo"
+                    <tr>
+                        <input type='hidden' name='IdPromo' value='$id'>
+                        <td class='td_check'><input type='checkbox' id='chek1'name='IdPr[]' value='$IdPr'  class='checkbox'><img src='../inc/img/produits/$row[ImagePr]'></td>
+                        <td><label for='chek1' class='chek_prd'>$row[NomPr]</label></td>
+                    </tr>";
+                }
+                    echo"
+                    </tbody>
+                </table>
+                <div class='bas'>
+                    <button type='submit'>Ajouter</button>
+                </div>
+            </form>
+        </div>
+    </div>";
+}
+if(isset($_GET['successDétails'])){
+    echo "<script>successDétails('$_GET[successDétails]');</script>";
+}
+?>
+<?php
 if (isset($_GET['table'])) {
     if ($_GET['table'] == 'produit') {
         $CountProduct=mysqli_query($mysqli,"select * from produit");
@@ -174,17 +980,17 @@ if (isset($_GET['table'])) {
                     $id=$row['IdCt'];
                     $rslt2=mysqli_query($mysqli,"select * from produit where IdCt = $id");
                     echo"
-                    <form action='controller.php?table=catégorie&action=modifier&id=$id' method='post'>
+                    <form>
                     <div class='category'>
                         <div class='name_category'>
-                            <input type='text' name='NomCt' value='".$row['NomCt']."' readonly class='nom_categorie'>
+                            <input type='text' value='".$row['NomCt']."' readonly class='nom_categorie'>
                         </div> 
                         <div class='nbr_produit'>
                             <p>Nombre de produits :</p> <span>".mysqli_num_rows($rslt2)."</span>
                         </div>
                         <div class='action_category'>
-                            <input  type='submit' value='Valider' class='btn_valider_categorie cacher'>
-                            <input  type='button' value='Modifier' class='btn_modifier_categorie'>
+                            <input  type='submit' value='Valider' class='btn_valider_categorie'>
+                            <input  type='button' value='Modifier' class='btn_modifier_categorie cacher'>
                             <input type='button' value='Supprimer' class='btn_supprimer_categorie' onclick='confirmSupp(\"catégorie\",\"supprimer\",\"$id\")'>
                         </div> 
                     </div>
@@ -309,7 +1115,7 @@ if (isset($_GET['table'])) {
                                 <td>".$row['modePaiement']."</td>
                                 <td>".$row['StatutCmd']."</td>
                                 <td class=\"action\">
-                                    <input type='button' value='détails'>
+                                    <input type='button' value='détails' class='btn_details_commande' onclick='document.location.href=\"gestion.php?table=commande&détails_commande=true&button_détails_commande=true&IdCmd=$id\"'>
                                     <i class=\"bx bx-edit icon_modifier_commande\" onclick='document.location.href=\"$url&icon_modifier_commande=true&id=$id\"' ></i>
                                     <lord-icon src=\"https://cdn.lordicon.com/qjwkduhc.json\" trigger=\"hover\" colors=\"primary:#e83a30,secondary:#e83a30,tertiary:#ffffff\" state=\"hover-empty\" style=\"width:35px;height:35px\" onClick=\"confirmSupp('commande','supprimer',$id)\"></lord-icon>
                                 </td>
@@ -328,7 +1134,7 @@ if (isset($_GET['table'])) {
         $nbreTr=mysqli_num_rows($rslt2);
         $rslt3=mysqli_query($mysqli,"select * from rdv where StatutRDV='Non traité'");
         $nbreNonTr=mysqli_num_rows($rslt3);
-        echo "
+       echo"
         <section class='home '>
             <header class='rdv'>
                 <div class='header_header_rdv'></div>
@@ -384,7 +1190,7 @@ if (isset($_GET['table'])) {
                             <div class=''></div>
                         </div>
                         <div class='produit'>
-                            <button><i class='fa-solid fa-plus '></i> Ajouter RDV</button>
+                            <button onclick='document.location.href=\"gestion.php?table=RDV&icon_ajouter_RDV=true\"'><i class='fa-solid fa-plus' ></i> Ajouter RDV</button>
                         </div>
                     </div>
                     <table cellspacing='0'>
@@ -392,6 +1198,8 @@ if (isset($_GET['table'])) {
                             <tr>
                                 <th>N° RDV</th>
                                 <th>Client</th>
+                                <th>Adresse</th>
+                                <th>Télé</th>
                                 <th>Type de projet</th>
                                 <th>Date</th>
                                 <th>Statut</th>
@@ -402,18 +1210,18 @@ if (isset($_GET['table'])) {
         ";
                         if(isset($_GET['tri'])){
                             $tri=$_GET['tri'];
-                            $rslt = mysqli_query($mysqli, "select * from rdv natural join membre order by $tri ");
+                            $rslt = mysqli_query($mysqli, "select * from rdv  order by $tri ");
                         }
                         elseif(isset($_GET['statut'])){
                             $statut=$_GET['statut'];
-                            $rslt = mysqli_query($mysqli, "select * from rdv natural join membre where StatutRDV='$statut' order by IdRDV");
+                            $rslt = mysqli_query($mysqli, "select * from rdv where StatutRDV='$statut' order by IdRDV");
                         }
                         elseif(isset($_GET['recherche']) && isset($_GET['mot'])){
                             $mot=$_GET['mot'];
-                            $rslt = mysqli_query($mysqli, "select * from rdv natural join membre where IdRDV like '%$mot%' order by IdRDV");
+                            $rslt = mysqli_query($mysqli, "select * from rdv  where IdRDV like '%$mot%' order by IdRDV");
                         }
                         else{
-                            $rslt=mysqli_query($mysqli,"select * from rdv natural join membre order by IdRDV");
+                            $rslt=mysqli_query($mysqli,"select * from rdv  order by IdRDV");
                         }
                         while($row=mysqli_fetch_assoc($rslt)){
                             $id=$row['IdRDV'];
@@ -421,11 +1229,13 @@ if (isset($_GET['table'])) {
                             <tr>
                                 <td>$row[IdRDV]</td>
                                 <td>$row[NomMb] $row[PrénomMb]</td>
+                                <td>$row[AdresseMb]</td>
+                                <td>$row[NumTélé]</td>
                                 <td>$row[TypePrjt]</td>
                                 <td>$row[DateRDV]</td>
                                 <td>$row[StatutRDV]</td>
                                 <td class='action'>
-                                    <i class='bx bx-edit modifier'></i>
+                                    <i class='bx bx-edit btn_modifier_rdv' onclick='document.location.href=\"gestion.php?table=RDV&icon_modifier_RDV=true&id=$id\"'></i>
                                     <lord-icon src='https://cdn.lordicon.com/qjwkduhc.json' trigger='hover' colors='primary:#e83a30,secondary:#e83a30,tertiary:#ffffff' state='hover-empty' style='width:35px;height:35px' onClick=\"confirmSupp('RDV','supprimer',$id)\"></lord-icon>
                                 </td>
                             </tr>";
@@ -442,7 +1252,7 @@ if (isset($_GET['table'])) {
         $nbreEnCrs=mysqli_num_rows($rslt2);
         $rslt3=mysqli_query($mysqli,"select * from promos where StatutPromo='Terminée'");
         $nbreTerm=mysqli_num_rows($rslt3);
-        echo "
+        echo"
         <section class='home'>
             <header class='promos'>
                 <div class='header_header_promos'></div>
@@ -496,7 +1306,7 @@ if (isset($_GET['table'])) {
                         <div class=''></div>
                     </div>
                     <div class='produit'>
-                        <button onclick='document.location.href=\"gestion.php?table=promos&icon_ajouter_promo=true\"'><i class='fa-solid fa-plus '></i> Ajouter promotion</button>
+                        <button onclick='document.location.href=\"gestion.php?table=promos&icon_ajouter_promos=true\"'><i class='fa-solid fa-plus '></i> Ajouter promotion</button>
                     </div>
                 </div>
                 <table cellspacing='0 '>
@@ -523,8 +1333,8 @@ if (isset($_GET['table'])) {
                             <td>".$row['DateFin']."</td>
                             <td>".$row['StatutPromo']."</td>
                             <td class=\"action\">
-                                <input type='button' value='détails'>
-                                <i class=\"bx bx-edit icon_modifier_commande\" onclick='document.location.href=\"gestion.php?table=promos&icon_modifier_promo=true&id=$id\"' ></i>
+                                <input type='button' value='détails' onclick='document.location.href=\"gestion.php?table=promos&icon_détails_promos=true&id=$id\"'>
+                                <i class=\"bx bx-edit icon_modifier_commande\" onclick='document.location.href=\"gestion.php?table=promos&icon_modifier_promos=true&id=$id\"' ></i>
                                 <lord-icon src=\"https://cdn.lordicon.com/qjwkduhc.json\" trigger=\"hover\" colors=\"primary:#e83a30,secondary:#e83a30,tertiary:#ffffff\" state=\"hover-empty\"style=\"width:35px;height:35px\" onClick=\"confirmSupp('promos','supprimer',$id)\"></lord-icon>
                             </td>
                         </tr>
@@ -540,21 +1350,4 @@ if(isset($_GET['success'])){
     echo "<script>success('$_GET[success]','$_GET[table]');</script>";
 }
 ?>
-<script>
-    const nom_categorie=document.querySelector(".nom_categorie"),
-    btn_valider_categorie=document.querySelector(".btn_valider_categorie"),
-    btn_modifier_categorie=document.querySelector(".btn_modifier_categorie"),
-    btn_supprimer_categorie=document.querySelector(".btn_supprimer_categorie");
-
-    btn_modifier_categorie.addEventListener("click",()=>{
-        nom_categorie.removeAttribute("readonly");
-        btn_modifier_categorie.classList.add("cacher");
-        btn_valider_categorie.classList.remove("cacher");
-    });
-    btn_valider_categorie.addEventListener("click",()=>{
-        nom_categorie.setAttribute("readonly", true);
-        btn_valider_categorie.classList.add("cacher");
-        btn_modifier_categorie.classList.remove("cacher");
-    });
-</script>
 <?php include('./inc_ADMIN/footer.html');?>

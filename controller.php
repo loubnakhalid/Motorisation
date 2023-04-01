@@ -5,6 +5,7 @@ if(isset($_GET['action']) && $_GET['action'] == "déconnexion") {
     header("location:index.php");
 }
 if(isset($_POST['con'])){
+    setcookie('login[EmailMb]',$_POST['EmailMb'],time()+60);
     $resultat = mysqli_execute_query($mysqli,"SELECT * FROM membre WHERE EmailMb='$_POST[EmailMb]'");
     if($resultat->num_rows != 0)
     {
@@ -28,35 +29,29 @@ if(isset($_POST['con'])){
         }
         else
         {
-            header("location:identification.php?action=connexion&erreur=Mot de passe incorrecte ! Veuillez réssayer .");
+            header("location:identification.php?action=connexion&erreurMDPS=Mot de passe incorrecte ! Veuillez réssayer .");
         }
     }
     else
     {
-        header("location:identification.php?action=connexion&erreur=Email incorrecte ! Veillez réssayer .");
+        setcookie('login[EmailMb]','',time()-1);
+        header("location:identification.php?action=connexion&erreurEmailMb=Email incorrecte ! Veuillez réssayer .");
     }
 }
 if(isset($_POST['inscr']) || (isset($_GET['action'])) && $_GET['action'] == "inscription"){
-    setcookie('login[nom]',$_POST['NomMb'],time()+60);
-    setcookie('login[prenom]',$_POST['PrénomMb'],time()+60);
-    setcookie('login[mdp1]',$_POST['MDPS'],time()+60);
-    setcookie('login[confMDPS]',$_POST['confMDPS'],time()+60);
-    setcookie('login[email]',$_POST['EmailMb'],time()+60);
-    $verif_mdp=preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/', $_POST['MDPS']);
+    setcookie('login[NomMb]',$_POST['NomMb'],time()+60);
+    setcookie('login[PrénomMb]',$_POST['PrénomMb'],time()+60);
+    setcookie('login[EmailMb]',$_POST['EmailMb'],time()+60);
+    setcookie('login[Ville]',$_POST['Ville'],time()+60);
+    setcookie('login[CP]',$_POST['CP'],time()+60);
+    setcookie('login[AdresseMb]',$_POST['AdresseMb'],time()+60);
+    setcookie('login[NumTélé]',$_POST['NumTélé'],time()+60);
+    setcookie('login[DateNc]',$_POST['DateNc'],time()+60);
 	$verifEmail=mysqli_execute_query($mysqli,"SELECT * FROM membre WHERE EmailMb='$_POST[EmailMb]'");
 		if($verifEmail->num_rows > 0){
             setcookie('login[EmailMb]','',time()-1);
-            header("location:identification.php?action=inscription&erreur=Email déjà utilisé ! Veuillez en choisir un autre svp.");
+            header("location:identification.php?action=inscription&erreurEmailMb=Email déjà utilisé ! Veuillez en choisir un autre svp.");
 		}
-        elseif(!$verif_mdp || strlen($_POST['MDPS']) < 8 ){
-            setcookie('login[MDPS]','',time()-1);
-            setcookie('login[confMDPS]','',time()-1);
-            header("location:identification.php?action=inscription&erreur=Votre mot de passe doit contenir au minimum : 8 caractères, 1 chiffre, 1 caractère spécial, 1 majuscule");
-        }
-        elseif($_POST['MDPS'] != $_POST['confMDPS']){
-            setcookie('login[confMDPS]','',time()-1);
-            header("location:identification.php?action=inscription&erreur=Les mots de passe ne sont pas identiques ! Veuillez réssayer svp.");
-        }
         else
 		{
 			foreach($_POST as $indice => $valeur)
@@ -75,7 +70,8 @@ if(isset($_POST['inscr']) || (isset($_GET['action'])) && $_GET['action'] == "ins
 			mail($to,$subject,$message,$header);
             $_POST['MDPS']=password_hash($_POST['MDPS'],PASSWORD_DEFAULT,['cost'=>14]);
 			mysqli_execute_query($mysqli,"INSERT INTO membre (NomMb,PrénomMb,NumTélé,DateNc,Ville,CP,AdresseMb,EmailMb,MDPS) VALUES ('$_POST[NomMb]','$_POST[PrénomMb]','$_POST[NumTélé]','$_POST[DateNc]','$_POST[Ville]','$_POST[CP]','$_POST[AdresseMb]','$_POST[EmailMb]','$_POST[MDPS]')");
-			header("location:index.php");
+			header("location:identification.php?action=connexion&success=Vous êtes inscris avec succés ! Veuillez vous connecter à votre compte .");
+            unset($_COOKIE['login']);
 		}
 }
 if (isset($_POST['mdpsOubl']) || (isset($_GET['action'])) && $_GET['action'] == "mdpsOubl") {

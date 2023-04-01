@@ -70,7 +70,7 @@ body .cacher_body_display_commande {
     cursor: pointer;
 }
 
-.div_details_display_commande table td.action button {
+.div_details_display_commande table button.valider_modif_display_cmd {
     border: none;
     background-color: inherit;
 }
@@ -148,6 +148,13 @@ body .cacher_body_display_commande {
     transition: all 0.7s ease;
 }
 
+table thead {
+    font-weight: normal;
+    color: #2368cf;
+    height: 50px;
+    font-size: 13px;
+}
+
 .ajouter_cmd_details_cmd table tbody {
     overflow-y: auto;
     height: auto;
@@ -160,9 +167,8 @@ body .cacher_body_display_commande {
     border-top: 1px solid rgb(240, 240, 240);
     font-size: 14px;
     color: rgb(69, 87, 106);
-    display: flex;
-    align-items: center;
     padding-left: 10px;
+    text-align: center;
 }
 
 .ajouter_cmd_details_cmd table td input {

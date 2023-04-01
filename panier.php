@@ -1,14 +1,23 @@
 <?php include('./inc/haut.inc.php'); ?>
 <?php
-if(! Client()){
+if(! Client() && !Admin()){
     echo "<script>document.location.href='identification.php?action=connexion&panVide=true';</script>";
 }
 ?>
 <section id="panier" class="pagePanier"> 
     <div>
     <?php
-    if(!isset($_SESSION['panier']['IdPr'])){
-        echo "Votre panier est vide ";
+    if(empty($_SESSION['panier']['IdPr'])){
+        echo "<div class='div_panier_vide'>
+        <div class='panier_vide'>
+        <script src='https://cdn.lordicon.com/ritcuqlt.js'></script> <lord-icon   src='https://cdn.lordicon.com/slkvcfos.json'   trigger='hover'  colors='primary:#1663c7,secondary:#ff840a' style='width:150px;height:150px'> </lord-icon>
+        <h1 class='text_panier_vide'>
+            <strong class='bold'>Votre panier </strong>est actuellement <strong class='bold'>vide</strong>
+        </h1>
+        <a href='index.php' >Commencer mes achats</a>
+    </div>
+
+    </div> ";
     }
     else{
         for($i = 0; $i < count($_SESSION['panier']['IdPr']); $i++){

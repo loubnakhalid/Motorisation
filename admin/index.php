@@ -180,31 +180,25 @@ $result2=printResults($resultsesision)-$result1;
   }
 
 </script>
-<div>
-<div>
-  Utilisateurs : <?= printResults($users); ?>
-</div>
-<div>
-  Sessions : <?= printResults($sessions); ?>
-</div>
-<div>
-  Sessions par utilisateur : <?= round(printResults($sessionsPerUser), 2); ?>
-</div>
-<div>
-  Pages vues : <?= printResults($pageViews); ?>
-</div>
-<div>
-  Pages/Sessions : <?= round($pageSessions,2); ?>
-</div>
-<div>
-  Durrée moyenne des sessions : <?= seconds(printResults($avgSessionsDuration)); ?>
-</div>
-<div>
-  Taux de rebond : <?= round(printResults($bouceRate),2); ?> %
-</div>
-<div>
-  Nouvelles sessions : <?= round(printResults($percentNewSessions),2); ?> %
-</div>
+<div class="header">
+    <div class="statis">
+      <p>Utilisateurs </p> <span><?= printResults($users); ?></span></div>
+    <div class="statis">
+      <p>Sessions </p> <span><?= printResults($sessions); ?></span></div>
+    <div class="statis">
+      <p>Sessions par utilisateur </p> <span><?= round(printResults($sessionsPerUser), 2); ?></span></div>
+    <div class="statis">
+      <p>Pages vues</p>  <span><?= printResults($pageViews); ?></span></div>
+    <div class="statis">
+      <p>Pages/Sessions</p> <span><?= round($pageSessions,2); ?></span></div>
+    <div class="statis">
+      <p>Durrée moyenne des sessions</p> <span><?= round($pageSessions,2); ?></span></div>
+    <div class="statis">
+      <p>Taux de rebond</p>  <span><?= seconds(printResults($avgSessionsDuration)); ?></span>
+    </div>
+    <div class="statis">
+      <p>Nouvelles sessions</p>  <span><?= round(printResults($bouceRate),2); ?></span>
+    </div>
 </div>
 <div>
 <div id="chart"></div>

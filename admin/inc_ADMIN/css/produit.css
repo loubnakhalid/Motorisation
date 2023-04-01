@@ -267,7 +267,6 @@
     justify-content: space-between;
     /* background-color: #f1f7fa; */
     background-color: rgb(234 237 255);
-    padding: 0px 27px;
     flex-wrap: wrap;
 }
 
@@ -304,7 +303,7 @@
     margin-bottom: 30px;
     border-radius: 5px;
     /* overflow: hidden; */
-    width: 95%;
+    width: 100%;
     transition: all 0.8s ease;
     position: relative;
 }
@@ -572,6 +571,6 @@
     font-weight: bold;
     cursor: pointer;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
 }

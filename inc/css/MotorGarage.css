@@ -1,0 +1,65 @@
+.GarageT1 {
+    font-size: 29px;
+    font-weight: 900;
+    color: #044570;
+    margin-top: 20px;
+    margin-left: 2px;
+}
+
+.Motopart1 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin-top: 53px;
+}
+
+.GaragePara1 {
+    width: 1280px;
+    line-height: 26px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 30px;
+}
+
+.Stitle1 {
+    font-size: 29px;
+    font-weight: 900;
+    color: #e8850b;
+    margin-top: 52px;
+}
+
+.GaragePara2 {
+    line-height: 27px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 13px;
+}
+
+.GarageImg1 {
+    width: 400px;
+    height: 392Px;
+}
+
+.Motopart1img {
+    margin-top: -43px;
+}
+
+.GaragePara3 {
+    line-height: 27px;
+    font-size: 15px;
+    font-weight: 600;
+    width: 1280px;
+    margin-top: 47px;
+}
+
+.marque {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin-top: 73px;
+}
+
+.mrqimg {
+    width: 250px;
+    height: 250px;
+}

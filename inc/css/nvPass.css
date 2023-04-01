@@ -1,71 +1,85 @@
-    #ReinMdps {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 50px;
-        margin-top: 10px;
-    }
-    
-    .TitleReinc {
-        font-size: 25px;
-        color: #015E9B;
-        font-weight: 800;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 29px;
-        margin-left: 37px;
-    }
-    
-    .inputReinMdps,
-    .ConfRein {
-        width: 378px;
-        padding: 14px;
-        border: 1px solid rgb(215 214 214);
-    }
-    
-    .BtnRein {
-        margin-top: 20px;
-        margin-left: 20px;
-    }
-    
-    .inputReinMdps {
-        margin-bottom: 20px;
-    }
-    
-    .InputRein {
-        margin-top: 39px;
-        margin-bottom: 10px;
-        margin-left: 56px
-    }
-    
-    .BtnRein {
-        margin-left: 91px;
-        margin-top: 25px;
-    }
-    
-    .btnReinMdps,
-    .btnAnnul {
-        padding: 12px;
-        width: 100px;
-    }
-    
-    .btnReinMdps {
-        margin-right: 100Px;
-        background: #015E9B;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-weight: 600;
-        font-size: 14px;
-        padding: 12px;
-    }
-    
-    .btnAnnul {
-        background: #ff6702;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-weight: 600;
-        font-size: 14px;
-    }
+#ReinMdps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+.TitleReinc {
+    font-size: 25px;
+    color: #015E9B;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 29px;
+    margin-left: 37px;
+}
+
+.inputReinMdps,
+.ConfRein {
+    width: 378px;
+    padding: 14px;
+    border: 1px solid rgb(215 214 214);
+}
+
+.BtnRein {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.inputReinMdps {
+    margin-bottom: 20px;
+}
+
+.InputRein {
+    margin-top: 39px;
+    margin-bottom: 10px;
+    margin-left: 56px
+}
+
+.BtnRein {
+    margin-left: 91px;
+    margin-top: 25px;
+}
+
+.btnReinMdps,
+.btnAnnul {
+    padding: 12px;
+    width: 100px;
+}
+
+.btnReinMdps {
+    margin-right: 100Px;
+    background: #015E9B;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px;
+}
+
+.btnAnnul {
+    background: #ff6702;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.ErReinMdps {
+    color: red;
+    position: relative;
+    top: -19px;
+    visibility: hidden;
+}
+
+.ErReinConfMdps {
+    color: red;
+    position: relative;
+    top: 1px;
+    visibility: hidden;
+}

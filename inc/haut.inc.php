@@ -14,15 +14,13 @@ include('./inc/init.inc.php');
     <script src='https://cdn.lordicon.com/ritcuqlt.js'></script>
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v6.3.0/css/all.css'>
     <link rel='stylesheet' href='inc/css/style.css'>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
-
 <body>
     <header id='h'>
-
         <div class='logo'>
             <a href='index.php'><img src='inc/img/logo3.png' alt='' class='logo3'></a>
         </div>
-
         <div class='recherche'>
             <div class='div_input'>
                 <form action='' name='form_recherche' class='recherche_form'>
@@ -36,17 +34,17 @@ include('./inc/init.inc.php');
                 <h2>indentifiez-vous</h2>
                 <form action='controller.php' method='post' class='form_hover_identifier'>
                     <div class='input_hover_identifier'>
-                        <input type='text' name='email' id='' placeholder='Email'>
+                        <input type='text' name='EmailMb' id='' placeholder='Email'>
                     </div>
                     <div class='input_hover_identifier'>
-                        <input type='text' name='mdp' id='' placeholder='Mot de passe'>
+                        <input type='text' name='MDPS' id='' placeholder='Mot de passe'>
                     </div>
                     <div class='input_hover_identifier'>
                         <input type='submit' name='con' id='btn'>
                     </div>
                     <div class='login_hover_grp'>
-                        <a href='controller.php?action=mdpsOubl'>Mot de passe oublié ?</a>
-                        <a href='controller.php?action=inscription'>Créer un compte</a>
+                        <a href='identification.php?action=mdpsOubl'>Mot de passe oublié ?</a>
+                        <a href='identification.php?action=inscription'>Créer un compte</a>
                     </div>
                 </form>
             </div>
@@ -57,8 +55,8 @@ include('./inc/init.inc.php');
             <nav class='panier_identifier'>
                 <ul>
                     <li>
-                        <a href='identification.php?action=connexion' class='icon_user'>
-                            <lord-icon src='https://cdn.lordicon.com/dxjqoygy.json' trigger='hover' state='hover-nodding' stroke='70' colors='primary:#1663c7,secondary:#ff840a' style='width:52px;height:52px'>
+                        <a href='<?php if(Client() || Admin()){ echo 'profil.php' ;} else { echo 'identification.php?action=connexion'; } ?>' class='icon_user' <?php if(!Client() && !Admin()){echo "onmouseover='login()'";}?>>
+                            <lord-icon src='https://cdn.lordicon.com/dxjqoygy.json'  state='hover-nodding' stroke='70' colors='primary:#1663c7,secondary:#ff840a' style='width:52px;height:52px'>
                             </lord-icon>
                         </a>
                     </li>
@@ -84,6 +82,61 @@ include('./inc/init.inc.php');
                     ?>
                 </ul>
             </nav>
+            <?php
+            if(isset($_GET['action']) && $_GET['action']=='connexion'){
+                echo "<nav style='padding: 9px;margin-top: 2px;align-items: center;font-size: 16px;font-weight: bold;color: white;background-color: #ff9200;'><p style='margin-left: 370px;'>Veuillez vous connectez ou créer un compte pour voir votre panier et faire des achats !</p></nav>";
+            }
+            ?>
         </div>
     </header>
     <main>
+    <form id='RDV' class='Rdv' onsubmit='return ValidationRdv()' style="display:none;">
+    <div class='Formulaire '>
+        <div class='Form-header'>
+            <div class='Form-title'>Demander RDV</div>
+            <button class='btn-ferm' onclick='history.back();'>&times;</button>
+        </div>
+        <div class='Form-content'>
+            <div class='PrgDate'>
+                Un conseiller vous rappelle dans les plus brefs délais pour convenir une date
+            </div>
+            <div class='Title1'>
+                Type de projet :
+            </div>
+            <div class='TypePrj'>
+                <select class='TypePrjSe'>
+                   <option value='' disabled selected hidden>Votre type de projet</option>
+                    <option value='1'>Motorisation porte de garage</option>
+                    <option value='2'>Motorisation de volet roulant</option>
+                    <option value='3'>Télécommandes</option>
+                    <option value='4'>Interphone&Visiophone</option>
+                    <option value='5'>Pièces détachées & Accessoires</option>
+                    <option value='6'>Alarmes</option>
+                   </select>
+            </div>
+            <div class='Title2'>
+                Pour vous joindre :
+            </div>
+            <div class='Rjd'>
+                <div class='RjdNP'>
+                    <input type='text' name='NomRdv' value='' placeholder='Nom' id='InputRdvNm' class='RjdN'>
+                    <input type='text' name='PrenomRdv' value='' placeholder='Prénom' id='InputRdvPr' class='RjdP'><br>
+                    <span class='ErRdvNom'>*Ce champs est obligatoire .</span>
+                    <span class='ErRdvPr'>*Ce champs est obligatoire .</span>
+                </div>
+                <div class='RjdE'>
+                    <input type='email' name='EmailRdv' value='' placeholder='Email' id='InputRdvEml' class='RjdEm'><br>
+                    <span class='ErRdvEmail'>*Ce champs est obligatoire .</span>
+                </div>
+                <div class='RjdT'>
+                    <input type='tel' name='TeleRdv' value='' placeholder='Téléphone' id='InputRdvtel' class='RjdTel'><br>
+                    <span class='ErRdvtel'>*Ce champs est obligatoire .</span>
+                </div>
+            </div>
+            <div class='RjdBt'>
+                <input type='submit' name='Envoi' value='Envoyer votre demande' class='RjdButton'>
+            </div>
+        </div>
+    </div>
+    <div id='Sur'></div>
+</form>

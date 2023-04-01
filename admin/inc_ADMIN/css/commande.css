@@ -188,7 +188,6 @@ input.btn_effacer_form_modifier_cmd {
     justify-content: space-between;
     /* background-color: #f1f7fa; */
     background-color: rgb(234 237 255);
-    padding: 0px 27px;
     flex-wrap: wrap;
 }
 
@@ -223,7 +222,7 @@ input.btn_effacer_form_modifier_cmd {
     height: auto;
     margin-bottom: 30px;
     border-radius: 5px;
-    width: 95%;
+    width: 100%;
     transition: all 0.8s ease;
 }
 
