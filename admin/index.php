@@ -1,11 +1,12 @@
 <?php
-include("./inc_ADMIN/menu.inc.php");
+include('./inc_ADMIN/menu.inc.php');
 if(! Admin()){
-	header("location:../index.php");
+	header('location:../index.php');
 	exit();
 }
-require_once "../vendor/autoload.php";
+require_once '../vendor/autoload.php';
 echo "<section class='home'>";
+try{
 $analytics = initializeAnalytics(); // Initialisera l'API
 $profile = getFirstProfileId($analytics); // Récupère le profil Google Analytics
 // Fonction d'initialisation et d'authentification
@@ -15,7 +16,7 @@ function initializeAnalytics(){
 
 	// Crée et configure le client
 	$client = new Google_Client();
-	$client->setApplicationName("Hello Analytics Reporting");
+	$client->setApplicationName('Hello Analytics Reporting');
 	$client->setAuthConfig($KEY_FILE_LOCATION);
 	$client->setScopes(['https://www.googleapis.com/auth/analytics.readonly']);
 	$analytics = new Google_Service_Analytics($client);
@@ -28,14 +29,14 @@ function getFirstProfileId($analytics) {
 
   if (count($accounts->getItems()) > 0) {
     $items = $accounts->getItems();
-    $firstAccountId = $items[0]["id"];
+    $firstAccountId = $items[0]['id'];
 
     // Récupère la liste des propriétés
     $properties = $analytics->management_webproperties->listManagementWebproperties($firstAccountId);
 
     if (count($properties->getItems()) > 0) {
       $items = $properties->getItems();
-      $firstPropertyId = $items[0]["id"];
+      $firstPropertyId = $items[0]['id'];
 
       // Récupère la liste des vues
       $profiles = $analytics->management_profiles->listManagementProfiles($firstAccountId, $firstPropertyId);
@@ -44,7 +45,7 @@ function getFirstProfileId($analytics) {
         $items = $profiles->getItems();
 
         // Retourne l'ID de la première vue
-        return $items[0]["id"];
+        return $items[0]['id'];
 
       } else {
         throw new Exception('No views (profiles) found for this user.');
@@ -70,7 +71,7 @@ function printResults($results) {
     $valeur = $rows[0][0];
     return $valeur;
     } else {
-    return "Pas de résultat.\n";
+    return 'Pas de résultat.\n';
 }
 }
 $users = getResults($analytics, $profile, 'users');
@@ -82,8 +83,7 @@ $pageSessions=printResults($pageViews)/printResults($sessions);
 $avgSessionsDuration = getResults($analytics, $profile, 'avgSessionDuration');
 $bouceRate = getResults($analytics, $profile, 'bounceRate');
 $percentNewSessions = getResults($analytics, $profile, 'percentNewSessions');
-?>
-<?php
+
 // Cette ligne fait appel à la fonction ci-dessous et demande à récupérer les pages vues, les utilisateurs et les sessions
 // Fonction qui récupère les informations nécessaires pour le graphique
 function getChartResults($analytics, $profileId, $metric) {
@@ -101,15 +101,15 @@ function getChartResults($analytics, $profileId, $metric) {
 function buildChartArray($results){
 	if (count($results->getRows()) > 0) {
 		$rows = $results->getRows(); // On compte les lignes
-		$array=[["Date","Pages Vues","Visiteurs","Visites"]]; // Initialisation du tableau avec les nomn des "colonnes"
+		$array=[['Date','Pages Vues','Visiteurs','Visites']]; // Initialisation du tableau avec les nomn des 'colonnes'
 		foreach($rows as $date){ // Parcours des dates
-			$datejour = substr($date[0],-2,2)."/".substr($date[0],-4,2); // On formatte la date (pour être joli à l'affichage)
+			$datejour = substr($date[0],-2,2).'/'.substr($date[0],-4,2); // On formatte la date (pour être joli à l'affichage)
 			array_push($array,[$datejour,(int)$date[1],(int)$date[2],(int)$date[3]]); // On ajoute la date et les données du jour au tableau
 		}
 		$js_array=json_encode($array); // On encode le tout en json
 		return $js_array; // On le retourne
 	} else {
-		return "Pas de résultat.\n";
+		return 'Pas de résultat.\n';
 	}	
 }
 $results = getChartResults($analytics, $profile, 'ga:pageviews,ga:users,ga:sessions');
@@ -117,8 +117,7 @@ $resultsesision = getResults($analytics, $profile, 'sessions');
 $resultsnewsession = getResults($analytics, $profile, 'percentNewSessions');
 $result1=(printResults($resultsesision)*printResults($resultsnewsession))/100;
 $result2=printResults($resultsesision)-$result1;
-?>
-<script type="text/javascript">
+echo"<script type='text/javascript'>
 	google.charts.load('current', {'packages':['corechart']});
 	google.charts.setOnLoadCallback(drawChart);
   google.charts.setOnLoadCallback(drawPieChart);
@@ -165,7 +164,7 @@ $result2=printResults($resultsesision)-$result1;
 				}
 			}
 		};
-		// Nous précisons où le graphique doit être "injecté"
+		// Nous précisons où le graphique doit être 'injecté'
 		let chart = new google.visualization.LineChart(document.getElementById('chart'));
 		// Nous dessinons le graphique
 		chart.draw(data, options);
@@ -180,28 +179,38 @@ $result2=printResults($resultsesision)-$result1;
   }
 
 </script>
-<div class="header">
-    <div class="statis">
+<div class='header'>
+    <div class='statis'>
       <p>Utilisateurs </p> <span><?= printResults($users); ?></span></div>
-    <div class="statis">
+    <div class='statis'>
       <p>Sessions </p> <span><?= printResults($sessions); ?></span></div>
-    <div class="statis">
+    <div class='statis'>
       <p>Sessions par utilisateur </p> <span><?= round(printResults($sessionsPerUser), 2); ?></span></div>
-    <div class="statis">
+    <div class='statis'>
       <p>Pages vues</p>  <span><?= printResults($pageViews); ?></span></div>
-    <div class="statis">
+    <div class='statis'>
       <p>Pages/Sessions</p> <span><?= round($pageSessions,2); ?></span></div>
-    <div class="statis">
+    <div class='statis'>
       <p>Durrée moyenne des sessions</p> <span><?= round($pageSessions,2); ?></span></div>
-    <div class="statis">
+    <div class='statis'>
       <p>Taux de rebond</p>  <span><?= seconds(printResults($avgSessionsDuration)); ?></span>
     </div>
-    <div class="statis">
+    <div class='statis'>
       <p>Nouvelles sessions</p>  <span><?= round(printResults($bouceRate),2); ?></span>
     </div>
 </div>
 <div>
-<div id="chart"></div>
-<div id="pieChart"></div>
+<div id='chart'></div>
+<div id='pieChart'></div>
 </div>
-<?php include("./inc_ADMIN/footer.html"); ?>
+";
+}
+catch(Exception $e){
+	echo "<div>Veuillez vérifier votre connexion internet ou contactez l'équipe de développement !</div>";
+}
+catch(Error $e){
+	echo "<div>Veuillez vérifier votre connexion internet ou contactez l'équipe de développement !</div>";
+}
+
+?>
+<?php include('./inc_ADMIN/footer.html'); ?>

@@ -1,12 +1,12 @@
 function dispo() {
-    if (document.formModif.StockPr.value <= 0) {
+    if (document.getElementById('modifPrdt').StockPr.value <= 0) {
         document.getElementById('StatutPr').getElementsByTagName('option')[1].selected = 'selected';
     } else {
         document.getElementById('StatutPr').getElementsByTagName('option')[0].selected = 'selected';
     }
 }
 
-function confirmSupp(table, action, id) {
+function confirmSupp(table, action, id, id2) {
     switch (table) {
         case "commande":
             vText = "Si vous supprimez la commande, les détails y associés vont être supprimés également !";
@@ -22,7 +22,22 @@ function confirmSupp(table, action, id) {
             break;
         case "détails_commande":
             vText = "Voulez-vous vraiment supprimer le produit de la commande?";
-            break;
+            swal({
+                    title: "Êtes-vous sûr?",
+                    text: vText,
+                    icon: "warning",
+                    buttons: [
+                        "Annuler",
+                        "supprimer",
+                    ],
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.location.href = 'controller.php?table=' + table + '&action=' + action + '&id=' + id + '&id2=' + id2;
+                    }
+                });
+            return;
         case "promo_produit":
             vText = "Voulez-vous vraiment supprimer le produit de la promotion?";
             break;
@@ -47,10 +62,10 @@ function confirmSupp(table, action, id) {
         });
 }
 
-function confirmModif(formModif) {
+function confirmModifAjt(formModif, mssg) {
     swal({
             title: " ",
-            text: "Voulez-vous vraiment effectuer les modifications ?",
+            text: mssg,
             icon: "warning",
 
             buttons: [
@@ -61,8 +76,6 @@ function confirmModif(formModif) {
         .then((willDelete) => {
             if (willDelete) {
                 document.getElementById(formModif).submit();
-            } else {
-                history.back();
             }
         });
 }
@@ -89,4 +102,25 @@ function successDétails(success) {
         .then((value) => {
             history.back();
         });
+}
+
+function erreur(erreur) {
+    swal({
+            title: '',
+            text: erreur,
+            icon: 'warning',
+            button: 'Ok',
+        })
+        .then((value) => {
+            history.back();
+        });
+}
+
+function erreur2(erreur) {
+    swal({
+        title: '',
+        text: erreur,
+        icon: 'warning',
+        button: 'Ok',
+    });
 }

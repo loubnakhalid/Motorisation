@@ -1,3 +1,54 @@
+.fiche_client {
+    position: fixed;
+    width: 60%;
+    max-height: 90vh;
+    background-color: #ffffff;
+    box-shadow: rgba(12, 9, 9, 0.39) 0px 0px 11px 0px;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.fiche_client .client {
+    height: 50px;
+    border-bottom: 1px solid;
+}
+
+.fiche_client .client h1 {
+    font-weight: 900;
+    color: #062067;
+    font-family: 'Kumbh Sans', sans-serif;
+}
+
+.contenue_client {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    padding: 20px 10px;
+}
+
+.info {
+    width: 32.3%;
+    height: 60px;
+}
+
+.info h3 {
+    color: #062067;
+    font-family: 'Kumbh Sans', sans-serif;
+}
+
+.info span {
+    margin-top: 5px;
+    font-weight: 300;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 14px;
+}
+
 .body_cmd {
     background-color: #00154db7;
     position: absolute;

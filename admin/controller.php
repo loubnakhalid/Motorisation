@@ -48,10 +48,10 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                 $success="Vous-avez ajouté le produit avec succés ! ";
             }
             elseif($action=='modifier'){
-                $id=$_GET['id'];
+                $IdPr=$_GET['IdPr'];
                 $NomImage=$_POST['NomImage'];
                 move_uploaded_file($ImagePr['tmp_name'],"../inc/img/produits/$NomImage");
-                $rqt="update produit set NomPr='$NomPr',DescriptionPr='$DescriptionPr',PrixPr='$PrixPr',StatutPr='$StatutPr',StockPr='$StockPr',IdCt='$IdCt' where IdPr=$id ";
+                $rqt="update produit set NomPr='$NomPr',DescriptionPr='$DescriptionPr',PrixPr='$PrixPr',StatutPr='$StatutPr',StockPr='$StockPr',IdCt='$IdCt' where IdPr=$IdPr";
                 $success="Vous-avez modifié le produit avec succés ! ";
             }
         }
@@ -142,47 +142,102 @@ if(isset($_GET['table']) && isset($_GET['action'])){
     ;break;
     case 'détails_commande':
         if($action=='supprimer'){
-            $id=$_GET['id'];
-            $rqtdét="delete from détails_commande where IdDétailsCmd=$id";
-            if($rsltdét=mysqli_query($mysqli,$rqtdét)){
-                header("location:$lienPr&successDétails=Vous-avez supprimé le produit avec succés !");
+            if(isset($_GET['id']) && isset($_GET['id2'])){
+                $id=$_GET['id'];
+                $id2=$_GET['id2'];
+                $rqtdét="delete from détails_commande where IdDétailsCmd=$id";
+                if($rsltdét=mysqli_query($mysqli,$rqtdét)){
+                        if($rsltdét2=mysqli_query($mysqli,"select * from détails_commande natural join produit where IdCmd=$id2")){
+                            $prixTT=0;
+                            while($row2=mysqli_fetch_assoc($rsltdét2)){
+                                $prixTT+=$row2['PrixPr']*$row2['qt'];
+                            }
+                            if($rsltdét3=mysqli_query($mysqli,"update commande set prixTT=$prixTT where IdCmd=$id2")){
+                                header("location:$lienPr&successDétails=Vous-avez supprimé le produit avec succés !");
+                            }
+                        }
+                    }
+                }
             }
-        }
         elseif($action=='modifier'){
-            $id=$_GET['id'];
-            $rqtdét="update détails_commande set qt=$_POST[qt] where IdDétailsCmd=$id";
-            if($rsltdét=mysqli_query($mysqli,$rqtdét)){
-                header("location:$lienPr&successDétails=Vous-avez modifié la quantité du produit avec succés !");
+            if(isset($_GET['IdDétailsCmd']) && isset($_GET['IdCmd'])){
+                $id=$_GET['IdDétailsCmd'];
+                $IdCmd=$_GET['IdCmd'];
+                $qt=$_POST['qt'];
+                try{
+                $rslt1=mysqli_query($mysqli,"select * from détails_commande natural join produit where IdDétailsCmd=$id");
+                $row1=mysqli_fetch_assoc($rslt1);
+                $rowQt=$row1['qt'];
+                $stock=$row1['StockPr'];
+                if($rowQt>=$qt){
+                    $nvQt=$stock+($rowQt-$qt);
+                }
+                else{
+                    $nvQt=$stock-($qt-$rowQt);
+                }
+                $rqtdét="update détails_commande set qt=$qt where IdDétailsCmd=$id";
+                if($rsltdét=mysqli_query($mysqli,$rqtdét)){
+                    if($rsltdét2=mysqli_query($mysqli,"select * from commande natural join détails_commande natural join produit where IdCmd=$IdCmd")){
+                        $prixTT=0;
+                        while($row2=mysqli_fetch_assoc($rsltdét2)){
+                            $prixTT=$prixTT+($row2['PrixPr']*$row2['qt']);
+                        }
+                        $IdPr=$row1['IdPr'];
+                        if($rsltdét3=mysqli_query($mysqli,"update commande set prixTT='$prixTT' where IdCmd=$IdCmd")){
+                            if($rsltdét4=mysqli_query($mysqli,"update produit set StockPr=$nvQt where IdPr=$IdPr")){
+                            header("location:$lienPr&successDétails=Vous-avez modifié la quantité du produit avec succès !");
+                            }
+                        }
+                    }
+                }
+                }
+                catch(Exception | Error $e){
+                    header("location:$lienPr&erreur=Erreur lors de la modification de la quantité du produit ! Veuillez contacter l\'équipe de développement .");
+                }
+            }
+            else{
+                echo"<script>history.back();</script>";
             }
         }
         elseif($action=='ajouter'){
+            if(isset($_POST['IdCmd']) && isset($_POST['IdPr'])){
             $IdCmd=$_POST['IdCmd'];
             $IdPr=$_POST['IdPr'];
-            $check=$_POST['check'];
-            for($i=0;$i<count($check);$i++){
-                if($check[$i]==true){
-                    $rqt4="insert into détails_commande (IdCmd,IdPr,qt) values('$IdCmd','$check[$i]','1')";
+            foreach($IdPr as $value ){
+                    $rqt4="insert into détails_commande (IdCmd,IdPr,qt) values('$IdCmd','$value','1')";
                     $rslt=mysqli_query($mysqli,$rqt4);
-                }
             }
             header("location:$lienPr&successDétails=Vous-avez ajouté le produit à la commande avec succés !");
+            }
+            else{
+                header("location:$lienPr&erreur=Veuillez sélectionner un produit! ");
+            }
         }
         elseif($action=='ajouterCmd'){
-            $IdCmd=$_POST['IdCmd'];
-            $IdCmdAjt=$_POST['IdCmdAjt'];
-            for($i=0;$i<count($IdCmdAjt);$i++){
-                $rslt1=mysqli_query($mysqli,"select * from détails_commande where IdCmd=$IdCmdAjt[$i]");
-                while($row1=mysqli_fetch_assoc($rslt1)){
-                    if($rslt4=mysqli_query($mysqli,"insert into détails_commande (IdCmd,IdPr,qt) values ($IdCmd,$row1[IdPr],$row1[qt])")){
-                        mysqli_query($mysqli,"delete from commande where IdCmd=$IdCmdAjt[$i]");
+            if(isset($_POST['IdCmd']) && isset($_POST['IdCmdAjt'])){
+                try{
+                    $IdCmd=$_POST['IdCmd'];
+                    $IdCmdAjt=$_POST['IdCmdAjt'];
+                    $rslt1=mysqli_query($mysqli,"select * from détails_commande where IdCmd=$IdCmdAjt");
+                    if(mysqli_num_rows($rslt1)>0){
+                        while($row1=mysqli_fetch_assoc($rslt1)){
+                            $rslt4=mysqli_query($mysqli,"insert into détails_commande (IdCmd,IdPr,qt) values ($IdCmd,$row1[IdPr],$row1[qt])");
+                        }
+                        $rslt5=mysqli_query($mysqli,"delete from commande where IdCmd=$IdCmdAjt");
+                        header("location:$lienPr&successDétails=Vous-avez ajouté les détails à la commande $IdCmd avec succés ! ");
                     }
                     else{
-                        header("location:$lienPr&successDétails=La commande n'a pas de détails ! ");
+                        header("location:$lienPr&erreur=La commande sélectionnée $IdCmdAjt n\'a pas de détails ! ");
                     }
-                    
+                }
+                catch(Exception | Error $e){
+                    header("location:$lienPr&erreur=Erreur lors de la modification des détails de la commande ! Veuillez contactez l\'équipe de développement . ");
                 }
             }
-            header("location:$lienPr&successDétails=Vous-avez ajouté les détails à la commande $IdCmd avec succés ! ");
+            else{
+                header("location:$lienPr&erreur=Veuillez sélectionner une commande ! ");
+            }
+            
         }
     ;break;
     }

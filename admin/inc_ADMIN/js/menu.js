@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", function(event) {
+    var scrollpos = localStorage.getItem('scrollpos');
+    if (scrollpos) window.scrollTo(0, scrollpos);
+});
+
+window.onbeforeunload = function(e) {
+    localStorage.setItem('scrollpos', window.scrollY);
+};
+document.addEventListener("DOMContentLoaded", function(event) {
     const btn_details_commande = document.querySelector(".btn_details_commande"),
         body_display_commande = document.querySelector(".body_display_commande"),
         bodyElement = document.body;
