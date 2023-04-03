@@ -573,15 +573,15 @@ if(isset($_GET['ficheClient']) && isset($_GET['id'])){
     </div>
     </div>";
 }
-if(isset($_GET['icon_modifier_RDV']) && isset($_GET['id'])){
-    $id=$_GET['id'];
-    $rslt=mysqli_query($mysqli,"select * from rdv where IdRdv= $id");
+if(isset($_GET['modifier_RDV']) && isset($_GET['IdRDV'])){
+    $IdRDV=$_GET['IdRDV'];
+    $rslt=mysqli_query($mysqli,"select * from rdv where IdRdv= $IdRDV");
     $row=mysqli_fetch_assoc($rslt);
     echo "
     <div class='body_display_modif_rdv'>
         <div class='div_modif_rdv'>  
             <div class='haut'><i class='bx bxs-x-square icon_x_exit_rdv' onclick='history.back()'></i></div>
-            <form action='controller.php?table=RDV&action=modifier' method='post'>
+            <form id='modifRDV' action='controller.php?table=RDV&action=modifier&IdRDV=$IdRDV' method='post'>
                 <div class='case_nmr'>
                     <label for=''>N° RDV</label>
                     <div class='input_text'>
@@ -603,7 +603,7 @@ if(isset($_GET['icon_modifier_RDV']) && isset($_GET['id'])){
                 <div class='case'>
                     <label for=''>Statut</label>
                     <div class='input_select'>
-                        <select name='StatutRdv' id='StatutRdv' >
+                        <select name='StatutRDV' id='StatutRdv' >
                             <option value='Traité'>Traité</option>
                             <option value='Non traité'>Non traité</option>
                         </select>
@@ -632,7 +632,7 @@ if(isset($_GET['icon_modifier_RDV']) && isset($_GET['id'])){
                 <div class='form_bas'>
                     <div class='submit_form'>
                         <input type='reset' value='Effacer' class='btn_effacer_form_modifier_rdv'>
-                        <input type='submit' value='Modifier' class='btn_modifier_form_modifier_rdv'>
+                        <input type='button' value='Modifier' class='btn_modifier_form_modifier_rdv' onclick=\"confirmModifAjt('modifRDV','Voulez-vous vraiment modifier le RDV?','modifier')\">
                     </div>
                 </div>
             </form>
@@ -640,12 +640,12 @@ if(isset($_GET['icon_modifier_RDV']) && isset($_GET['id'])){
     </div>
     ";
 }
-if(isset($_GET['icon_ajouter_RDV'])){
+if(isset($_GET['ajouter_RDV'])){
     echo "
     <div class='body_display_modif_rdv'>
         <div class='div_modif_rdv'>  
             <div class='haut'><i class='bx bxs-x-square icon_x_exit_rdv' onclick='history.back();'></i></div>
-            <form>
+            <form id='ajtRDV' action='controller.php?table=RDV&action=ajouter' method='post'>
                 <div class='case_nmr'>
                     <label for=''>N RDV</label>
                     <div class='input_text'>
@@ -655,19 +655,19 @@ if(isset($_GET['icon_ajouter_RDV'])){
                 <div class='case_date'>
                     <label for=''>Date</label>
                     <div class='input_text'>
-                        <input type='date' name='' value=''>
+                        <input type='date' name='DateRDV' value=''>
                     </div> 
                 </div>
                 <div class='case'>
                     <label for=''>Nom client</label>
                     <div class='input_text'>
-                        <input type='text' name='' value='JAKHROUTI IMAD'>
+                        <input type='text' name='NomMb' value=''>
                     </div> 
                 </div>
                 <div class='case'>
                     <label for=''>Statut</label>
                     <div class='input_select'>
-                            <select name='' >
+                            <select name='StatutRDV' >
                             <option value='Traité'>Traité</option>
                             <option value=''Non traité>Non Traité</option>
                         </select>
@@ -676,19 +676,19 @@ if(isset($_GET['icon_ajouter_RDV'])){
                 <div class='case'>
                     <label for=''>Télephone</label>
                     <div class='input_text'>
-                        <input type='tel' name='' value=''>
+                        <input type='tel' name='NumTélé' value=''>
                     </div> 
                 </div>
                 <div class='case_adress'>
                     <label for=''>Adress</label>
                     <div class='input_text'>
-                        <input type='text' name='' value='JAKHROUTI IMAD'>
+                        <input type='text' name='AdresseMb' value=''>
                     </div> 
                 </div>
                 <div class='form_bas'>
                     <div class='submit_form'>
                         <input type='reset' value='Effacer' class='btn_effacer_form_modifier_rdv'>
-                        <input type='submit' value='Ajouter' class='btn_modifier_form_modifier_rdv'>
+                        <input type='button' value='Ajouter' class='btn_modifier_form_modifier_rdv' onclick=\"confirmModifAjt('ajtRDV','Voulez-vous vraiment ajouter le RDV?','ajouter')\">
                     </div>
                 </div>
             </form>
@@ -1033,33 +1033,37 @@ if (isset($_GET['table'])) {
                     <div class='case_categorie'>Catégorie la moins populaire :". $CtMoinsPop['NomCt']."</div>
                 </header>
                 <main>
-                    <div class='containner_main'>
-                        <div class='ajouter_category'>
-                            <button><i class='fa-solid fa-plus'></i> Ajouter catégorie</button>
+                    <div class='containner_main_categorie'>
+                    <div class='ajouter_category'>
+                            <button class='btn_ajouter_category' ><i class='fa-solid fa-plus'></i> Ajouter catégorie</button>
                         </div>
+                        
             ";
                         $rslt = mysqli_query($mysqli, 'select * from catégorie order by NomCt');
                         while ($row = mysqli_fetch_assoc($rslt)) {
-                        $id=$row['IdCt'];
-                        $rslt2=mysqli_query($mysqli,"select * from produit where IdCt = $id");
+                        $IdCt=$row['IdCt'];
+                        $rslt2=mysqli_query($mysqli,"select * from produit where IdCt = $IdCt");
                         echo"
-                        <form>
+                        <form action='controller.php?table=catégorie&action=modifier&IdCt=$IdCt' id='modifCt$IdCt' method='post'>
                         <div class='category'>
                             <div class='name_category'>
-                                <input type='text' value='".$row['NomCt']."' readonly class='nom_categorie'>
+                                <input type='text' value='".$row['NomCt']."' name='NomCt' readonly class='nom_categorie'>
+                                <button type='button' class='valider_modif_categorie cacher_icon' onclick=\"confirmModifAjt('modifCt$IdCt','Voulez-vous vraiment modifier le nom de la catégorie?')\"><i class='bx bxs-check-square icon_valider_modif_categorie'></i></button>
                             </div> 
                             <div class='nbr_produit'>
                                 <p>Nombre de produits :</p> <span>".mysqli_num_rows($rslt2)."</span>
                             </div>
                             <div class='action_category'>
-                                <input  type='submit' value='Valider' class='btn_valider_categorie'>
-                                <input  type='button' value='Modifier' class='btn_modifier_categorie cacher'>
-                                <input type='button' value='Supprimer' class='btn_supprimer_categorie' onclick='confirmSupp(\"catégorie\",\"supprimer\",\"$id\")'>
+                            
+                                <i class=\"bx bx-edit btn_modifier_categorie\" ></i>
+                                <lord-icon class='btn_supprimer_categorie' src=\"https://cdn.lordicon.com/qjwkduhc.json\" trigger=\"hover\"  colors=\"primary:#e83a30,secondary:#e83a30,tertiary:#ffffff\" state=\"hover-empty\" style=\"width:35px;height:35px\" onclick=\"confirmSupp('catégorie','supprimer',$IdCt)\" ></lord-icon>
                             </div> 
                         </div>
                         </form>
                         ";
                         }
+                        // <input  type='submit' value='Valider' class='btn_valider_categorie'>
+                                // <input  type='button' value='Modifier' class='btn_modifier_categorie cacher'>
                     echo "
                     </div>
                     ";
@@ -1253,7 +1257,7 @@ if (isset($_GET['table'])) {
                                     <div class=''></div>
                                 </div>
                                 <div class='produit'>
-                                    <button onclick='document.location.href=\"gestion.php?table=RDV&icon_ajouter_RDV=true\"'><i class='fa-solid fa-plus' ></i> Ajouter RDV</button>
+                                    <button onclick='document.location.href=\"gestion.php?table=RDV&ajouter_RDV=true\"'><i class='fa-solid fa-plus' ></i> Ajouter RDV</button>
                                 </div>
                             </div>
                             <table cellspacing='0'>
@@ -1287,7 +1291,7 @@ if (isset($_GET['table'])) {
                                     $rslt=mysqli_query($mysqli,"select * from rdv  order by IdRDV");
                                 }
                                 while($row=mysqli_fetch_assoc($rslt)){
-                                    $id=$row['IdRDV'];
+                                    $IdRDV=$row['IdRDV'];
                                     echo "
                                     <tr>
                                         <td>$row[IdRDV]</td>
@@ -1298,8 +1302,8 @@ if (isset($_GET['table'])) {
                                         <td>$row[DateRDV]</td>
                                         <td>$row[StatutRDV]</td>
                                         <td class='action'>
-                                            <i class='bx bx-edit btn_modifier_rdv' onclick='document.location.href=\"gestion.php?table=RDV&icon_modifier_RDV=true&id=$id\"'></i>
-                                            <lord-icon src='https://cdn.lordicon.com/qjwkduhc.json' trigger='hover' colors='primary:#e83a30,secondary:#e83a30,tertiary:#ffffff' state='hover-empty' style='width:35px;height:35px' onClick=\"confirmSupp('RDV','supprimer',$id)\"></lord-icon>
+                                            <i class='bx bx-edit btn_modifier_rdv' onclick='document.location.href=\"gestion.php?table=RDV&modifier_RDV=true&IdRDV=$IdRDV\"'></i>
+                                            <lord-icon src='https://cdn.lordicon.com/qjwkduhc.json' trigger='hover' colors='primary:#e83a30,secondary:#e83a30,tertiary:#ffffff' state='hover-empty' style='width:35px;height:35px' onClick=\"confirmSupp('RDV','supprimer',$IdRDV)\"></lord-icon>
                                         </td>
                                     </tr>";
                                 }

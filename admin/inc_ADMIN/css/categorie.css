@@ -33,7 +33,7 @@
     height: 40px;
 }
 
-.home main .containner_main {
+.home main .containner_main_categorie {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -41,14 +41,15 @@
     margin-bottom: 20px;
 }
 
-.home main .containner_main .ajouter_category {
+.home main .containner_main_categorie .ajouter_category {
     width: 100%;
     height: 35px;
     display: flex;
     justify-content: flex-end;
 }
 
-.home main .containner_main .ajouter_category input {
+
+/* .home main .containner_main_categorie .ajouter_category input {
     height: 100%;
     width: 120px;
     color: #ffffff;
@@ -56,10 +57,10 @@
     border: none;
     outline: none;
     font-size: 14px;
-    border-radius: 6px;
-}
+    border-radius: 5px;
+} */
 
-.home main .containner_main .category {
+.home main .containner_main_categorie .category {
     width: 100%;
     height: 60px;
     background-color: #ffffff;
@@ -68,7 +69,7 @@
     cursor: auto;
 }
 
-.home main .containner_main .category:hover {
+.home main .containner_main_categorie .category:hover {
     border-left: 8px solid red;
 }
 
@@ -84,11 +85,27 @@
 
 .home main .category .name_category input.nom_categorie {
     padding-left: 10px;
-    border: none;
+    border: 1px solid white;
     outline: none;
     font-weight: 700;
     font-size: 16px;
-    width: 100%;
+    width: 80%;
+    height: 60%;
+}
+
+.home main .category .name_category .icon_valider_modif_categorie {
+    font-size: 25px;
+    color: #08a775;
+    cursor: pointer;
+}
+
+.home main .category .name_category .cacher_icon {
+    display: none;
+}
+
+.home main .category .name_category button.valider_modif_categorie {
+    border: none;
+    background-color: inherit;
 }
 
 .home main .category .nbr_produit {
@@ -132,15 +149,6 @@
     cursor: pointer;
 }
 
-
-/* .home main .category .action_category input.btn_modifier_categorie{
-   visibility: hidden;
-} */
-
-.home main .category .action_category input .cacher {
-    visibility: hidden;
-}
-
 .cacher {
     visibility: hidden;
 }
@@ -151,11 +159,12 @@
     z-index: 0;
 }
 
-.home main .category .action_category input.btn_supprimer_categorie {
-    background-color: red;
+i.bx.bx-edit.btn_modifier_categorie {
+    font-size: 25px;
+    color: #0833a7;
 }
 
-.home main .containner_main .ajouter_category button {
+.home main .containner_main_categorie .ajouter_category button {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -166,22 +175,6 @@
     border: none;
     outline: none;
     font-size: 14px;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 0 8px 0 8px;
-}
-
-.home main .category .action_category .modifier_category {
-    position: absolute;
-    color: rgb(0, 50, 186);
-    right: -2px;
-    bottom: -3px;
-    font-size: 25px;
-}
-
-.home main .category .action_category .supprimer_category {
-    position: absolute;
-    color: red;
-    right: -2px;
-    top: -2px;
-    font-size: 25px;
 }

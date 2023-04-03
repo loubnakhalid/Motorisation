@@ -62,7 +62,7 @@ function confirmSupp(table, action, id, id2) {
         });
 }
 
-function confirmModifAjt(formModif, mssg) {
+function confirmModifAjt(formModif, mssg, action) {
     swal({
             title: " ",
             text: mssg,
@@ -70,7 +70,7 @@ function confirmModifAjt(formModif, mssg) {
 
             buttons: [
                 "Annuler",
-                "Modifier",
+                action,
             ],
         })
         .then((willDelete) => {
