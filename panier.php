@@ -1,7 +1,7 @@
 <?php include('./inc/haut.inc.php'); ?>
 <?php
 if(! Client() && !Admin()){
-    echo "<script>document.location.href='identification.php?action=connexion&panVide=true';</script>";
+    echo "<script>document.location.href='identification.php?action=connexion';</script>";
 }
 ?>
 <section id="panier" class="pagePanier"> 

@@ -1,5 +1,9 @@
 <?php
-include('./inc_ADMIN/menu.inc.php'); ?>
+include('./inc_ADMIN/menu.inc.php'); 
+if(! Admin()){
+    header("location:../index.php");
+}
+?>
 <?php
 if(isset($_GET['modifier_produit']) && isset($_GET['IdPr'])){
     $IdPr=$_GET['IdPr'];
@@ -111,7 +115,7 @@ if(isset($_GET['modifier_produit']) && isset($_GET['IdPr'])){
     }
 
 }
-if(isset($_GET['ajouter_produit'])){
+elseif(isset($_GET['ajouter_produit'])){
     echo "
     <div class='body'>
         <div class='div_form_modification_produit'>
@@ -193,14 +197,14 @@ if(isset($_GET['ajouter_produit'])){
     </div>
     ";
 }
-if(isset($_GET['modifier_commande']) && isset($_GET['IdCmd'])){
+elseif(isset($_GET['modifier_commande']) && isset($_GET['IdCmd'])){
     $IdCmd=$_GET['IdCmd'];
     $rslt=mysqli_query($mysqli,"select * from commande natural join membre where IdCmd=$IdCmd");
     $row=mysqli_fetch_assoc($rslt);
     echo "
     <div class='body_cmd'>
         <div class='div_form_modification_cmd'>
-            <i class='bx bxs-x-square icon_x_exit' onclick='history.back()'></i>
+            <i class='bx bxs-x-square icon_x_exit' onclick=\"document.location.href='gestion.php?table=commande'\"></i>
             <form action='controller.php?table=commande&action=modifier' method='post' id='modifCMD' enctype='multipart/form-data' >
                 <div class='case_text'>
                     <label for=''>N° commande</label>
@@ -306,11 +310,11 @@ if(isset($_GET['modifier_commande']) && isset($_GET['IdCmd'])){
     </div>
     ";
 }
-if(isset($_GET['ajouter_commande'])){
+elseif(isset($_GET['ajouter_commande'])){
     echo "
     <div class='body_cmd'>
         <div class='div_form_modification_cmd'>
-            <i class='bx bxs-x-square icon_x_exit' onclick='history.back()'></i>
+            <i class='bx bxs-x-square icon_x_exit' onclick=\"document.location.href='gestion.php?table=commande'\"></i>
             <form id='ajtCmd' action='controller.php?table=commande&action=ajouter' method='post' enctype='multipart/form-data'>
                 <div class='case_text'>
                     <label for=''>N° commande</label>
@@ -393,13 +397,13 @@ if(isset($_GET['ajouter_commande'])){
     </div>
     ";
 }
-if(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
+elseif(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
     $IdCmd=$_GET['IdCmd'];
     if(isset($_GET['btn_détails_commande']) ){
         echo "
         <div class='body_display_commande'>
             <div class='div_details_display_commande'>
-                <i class='bx bxs-x-square icon_x_exit' onclick='history.back();' style='right: 0'></i>
+                <i class='bx bxs-x-square icon_x_exit' onclick=\"document.location.href='gestion.php?table=commande'\" style='right: 0'></i>
                 <table cellspacing='0 '>
                     <thead>
                         <tr>
@@ -445,7 +449,7 @@ if(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
         echo "
         <div class='body_display_commande'>
             <div class='ajouter_cmd_details_cmd'>
-            <i class='bx bxs-x-square icon_x_exit' onclick='history.back();'  style='right: 0'></i>
+            <i class='bx bxs-x-square icon_x_exit' onclick=\"document.location.href='gestion.php?table=commande&btn_détails_commande=true'\"  style='right: 0'></i>
                 <form id='ajtCmdDt' action='controller.php?table=détails_commande&action=ajouterCmd' method='post'>
                     <table cellspacing='0 '>
                         <thead>
@@ -486,7 +490,7 @@ if(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
         echo "
         <div class='body_display_commande'>
             <div class='ajouter_prd_details_cmd'>
-                <i class='bx bxs-x-square icon_x_exit' onclick='history.back();'  style='right: 0'></i>
+                <i class='bx bxs-x-square icon_x_exit' onclick=\"document.location.href='gestion.php?table=commande&btn_détails_commande=true'\"  style='right: 0'></i>
                 <form id='ajtPrdtDt' action='controller.php?table=détails_commande&action=ajouter' method='post'>
                     <table cellspacing='0 '>
                         <thead>
@@ -522,7 +526,7 @@ if(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
         ";
     }
 }
-if(isset($_GET['ficheClient']) && isset($_GET['id'])){
+elseif(isset($_GET['ficheClient']) && isset($_GET['id'])){
     $id=$_GET['id'];
     $rslt=mysqli_query($mysqli,"select * from membre where IdMb=$id");
     $row=mysqli_fetch_assoc($rslt);
@@ -573,7 +577,7 @@ if(isset($_GET['ficheClient']) && isset($_GET['id'])){
     </div>
     </div>";
 }
-if(isset($_GET['modifier_RDV']) && isset($_GET['IdRDV'])){
+elseif(isset($_GET['modifier_RDV']) && isset($_GET['IdRDV'])){
     $IdRDV=$_GET['IdRDV'];
     $rslt=mysqli_query($mysqli,"select * from rdv where IdRdv= $IdRDV");
     $row=mysqli_fetch_assoc($rslt);
@@ -640,7 +644,7 @@ if(isset($_GET['modifier_RDV']) && isset($_GET['IdRDV'])){
     </div>
     ";
 }
-if(isset($_GET['ajouter_RDV'])){
+elseif(isset($_GET['ajouter_RDV'])){
     echo "
     <div class='body_display_modif_rdv'>
         <div class='div_modif_rdv'>  
@@ -696,7 +700,7 @@ if(isset($_GET['ajouter_RDV'])){
     </div>
     ";
 }
-if(isset($_GET['modifier_promos']) && isset($_GET['id'])){
+elseif(isset($_GET['modifier_promos']) && isset($_GET['id'])){
     $id=$_GET['id'];
     $rslt=mysqli_query($mysqli,"select * from promos where IdPromo=$id");
     $row=mysqli_fetch_assoc($rslt);
@@ -759,7 +763,7 @@ if(isset($_GET['modifier_promos']) && isset($_GET['id'])){
     </div>
     </div>";
 }
-if(isset($_GET['ajouter_promos'])){
+elseif(isset($_GET['ajouter_promos'])){
     echo" 
     <div class='body_display_modif_promo'>
         <div class='div_modif_promo '>
@@ -809,7 +813,7 @@ if(isset($_GET['ajouter_promos'])){
     </div>
     ";
 }
-if(isset($_GET['détails_promos']) && isset($_GET['id'])){
+elseif(isset($_GET['détails_promos']) && isset($_GET['id'])){
     $id=$_GET['id'];
     echo "  <div class='body_display_modif_promo '><div class='div_details_promo'>
     <i class='bx bxs-x-square icon_x_exit' onclick='history.back();'  style='right: 0'></i>
@@ -844,7 +848,7 @@ if(isset($_GET['détails_promos']) && isset($_GET['id'])){
         </div>
         </div>";
 }
-if(isset($_GET['ajouter_prmprdt']) && isset($_GET['id'])){
+elseif(isset($_GET['ajouter_prmprdt']) && isset($_GET['id'])){
     $id=$_GET['id'];
     echo "
     <div class='body_display_modif_promo '>
@@ -879,6 +883,9 @@ if(isset($_GET['ajouter_prmprdt']) && isset($_GET['id'])){
             </form>
         </div>
     </div>";
+}
+else{
+    echo "";
 }
 ?>
 <?php
@@ -1288,16 +1295,23 @@ if (isset($_GET['table'])) {
                                     $rslt = mysqli_query($mysqli, "select * from rdv  where IdRDV like '%$mot%' order by IdRDV");
                                 }
                                 else{
-                                    $rslt=mysqli_query($mysqli,"select * from rdv  order by IdRDV");
+                                    $rslt=mysqli_query($mysqli,"SELECT r.*, 
+                                    CASE WHEN r.IdMb IS NOT NULL THEN m.NomMb ELSE p.NomPart END AS nom,
+                                    CASE WHEN r.IdMb IS NOT NULL THEN m.PrénomMb ELSE p.PrénomPart END AS prenom,
+                                    CASE WHEN r.IdMb IS NOT NULL THEN m.NumTélé ELSE p.NumTélé END AS télé,
+                                    CASE WHEN r.IdMb IS NOT NULL THEN m.AdresseMb ELSE p.AdressePart END AS adresse
+                                    FROM rdv r
+                                    LEFT JOIN membre m ON r.IdMb = m.IdMb
+                                    LEFT JOIN participant p ON r.IdPart = p.IdPart;");
                                 }
                                 while($row=mysqli_fetch_assoc($rslt)){
                                     $IdRDV=$row['IdRDV'];
                                     echo "
                                     <tr>
                                         <td>$row[IdRDV]</td>
-                                        <td>$row[NomMb] $row[PrénomMb]</td>
-                                        <td>$row[AdresseMb]</td>
-                                        <td>$row[NumTélé]</td>
+                                        <td>$row[nom] $row[prenom]</td>
+                                        <td>$row[adresse]</td>
+                                        <td>$row[télé]</td>
                                         <td>$row[TypePrjt]</td>
                                         <td>$row[DateRDV]</td>
                                         <td>$row[StatutRDV]</td>
@@ -1428,6 +1442,9 @@ if (isset($_GET['table'])) {
                         ";
         ;break;
     }
+}
+else{
+    header("location:accueil.php");
 }
 if(isset($_GET['success'])){
     echo "<script>success('$_GET[success]','$_GET[table]');</script>";

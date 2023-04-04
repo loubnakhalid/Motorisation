@@ -23,7 +23,7 @@ if(isset($_POST['con'])){
                 }
             }
             if(Admin()){
-                header("location:./admin/index.php");
+                header("location:./admin/accueil.php");
             }
             elseif(Client()){
                 header("location:index.php");
@@ -218,18 +218,32 @@ if(isset($_GET['envEml'])){
 if(isset($_POST['envoiRDV'])){
     $DateRDV=Date("20y-m-d");
     $TypePrjt=$_POST['TypePrjt'];
-    $NomMb=$_POST['NomMb'];
-    $PrénomMb=$_POST['PrénomMb'];
-    $AdresseMb=$_POST['AdresseMb'];
+    $Nom=$_POST['NomMb'];
+    $Prénom=$_POST['PrénomMb'];
+    $Adresse=$_POST['AdresseMb'];
     $NumTélé=$_POST['NumTélé'];
-    try{
-        if($rslt2=mysqli_query($mysqli,"insert into rdv (TypePrjt,NomMb,PrénomMb,AdresseMb,NumTélé,DateRdv,StatutRdv) values ('$TypePrjt','$NomMb','$PrénomMb','$AdresseMb','$NumTélé','$DateRDV','Non traité')")){
-            header("location:$lienPr?success=Votre demande a été envoyée avec succès");
+    //try{
+        if(isset($_SESSION['membre']['IdMb'])){
+            $IdMb=$_SESSION['membre']['IdMb'];
+            if($rslt=mysqli_query($mysqli,"update membre set NomMb='$Nom',PrénomMb='$Prénom',AdresseMb='$Adresse',NumTélé='$NumTélé' where IdMb=$IdMb")){
+                if($rslt2=mysqli_query($mysqli,"insert into RDV (IdMb,IdPart,DateRDV,TypePrjt,StatutRDV) values ($IdMb,NULL,'$DateRDV','$TypePrjt','Non traité')")){
+                    header("location:$lienPr?success=Votre demande a été envoyée avec succès");
+                }
+            }
         }
-    }
-    catch(Exception | Error $e){
+        else{
+            if($rslt=mysqli_query($mysqli,"insert into participant (NomPart,PrénomPart,AdressePart,NumTélé) values ('$Nom','$Prénom','$Adresse','$NumTélé')")){
+                $IdPart=$mysqli->insert_id;
+                if($rslt2=mysqli_query($mysqli,"insert into rdv (IdMb,IdPart,DateRDV,TypePrjt,StatutRDV) values (NULL,$IdPart,'$DateRDV','$TypePrjt','Non traité')")){
+                    header("location:$lienPr?success=Votre demande a été envoyée avec succès");
+                }
+            }
+            
+        }
+    //}
+    /*catch(Exception | Error $e){
         header("location:$lienPr?erreur=Erreur à la demande de Rendez-vous ! Veuillez réssayer plus tard ou cantactez-nous et merci .");
-    }
+    }*/
 }
 if(isset($_POST['ajoutPan'])){
     if(! Client() && ! Admin()){

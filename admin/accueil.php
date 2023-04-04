@@ -7,8 +7,6 @@ if(! Admin()){
 require_once '../vendor/autoload.php';
 echo "<section class='home'>";
 try{
-$analytics = initializeAnalytics(); // Initialisera l'API
-$profile = getFirstProfileId($analytics); // Récupère le profil Google Analytics
 // Fonction d'initialisation et d'authentification
 function initializeAnalytics(){
 	// Précise où trouver la clé du compte de service
@@ -22,6 +20,7 @@ function initializeAnalytics(){
 	$analytics = new Google_Service_Analytics($client);
 	return $analytics;
 }
+$analytics = initializeAnalytics(); // Initialisera l'API
 // Récupère le profil Google Analytics
 function getFirstProfileId($analytics) {
   // Récupère la liste des comptes
@@ -57,6 +56,8 @@ function getFirstProfileId($analytics) {
     throw new Exception('No accounts found for this user.');
   }
 }
+$profile = getFirstProfileId($analytics); // Récupère le profil Google Analytics
+
 function getResults($analytics, $profileId, $metric) {
   return $analytics->data_ga->get(
  'ga:' . $profileId, // Précise le profil Google Analytics à utiliser
@@ -117,7 +118,13 @@ $resultsesision = getResults($analytics, $profile, 'sessions');
 $resultsnewsession = getResults($analytics, $profile, 'percentNewSessions');
 $result1=(printResults($resultsesision)*printResults($resultsnewsession))/100;
 $result2=printResults($resultsesision)-$result1;
-echo"<script type='text/javascript'>
+}
+catch(Exception $e){
+	echo "Veuillez vérifier votre connexion internet ou contactez l'équipe de développement ! ";
+	exit;
+}
+?>
+<script type='text/javascript'>
 	google.charts.load('current', {'packages':['corechart']});
 	google.charts.setOnLoadCallback(drawChart);
   google.charts.setOnLoadCallback(drawPieChart);
@@ -203,14 +210,4 @@ echo"<script type='text/javascript'>
 <div id='chart'></div>
 <div id='pieChart'></div>
 </div>
-";
-}
-catch(Exception $e){
-	echo "<div>Veuillez vérifier votre connexion internet ou contactez l'équipe de développement !</div>";
-}
-catch(Error $e){
-	echo "<div>Veuillez vérifier votre connexion internet ou contactez l'équipe de développement !</div>";
-}
-
-?>
 <?php include('./inc_ADMIN/footer.html'); ?>

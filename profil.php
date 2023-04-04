@@ -1,5 +1,8 @@
 <?php
     include("inc/haut.inc.php");
+    if(!Client() && !Admin()){
+        echo "<script>document.location.href='identification.php?action=connexion';</script>";
+    }
     $id=$_SESSION['membre']['IdMb'];
     $rslt=mysqli_query($mysqli,"select * from  membre where IdMb=$id");
     $row=mysqli_fetch_assoc($rslt);

@@ -22,6 +22,9 @@ include('./inc/init.inc.php');
         <div class='logo'>
             <a href='index.php'><img src='inc/img/logo3.png' alt='' class='logo3'></a>
         </div>
+        <div class='logo'>
+            <button onclick='ouvrirRDV()'>RDV</button>
+        </div>
         <div class='recherche'>
             <div class='div_input'>
                 <form action='catégorie.php' method='get' name='form_recherche' class='recherche_form'>
@@ -91,11 +94,28 @@ include('./inc/init.inc.php');
         </div>
     </header>
     <main>
-        <form id='RDV' action="controller.php" method="post" class='Rdv' onsubmit='return ValidationRdv()' style="display:none;">
-            <div class='Formulaire '>
+        <?php
+        if(isset($_SESSION['membre']['IdMb'])){
+            $rqt='SELECT * FROM membre WHERE IdMb='.$_SESSION['membre']['IdMb'];
+            $rslt=mysqli_execute_query($mysqli,$rqt);
+            $row=mysqli_fetch_assoc($rslt);
+            $Nom=$row['NomMb'];
+            $Prénom=$row['PrénomMb'];
+            $NumTélé=$row['NumTélé'];
+            $Adresse=$row['AdresseMb'];
+        }
+        else{
+            $Nom="";
+            $Prénom="";
+            $NumTélé="";
+            $Adresse="";
+        }
+        ?>
+        <form id='RDV' action='controller.php' method='post' class='Rdv' onsubmit='return ValidationRdv()' style='display:none;'>
+            <div class='Formulaire'>
                 <div class='Form-header'>
                     <div class='Form-title'>Demander RDV</div>
-                    <button class='btn-ferm' onclick='history.back();'>&times;</button>
+                    <button class='btn-ferm' onclick='document.getElementById("RDV").style.display="none";'>&times;</button>
                 </div>
                 <div class='Form-content'>
                     <div class='PrgDate'>
@@ -110,7 +130,7 @@ include('./inc/init.inc.php');
                             <option value='Motorisation porte garage'>Motorisation porte de garage</option>
                             <option value='Motorisation volet roulant'>Motorisation de volet roulant</option>
                             <option value='Télécommandes'>Télécommandes</option>
-                            <option value='Interphones & Visiophones'>Interphone&Visiophone</option>
+                            <option value='Interphones & Visiophones'>Interphones & Visiophones</option>
                             <option value='Pièces détachées & Accessoires'>Pièces détachées & Accessoires</option>
                             <option value='Alarmes'>Alarmes</option>
                         </select>
@@ -120,17 +140,17 @@ include('./inc/init.inc.php');
                     </div>
                     <div class='Rjd'>
                         <div class='RjdNP'>
-                            <input type='text' name='NomMb' value='' placeholder='Nom' id='InputRdvNm' class='RjdN'>
-                            <input type='text' name='PrénomMb' value='' placeholder='Prénom' id='InputRdvPr' class='RjdP'><br>
+                            <input type='text' name='NomMb' value='<?=$Nom?>' placeholder='Nom' id='InputRdvNm' class='RjdN'>
+                            <input type='text' name='PrénomMb' value='<?=$Prénom?>' placeholder='Prénom' id='InputRdvPr' class='RjdP'><br>
                             <span class='ErRdvNom'>*Ce champs est obligatoire .</span>
                             <span class='ErRdvPr'>*Ce champs est obligatoire .</span>
                         </div>
                         <div class='RjdE'>
-                            <input type='text' name='AdresseMb' value='' placeholder='Adresse' id='InputRdvEml' class='RjdEm'><br>
+                            <input type='text' name='AdresseMb' value='<?=$Adresse?>' placeholder='Adresse' id='InputRdvEml' class='RjdEm'><br>
                             <span class='ErRdvEmail'>*Ce champs est obligatoire .</span>
                         </div>
                         <div class='RjdT'>
-                            <input type='tel' name='NumTélé' value='' placeholder='Téléphone' id='InputRdvtel' class='RjdTel'><br>
+                            <input type='tel' name='NumTélé' value='<?=$NumTélé?>' placeholder='Téléphone' id='InputRdvtel' class='RjdTel'><br>
                             <span class='ErRdvtel'>*Ce champs est obligatoire .</span>
                         </div>
                     </div>

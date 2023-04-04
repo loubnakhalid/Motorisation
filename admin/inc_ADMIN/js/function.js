@@ -88,7 +88,10 @@ function success(success, table) {
             button: 'Ok',
         })
         .then((value) => {
-            document.location.href = "gestion.php?table=" + table;
+            let params = new URLSearchParams(window.location.search);
+            params.delete("success");
+            let newUrl = "gestion.php?" + (params.toString());
+            location.replace(newUrl);
         });
 }
 
@@ -100,7 +103,10 @@ function successDétails(success) {
             button: 'Ok',
         })
         .then((value) => {
-            history.back();
+            let params = new URLSearchParams(window.location.search);
+            params.delete("successDétails");
+            let newUrl = "gestion.php?" + (params.toString());
+            location.replace(newUrl);
         });
 }
 
