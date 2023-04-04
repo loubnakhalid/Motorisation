@@ -1,0 +1,20 @@
+.Garantimg1 {
+    width: 850px;
+    height: 210px;
+    position: relative;
+    left: 192px;
+}
+
+.Stitle1 {
+    font-size: 29px;
+    font-weight: 900;
+    color: #015EB9;
+    margin-top: 52px;
+}
+
+.GarantPara {
+    line-height: 27px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 13px;
+}
