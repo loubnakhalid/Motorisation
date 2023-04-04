@@ -21,10 +21,20 @@ function diminuerQt(pos) {
     document.location.href = 'controller.php?qtPan=true&pos=' + pos + '&nbre=' + inpt[pos].value;
 }
 
-function augmenterQt(pos) {
+function augmenterQt(pos, stock) {
     let inpt = document.getElementsByClassName("btnQte");
-    if (inpt[pos].value >= 0) {
+    if (inpt[pos].value >= stock) {
+        inpt[pos].value = stock;
+        swal({
+            title: 'Le stock de ce produit s\'est épuisé!',
+            text: 'Il en reste que ' + stock + ' articles ',
+            icon: 'warning',
+            button: 'Ok',
+        });
+        return;
+    } else if (inpt[pos].value >= 0) {
         inpt[pos].value++;
+        document.location.href = 'controller.php?qtPan=true&pos=' + pos + '&nbre=' + inpt[pos].value;
     }
-    document.location.href = 'controller.php?qtPan=true&pos=' + pos + '&nbre=' + inpt[pos].value;
+
 }

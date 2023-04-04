@@ -80,7 +80,7 @@
                 <div class="input-perso">
                     <label>Nom :<input type="text" name="NomMb" value="<?=$row['NomMb'];?>" class="nom-input"></label>
                     <span class="prénom"><label>Prénom :<input type="text" name="PrénomMb" value="<?=$row['PrénomMb'];?>"  class="prénom-input"></label><br></span>
-                    <span class="tele"><label>Email :<input type="tel" name="EmailMb" value="<?=$row['EmailMb'];?>"  class="tele-input"></label></span>
+                    <span class="tele"><label>Email :<input type="email" name="EmailMb" value="<?=$row['EmailMb'];?>"  class="tele-input"></label></span>
                     <span class="tele"><label> Téléphone :<input type="tel" name="NumTélé" value="<?=$row['NumTélé'];?>"  class="tele-input"></label></span>
                     <div class="adresse"><label>Adresse :<input type="text" name="AdresseMb" value="<?=$row['AdresseMb'];?>"  class="adresse-input"></label></div>
                 </div>
@@ -91,7 +91,7 @@
                     <label for="paypal">Paiement avec Paypal </label><br>
                     <!-- Set up a container element for the button -->
                     <div id="paypal-button-container" class="btn-Paypal"></div>
-                    <input type="radio" name="modePaiement" value="Cash" id="espece" class="paiement-input" onclick="MasquePaypal()">
+                    <input type="radio" name="modePaiement" value="Espèces" id="espece" class="paiement-input" onclick="MasquePaypal()">
                     <label for="espece">Paiement cash à la livraison </label></label>
                 </div>
             </div>

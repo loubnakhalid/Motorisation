@@ -1,17 +1,5 @@
-main {
-    width: 100%;
-    overflow: hidden;
-    grid-area: main;
-    display: flex;
-    flex-direction: column;
-    background-color: #f5f6f7;
-    scroll-behavior: smooth;
-    font-family: 'Kumbh Sans', sans-serif;
-    padding: 50px;
-}
-
 section.fiche_produit {
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: row;
     background-color: #ffffff;
@@ -20,6 +8,10 @@ section.fiche_produit {
     box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
     overflow: hidden;
     padding: 50px;
+    margin: 50px 0;
+    margin: auto;
+    margin-bottom: 70px;
+    margin-top: 20px;
 }
 
 .fiche_produit_left {

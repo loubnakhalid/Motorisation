@@ -2,6 +2,12 @@ main {
     width: 100%;
     overflow: hidden;
     grid-area: main;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f6f7;
+    scroll-behavior: smooth;
+    font-family: 'Kumbh Sans', sans-serif;
+    gap: 41px;
 }
 
 section.publicite {
@@ -78,12 +84,13 @@ section.publicite {
     position: absolute;
     bottom: 6px;
     display: flex;
-    justify-content: center;
-    z-index: 3;
+    justify-content: flex-end;
+    z-index: 0;
+    padding-right: 20px;
 }
 
 .publicite_content .btn_radio .btn {
-    border: 3px solid #00f2ff;
+    border: 3px solid rgb(220, 220, 220);
     padding: 5px;
     border-radius: 50%;
     cursor: pointer;
@@ -91,7 +98,7 @@ section.publicite {
 }
 
 .publicite_content .btn_radio .btn:hover {
-    background-color: #00f2ff;
+    background-color: rgb(220, 220, 220);
 }
 
 .publicite_content .btn_radio .btn:not(:last-of-type) {
@@ -106,24 +113,26 @@ section.publicite {
     margin-left: -20%;
 }
 
-#r3:checked~.first {
+
+/* #r3:checked~.first {
     margin-left: -40%;
 }
 
 #r4:checked~.first {
     margin-left: -60%;
-}
+} */
 
 .publicite_content .slider .btn_radio_back {
     width: 100%;
     position: absolute;
     bottom: 6px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-right: 20px;
 }
 
 .publicite_content .slider .btn_radio_back div {
-    border: 3px solid #00f2ff;
+    border: 3px solid rgb(220, 220, 220);
     padding: 5px;
     border-radius: 50%;
     cursor: pointer;
@@ -135,25 +144,27 @@ section.publicite {
 }
 
 #r1:checked~.btn_radio_back .btn1 {
-    background-color: #00f2ff;
+    background-color: rgb(220, 220, 220);
 }
 
 #r2:checked~.btn_radio_back .btn2 {
-    background-color: #00f2ff;
+    background-color: rgb(220, 220, 220);
 }
 
-#r3:checked~.btn_radio_back .btn3 {
-    background-color: #00f2ff;
+
+/* #r3:checked~.btn_radio_back .btn3 {
+    background-color: rgb(220, 220, 220);
 }
 
 #r4:checked~.btn_radio_back .btn4 {
-    background-color: #00f2ff;
-}
+    background-color: rgb(220, 220, 220);
+} */
 
 section.categorie {
     width: 100%;
-    padding: 10px 24px 10px 24px;
+    padding: 10px 0 10px 0;
     overflow: hidden;
+    padding: 0 40px;
 }
 
 section.categorie .entete_categorie {
@@ -163,6 +174,8 @@ section.categorie .entete_categorie {
 
 section.categorie .titre_categorie {
     width: 93.4%;
+    /* height: 48px; */
+    padding: to;
 }
 
 section.categorie .titre_categorie h2 {
@@ -179,7 +192,8 @@ section.categorie .flech_categorie {
     width: 6.6%;
     display: flex;
     justify-content: space-around;
-    align-items: flex-start;
+    align-items: center;
+    /* padding-top: 4px; */
 }
 
 section.categorie .flech_categorie button {
@@ -201,7 +215,7 @@ section.categorie .flech_categorie button i:hover {
 }
 
 section.categorie .tout_produit_categorie {
-    margin-top: 30px;
+    margin-top: 10px;
     display: flex;
     gap: 29px;
     overflow-x: auto;
@@ -218,11 +232,11 @@ section.categorie .tout_produit_categorie::-webkit-scrollbar {
 
 section.categorie .tout_produit_categorie .produit {
     text-decoration: none;
-    min-width: 220px;
-    max-width: 220px;
+    min-width: 202px;
+    max-width: 202px;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .08);
     transition: box-shadow .3s ease;
-    height: 286px;
+    height: 274px;
     background-color: #ffffff;
     padding: 16px 24px 16px 24px;
     display: flex;
@@ -232,7 +246,7 @@ section.categorie .tout_produit_categorie .produit {
     margin-bottom: 10px;
     margin-top: 10px;
     cursor: pointer;
-    gap: 5px;
+    gap: 2px;
     font-family: 'Kumbh Sans', sans-serif;
 }
 
@@ -246,7 +260,7 @@ section.categorie .tout_produit_categorie .produit:hover {
 
 section.categorie .tout_produit_categorie .produit .photo_produit {
     background-color: #ffffff;
-    height: 550px;
+    height: 568px;
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -281,7 +295,7 @@ section.categorie .tout_produit_categorie .produit .nom_prod {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-    font-weight: 700;
+    font-weight: 500;
     background: #ffffff;
     font-family: 'Kumbh Sans', sans-serif;
 }
@@ -354,4 +368,70 @@ section.information_pourquoi {
 
 .information_pourquoi .photo_pourquoi img {
     width: 100%;
+}
+
+.mes_categorie {
+    margin-top: 40px;
+    display: flex;
+    background-color: #e9efff;
+    flex-direction: column;
+    height: 350px;
+    width: 100%;
+    padding: 20px 40px;
+}
+
+.entete h2 {
+    font-weight: 900;
+    line-height: 40px;
+}
+
+.entete {
+    padding-bottom: 30px;
+}
+
+.div_categorie {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 27px;
+}
+
+a.mon_categorie {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    padding: 0 8px 0;
+    min-width: 216px;
+    background-color: #fff;
+    border: 1px solid #ecedf0;
+    border-radius: 8px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, .08);
+    text-decoration: none;
+    transition: box-shadow .3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+a.mon_categorie:hover {
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .08);
+}
+
+a.mon_categorie p {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    color: #0c193a;
+}
+
+a.mon_categorie .photo_categorie {
+    width: 100%;
+    height: 150px;
+}
+
+a.mon_categorie .photo_categorie img {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
 }

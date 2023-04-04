@@ -15,6 +15,7 @@ include('./inc/init.inc.php');
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v6.3.0/css/all.css'>
     <link rel='stylesheet' href='inc/css/style.css'>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="./inc/js/functions.js"></script>
 </head>
 <body>
     <header id='h'>
@@ -23,9 +24,9 @@ include('./inc/init.inc.php');
         </div>
         <div class='recherche'>
             <div class='div_input'>
-                <form action='' name='form_recherche' class='recherche_form'>
-                    <input type='text' name='chercher' id='cherche_input' value='' placeholder='Article, produit, marque...' onclick='click_cherche_input()'>
-                    <button type='submit' class='btn_recherche'><i class='fa-solid fa-magnifying-glass' aria-hidden='true'></i></button>
+                <form action='catégorie.php' method='get' name='form_recherche' class='recherche_form'>
+                    <input type='text' name='mot' id='cherche_input' value='' placeholder='Article, produit, marque...'>
+                    <button type='submit' name='rechercher' class='btn_recherche'><i class='fa-solid fa-magnifying-glass' aria-hidden='true'></i></button>
                 </form>
             </div>
         </div>
@@ -77,7 +78,7 @@ include('./inc/init.inc.php');
                         $rqt='SELECT * FROM catégorie';
                         $rslt=mysqli_execute_query($mysqli,$rqt);
                         while($row=mysqli_fetch_assoc($rslt)){
-                            echo "<li><a href='produit.php?id_catégorie=".$row['IdCt']."'>".$row['NomCt']."</a></li>";
+                            echo "<li><a href='catégorie.php?IdCt=".$row['IdCt']."'>".$row['NomCt']."</a></li>";
                         }
                     ?>
                 </ul>
@@ -90,53 +91,82 @@ include('./inc/init.inc.php');
         </div>
     </header>
     <main>
-    <form id='RDV' class='Rdv' onsubmit='return ValidationRdv()' style="display:none;">
-    <div class='Formulaire '>
-        <div class='Form-header'>
-            <div class='Form-title'>Demander RDV</div>
-            <button class='btn-ferm' onclick='history.back();'>&times;</button>
-        </div>
-        <div class='Form-content'>
-            <div class='PrgDate'>
-                Un conseiller vous rappelle dans les plus brefs délais pour convenir une date
-            </div>
-            <div class='Title1'>
-                Type de projet :
-            </div>
-            <div class='TypePrj'>
-                <select class='TypePrjSe'>
-                   <option value='' disabled selected hidden>Votre type de projet</option>
-                    <option value='1'>Motorisation porte de garage</option>
-                    <option value='2'>Motorisation de volet roulant</option>
-                    <option value='3'>Télécommandes</option>
-                    <option value='4'>Interphone&Visiophone</option>
-                    <option value='5'>Pièces détachées & Accessoires</option>
-                    <option value='6'>Alarmes</option>
-                   </select>
-            </div>
-            <div class='Title2'>
-                Pour vous joindre :
-            </div>
-            <div class='Rjd'>
-                <div class='RjdNP'>
-                    <input type='text' name='NomRdv' value='' placeholder='Nom' id='InputRdvNm' class='RjdN'>
-                    <input type='text' name='PrenomRdv' value='' placeholder='Prénom' id='InputRdvPr' class='RjdP'><br>
-                    <span class='ErRdvNom'>*Ce champs est obligatoire .</span>
-                    <span class='ErRdvPr'>*Ce champs est obligatoire .</span>
+        <form id='RDV' action="controller.php" method="post" class='Rdv' onsubmit='return ValidationRdv()' style="display:none;">
+            <div class='Formulaire '>
+                <div class='Form-header'>
+                    <div class='Form-title'>Demander RDV</div>
+                    <button class='btn-ferm' onclick='history.back();'>&times;</button>
                 </div>
-                <div class='RjdE'>
-                    <input type='email' name='EmailRdv' value='' placeholder='Email' id='InputRdvEml' class='RjdEm'><br>
-                    <span class='ErRdvEmail'>*Ce champs est obligatoire .</span>
-                </div>
-                <div class='RjdT'>
-                    <input type='tel' name='TeleRdv' value='' placeholder='Téléphone' id='InputRdvtel' class='RjdTel'><br>
-                    <span class='ErRdvtel'>*Ce champs est obligatoire .</span>
+                <div class='Form-content'>
+                    <div class='PrgDate'>
+                        Un conseiller vous rappelle dans les plus brefs délais pour convenir une date
+                    </div>
+                    <div class='Title1'>
+                        Type de projet :
+                    </div>
+                    <div class='TypePrj'>
+                        <select name="TypePrjt" class='TypePrjSe'>
+                        <option value='' disabled selected hidden>Votre type de projet</option>
+                            <option value='Motorisation porte garage'>Motorisation porte de garage</option>
+                            <option value='Motorisation volet roulant'>Motorisation de volet roulant</option>
+                            <option value='Télécommandes'>Télécommandes</option>
+                            <option value='Interphones & Visiophones'>Interphone&Visiophone</option>
+                            <option value='Pièces détachées & Accessoires'>Pièces détachées & Accessoires</option>
+                            <option value='Alarmes'>Alarmes</option>
+                        </select>
+                    </div>
+                    <div class='Title2'>
+                        Pour vous joindre :
+                    </div>
+                    <div class='Rjd'>
+                        <div class='RjdNP'>
+                            <input type='text' name='NomMb' value='' placeholder='Nom' id='InputRdvNm' class='RjdN'>
+                            <input type='text' name='PrénomMb' value='' placeholder='Prénom' id='InputRdvPr' class='RjdP'><br>
+                            <span class='ErRdvNom'>*Ce champs est obligatoire .</span>
+                            <span class='ErRdvPr'>*Ce champs est obligatoire .</span>
+                        </div>
+                        <div class='RjdE'>
+                            <input type='text' name='AdresseMb' value='' placeholder='Adresse' id='InputRdvEml' class='RjdEm'><br>
+                            <span class='ErRdvEmail'>*Ce champs est obligatoire .</span>
+                        </div>
+                        <div class='RjdT'>
+                            <input type='tel' name='NumTélé' value='' placeholder='Téléphone' id='InputRdvtel' class='RjdTel'><br>
+                            <span class='ErRdvtel'>*Ce champs est obligatoire .</span>
+                        </div>
+                    </div>
+                    <div class='RjdBt'>
+                        <input type='submit' name='envoiRDV' value='Envoyer votre demande' class='RjdButton'>
+                    </div>
                 </div>
             </div>
-            <div class='RjdBt'>
-                <input type='submit' name='Envoi' value='Envoyer votre demande' class='RjdButton'>
-            </div>
-        </div>
-    </div>
-    <div id='Sur'></div>
-</form>
+            <div id='Sur'></div>
+        </form>
+        <?php
+        if(isset($_GET['erreur'])){
+	    echo "
+            <script>
+            swal({
+		        title: '$_GET[erreur]',
+		        text: '',
+		        icon: 'warning',
+		        button: 'Ok',
+	        })
+	        .then((value) => {
+		        history.back();
+	        });
+            </script>";
+        }
+        if(isset($_GET['success'])){
+            echo "
+            <script>
+                swal({
+                    title: '$_GET[success]',
+                    text: '',
+                    icon: 'success',
+                    button: 'Ok',
+                })
+                .then((value) => {
+                    history.back();
+                });</script>";
+        }
+        ?>

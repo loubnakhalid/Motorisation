@@ -98,7 +98,7 @@ if(isset($_GET['modifier_produit']) && isset($_GET['IdPr'])){
                 <div class='form_bas'>
                     <div class='submit_form'>
                         <input type='reset' value='Effacer' class='btn_effacer_form_modifier_produit'>
-                        <input type='button' value='Modifier' class='btn_modifier_form_modifier_produit' onclick=\"confirmModifAjt('modifPrdt','Voulez-vous vraiament modifier le produit ?')\">
+                        <input type='button' value='Modifier' class='btn_modifier_form_modifier_produit' onclick=\"confirmModifAjt('modifPrdt','Voulez-vous vraiament modifier le produit ?','Modifier')\">
                     </div>
                 </div>
             </form>
@@ -185,7 +185,7 @@ if(isset($_GET['ajouter_produit'])){
                 <div class='form_bas'>
                     <div class='submit_form'>
                         <input type='reset' value='Effacer' class='btn_effacer_form_modifier_produit'>
-                        <input type='button' value='Ajouter' class='btn_modifier_form_modifier_produit' onclick=\"confirmModifAjt('ajtPrdt','Voulez-vous vraiment ajouter le produit ?')\">
+                        <input type='button' value='Ajouter' class='btn_modifier_form_modifier_produit' onclick=\"confirmModifAjt('ajtPrdt','Voulez-vous vraiment ajouter le produit ?','Ajouter')\">
                     </div>
                 </div>
             </div>
@@ -298,7 +298,7 @@ if(isset($_GET['modifier_commande']) && isset($_GET['IdCmd'])){
                 <div class='bas_form'>
                     <div class='submit_form_modification_cmd'>
                         <input type='reset' value='Effacer' class='btn_effacer_form_modifier_cmd'>
-                        <input type='button' value='Modifier' class='btn_modifier_form_modifier_cmd' onclick='confirmModifAjt(\"modifCMD\",\"Voulez-vous vraiment modifier la commande?\");'>
+                        <input type='button' value='Modifier' class='btn_modifier_form_modifier_cmd' onclick='confirmModifAjt(\"modifCMD\",\"Voulez-vous vraiment modifier la commande?\",\"Modifier\");'>
                     </div>
                 </div>
             </form>
@@ -311,7 +311,7 @@ if(isset($_GET['ajouter_commande'])){
     <div class='body_cmd'>
         <div class='div_form_modification_cmd'>
             <i class='bx bxs-x-square icon_x_exit' onclick='history.back()'></i>
-            <form action='controller.php?table=commande&action=ajouter' method='post' enctype='multipart/form-data'>
+            <form id='ajtCmd' action='controller.php?table=commande&action=ajouter' method='post' enctype='multipart/form-data'>
                 <div class='case_text'>
                     <label for=''>N° commande</label>
                     <div class='input_text'>
@@ -385,7 +385,7 @@ if(isset($_GET['ajouter_commande'])){
                 <div class='bas_form'>
                     <div class='submit_form_modification_cmd'>
                         <input type='reset' value='Effacer' class='btn_effacer_form_modifier_cmd'>
-                        <input type='submit' value='Ajouter' class='btn_modifier_form_modifier_cmd'>
+                        <input type='button' value='Ajouter' class='btn_modifier_form_modifier_cmd' onclick=\"confirmModifAjt('ajtCmd','Voulez-vous vraiment ajouter la commande?','Ajouter')\">
                     </div>
                 </div>
             </form>
@@ -446,7 +446,7 @@ if(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
         <div class='body_display_commande'>
             <div class='ajouter_cmd_details_cmd'>
             <i class='bx bxs-x-square icon_x_exit' onclick='history.back();'  style='right: 0'></i>
-                <form action='controller.php?table=détails_commande&action=ajouterCmd' method='post'>
+                <form id='ajtCmdDt' action='controller.php?table=détails_commande&action=ajouterCmd' method='post'>
                     <table cellspacing='0 '>
                         <thead>
                             <tr>
@@ -475,7 +475,7 @@ if(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
                         </tbody>
                     </table>
                     <div class='bas'>
-                        <button type='submit'>Ajouter</button>
+                        <button type='button' onclick=\"confirmModifAjt('ajtCmdDt','Voulez-vous vraiment ajouter la commande $IdCmdAjt à la commande $IdCmd?','Ajouter')\">Ajouter</button>
                     </div>
                 </form>
             </div>
@@ -487,7 +487,7 @@ if(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
         <div class='body_display_commande'>
             <div class='ajouter_prd_details_cmd'>
                 <i class='bx bxs-x-square icon_x_exit' onclick='history.back();'  style='right: 0'></i>
-                <form action='controller.php?table=détails_commande&action=ajouter' method='post'>
+                <form id='ajtPrdtDt' action='controller.php?table=détails_commande&action=ajouter' method='post'>
                     <table cellspacing='0 '>
                         <thead>
                             <tr>
@@ -514,7 +514,7 @@ if(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
                         </tbody>
                     </table>
                     <div class='bas'>
-                        <button type='submit'>Ajouter</button>
+                        <button type='button' onclick=\"confirmModifAjt('ajtPrdtDt','Voulez-vous vraiment ajouter les produits à la commande $IdCmd?','Ajouter')\">Ajouter</button>
                     </div>
                 </form>
             </div>
@@ -632,7 +632,7 @@ if(isset($_GET['modifier_RDV']) && isset($_GET['IdRDV'])){
                 <div class='form_bas'>
                     <div class='submit_form'>
                         <input type='reset' value='Effacer' class='btn_effacer_form_modifier_rdv'>
-                        <input type='button' value='Modifier' class='btn_modifier_form_modifier_rdv' onclick=\"confirmModifAjt('modifRDV','Voulez-vous vraiment modifier le RDV?','modifier')\">
+                        <input type='button' value='Modifier' class='btn_modifier_form_modifier_rdv' onclick=\"confirmModifAjt('modifRDV','Voulez-vous vraiment modifier le RDV?','Modifier')\">
                     </div>
                 </div>
             </form>
@@ -688,7 +688,7 @@ if(isset($_GET['ajouter_RDV'])){
                 <div class='form_bas'>
                     <div class='submit_form'>
                         <input type='reset' value='Effacer' class='btn_effacer_form_modifier_rdv'>
-                        <input type='button' value='Ajouter' class='btn_modifier_form_modifier_rdv' onclick=\"confirmModifAjt('ajtRDV','Voulez-vous vraiment ajouter le RDV?','ajouter')\">
+                        <input type='button' value='Ajouter' class='btn_modifier_form_modifier_rdv' onclick=\"confirmModifAjt('ajtRDV','Voulez-vous vraiment ajouter le RDV?','Ajouter')\">
                     </div>
                 </div>
             </form>
@@ -696,14 +696,14 @@ if(isset($_GET['ajouter_RDV'])){
     </div>
     ";
 }
-if(isset($_GET['icon_modifier_promos']) && isset($_GET['id'])){
+if(isset($_GET['modifier_promos']) && isset($_GET['id'])){
     $id=$_GET['id'];
     $rslt=mysqli_query($mysqli,"select * from promos where IdPromo=$id");
     $row=mysqli_fetch_assoc($rslt);
     echo" <div class='body_display_modif_promo '>
     <div class='div_modif_promo '>
         <div class='haut'><i class='bx bxs-x-square icon_x_exit_promo' onclick='history.back();'></i></div>
-        <form action='controller.php?table=promos&action=modifier&id=$id' method='post'>
+        <form id='modifPromo' action='controller.php?table=promos&action=modifier&id=$id' method='post'>
 
             <div class='case_nmr'>
                 <label for=''>N promo</label>
@@ -752,19 +752,19 @@ if(isset($_GET['icon_modifier_promos']) && isset($_GET['id'])){
             <div class='form_bas'>
                 <div class='submit_form'>
                     <input type='reset' value='Effacer' class='btn_effacer_form_modifier_promo'>
-                    <input type='submit' value='Modifier' class='btn_modifier_form_modifier_promo'>
+                    <input type='button' value='Modifier' class='btn_modifier_form_modifier_promo' onclick=\"confirmModifAjt('modifPromo','Voulez-vous vraiment modifier la promotion?','Modifier')\">
                 </div>
             </div>
         </form>
     </div>
     </div>";
 }
-if(isset($_GET['icon_ajouter_promos'])){
+if(isset($_GET['ajouter_promos'])){
     echo" 
     <div class='body_display_modif_promo'>
         <div class='div_modif_promo '>
             <div class='haut'><i class='bx bxs-x-square icon_x_exit_promo' onclick='history.back();'></i></div>
-            <form action='controlleR.php?table=promos&action=ajouter' method='post'>
+            <form id='ajtPromo' action='controlleR.php?table=promos&action=ajouter' method='post'>
                 <div class='case_nmr'>
                     <label for=''>N promo</label>
                     <div class='input_text'>
@@ -801,7 +801,7 @@ if(isset($_GET['icon_ajouter_promos'])){
                 <div class='form_bas'>
                     <div class='submit_form'>
                         <input type='reset' value='Effacer' class='btn_effacer_form_modifier_promo'>
-                        <input type='submit' value='Ajouter' class='btn_modifier_form_modifier_promo'>
+                        <input type='button' value='Ajouter' class='btn_modifier_form_modifier_promo'  onclick=\"confirmModifAjt('ajtPromo','Voulez-vous vraiment ajouter la promotion?','Ajouter')\">
                     </div>
                 </div>
             </form>
@@ -809,7 +809,7 @@ if(isset($_GET['icon_ajouter_promos'])){
     </div>
     ";
 }
-if(isset($_GET['icon_détails_promos']) && isset($_GET['id'])){
+if(isset($_GET['détails_promos']) && isset($_GET['id'])){
     $id=$_GET['id'];
     echo "  <div class='body_display_modif_promo '><div class='div_details_promo'>
     <i class='bx bxs-x-square icon_x_exit' onclick='history.back();'  style='right: 0'></i>
@@ -839,12 +839,12 @@ if(isset($_GET['icon_détails_promos']) && isset($_GET['id'])){
             </tbody>
         </table>
         <div class='bas'>
-            <button class='ajouter_prd_details_promo' onclick='document.location.href=\"gestion.php?table=promos&button_ajouter_prmprdt=true&id=$id\"'><i class='fa-solid fa-plus '></i> produit</button>
+            <button class='ajouter_prd_details_promo' onclick='document.location.href=\"gestion.php?table=promos&ajouter_prmprdt=true&id=$id\"'><i class='fa-solid fa-plus '></i> produit</button>
         </div>
         </div>
         </div>";
 }
-if(isset($_GET['button_ajouter_prmprdt']) && isset($_GET['id'])){
+if(isset($_GET['ajouter_prmprdt']) && isset($_GET['id'])){
     $id=$_GET['id'];
     echo "
     <div class='body_display_modif_promo '>
@@ -860,7 +860,7 @@ if(isset($_GET['button_ajouter_prmprdt']) && isset($_GET['id'])){
                     </thead>
                     <tbody>
     ";
-                $rslt=mysqli_query($mysqli,"select * from produit order by NomPr");
+                $rslt=mysqli_query($mysqli,"select * from produit where IdPr not in (select IdPr from promo_produit where IdPromo=$id) order by NomPr");
                 while($row=mysqli_fetch_assoc($rslt)){
                     $IdPr=$row['IdPr'];
                     echo"
@@ -1048,7 +1048,7 @@ if (isset($_GET['table'])) {
                         <div class='category'>
                             <div class='name_category'>
                                 <input type='text' value='".$row['NomCt']."' name='NomCt' readonly class='nom_categorie'>
-                                <button type='button' class='valider_modif_categorie cacher_icon' onclick=\"confirmModifAjt('modifCt$IdCt','Voulez-vous vraiment modifier le nom de la catégorie?')\"><i class='bx bxs-check-square icon_valider_modif_categorie'></i></button>
+                                <button type='button' class='valider_modif_categorie cacher_icon' onclick=\"confirmModifAjt('modifCt$IdCt','Voulez-vous vraiment modifier le nom de la catégorie?','Modifier')\"><i class='bx bxs-check-square icon_valider_modif_categorie'></i></button>
                             </div> 
                             <div class='nbr_produit'>
                                 <p>Nombre de produits :</p> <span>".mysqli_num_rows($rslt2)."</span>
@@ -1332,9 +1332,10 @@ if (isset($_GET['table'])) {
                         <div class='entete'>
                             <div class='element'>
                                 <div class='chercher'>
-                                    <form action='gestion.php?table=commande&rechercher=true' method='post'>
+                                    <form action='gestion.php?table=promos' method='get'>
+                                        <input type='hidden' name='table' value='promos'>
                                         <button type='submit' name='recherche' class='btn_recherche'><i class='fa-solid fa-magnifying-glass' aria-hidden='true'></i></button>
-                                        <input type='text' name='mot' placeholder='N° commande...'>
+                                        <input type='text' name='mot' placeholder='N° promo...'>
                                     </form>
                                 </div>
                             </div>
@@ -1373,7 +1374,7 @@ if (isset($_GET['table'])) {
                             <div class=''></div>
                         </div>
                         <div class='produit'>
-                            <button onclick='document.location.href=\"gestion.php?table=promos&icon_ajouter_promos=true\"'><i class='fa-solid fa-plus '></i> Ajouter promotion</button>
+                            <button onclick='document.location.href=\"gestion.php?table=promos&ajouter_promos=true\"'><i class='fa-solid fa-plus '></i> Ajouter promotion</button>
                         </div>
                     </div>
                     <table cellspacing='0 '>
@@ -1389,7 +1390,21 @@ if (isset($_GET['table'])) {
                         </thead>
                         <tbody>
             ";
-                        $rslt = mysqli_query($mysqli, 'select * from promos');
+                        if(isset($_GET['tri'])){
+                            $tri=$_GET['tri'];
+                            $rslt = mysqli_query($mysqli, "select * from promos  order by $tri ");
+                        }
+                        elseif(isset($_GET['statut'])){
+                            $statut=$_GET['statut'];
+                            $rslt = mysqli_query($mysqli, "select * from promos where StatutPromo='$statut' order by IdPromo");
+                        }
+                        elseif(isset($_GET['recherche']) && isset($_GET['mot'])){
+                            $mot=$_GET['mot'];
+                            $rslt = mysqli_query($mysqli, "select * from promos  where IdPromo like '%$mot%' order by IdPromo");
+                        }
+                        else{
+                            $rslt=mysqli_query($mysqli,"select * from promos  order by IdPromo");
+                        }
                         while ($row = mysqli_fetch_assoc($rslt)) {
                             $id=$row['IdPromo'];
                             echo " 
@@ -1400,8 +1415,8 @@ if (isset($_GET['table'])) {
                                 <td>".$row['DateFin']."</td>
                                 <td>".$row['StatutPromo']."</td>
                                 <td class=\"action\">
-                                    <input type='button' value='détails' onclick='document.location.href=\"gestion.php?table=promos&icon_détails_promos=true&id=$id\"'>
-                                    <i class=\"bx bx-edit icon_modifier_commande\" onclick='document.location.href=\"gestion.php?table=promos&icon_modifier_promos=true&id=$id\"' ></i>
+                                    <input type='button' value='détails' onclick='document.location.href=\"gestion.php?table=promos&détails_promos=true&id=$id\"'>
+                                    <i class=\"bx bx-edit icon_modifier_commande\" onclick='document.location.href=\"gestion.php?table=promos&modifier_promos=true&id=$id\"' ></i>
                                     <lord-icon src=\"https://cdn.lordicon.com/qjwkduhc.json\" trigger=\"hover\" colors=\"primary:#e83a30,secondary:#e83a30,tertiary:#ffffff\" state=\"hover-empty\"style=\"width:35px;height:35px\" onClick=\"confirmSupp('promos','supprimer',$id)\"></lord-icon>
                                 </td>
                             </tr>

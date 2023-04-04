@@ -194,7 +194,7 @@ if(isset($_GET['action'])&&$_GET['action']=='nvPass'){
 }
 ?>
 <?php
-if(isset($_GET['success'])){
+if(isset($_GET['successInscr'])){
 	echo "<script>swal({
 		title: '$_GET[success]',
 		text: '',

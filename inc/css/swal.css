@@ -1,0 +1,16 @@
+    .swal-modal {
+        width: 575px;
+    }
+    
+    .swal-title {
+        /* font-size: 0.875em; */
+        font-size: 20px !important;
+    }
+    
+    .swal-footer {
+        text-align: center;
+    }
+    
+    .swal-text {
+        text-align: center;
+    }

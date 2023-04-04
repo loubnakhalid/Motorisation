@@ -22,6 +22,9 @@ if(! Client() && !Admin()){
     else{
         for($i = 0; $i < count($_SESSION['panier']['IdPr']); $i++){
             $IdPr=$_SESSION['panier']['IdPr'][$i];
+            $rslt=mysqli_query($mysqli,"select * from produit where IdPr=$IdPr");
+            $row=mysqli_fetch_assoc($rslt);
+            $StockPr=$row['StockPr'];
             echo "
             <div id='Produits'>
                 <table>
@@ -32,8 +35,6 @@ if(! Client() && !Admin()){
                         <td class='NomPR' >".$_SESSION['panier']['NomPr'][$i]."</td>
             ";
                     if(verifPromo($IdPr)){
-                        $rslt=mysqli_query($mysqli,"select * from produit where IdPr=$IdPr");
-                        $row=mysqli_fetch_assoc($rslt);
                         echo"
                         <td class='prixPanier'>".$_SESSION['panier']['PrixPr'][$i]." DH <br>
                            <span class='promo'>".$row['PrixPr']." DH</span>
@@ -60,7 +61,7 @@ if(! Client() && !Admin()){
                             <div class='wrapper'>
                                 <span class='decrementer' onclick='diminuerQt($i)'>-</span>
                                 <span class='num'> <input type='text' name='quantite' class='btnQte' value=".$_SESSION['panier']['qt'][$i]."  readonly ></span>
-                                <span class='incrementer' onclick='augmenterQt($i)'>+</span>
+                                <span class='incrementer' onclick='augmenterQt($i,$StockPr)'>+</span>
                             </div>
                         </td>
                     </tr>
@@ -95,26 +96,4 @@ if(! Client() && !Admin()){
     }
     ?>
 </section>
-<script>
-        /*let plus = document.getElementsByClassName("incrementer"),
-        moins = document.getElementsByClassName("decrementer"),
-        quantite_panier = document.getElementsByClassName("btnQte");
-        for(let j=0;j<plus.length;j++){
-        plus[j].addEventListener("click", () => {
-        if (quantite_panier[j].value >= 0) {
-            quantite_panier[j].value++;
-        }
-        document.location.href='controller.php?qtPan=true&pos=<?=$i?>&nbre='+quantite_panier[j].value;
-        });
-    }
-    for(let j=0;j<moins.length;j++){
-        moins[j].addEventListener("click", () => {
-        if (quantite_panier[j].value > 0) {
-            quantite_panier[j].value--;
-        }
-        document.location.href='controller.php?qtPan=true&pos=<?=$i?>&nbre='+quantite_panier[j].value;
-        });
-        }*/
-        
-        </script>
 <?php include("./inc/bas.inc.html") ?>

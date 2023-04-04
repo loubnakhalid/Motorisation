@@ -24,21 +24,7 @@ function login() {
     login_hover.addEventListener("mouseleave", hide);
 }
 
-function diminuerQt(pos) {
-    let inpt = document.getElementsByClassName("btnQte");
-    if (inpt[pos].value > 0) {
-        inpt[pos].value--;
-    }
-    document.location.href = 'controller.php?qtPan=true&pos=' + pos + '&nbre=' + inpt[pos].value;
-}
 
-function augmenterQt(pos) {
-    let inpt = document.getElementsByClassName("btnQte");
-    if (inpt[pos].value >= 0) {
-        inpt[pos].value++;
-    }
-    document.location.href = 'controller.php?qtPan=true&pos=' + pos + '&nbre=' + inpt[pos].value;
-}
 
 function ouvrirRDV() {
     document.getElementById('RDV').style = '';

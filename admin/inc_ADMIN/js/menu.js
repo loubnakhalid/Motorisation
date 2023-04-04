@@ -1,11 +1,3 @@
-document.addEventListener("DOMContentLoaded", function(event) {
-    var scrollpos = localStorage.getItem('scrollpos');
-    if (scrollpos) window.scrollTo(0, scrollpos);
-});
-
-window.onbeforeunload = function(e) {
-    localStorage.setItem('scrollpos', window.scrollY);
-};
 let btn_modifier_categorie = document.getElementsByClassName("btn_modifier_categorie"),
     valider_modif_categorie = document.getElementsByClassName("valider_modif_categorie"),
     nom_categorie = document.getElementsByClassName("nom_categorie");
@@ -82,9 +74,6 @@ input_image.onchange = () => {
 
     }
     /*-----------------------------------------------------------------------------------*/
-
-
-
 const input_quantite = document.querySelector(".input_quantite"),
     icon_modifier_commande_display = document.querySelector(".icon_modifier_commande_display"),
     valider_modif_display_cmd = document.querySelector(".valider_modif_display_cmd");
@@ -94,3 +83,12 @@ icon_modifier_commande_display.addEventListener("click", () => {
     input_quantite.style.borderColor = '#00c985';
     valider_modif_display_cmd.classList.remove("cacher_icon");
 });
+/*-----------------------------------------------------------------------------------*/
+document.addEventListener("DOMContentLoaded", function(event) {
+    var scrollpos = localStorage.getItem('scrollpos');
+    if (scrollpos) window.scrollTo(0, scrollpos);
+});
+
+window.onbeforeunload = function(e) {
+    localStorage.setItem('scrollpos', window.scrollY);
+};

@@ -1,19 +1,6 @@
 <?php include('./inc/haut.inc.php'); ?>
 <?php
-if(isset($_POST['ajoutPan'])){
-    if(! Client()){
-        echo "<script>document.location.href='identification.php?action=connexion&panVide=true';</script>";
-    }
-    $id=$_POST['IdPr'];
-    $qt=$_POST['qt'];
-    $rslt=mysqli_query($mysqli,"select * from produit where IdPr=$id");
-    $row=mysqli_fetch_assoc($rslt);
-    ajouterProduitDansPanier($row['IdPr'],$row['NomPr'],$qt,$row['PrixPr'],$row['ImagePr']);
-    echo "<script>alert('Produit ajouté ! ');</script>";
-}
-?>
-<?php
-$id=$_GET['id'];
+$id=$_GET['IdPr'];
 $rslt=mysqli_query($mysqli,"select * from produit where IdPr=$id");
 $row=mysqli_fetch_assoc($rslt);
 $prix=$row['PrixPr'];
@@ -52,14 +39,14 @@ if(verifPromo($row['IdPr'])){
                         echo "
                         </div>
                         <div class='add_panier'>
-                            <form action='produits.php?id=$row[IdPr]' method='post' >
+                            <form action='controller.php' method='post' >
                                 <input type='hidden' name='IdPr' value='$row[IdPr]'>
                                 <div class='controle'>
                                     <span class='moins'>
                                         <i class='bx bx-minus'></i>
                                     </span>
                                     <span class='nombre'>
-                                        <input type='text' name='qt' value='1' size='5' readonly class='quantite_panier'>
+                                        <input type='text' name='qt' value='1' size='5' class='quantite_panier' readonly >
                                     </span>
                                     <span class='plus'>
                                         <i class='bx bx-plus'></i>
@@ -94,14 +81,14 @@ if(verifPromo($row['IdPr'])){
             while($row3=mysqli_fetch_assoc($rslt3)){
             if(verifPromo($row3['IdPr'])){
                 $nvPrix=nvPrix($row3['IdPr']);
-                echo "<a href='produits.php?id=$row3[IdPr]' class='produit'><div class='photo_produit'><img src='./inc/img/produits/$row3[ImagePr]'></div><div class='nom_prod'>$row3[NomPr]</div><div class='prix_prod'>$nvPrix DH <sup ><strike>$row3[PrixPr] DH</strike> </sup></div></a>";
+                echo "<a href='produits.php?IdPr=$row3[IdPr]' class='produit'><div class='photo_produit'><img src='./inc/img/produits/$row3[ImagePr]'></div><div class='nom_prod'>$row3[NomPr]</div><div class='prix_prod'>$nvPrix DH <sup ><strike>$row3[PrixPr] DH</strike> </sup></div></a>";
             }
             elseif($row3['StockPr'] <= 0){
-                echo "<a href='produits.php?id=$row3[IdPr]' class='produit'><div class='photo_produit'><img src='./inc/img/produits/$row3[ImagePr]'></div><div class='nom_prod'>$row3[NomPr]</div><div class='prix_prod' style='color:red;font-size:1.3em'>Rupture de stock</div></a>";
+                echo "<a href='produits.php?IdPr=$row3[IdPr]' class='produit'><div class='photo_produit'><img src='./inc/img/produits/$row3[ImagePr]'></div><div class='nom_prod'>$row3[NomPr]</div><div class='prix_prod' style='color:red;font-size:1.3em'>Rupture de stock</div></a>";
 
             }
             else{
-                echo "<a href='produits.php?id=$row3[IdPr]' class='produit'><div class='photo_produit'><img src='./inc/img/produits/$row3[ImagePr]'></div><div class='nom_prod'>$row3[NomPr]</div><div class='prix_prod'>$row3[PrixPr] DH</div></a>";
+                echo "<a href='produits.php?IdPr=$row3[IdPr]' class='produit'><div class='photo_produit'><img src='./inc/img/produits/$row3[ImagePr]'></div><div class='nom_prod'>$row3[NomPr]</div><div class='prix_prod'>$row3[PrixPr] DH</div></a>";
             }
             }
             echo "</div></section>";
@@ -112,7 +99,17 @@ if(verifPromo($row['IdPr'])){
     quantite_panier = document.querySelector(".quantite_panier");
 
 plus.addEventListener("click", () => {
-    if (quantite_panier.value >= 0) {
+    let stock=<?=$row['StockPr']?>;
+    if(quantite_panier.value >= stock){
+        swal({
+		        title: 'Le stock de ce produit s\'est épuisé !',
+		        text: '',
+		        icon: 'warning',
+		        button: 'Ok',
+	        });
+        quantite_panier.value=stock;
+    }
+    else if(quantite_panier.value >= 0){
         quantite_panier.value++;
     }
 });

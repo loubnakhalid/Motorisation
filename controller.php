@@ -1,7 +1,9 @@
 <?php require_once("./inc/init.inc.php"); ?>
 <?php
 if(isset($_GET['action']) && $_GET['action'] == "déconnexion") {
-	session_destroy(); 
+	$_SESSION = array();
+    setcookie(session_name(), ' ', time()-1);
+    session_destroy();
     header("location:index.php");
 }
 if(isset($_POST['con'])){
@@ -70,7 +72,7 @@ if(isset($_POST['inscr']) || (isset($_GET['action'])) && $_GET['action'] == "ins
 			mail($to,$subject,$message,$header);
             $_POST['MDPS']=password_hash($_POST['MDPS'],PASSWORD_DEFAULT,['cost'=>14]);
 			mysqli_execute_query($mysqli,"INSERT INTO membre (NomMb,PrénomMb,NumTélé,DateNc,Ville,CP,AdresseMb,EmailMb,MDPS) VALUES ('$_POST[NomMb]','$_POST[PrénomMb]','$_POST[NumTélé]','$_POST[DateNc]','$_POST[Ville]','$_POST[CP]','$_POST[AdresseMb]','$_POST[EmailMb]','$_POST[MDPS]')");
-			header("location:identification.php?action=connexion&success=Vous êtes inscris avec succés ! Veuillez vous connecter à votre compte .");
+			header("location:identification.php?action=connexion&successInscr=Vous êtes inscris avec succés ! Veuillez vous connecter à votre compte .");
             unset($_COOKIE['login']);
 		}
 }
@@ -153,18 +155,21 @@ if(isset($_POST['Finaliser'])){
     $StatutCmd='En cours';
     $prixTT=montantTotal();
     $modePaiement=$_POST['modePaiement'];
+    /*Insertion de commande et détails commande -------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
     $rslt=mysqli_query($mysqli,"insert into commande (DateCmd,IdMb,StatutCmd,prixTT,modePaiement) values('$DateCmd',$IdMb,'$StatutCmd',$prixTT,'$modePaiement')");
     $IdCmd = $mysqli->insert_id;
 		for($i = 0; $i < count($_SESSION['panier']['IdPr']); $i++)
 		{
 			$rslt1=mysqli_query($mysqli,"INSERT INTO détails_commande (IdCmd, IdPr,qt) VALUES ($IdCmd, " . $_SESSION['panier']['IdPr'][$i] . "," . $_SESSION['panier']['qt'][$i] . ")");
 		}
-		//unset($_SESSION['panier']);
+    /* Modifiaction des informations du membre-------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
     $NomMb=$_POST['NomMb'];
     $PrénomMb=$_POST['PrénomMb'];
     $NumTélé=$_POST['NumTélé'];
+    $EmailMb=$_POST['EmailMb'];
     $AdresseMb=$_POST['AdresseMb'];
-    $rslt2=mysqli_query($mysqli,"UPDATE membre set NomMb='$NomMb',PrénomMb='$PrénomMb',NumTélé='$NumTélé',AdresseMb='$AdresseMb' where IdMb=$IdMb");
+    $rslt2=mysqli_query($mysqli,"UPDATE membre set NomMb='$NomMb',PrénomMb='$PrénomMb',NumTélé='$NumTélé',EmailMb='$EmailMb',AdresseMb='$AdresseMb' where IdMb=$IdMb");
+    /*Envoi Email de confirmation de commande-------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
     $rslt2=mysqli_query($mysqli,"select * from membre where IdMb='$IdMb'");
     $row2=mysqli_fetch_assoc($rslt2);
     $to=$row2['EmailMb'];
@@ -179,7 +184,19 @@ if(isset($_POST['Finaliser'])){
     $message="<html><head><style>span.im{color:black;} </style></head><body style='font-size:12pt;color:#3a3a3a;'<fieldset style='padding: 25px;border-color: #0870b5;text-align: justify;'><legend><img src='https://motorify.000webhostapp.com/inc/img/logo3.png' width='150px'></legend>Cher(e)<b> $row2[NomMb] $row2[PrénomMb] </b>,<br><br> Nous sommes heureux de vous informer que nous avons bien reçu votre commande. Vous trouverez ci-dessous les détails de votre commande :<br><br> <b>Date d'expédition</b> : $date <br><b>Numéro de suivi</b> : $IdCmd <br> <b>Adresse de livraison</b> : $row2[AdresseMb]<br> <b>Articles expédiés</b> : <br>$tablePr <br><br>Veuillez noter que le numéro de suivi vous permettra de suivre l'avancement de votre colis.<br>Nous avons bien pris en compte votre commande et nous la traiterons dès que possible. Vous recevrez une notification dès que votre commande sera expédiée.<br> Si vous avez des questions ou des préoccupations concernant votre commande, n'hésitez pas à nous contacter. <br>Nous espérons que vous apprécierez vos achats et nous vous remercions de votre confiance.<br><br> Cordialement, <br><br> L'équipe d'expédition</fieldset></body></html>";
     $subject="Confirmation de commande";
     mail($to,$subject,$message,$header);
-    header("location:index.php");
+    /*Diminuer la quantité des produits commandés-------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    for($i = 0; $i < count($_SESSION['panier']['IdPr']); $i++){
+        $IdPr=$_SESSION['panier']['IdPr'][$i];
+        $qt=$_SESSION['panier']['qt'][$i];
+        $rslt=mysqli_query($mysqli,"select * from produit where IdPr=$IdPr");
+        $row=mysqli_fetch_assoc($rslt);
+        $StockPr=$row["StockPr"];
+        $nvStock=($StockPr-$qt);
+		$rslt1=mysqli_query($mysqli,"UPDATE produit SET StockPr=$nvStock where IdPr=$IdPr");
+	}
+    /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    unset($_SESSION['panier']);
+    header("location:profil.php");
 }
 if(isset($_GET['envEml'])){
     $subject=$_POST['subject'];
@@ -196,6 +213,87 @@ if(isset($_GET['envEml'])){
     }
     else{
         echo "<script>alert('echec de l'envoi.);document.location.href='$lienPr';</script>";
+    }
+}
+if(isset($_POST['envoiRDV'])){
+    $DateRDV=Date("20y-m-d");
+    $TypePrjt=$_POST['TypePrjt'];
+    $NomMb=$_POST['NomMb'];
+    $PrénomMb=$_POST['PrénomMb'];
+    $AdresseMb=$_POST['AdresseMb'];
+    $NumTélé=$_POST['NumTélé'];
+    try{
+        if($rslt2=mysqli_query($mysqli,"insert into rdv (TypePrjt,NomMb,PrénomMb,AdresseMb,NumTélé,DateRdv,StatutRdv) values ('$TypePrjt','$NomMb','$PrénomMb','$AdresseMb','$NumTélé','$DateRDV','Non traité')")){
+            header("location:$lienPr?success=Votre demande a été envoyée avec succès");
+        }
+    }
+    catch(Exception | Error $e){
+        header("location:$lienPr?erreur=Erreur à la demande de Rendez-vous ! Veuillez réssayer plus tard ou cantactez-nous et merci .");
+    }
+}
+if(isset($_POST['ajoutPan'])){
+    if(! Client() && ! Admin()){
+        echo "<script>document.location.href='identification.php?action=connexion&panVide=true';</script>";
+    }
+    else{
+        $id=$_POST['IdPr'];
+        $qt=$_POST['qt'];
+        $rslt=mysqli_query($mysqli,"select * from produit where IdPr=$id");
+        $row=mysqli_fetch_assoc($rslt);
+        ajouterProduitDansPanier($row['IdPr'],$row['NomPr'],$qt,$row['PrixPr'],$row['ImagePr']);
+        header("location:produits.php?IdPr=$id&success=Vous avez ajouté le produit dans le panier avec succès ! ");
+    }
+}
+if(isset($_POST['modifIdentit'])){
+    $IdMb=$_SESSION['membre']['IdMb'];
+    $NomMb=$_POST['NomMb'];
+    $PrénomMb=$_POST['PrénomMb'];
+    $DateNc=$_POST['DateAnn'].'-'.$_POST['DateMs'].'-'.$_POST['DateJr'];
+    try{
+        if($rslt=mysqli_query($mysqli,"update membre set NomMb='$NomMb', PrénomMb='$PrénomMb', DateNc='$DateNc' where IdMb=$IdMb")){
+            header("location:profil.php?success=Votre modification a été enregistrée avec succès ! ");
+        }
+    }
+    catch(Exception | Error $e){
+        header("location:profil.php?erreur=Erreur à la modificaton des identifiants ! Veuillez réssayer plus tard ou contactez-nous . ");
+    }
+}
+if(isset($_POST['modifIdentif'])){
+    $IdMb=$_SESSION['membre']['IdMb'];
+    $rslt=mysqli_query($mysqli,"select * from membre where IdMb=$IdMb");
+    $row=mysqli_fetch_assoc($rslt);
+    $EmailMb=$_POST['EmailMb'];
+    $MDPS=$_POST['MDPS'];
+    $mdps=$row['MDPS'];
+    $nvMDPS=$_POST['nvMDPS'];
+    try{
+        if(password_verify($MDPS,$mdps)){
+            $mdps=password_hash($MDPS,PASSWORD_DEFAULT);
+            if($rslt=mysqli_query($mysqli,"update membre set EmailMb='$EmailMb', MDPS='$mdps' where IdMb=$IdMb")){
+                header("location:profil.php?success=Votre modification a été enregistrée avec succès ! ");
+            }
+        }
+        else{
+            header("location:profil.php?erreur=Le mot de passe que vous-avez entré est incorrecte ! ");
+        }
+    }
+    catch(Exception | Error $e){
+        header("location:profil.php?erreur=Erreur à la modificaton des identifiants ! Veuillez réssayer plus tard ou contactez-nous . ");
+    }
+}
+if(isset($_POST['modifContact'])){
+    $IdMb=$_SESSION['membre']['IdMb'];
+    $AdresseMb=$_POST['AdresseMb'];
+    $Ville=$_POST['Ville'];
+    $CP=$_POST['CP'];
+    $NumTélé=$_POST['NumTélé'];
+    try{
+        if($rslt=mysqli_query($mysqli,"update membre set AdresseMb='$AdresseMb', Ville='$Ville', CP='$CP',NumTélé='$NumTélé' where IdMb=$IdMb")){
+            header("location:profil.php?success=Votre modification a été enregistrée avec succès ! ");
+        }
+    }
+    catch(Exception | Error $e){
+        header("location:profil.php?erreur=Erreur à la modificaton des identifiants ! Veuillez réssayer plus tard ou contactez-nous . ");
     }
 }
 ?>

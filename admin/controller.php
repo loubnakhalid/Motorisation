@@ -1,4 +1,9 @@
-<?php include("../inc/init.inc.php"); ?>
+<?php 
+include("../inc/init.inc.php"); 
+if(!Admin()){
+    header("location:../index.php");
+}
+?>
 <?php
 if(isset($_GET['table']) && isset($_GET['action'])){
     $table=$_GET['table'];
@@ -74,8 +79,8 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                 $success="Vous-avez ajouté la commande avec succés ! ";
             }
             elseif($action=='modifier'){
-                $id=$_POST['IdCmd'];
-                $rqt="update commande set DateCmd='$DateCmd',prixTT=$prixTT,modePaiement='$modePaiement',StatutCmd='$StatutCmd',NoteCmd='$NoteCmd' where IdCmd='$id'";
+                $IdCmd=$_POST['IdCmd'];
+                $rqt="update commande set DateCmd='$DateCmd',prixTT=$prixTT,modePaiement='$modePaiement',StatutCmd='$StatutCmd',NoteCmd='$NoteCmd' where IdCmd='$IdCmd'";
                 $success="Vous avez modifié la commande avec succés ! ";
             }
         }
@@ -135,11 +140,15 @@ if(isset($_GET['table']) && isset($_GET['action'])){
         elseif($action=='ajouter'){
             $IdPromo=$_POST['IdPromo'];
             $IdPr=$_POST['IdPr'];
-            for($i=0;$i<count($IdPr);$i++){
-                $rqt4="insert into promo_produit (IdPromo,IdPr) values('$IdPromo','$IdPr[$i]')";
-                $rslt=mysqli_query($mysqli,$rqt4);
+            try{
+                for($i=0;$i<count($IdPr);$i++){
+                    $rslt=mysqli_query($mysqli,"insert into promo_produit (IdPromo,IdPr) values('$IdPromo','$IdPr[$i]')");
+                }
+                header("location:$lienPr&successDétails=Vous-avez effectuer la promotion sur les produits avec succés !");
             }
-            header("location:$lienPr&successDétails=Vous-avez effectuer la promotion sur les produits avec succés !");
+            catch(Exception | Error $e){
+                header("location:$lienPr&erreur=Erreur à l'ajout de(s) produit(s) ! Veuillez contacter l'équipe de développement .");
+            }
         }
     ;break;
     case 'détails_commande':
@@ -275,39 +284,49 @@ if(isset($_GET['table']) && isset($_GET['action'])){
     ;break;
     }
     if(isset($rqt)){
-        if($rslt=mysqli_query($mysqli,$rqt)){
-            if($table=='commande' && $action=='modifier'){
-                if(isset($_POST['envEmail'])){
-                    $rslt2=mysqli_query($mysqli,"select * from commande natural join membre where IdCmd='$id'");
-                    $row2=mysqli_fetch_assoc($rslt2);
-                    $rslt3=mysqli_query($mysqli,"select * from détails_commande natural join produit natural join commande natural join membre where IdCmd='$id'");
-                    $header="From: Motorify.com <supportMotorify@test.com>\r\n";
-                    $date= date("d/m/Y H:i:s");
-                    if($StatutCmd=='Expédiée'){
-                        $message="<html><head><style>span.im{color:black;} </style></head><body style='font-size:12pt;color:#3a3a3a;'<fieldset style='padding: 25px;border-color: #0870b5;text-align: justify;'><legend><img src='https://motorify.000webhostapp.com/inc/img/logo3.png' width='150px'></legend>Cher(e)<b> $row2[NomMb] $row2[PrénomMb] </b>,<br><br> Nous avons le plaisir de vous informer que votre commande a été expédiée avec succès. Vous trouverez ci-dessous les détails de votre expédition :<br><br> <b>Date d'expédition</b> : $date <br><b>Numéro de suivi</b> : $id <br> <b>Adresse de livraison</b> : $row2[AdresseMb]<br> <b>Articles expédiés</b> : <br>$tablePr <br><br>Veuillez noter que le numéro de suivi vous permettra de suivre l'avancement de votre colis. Si vous avez des questions ou des préoccupations concernant votre expédition, n'hésitez pas à nous contacter. <br>Nous espérons que vous apprécierez vos achats et nous vous remercions de votre confiance.<br><br> Cordialement, <br><br> L'équipe d'expédition</fieldset></body></html>";
-                        $subject="Avis d'expédition";
-                    }
-                    elseif($StatutCmd=='Annulée'){
-                        $message="<html><head><style>span.im{color:black;} </style></head><body style='font-size:12pt;color:#3a3a3a;'><fieldset style='padding: 25px;border-color: #0870b5;text-align: justify;'><legend><img src='https://motorify.000webhostapp.com/inc/img/logo3.png' width='150px'></legend>Cher(e)<b> $row2[NomMb] $row2[PrénomMb] </b>,<br><br> Nous vous écrivons pour vous informer que nous avons annulé votre commande numéro $id passée sur notre site web/par téléphone le $DateCmd. Nous sommes désolés pour toute gêne occasionnée.<br><br> Nous avons annulé la commande en raison d'une erreur de stock ou de disponibilité de l'article commandé, ou pour toute autre raison qui a rendu impossible l'exécution de votre commande.<br><br>";
-                        if($modePaiement=='Paypal'){
-                            $message.=" Nous avons déjà procédé au remboursement de votre paiement, qui devrait apparaître sur votre compte dans les prochains jours.<br><br>";
+        try{
+            if($rslt=mysqli_query($mysqli,$rqt)){
+                if($table=='commande' && $action=='modifier'){
+                    if(isset($_POST['envEmail'])){
+                        $rslt2=mysqli_query($mysqli,"select * from commande natural join membre where IdCmd=$IdCmd");
+                        $row2=mysqli_fetch_assoc($rslt2);
+                        $rslt3=mysqli_query($mysqli,"select * from détails_commande natural join produit natural join commande natural join membre where IdCmd='$id'");
+                        $header="From: Motorify.com <supportMotorify@test.com>\r\n";
+                        $header.="Content-Type: text/html\r\n";
+                        $date= date("d/m/Y H:i:s");
+                        if($StatutCmd=='Expédiée'){
+                            $message="<html><head><style>span.im{color:black;}</style></head><body style='font-size:12pt;color:#3a3a3a;'<fieldset style='padding: 25px;border-color: #0870b5;text-align: justify;'><legend><img src='https://motorify.000webhostapp.com/inc/img/logo3.png' width='150px'></legend>Cher(e)<b> $row2[NomMb] $row2[PrénomMb] </b>,<br><br> Nous avons le plaisir de vous informer que votre commande a été expédiée avec succès. Vous trouverez ci-dessous les détails de votre expédition :<br><br> <b>Date d'expédition</b> : $date <br><b>Numéro de suivi</b> : $id <br> <b>Adresse de livraison</b> : $row2[AdresseMb]<br> <b>Articles expédiés</b> : <br>$tablePr <br><br>Veuillez noter que le numéro de suivi vous permettra de suivre l'avancement de votre colis. Si vous avez des questions ou des préoccupations concernant votre expédition, n'hésitez pas à nous contacter. <br>Nous espérons que vous apprécierez vos achats et nous vous remercions de votre confiance.<br><br> Cordialement, <br><br> L'équipe d'expédition</fieldset></body></html>";
+                            $subject="Avis d'expédition";
                         }
-                        $message.="Nous sommes désolés de ne pas avoir pu honorer votre commande cette fois-ci, mais nous espérons pouvoir vous servir à l'avenir. Si vous avez des questions ou des préoccupations, n'hésitez pas à nous contacter par email ou par téléphone.<br><br> Cordialement,<br><br>L'équipe de Motorify</fieldset></body></html>";
-                        $subject="Annulation de la commande numéro $id";
+                        elseif($StatutCmd=='Annulée'){
+                            $message="<html><head><style>span.im{color:black;} </style></head><body style='font-size:12pt;color:#3a3a3a;'><fieldset style='padding: 25px;border-color: #0870b5;text-align: justify;'><legend><img src='https://motorify.000webhostapp.com/inc/img/logo3.png' width='150px'></legend>Cher(e)<b> $row2[NomMb] $row2[PrénomMb] </b>,<br><br> Nous vous écrivons pour vous informer que nous avons annulé votre commande numéro $IdCmd passée sur notre site web/par téléphone le $DateCmd. Nous sommes désolés pour toute gêne occasionnée.<br><br> Nous avons annulé la commande en raison d'une erreur de stock ou de disponibilité de l'article commandé, ou pour toute autre raison qui a rendu impossible l'exécution de votre commande.<br><br>";
+                            if($modePaiement=='Paypal'){
+                                $message.=" Nous avons déjà procédé au remboursement de votre paiement, qui devrait apparaître sur votre compte dans les prochains jours.<br><br>";
+                            }
+                            $message.="Nous sommes désolés de ne pas avoir pu honorer votre commande cette fois-ci, mais nous espérons pouvoir vous servir à l'avenir. Si vous avez des questions ou des préoccupations, n'hésitez pas à nous contacter par email ou par téléphone.<br><br> Cordialement,<br><br>L'équipe de Motorify</fieldset></body></html>";
+                            $subject="Annulation de la commande numéro $IdCmd";
+                        }
+                        $to=$row2['EmailMb'];
+                        mail($to,$subject,$message,$header);
                     }
-                    $to=$row2['EmailMb'];
-                    mail($to,$subject,$message,$header);
+                }
+                if($StatutCmd=='Annulée'){
+                    $rslt=mysqli_query($mysqli,"select * from détails_commande natural join produit where IdCmd=$IdCmd");
+                    while($row=mysqli_fetch_assoc($rslt)){
+                        $nvQt=$row['StockPr']+$row['qt'];
+                        $rslt2=mysqli_query($mysqli,"update produit set StockPr=$nvQt where IdPr=$row[IdPr]");
+                    }
+                }
+                if(isset($success)){
+                    header("location:gestion.php?table=$table&success=$success");
+                }
+                else{
+                    header("location:gestion.php?table=$table");
                 }
             }
-            if(isset($success)){
-                header("location:gestion.php?table=$table&success=$success");
-            }
-            else{
-                header("location:gestion.php?table=$table");
-            }
         }
-        else{
-            echo mysqli_error($mysqli);
+        catch(Exception | Error $e){
+            header("location:gestion.php?table=$table&erreur=Erreur ! Veuillez contacter l'équipe de développement .");
         }
     }
 }
