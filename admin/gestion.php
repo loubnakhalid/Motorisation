@@ -579,7 +579,13 @@ elseif(isset($_GET['ficheClient']) && isset($_GET['id'])){
 }
 elseif(isset($_GET['modifier_RDV']) && isset($_GET['IdRDV'])){
     $IdRDV=$_GET['IdRDV'];
-    $rslt=mysqli_query($mysqli,"select * from rdv where IdRdv= $IdRDV");
+    $rslt=mysqli_query($mysqli,"SELECT r.* CASE WHEN r.IdMb IS NOT NULL THEN m.NomMb ELSE p.NomPart END AS nom,
+    CASE WHEN r.IdMb IS NOT NULL THEN m.PrénomMb ELSE p.PrénomPart END AS prenom,
+    CASE WHEN r.IdMb IS NOT NULL THEN m.NumTélé ELSE p.NumTélé END AS télé,
+    CASE WHEN r.IdMb IS NOT NULL THEN m.AdresseMb ELSE p.AdressePart END AS adresse
+    FROM rdv r
+    LEFT JOIN membre m ON r.IdMb = m.IdMb
+    LEFT JOIN participant p ON r.IdPart = p.IdPart where IdRdv=$IdRDV");
     $row=mysqli_fetch_assoc($rslt);
     echo "
     <div class='body_display_modif_rdv'>
@@ -601,7 +607,7 @@ elseif(isset($_GET['modifier_RDV']) && isset($_GET['IdRDV'])){
                 <div class='case'>
                     <label for=''>Nom client</label>
                     <div class='input_text'>
-                        <input type='text' name='NomMb' value='$row[NomMb]'>
+                        <input type='text' name='NomMb' value='$row[nom] $row[prenom]'>
                     </div> 
                 </div>
                 <div class='case'>
@@ -624,13 +630,13 @@ elseif(isset($_GET['modifier_RDV']) && isset($_GET['IdRDV'])){
                 <div class='case'>
                     <label for=''>Télephone</label>
                     <div class='input_text'>
-                        <input type='tel' name='NumTélé' value='$row[NumTélé]'>
+                        <input type='tel' name='NumTélé' value='$row[télé]'>
                     </div> 
                 </div>
                 <div class='case_adress'>
                     <label for=''>Adress</label>
                     <div class='input_text'>
-                        <input type='text' name='AdresseMb' value='$row[AdresseMb]'>
+                        <input type='text' name='AdresseMb' value='$row[adresse]'>
                     </div> 
                 </div>
                 <div class='form_bas'>
