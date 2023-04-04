@@ -579,7 +579,8 @@ elseif(isset($_GET['ficheClient']) && isset($_GET['id'])){
 }
 elseif(isset($_GET['modifier_RDV']) && isset($_GET['IdRDV'])){
     $IdRDV=$_GET['IdRDV'];
-    $rslt=mysqli_query($mysqli,"SELECT r.* CASE WHEN r.IdMb IS NOT NULL THEN m.NomMb ELSE p.NomPart END AS nom,
+    $rslt=mysqli_query($mysqli,"SELECT r.*,
+    CASE WHEN r.IdMb IS NOT NULL THEN m.NomMb ELSE p.NomPart END AS nom,
     CASE WHEN r.IdMb IS NOT NULL THEN m.PrénomMb ELSE p.PrénomPart END AS prenom,
     CASE WHEN r.IdMb IS NOT NULL THEN m.NumTélé ELSE p.NumTélé END AS télé,
     CASE WHEN r.IdMb IS NOT NULL THEN m.AdresseMb ELSE p.AdressePart END AS adresse
