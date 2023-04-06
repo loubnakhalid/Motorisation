@@ -2,14 +2,16 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
+    padding: 40px;
 }
 
 .ProfTitle {
     font-size: 24px;
     font-weight: 900;
     color: #044570;
+    display: flex;
+    justify-content: center;
     margin-bottom: 35px;
-    margin-left: 55px;
 }
 
 .Identité,
@@ -19,8 +21,8 @@
     border-radius: 10px;
     width: 503px;
     height: 140px;
-    box-shadow: 20px 20px 20px rgb(229, 229, 229);
     margin-bottom: 36px;
+    background-color: #f4f8fb;
 }
 
 .SousTitle1 {
@@ -36,31 +38,8 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-around;
-    margin-left: -87px;
+    margin-left: -43px;
     margin-top: 20px;
-}
-
-.NomPr2 {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    margin-left: -38px;
-    margin-top: 20px;
-}
-
-.AdrsVille {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    margin-left: -130px;
-}
-
-.TelCP {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    margin-left: -108px;
-    margin-bottom: 10px
 }
 
 .MpPrEmPr {
@@ -121,7 +100,6 @@
     border-radius: 10px;
     width: 650px;
     height: 68px;
-    box-shadow: 20px 20px 20px rgb(229, 229, 229);
     color: orange;
     font-size: 23px;
     font-weight: 600;
@@ -129,6 +107,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #f4f8fb;
 }
 
 .InputNmPr,
@@ -218,24 +197,4 @@
 
 .SPdeconnexion {
     margin-left: 13px;
-}
-
-.Commande {
-    display: flex;
-}
-
-.ProfIdCmd {
-    display: flex;
-    flex-wrap: nowrap;
-}
-
-.InfoCmd {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    width: 70%;
-}
-
-.DateModif {
-    margin-left: 10px;
 }

@@ -1,10 +1,19 @@
+const change = document.querySelector(".change"),
+    menu = document.querySelector(".menu");
+change.addEventListener("click", () => {
+    menu.classList.toggle("fermer");
+})
+
+
 let btn_modifier_categorie = document.getElementsByClassName("btn_modifier_categorie"),
     valider_modif_categorie = document.getElementsByClassName("valider_modif_categorie"),
-    nom_categorie = document.getElementsByClassName("nom_categorie");
+    nom_categorie = document.getElementsByClassName("nom_categorie"),
+    exit_modif_categorie=document.getElementsByClassName("exit_modif_categorie");
 
 for (let index = 0; index < btn_modifier_categorie.length; index++) {
     btn_modifier_categorie[index].addEventListener("click", () => {
         valider_modif_categorie[index].classList.remove("cacher_icon");
+        exit_modif_categorie[index].classList.remove("cacher_icon");
         nom_categorie[index].removeAttribute("readonly");
         nom_categorie[index].style.borderColor = '#00c985';
     });
@@ -14,7 +23,7 @@ for (let index = 0; index < btn_modifier_categorie.length; index++) {
 let btn_ajouter_category = document.querySelector(".btn_ajouter_category"),
     containner_main_categorie = document.querySelector(".containner_main_categorie");
 btn_ajouter_category.addEventListener("click", () => {
-    containner_main_categorie.innerHTML = containner_main_categorie.innerHTML + "<form action='controller.php?table=catégorie&action=ajouter' method='post'><div class='category'> <div class='name_category'><input type='text' value='' name='NomCt' class='nom_categorie display'><button type='submit' class='valider_modif_categorie '><i class='bx bxs-check-square icon_valider_modif_categorie '></i></button> </div> </div></form>";
+    containner_main_categorie.innerHTML = containner_main_categorie.innerHTML + "<form action='controller.php?table=catégorie&action=ajouter' method='post'><div class='category'> <div class='name_category'><input type='text' value='' name='NomCt' class='nom_categorie display' style='border-color:#00c985'><button type='submit' class='valider_modif_categorie '><i class='bx bxs-check-square icon_valider_modif_categorie '></i></button><button type='reset' class='exit_modif_categorie'><i class='bx bxs-x-square icon_exit_modif_categorie''></i></button> </div> </div></form>";
     document.querySelector(".nom_categorie.display").style.borderColor = '#00c985';
 });
 /*-----------------------------------------------------------------------------------*/
@@ -72,7 +81,7 @@ input_image.onchange = () => {
             image_telecharger.setAttribute("src", reader.result);
         }
 
-    }
+    };
     /*-----------------------------------------------------------------------------------*/
 const input_quantite = document.querySelector(".input_quantite"),
     icon_modifier_commande_display = document.querySelector(".icon_modifier_commande_display"),

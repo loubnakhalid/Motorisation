@@ -2,13 +2,13 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
-    /* margin-top: 40px; */
     margin-left: 5px;
     margin-right: 5px;
+    padding: 40px;
 }
 
 #Total {
-    width: 325px;
+    width: 310px;
     margin-bottom: 30px;
     margin-left: 50px;
     margin-right: 5px;
@@ -19,6 +19,12 @@
     position: relative;
     /* border-radius: 25px; */
     /* box-shadow: 10px 5px 5px rgb(199, 194, 194); */
+    display: flex;
+    flex-direction: column;
+    /* justify-items: center; */
+    /* align-content: center; */
+    align-items: center;
+    ali: center;
 }
 
 #Total table {
@@ -38,7 +44,7 @@
 #Total h3 {
     padding-bottom: 15px;
     color: #014a6e;
-    margin-left: 54px;
+    /* margin-left: 54px; */
 }
 
 #Total button {
@@ -48,7 +54,7 @@
     height: 35px;
     border: none;
     border-radius: 2px;
-    margin-left: 54px;
+    /* margin-left: 54px; */
 }
 
 #Produits table {

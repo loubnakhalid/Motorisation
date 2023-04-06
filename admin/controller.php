@@ -92,19 +92,31 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             $success="Vous-avez supprimé le rendez-vous avec succés ! ";
         }
         else{
-            //$TypePrjt=$_POST['TypePrjt'];
-            $NomMb=$_POST['NomMb'];
+            $nom=strtoupper($_POST['nom']);
+            $prenom=ucfirst($_POST['prenom']);
             $DateRDV=$_POST['DateRDV'];
             $NumTélé=$_POST['NumTélé'];
-            $AdresseMb=$_POST['AdresseMb'];
+            $adresse=$_POST['adresse'];
             $StatutRDV=$_POST['StatutRDV'];
+            $TypePrjt=$_POST['TypePrjt'];
             if($action=='ajouter'){
-                $rqt="insert into rdv (NomMb,DateRDV,NumTélé,AdresseMb,StatutRDV) values ('$NomMb','$DateRDV','$NumTélé','$AdresseMb','$StatutRDV')";
+                $rslt1=mysqli_query($mysqli,"insert into participant (NomPart,PrénomPart,AdressePart,NumTélé) values ('$nom','$prenom', '$adresse','$NumTélé')");
+                $IdPart= $mysqli->insert_id;
+                $rqt="insert into rdv (IdPart,IdMb,DateRDV,StatutRDV,TypePrjt) values ('$IdPart',NULL,'$DateRDV','$StatutRDV','$TypePrjt')";
                 $success="Vous-avez ajouté le rendez-vous avec succés ! ";
             }
             elseif($action=='modifier'){
+                $Id=explode('/',$_POST['Id']);
+                $NomId=$Id[0];
+                $ValeurId=$Id[1];
                 $IdRDV=$_GET['IdRDV'];
-                $rqt="update rdv set  NomMb='$NomMb', DateRDV='$DateRDV', NumTélé='$NumTélé', AdresseMb='$AdresseMb', StatutRDV='$StatutRDV' where IdRDV=$IdRDV";
+                if($ValeurId=='IdMb'){
+                    $rslt=mysqli_query($mysqli,"update membre set NomMb='$nom', PrénomMb='$prenom', AdresseMb='$adresse', NumTélé='$NumTélé' where IdMb=$ValeurId ");
+                }
+                elseif($NomId=='IdPart'){
+                    $rslt=mysqli_query($mysqli,"update participant set NomPart='$nom', PrénomPart='$prenom', AdressePart='$adresse' where IdPart=$ValeurId ");
+                }
+                $rqt="update rdv set  DateRDV='$DateRDV', StatutRDV='$StatutRDV', TypePrjt='$TypePrjt' where IdRDV=$IdRDV";
                 $success="Vous-avez modifié le rendez-vous avec succés ! ";
             }
         }
@@ -134,8 +146,16 @@ if(isset($_GET['table']) && isset($_GET['action'])){
     case 'promo_produit':
         if($action=='supprimer'){
             $id=$_GET['id'];
-            $rqt="delete from promo_produit where IdPrmPrdt=$id";
-            $success="Vous-avez annulé la promotion sur ce produit avec succés ! ";
+            try{
+                if($rslt=mysqli_query($mysqli,"delete from promo_produit where IdPrmPrdt=$id")){
+                    $_SESSION['success']='Vous-avez annulé la promotion sur ce produit avec succés !';
+                    header("location:$lienPr");
+                }
+            }
+            catch(Exception | Error $e){
+                $_SESSION['erreur']="Erreur à la suppression de produit ! Veuillez contacter l'équipe de développement .";
+                header("location:$lienPr");
+            }
         }
         elseif($action=='ajouter'){
             $IdPromo=$_POST['IdPromo'];
@@ -144,10 +164,12 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                 for($i=0;$i<count($IdPr);$i++){
                     $rslt=mysqli_query($mysqli,"insert into promo_produit (IdPromo,IdPr) values('$IdPromo','$IdPr[$i]')");
                 }
-                header("location:$lienPr&successDétails=Vous-avez effectuer la promotion sur les produits avec succés !");
+                $_SESSION['success']='Vous-avez effectuer la promotion sur les produits avec succés !';
+                header("location:$lienPr");
             }
             catch(Exception | Error $e){
-                header("location:$lienPr&erreur=Erreur à l'ajout de(s) produit(s) ! Veuillez contacter l'équipe de développement .");
+                $_SESSION['erreur']="Erreur à l'ajout de(s) produit(s) ! Veuillez contacter l'équipe de développement .";
+                header("location:$lienPr");
             }
         }
     ;break;
@@ -165,13 +187,15 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                                 $prixTT+=$row2['PrixPr']*$row2['qt'];
                             }
                             if($rsltdét3=mysqli_query($mysqli,"update commande set prixTT=$prixTT where IdCmd=$id2")){
-                                header("location:$lienPr&successDétails=Vous-avez supprimé le produit avec succés !");
+                                $_SESSION['success']='Vous-avez supprimé le produit avec succés !';
+                                header("location:$lienPr");
                             }
                         }
                     }
                 }
                 catch(Exception | Error $e){
-                    header("location:$lienPr&erreur=Erreur à la suppression de produit ! Veuillez contacter l\équipe de développement .");
+                    $_SESSION['erreur']='Erreur à la suppression de produit ! Veuillez contacter l\équipe de développement.';
+                    header("location:$lienPr");
                 }
                 }
             }
@@ -201,14 +225,16 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                         $IdPr=$row1['IdPr'];
                         if($rsltdét3=mysqli_query($mysqli,"update commande set prixTT='$prixTT' where IdCmd=$IdCmd")){
                             if($rsltdét4=mysqli_query($mysqli,"update produit set StockPr=$nvQt where IdPr=$IdPr")){
-                            header("location:$lienPr&successDétails=Vous-avez modifié la quantité du produit avec succès !");
+                                $_SESSION['success']='Vous-avez modifié la quantité du produit avec succès !';
+                                header("location:$lienPr");
                             }
                         }
                     }
                 }
                 }
                 catch(Exception | Error $e){
-                    header("location:$lienPr&erreur=Erreur lors de la modification de la quantité du produit ! Veuillez contacter l\'équipe de développement .");
+                    $_SESSION['erreur']='Vous-avez modifié la quantité du produit avec succès !';
+                    header("location:$lienPr");
                 }
             }
             else{
@@ -234,16 +260,19 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                         $prixTT=$prixTT+($row['qt']*$row['PrixPr']);
                     }
                     if($rsltdét1=mysqli_query($mysqli,"update commande set prixTT='$prixTT' where IdCmd=$IdCmd")){
-                        header("location:$lienPr&successDétails=Vous-avez ajouté le(s) produit(s) à la commande avec succés !");
+                        $_SESSION['success']='Vous-avez ajouté le(s) produit(s) à la commande avec succés !';
+                        header("location:$lienPr");
                     }
                 }
             }
             catch(Exception | Error $e){
-                header("location:$lienPr&erreur=Erreur lors de l'ajout de(s) produit(s) ! Veuillez contacter l\'équipe de développement .");
+                $_SESSION['erreur']="Erreur lors de l'ajout de(s) produit(s) ! Veuillez contacter l\'équipe de développement";
+                header("location:$lienPr");
             }
         }
         else{
-            header("location:$lienPr&erreur=Veuillez sélectionner un produit! ");
+            $_SESSION['erreur']="Veuillez sélectionner un produit!t";
+            header("location:$lienPr");
         }
         }
         elseif($action=='ajouterCmd'){
@@ -263,7 +292,8 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                                     $prixTT+=$row4['PrixPr']*$row4['qt'];
                                 }
                                 if($rslt5=mysqli_query($mysqli,"update commande set prixTT=$prixTT where IdCmd=$IdCmd")){
-                                    header("location:$lienPr&successDétails=Vous-avez ajouté les détails à la commande $IdCmd avec succés ! ");
+                                    $_SESSION['success']='Vous-avez ajouté les détails à la commande $IdCmd avec succés !';
+                                    header("location:$lienPr");
                                 }
                             }
                         }
@@ -273,11 +303,13 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                     }
                 }
                 catch(Exception | Error $e){
-                    header("location:$lienPr&erreur=Erreur lors de la modification des détails de la commande ! Veuillez contactez l\'équipe de développement . ");
+                    $_SESSION['erreur']="Erreur lors de la modification de détails de la commande ! Veuillez contactez l\'équipe de développement . t";
+                    header("location:$lienPr");
                 }
             }
             else{
-                header("location:$lienPr&erreur=Veuillez sélectionner une commande ! ");
+                $_SESSION['erreur']="Veuillez sélectionner une commande !";
+                header("location:$lienPr");
             }
             
         }
@@ -318,7 +350,8 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                     }
                 }
                 if(isset($success)){
-                    header("location:gestion.php?table=$table&success=$success");
+                    $_SESSION['success']=$success;
+                    header("location:gestion.php?table=$table");
                 }
                 else{
                     header("location:gestion.php?table=$table");
@@ -326,7 +359,8 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             }
         }
         catch(Exception | Error $e){
-            header("location:gestion.php?table=$table&erreur=Erreur ! Veuillez contacter l'équipe de développement .");
+            $_SESSION['erreur']='Erreur ! Veuillez contacter l\'équipe de développement .';
+            header("location:gestion.php?table=$table");
         }
     }
 }

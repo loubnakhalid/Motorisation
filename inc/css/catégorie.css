@@ -1,14 +1,27 @@
-.name_categorie {
+.container_categorie {
+    width: 100%;
+    overflow: hidden;
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f6f7;
+    scroll-behavior: smooth;
+    font-family: 'Kumbh Sans', sans-serif;
+    gap: 20px;
+    padding: 50px 75px;
+}
+
+.container_categorie .name_categorie {
     width: 100%;
 }
 
-.name_categorie h2 {
+.container_categorie .name_categorie h2 {
     color: #171f35;
     font-weight: 900;
     line-height: 40px;
 }
 
-.entete_categorie {
+.container_categorie .entete_mes_categorie {
     width: 100%;
     height: 50px;
     background-color: rgb(255, 255, 255);
@@ -17,17 +30,17 @@
     gap: 20px;
 }
 
-.entete_categorie .element {
+.container_categorie .entete_mes_categorie .element {
     width: 200px;
     height: 100%;
 }
 
-.entete_categorie .element:not(:hover) .cacher {
+.container_categorie .entete_mes_categorie .element:not(:hover) .cacher {
     display: none;
 }
 
-.entete_categorie .element .trie,
-.entete_categorie .element .statut {
+.container_categorie .entete_mes_categorie .element .trie,
+.container_categorie .entete_mes_categorie .element .statut {
     display: flex;
     width: 100%;
     height: 100%;
@@ -36,8 +49,8 @@
     position: relative;
 }
 
-.entete_categorie .element .trie .input_trie,
-.entete_categorie .element .statut .input_statut {
+.container_categorie .entete_mes_categorie .element .trie .input_trie,
+.container_categorie .entete_mes_categorie .element .statut .input_statut {
     display: flex;
     border: 1px solid rgb(220, 220, 220);
     width: 90%;
@@ -49,8 +62,8 @@
     cursor: pointer;
 }
 
-.entete_categorie .element .trie .input_trie span.icon_select_trie,
-.entete_categorie .element .statut .input_statut span.icon_select_statut {
+.container_categorie .entete_mes_categorie .element .trie .input_trie span.icon_select_trie,
+.container_categorie .entete_mes_categorie .element .statut .input_statut span.icon_select_statut {
     height: 100%;
     border-left: 1px solid rgb(220, 220, 220);
     display: flex;
@@ -59,30 +72,30 @@
     width: 19px;
 }
 
-.entete_categorie .element .statut .input_statut p {
+.container_categorie .entete_mes_categorie .element .statut .input_statut p {
     padding-bottom: 2.5px;
 }
 
-.entete_categorie .element .trie .input_trie p {
+.container_categorie .entete_mes_categorie .element .trie .input_trie p {
     padding-bottom: 2.5px;
 }
 
-.entete_categorie .element .trie .input_trie span.trie_par,
-.entete_categorie .element .statut .input_statut span.statut_par {
+.container_categorie .entete_mes_categorie .element .trie .input_trie span.trie_par,
+.container_categorie .entete_mes_categorie .element .statut .input_statut span.statut_par {
     font-size: 13px;
     font-weight: 600;
     color: #919ba8;
 }
 
-.entete_categorie .element .trie .input_trie span.name_trie,
-.entete_categorie .element .statut .input_statut span.name_statut {
+.container_categorie .entete_mes_categorie .element .trie .input_trie span.name_trie,
+.container_categorie .entete_mes_categorie .element .statut .input_statut span.name_statut {
     font-weight: bold;
     color: #43465e;
     font-size: 14px;
 }
 
-.entete_categorie .element .trie .display_trie,
-.entete_categorie .element .statut .display_statut {
+.container_categorie .entete_mes_categorie .element .trie .display_trie,
+.container_categorie .entete_mes_categorie .element .statut .display_statut {
     position: absolute;
     background-color: rgb(255, 255, 255);
     width: 90%;
@@ -91,13 +104,13 @@
     padding: 10px 0 10px 0;
 }
 
-.entete_categorie .element .trie .display_trie ul,
-.entete_categorie .element .statut .display_statut ul {
+.container_categorie .entete_mes_categorie .element .trie .display_trie ul,
+.container_categorie .entete_mes_categorie .element .statut .display_statut ul {
     margin: 0 5px 0 5px;
 }
 
-.entete_categorie .element .trie .display_trie ul li,
-.entete_categorie .element .statut .display_statut ul li {
+.container_categorie .entete_mes_categorie .element .trie .display_trie ul li,
+.container_categorie .entete_mes_categorie .element .statut .display_statut ul li {
     list-style: none;
     margin-top: 5px;
     padding-left: 10px;
@@ -109,20 +122,20 @@
     border-radius: 3px;
 }
 
-.entete_categorie .element .trie .display_trie ul li::before,
-.entete_categorie .element .statut .display_statut ul li::before {
+.container_categorie .entete_mes_categorie .element .trie .display_trie ul li::before,
+.container_categorie .entete_mes_categorie .element .statut .display_statut ul li::before {
     content: "•";
     padding-right: 10px;
     color: rgb(100, 101, 206);
 }
 
-.entete_categorie .element .trie .display_trie ul li:hover,
-.entete_categorie .element .statut .display_statut ul li:hover {
+.container_categorie .entete_mes_categorie .element .trie .display_trie ul li:hover,
+.container_categorie .entete_mes_categorie .element .statut .display_statut ul li:hover {
     background-color: #eaf0ff;
 }
 
-.entete_categorie .element .trie .display_trie ul li a,
-.entete_categorie .element .statut .display_statut ul li a {
+.container_categorie .entete_mes_categorie .element .trie .display_trie ul li a,
+.container_categorie .entete_mes_categorie .element .statut .display_statut ul li a {
     text-decoration: none;
     display: flex;
     align-items: centere;
@@ -132,26 +145,26 @@
     height: 100%;
 }
 
-.entete_categorie .element .trie .display_trie ul li:hover a,
-.entete_categorie .element .statut .display_statut ul li:hover a {
+.container_categorie .entete_mes_categorie .element .trie .display_trie ul li:hover a,
+.container_categorie .entete_mes_categorie .element .statut .display_statut ul li:hover a {
     text-decoration: none;
     color: #202cd1;
 }
 
-.entete_categorie .interval_prix {
+.container_categorie .entete_mes_categorie .interval_prix {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 70%;
-    width: 24%;
+    width: 28%;
 }
 
-.entete_categorie .interval_prix .min,
-.max {
+.container_categorie .entete_mes_categorie .interval_prix .min,
+.container_categorie .entete_mes_categorie .interval_prix .max {
     height: 100%;
 }
 
-.entete_categorie .interval_prix input {
+.container_categorie .entete_mes_categorie .interval_prix input {
     height: 100%;
     text-align: center;
     outline: none;
@@ -161,94 +174,11 @@
     border-radius: 5px;
 }
 
-.Les_produit_categorie {
+.container_categorie .Les_produit_categorie {
     width: 100%;
     display: flex;
     gap: 15.55px;
     flex-wrap: wrap;
-}
-
-.Les_produit_categorie .produit {
-    text-decoration: none;
-    min-width: 220px;
-    max-width: 220px;
-    box-shadow: 0 0 6px 0 rgba(101, 101, 101, 0.08);
-    transition: box-shadow .3s ease;
-    height: 286px;
-    background-color: #ffffff;
-    padding: 16px 24px 16px 24px;
-    display: flex;
-    flex-direction: column;
-    align-content: space-between;
-    justify-content: space-between;
-    cursor: pointer;
-    gap: 5px;
-    font-family: 'Kumbh Sans', sans-serif;
-}
-
-.Les_produit_categorie .produit:hover {
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, .08);
-}
-
-.Les_produit_categorie .produit:hover {
-    box-shadow: 0 0 2px #12bbff;
-}
-
-.Les_produit_categorie .produit .photo_produit {
-    background-color: #ffffff;
-    height: 550px;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.Les_produit_categorie .produit .photo_produit img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.Les_produit_categorie .produit .nom_prix_produit {
-    width: 100%;
-    background-color: #ffffff;
-    height: 30%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.Les_produit_categorie .produit .nom_prod {
-    color: #0c193a;
-    width: 100%;
-    height: 115px;
-    max-width: 100%;
-    line-height: 18px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 1.1em;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    font-weight: 700;
-    background: #ffffff;
-    font-family: 'Kumbh Sans', sans-serif;
-}
-
-.Les_produit_categorie .produit .prix_prod {
-    height: 30px;
-    color: #ff8c00;
-    font-size: 1.4em;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 800;
-    font-family: 'Kumbh Sans', sans-serif;
-    line-height: 1.8em;
-}
-
-.Les_produit_categorie .produit .prix_prod sup {
-    color: red;
-    font-family: 'Kumbh Sans', sans-serif;
 }
 
 
@@ -345,17 +275,17 @@ footer .footer_entete .contacter_nous .contacter input.envoyer {
 
 
 footer .footer_entete .livraison {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 25%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 100%;
+width: 25%;
 }
 
 footer .footer_entete span.title {
-    font-weight: bolder;
-    font-size: 17px;
+font-weight: bolder;
+font-size: 17px;
 } */
 
 footer .bas_footer {

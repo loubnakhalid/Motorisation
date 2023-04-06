@@ -20,6 +20,113 @@ body {
     background-color: rgb(245, 246, 247);
 }
 
+body .cacher {
+    display: none;
+}
+
+
+/* *********************************************************  display contacter nous  *************************************************************** */
+
+.display_body_contacter_nous {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background-color: #000000c9;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+i.icon_x_exit_contacter_nous {
+    font-size: 28px;
+    position: absolute;
+    color: red;
+    top: 0;
+    right: 0;
+}
+
+.contacter_nous {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+    background-color: white;
+    padding: 50px;
+}
+
+.contacter_nous h3 {
+    color: #015e9b;
+    font-size: 20px;
+    border-bottom: 6px solid;
+    /* display: inline; */
+    width: 142px;
+}
+
+.contacter_nous .contacter {
+    width: 100%;
+    height: auto;
+    /* padding: 30px; */
+}
+
+.contacter_nous .contacter form {
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    gap: 21px;
+}
+
+.contacter_nous .contacter input.inpp {
+    width: 48%;
+    height: 40px;
+    border: none;
+    outline: none;
+    background-color: #4084bf11;
+    color: #015e9b;
+    padding-left: 10px;
+}
+
+.contacter_nous .contacter input.inpp:hover {
+    background-color: #4084bf24;
+}
+
+.contacter_nous .contacter input.inpp::placeholder {
+    color: #151d32;
+    font-size: 14px;
+}
+
+.contacter_nous .contacter textarea {
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: #4084bf11;
+    color: #151d32;
+    height: 213px;
+    width: 100%;
+}
+
+.contacter_nous .contacter textarea :hover {
+    background-color: #4084bf24;
+}
+
+.contacter_nous .contacter textarea::placeholder {
+    color: #151d32;
+    font-size: 14px;
+}
+
+.contacter_nous .contacter input.envoyer {
+    width: 70px;
+    height: 30px;
+    background-color: #015e9b;
+    color: #ffffff;
+    border: 1px solid white;
+    outline: none;
+    cursor: pointer;
+    /* display: flex; */
+    /* align-self: flex-end; */
+}
+
 
 /* *********************************************************  header  *************************************************************** */
 
@@ -43,10 +150,23 @@ header {
     display: flex;
     padding-left: 20px;
     align-items: center;
+    justify-content: space-between;
 }
 
-.logo3 {
+.logo .logo3 {
     width: 180px;
+}
+
+.logo .btn_rendez_vous {
+    width: 129px;
+    /* height: 73px; */
+    border: solid 1px;
+    background-color: #ffffff;
+    color: #015e9b;
+    height: 35px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 
@@ -267,6 +387,17 @@ nav.panier_identifier ul li a {
 .menu ul li a:hover:before {
     transform: scaleX(1);
     transform-origin: left;
+}
+
+nav.nav_identifier {
+    padding: 9px;
+    margin-top: 2px;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #ff9200;
+    padding-left: 370px;
 }
 
 

@@ -95,34 +95,7 @@ function success(success, table) {
         });
 }
 
-function successDétails(success) {
-    swal({
-            title: '',
-            text: success,
-            icon: 'success',
-            button: 'Ok',
-        })
-        .then((value) => {
-            let params = new URLSearchParams(window.location.search);
-            params.delete("successDétails");
-            let newUrl = "gestion.php?" + (params.toString());
-            location.replace(newUrl);
-        });
-}
-
 function erreur(erreur) {
-    swal({
-            title: '',
-            text: erreur,
-            icon: 'warning',
-            button: 'Ok',
-        })
-        .then((value) => {
-            history.back();
-        });
-}
-
-function erreur2(erreur) {
     swal({
         title: '',
         text: erreur,

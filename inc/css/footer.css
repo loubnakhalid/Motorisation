@@ -7,10 +7,89 @@ html {
 footer {
     grid-area: footer;
     margin-top: 50px;
-    background-color: #051133;
+    background-color: #232323;
+}
+.container_footer{
+    width: 100%;
+    height: 180px;
+    background-color:  #0b0f47;
+    display: flex;
+    align-items: center;
+}
+.div1{
+    width: 25%;
+    height: 70%;
+    border-right: 1px solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-footer .footer_entete {
+.div1 img{
+    width: 200px;
+}
+.div2{
+    width: 35%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+}
+.div2 .lien_footer{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.div2 .lien_footer a{
+    text-decoration:none;
+    font-size: 13px;
+    color: #abdbff;
+
+}
+.div2 .copyrigth{
+    font-size: 12px;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.div3{
+    width: 15%;
+    height: 80%;
+}
+.div4{
+    width: 25%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.div4 a{
+    font-size: 23px;
+    color: #abdbff;
+   
+}
+.arrow_bas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 12px; */
+    width: 45px;
+    height: 45px;
+    border: 1px solid #abdbff;
+    border-radius: 50%;
+}
+a{
+    cursor: pointer;
+}
+i{
+    cursor: pointer;
+}
+
+/* footer .footer_entete {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -53,7 +132,7 @@ footer .footer_entete .contacter_nous .contacter form {
 }
 
 footer .footer_entete .contacter_nous .contacter input.inpp {
-    width: 100%;
+    width: 50%;
     height: 40px;
     border: none;
     outline: none;
@@ -95,7 +174,7 @@ footer .footer_entete .contacter_nous .contacter input.envoyer {
     margin-top: 27px;
     text-decoration: none;
     color: white;
-}
+} */
 
 
 /* 
@@ -114,7 +193,7 @@ footer .footer_entete span.title {
     font-weight: bolder;
     font-size: 17px;
 } */
-
+/* 
 footer .bas_footer {
     width: 100%;
     height: 90px;
@@ -172,4 +251,4 @@ footer .bas_footer .arrow_bas a i {
     width: 45px;
     height: 45px;
     border-radius: 50px;
-}
+} */

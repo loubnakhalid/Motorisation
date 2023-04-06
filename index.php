@@ -85,7 +85,7 @@ include("inc/haut.inc.php");
             $rslt2=mysqli_query($mysqli,"select * from produit where IdCt=$row[IdCt]");
             while($row2=mysqli_fetch_assoc($rslt2)){
             if($row2['StockPr'] <= 0){
-                echo "<a href='produits.php?IdPr=$row2[IdPr]' class='produit'><div class='photo_produit'><img src='./inc/img/produits/$row2[ImagePr]'></div><div class='nom_prod'>$row2[NomPr]</div><div class='prix_prod' style='color:red;font-size:1.3em'>Rupture de stock</div></a>";
+                echo "<a href='produits.php?IdPr=$row2[IdPr]' class='produit'><div class='photo_produit'><img src='./inc/img/produits/$row2[ImagePr]'></div><div class='nom_prod'>$row2[NomPr]</div><div class='prix_prod' style='color:red;font-size:1.2em'>Rupture de stock</div></a>";
             }
             elseif(verifPromo($row2['IdPr'])){
                 $nvPrix=nvPrix($row2['IdPr']);
@@ -106,7 +106,7 @@ include("inc/haut.inc.php");
                 <p>Ces catégories font parler d’elles</p>
             </div>
             <div class="div_categorie">
-                <a class="mon_categorie">
+                <a href="footer.php?Guide=MotorisationPorteGarage" class="mon_categorie">
                     <div class="photo_categorie">
                        <img src="./inc/img/garage.jpg" alt="">
 
@@ -114,7 +114,7 @@ include("inc/haut.inc.php");
                     <p>Porte de garage</p>
 
                 </a>
-                <a class="mon_categorie">
+                <a  href="footer.php?Guide=MotorisationVolet" class="mon_categorie">
                     <div class="photo_categorie">
                         <img src="./inc/img/roulant.jpg" alt="">
                     </div>
@@ -128,7 +128,7 @@ include("inc/haut.inc.php");
                     <p>Télécommandes</p>
 
                 </a>
-                <a class="mon_categorie">
+                <a href="footer.php?Guide=Interphonie" class="mon_categorie">
                     <div class="photo_categorie">
                     <img src="./inc/img/inter.jpg" alt="">
 
@@ -137,9 +137,9 @@ include("inc/haut.inc.php");
                     
 
                 </a>
-                <a class="mon_categorie">
+                <a href="footer.php?Guide=Alarme" class="mon_categorie">
                     <div class="photo_categorie">
-                    <img src="./inc/img/alarme.jpg" alt="">
+                        <img src="./inc/img/alarme.jpg" alt="">
                     </div>
                     <p>Alarmes</p>
 

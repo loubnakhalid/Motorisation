@@ -18,12 +18,25 @@ include('./inc/init.inc.php');
     <script src="./inc/js/functions.js"></script>
 </head>
 <body>
-    <header id='h'>
+    <div class="display_body_contacter_nous cacher">
+    
+            <div class="contacter_nous">
+            <i class='bx bxs-x-square icon_x_exit_contacter_nous' onclick='history.back();'></i>
+                <h3>Contactez-nous</h3>
+                <div class="contacter">
+                    <form action="controller.php?envEml=true" method="post">
+                        <input type="text" name="subject" placeholder="Objet" class="inpp">
+                        <input type="text" name="from" placeholder="Email" class="inpp">
+                        <textarea name="message" id="" cols="30" rows="10" placeholder="Description"></textarea>
+                        <input type="submit" name="envEml" value="Envoyer" class="envoyer">
+                    </form>
+                </div>
+            </div>
+    </div>
+    <header id='header'>
         <div class='logo'>
             <a href='index.php'><img src='inc/img/logo3.png' alt='' class='logo3'></a>
-        </div>
-        <div class='logo'>
-            <button onclick='ouvrirRDV()'>RDV</button>
+            <button class="btn_rendez_vous" onclick='ouvrirRDV()' >Rendez-vous</button>
         </div>
         <div class='recherche'>
             <div class='div_input'>
@@ -75,7 +88,7 @@ include('./inc/init.inc.php');
             </nav>
         </div>
         <div class='menu'>
-            <nav>
+            <nav >
                 <ul>
                     <?php
                         $rqt='SELECT * FROM catégorie';
@@ -88,34 +101,17 @@ include('./inc/init.inc.php');
             </nav>
             <?php
             if(isset($_GET['action']) && $_GET['action']=='connexion'){
-                echo "<nav style='padding: 9px;margin-top: 2px;align-items: center;font-size: 16px;font-weight: bold;color: white;background-color: #ff9200;'><p style='margin-left: 370px;'>Veuillez vous connectez ou créer un compte pour voir votre panier et faire des achats !</p></nav>";
+                echo "<nav class='nav_identifier' >Veuillez vous connectez ou créer un compte pour voir votre panier et faire des achats !</p></nav>";
             }
             ?>
         </div>
     </header>
     <main>
-        <?php
-        if(isset($_SESSION['membre']['IdMb'])){
-            $rqt='SELECT * FROM membre WHERE IdMb='.$_SESSION['membre']['IdMb'];
-            $rslt=mysqli_execute_query($mysqli,$rqt);
-            $row=mysqli_fetch_assoc($rslt);
-            $Nom=$row['NomMb'];
-            $Prénom=$row['PrénomMb'];
-            $NumTélé=$row['NumTélé'];
-            $Adresse=$row['AdresseMb'];
-        }
-        else{
-            $Nom="";
-            $Prénom="";
-            $NumTélé="";
-            $Adresse="";
-        }
-        ?>
-        <form id='RDV' action='controller.php' method='post' class='Rdv' onsubmit='return ValidationRdv()' style='display:none;'>
-            <div class='Formulaire'>
+        <form id='RDV' action="controller.php" method="post" class='Rdv' onsubmit='return ValidationRdv()' style="display:none;">
+            <div class='Formulaire '>
                 <div class='Form-header'>
                     <div class='Form-title'>Demander RDV</div>
-                    <button class='btn-ferm' onclick='document.getElementById("RDV").style.display="none";'>&times;</button>
+                    <button class='btn-ferm' onclick='history.back();'>&times;</button>
                 </div>
                 <div class='Form-content'>
                     <div class='PrgDate'>
@@ -130,7 +126,7 @@ include('./inc/init.inc.php');
                             <option value='Motorisation porte garage'>Motorisation porte de garage</option>
                             <option value='Motorisation volet roulant'>Motorisation de volet roulant</option>
                             <option value='Télécommandes'>Télécommandes</option>
-                            <option value='Interphones & Visiophones'>Interphones & Visiophones</option>
+                            <option value='Interphones & Visiophones'>Interphone&Visiophone</option>
                             <option value='Pièces détachées & Accessoires'>Pièces détachées & Accessoires</option>
                             <option value='Alarmes'>Alarmes</option>
                         </select>
@@ -140,17 +136,17 @@ include('./inc/init.inc.php');
                     </div>
                     <div class='Rjd'>
                         <div class='RjdNP'>
-                            <input type='text' name='NomMb' value='<?=$Nom?>' placeholder='Nom' id='InputRdvNm' class='RjdN'>
-                            <input type='text' name='PrénomMb' value='<?=$Prénom?>' placeholder='Prénom' id='InputRdvPr' class='RjdP'><br>
+                            <input type='text' name='NomMb' value='' placeholder='Nom' id='InputRdvNm' class='RjdN'>
+                            <input type='text' name='PrénomMb' value='' placeholder='Prénom' id='InputRdvPr' class='RjdP'><br>
                             <span class='ErRdvNom'>*Ce champs est obligatoire .</span>
                             <span class='ErRdvPr'>*Ce champs est obligatoire .</span>
                         </div>
                         <div class='RjdE'>
-                            <input type='text' name='AdresseMb' value='<?=$Adresse?>' placeholder='Adresse' id='InputRdvEml' class='RjdEm'><br>
+                            <input type='text' name='AdresseMb' value='' placeholder='Adresse' id='InputRdvEml' class='RjdEm'><br>
                             <span class='ErRdvEmail'>*Ce champs est obligatoire .</span>
                         </div>
                         <div class='RjdT'>
-                            <input type='tel' name='NumTélé' value='<?=$NumTélé?>' placeholder='Téléphone' id='InputRdvtel' class='RjdTel'><br>
+                            <input type='tel' name='NumTélé' value='' placeholder='Téléphone' id='InputRdvtel' class='RjdTel'><br>
                             <span class='ErRdvtel'>*Ce champs est obligatoire .</span>
                         </div>
                     </div>

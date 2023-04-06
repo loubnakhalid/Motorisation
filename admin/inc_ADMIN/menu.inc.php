@@ -30,7 +30,7 @@
         <div class="main_menu">
             <ul>
                 <li class="lien acceuil">
-                    <a href="./index.php">
+                    <a href="./accueil.php">
                         <i class='bx bx-home  icon'></i>
                         <span class="text">Acceuil</span>
                     </a>

@@ -10,7 +10,8 @@
 body {
     display: flex;
     position: relative;
-    background-color: rgb(234 237 255);
+    background-color: #f4f8fb;
+
     min-height: 100vh;
 }
 
@@ -131,6 +132,11 @@ nav.menu.fermer header .change {
     background-color: #ffffff;
 }
 
+.main_menu ul li a:active {
+    background-color: #ffffff;
+}
+
+
 .main_menu ul li a:hover .text,
 .main_menu ul li a:hover .icon {
     color: #11101d;
@@ -147,7 +153,7 @@ section.home {
     position: relative;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 170px auto;
+    grid-template-rows: 77px auto;
     grid-template-areas: "header" "main";
     min-height: 100vh;
     left: 210px;
@@ -163,56 +169,24 @@ nav.menu.fermer~section.home {
 }
 
 .home main {
-    grid-area: main;
-    display: flex;
+    grid-area: main;  
     justify-content: center;
     width: 100%;
     align-items: flex-start;
 }
-
-
-/* .home header {
-    grid-area: header;
-    display: flex;
-    align-items: start;
-    justify-content: flex-start;
-    
-    background-color: rgb(234 237 255);
-    padding: 0px 27px;
-    flex-wrap: wrap;
-} */
-
-
-/* .home header {
-    grid-area: header;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f1f7fa;
+textarea{
+    resize: none;
 }
-
-.home main {
-    grid-area: main;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.home main .table {
-    width: 95%;
+.table {
+    box-shadow: rgba(163, 163, 163, 0.39) 0px 5px 11px -4.5px;
     height: auto;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    width: 100%;
+    transition: all 0.8s ease;
+    position: relative;
 }
-
-.home main .table table thead {
-    font-weight: normal;
-    background-color: #ffffff;
-    color: #000000;
-    height: 25px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-}
-
-.home main .table table {
+ table {
     gap: 60px;
     width: 100%;
     border: 1px solid whitesmoke;
@@ -220,12 +194,254 @@ nav.menu.fermer~section.home {
     height: auto;
     background-color: #ffffff;
 }
-
-.home main .table table td {
-    height: 40px;
+table thead {
+    font-weight: normal;
+    color: #2368cf;
+    height: 50px;
+    font-size: 13px;
 }
 
-.home main .table table tbody {
+ table tbody {
     overflow-y: auto;
     height: auto;
-} */
+    margin-top: 10px;
+}
+
+table td {
+    height: 50px;
+    background-color: inherit;
+    text-align: center;
+    border-top: 1px solid rgb(240, 240, 240);
+    font-size: 14px;
+    color: rgb(69, 87, 106);
+}
+table td.action {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+}
+table td input {
+    padding-bottom: 2px;
+    height: 27px;
+    width: 55px;
+    color: #ffffff;
+    background-color: #0833a7;
+    border: none;
+    border-radius: 4px;
+}
+
+
+.entete {
+    width: 100%;
+    height: 50px;
+    background-color: #ffffff;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-row: auto;
+}
+
+ .entete .element {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ .entete .element .chercher {
+    width: 90%;
+    height: 75%;
+    background-color: #d4e1ff;
+    padding-left: 15px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+ .entete .element .chercher form {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+}
+
+ .entete .element .chercher button {
+    width: 10%;
+    background: inherit;
+    border: none;
+    outline: none;
+    color: rgb(47, 141, 199);
+    font-size: 17px;
+}
+
+ .entete .element .chercher input {
+    background: inherit;
+    border: none;
+    width: 80%;
+    outline: none;
+    height: 100%;
+}
+
+.home main .table_commande .entete .element .chercher input:focus {
+    outline: none;
+    border: none;
+}
+
+ .entete .element .trie,
+ .entete .element .statut {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+ .entete .element .trie .input_trie,
+ .entete .element .statut .input_statut {
+    display: flex;
+    border: 1px solid rgb(220, 220, 220);
+    width: 90%;
+    height: 70%;
+    padding: 0 0 0 9px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.entete .element .trie .cacher,
+ .entete .element .statut .cacher {
+    display: none;
+}
+
+ .entete .element .trie .input_trie span.icon_select_trie,
+ .entete .element .statut .input_statut span.icon_select_statut {
+    height: 100%;
+    border-left: 1px solid rgb(220, 220, 220);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 19px;
+}
+
+ .entete .element .statut .input_statut p {
+    padding-bottom: 2.5px;
+}
+
+ .entete .element .trie .input_trie p {
+    padding-bottom: 2.5px;
+}
+
+ .entete .element .trie .input_trie span.trie_par,
+ .entete .element .statut .input_statut span.statut_par {
+    font-size: 13px;
+    font-weight: 600;
+    color: #919ba8;
+}
+
+ .entete .element .trie .input_trie span.name_trie,
+ .entete .element .statut .input_statut span.name_statut {
+    font-weight: bold;
+    color: #43465e;
+    font-size: 14px;
+}
+ .entete .element .trie:not(:hover) .display_trie,
+ .entete .element .statut:not(:hover) .display_statut {
+    display: none;
+}
+
+.entete .element .trie .display_trie,
+ .entete .element .statut .display_statut {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    width: 82%;
+    top: 43px;
+    box-shadow: rgba(163, 163, 163, 0.39) 0px 3px 11px 0px;
+    padding: 10px 0 10px 0;
+}
+
+ .entete .element .trie .display_trie ul,
+ .entete .element .statut .display_statut ul {
+    margin: 0 5px 0 5px;
+}
+
+ .entete .element .trie .display_trie ul li,
+ .entete .element .statut .display_statut ul li {
+    list-style: none;
+    margin-top: 5px;
+    padding-left: 10px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+}
+
+ .entete .element .trie .display_trie ul li::before,
+ .entete .element .statut .display_statut ul li::before {
+    content: "•";
+    padding-right: 10px;
+    color: rgb(100, 101, 206);
+}
+
+ .entete .element .trie .display_trie ul li:hover,
+ .entete .element .statut .display_statut ul li:hover {
+    background-color: #eaf0ff;
+}
+
+.entete .element .trie .display_trie ul li a,
+ .entete .element .statut .display_statut ul li a {
+    width: 100%;
+    text-decoration: none;
+    font-size: 14px;
+    color: #404586;
+}
+
+ .entete .element .trie .display_trie ul li:hover a,
+ .entete .element .statut .display_statut ul li:hover a {
+    text-decoration: none;
+    color: #202cd1;
+}
+
+ .entete .produit {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.entete .produit button {
+    background-color: #0833a7;
+    padding: 10px 12px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: #ffffff;
+    margin-right: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    
+} 
+
+.home .border_red{
+    border-left: 5px solid red;
+
+}
+.home .border_blue{
+    border-left: 5px solid rgb(43, 0, 255);
+}
+.home  .border_vert{
+    border-left: 5px solid rgb(0, 255, 110);
+}
+
+.home .border_maron{
+    border-left: 5px solid rgb(153, 0, 255);
+}
+.home .border_orange{
+    border-left: 5px solid rgb(255, 174, 0);
+}
+.home .border_roz{
+    border-left: 5px solid rgb(255, 0, 170);
+}

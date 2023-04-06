@@ -1,7 +1,7 @@
 <?php
 include('./inc_ADMIN/menu.inc.php'); 
 if(! Admin()){
-    header("location:../index.php");
+    echo "<script>document.location.href='../index.php'</script>";
 }
 ?>
 <?php
@@ -42,9 +42,6 @@ if(isset($_GET['modifier_produit']) && isset($_GET['IdPr'])){
                         }
                             echo "
                             </select>
-                            <div class='icon_select'>
-                                <i class='bx bxs-down-arrow'></i>
-                            </div>
                         </div> 
                     </div>
                     <div class='case'>
@@ -65,9 +62,6 @@ if(isset($_GET['modifier_produit']) && isset($_GET['IdPr'])){
                             }
                             echo "
                             </select>
-                            <div class='icon_select'>
-                                <i class='bx bxs-down-arrow'></i>
-                            </div>
                         </div> 
                     </div>
                     <div class='case_prix_qauntite'>
@@ -141,9 +135,6 @@ elseif(isset($_GET['ajouter_produit'])){
                             }
                             echo "
                             </select>
-                            <div class='icon_select'>
-                                <i class='bx bxs-down-arrow'></i>
-                            </div>
                         </div> 
                     </div>
                     <div class='case'>
@@ -153,9 +144,6 @@ elseif(isset($_GET['ajouter_produit'])){
                                 <option value='1'>Disponible</option>
                                 <option value='0'>Indisponible</option>
                             </select>
-                        <div class='icon_select'>
-                            <i class='bx bxs-down-arrow'></i>
-                        </div>
                     </div> 
                     </div>
                     <div class='case_prix_qauntite'>
@@ -255,9 +243,6 @@ elseif(isset($_GET['modifier_commande']) && isset($_GET['IdCmd'])){
                             }
                             document.getElementById('mode').getElementsByTagName('option')[selectd].selected= 'selected';
                         </script>
-                        <div class='icon_select'>
-                            <i class='bx bxs-down-arrow'></i>
-                        </div>
                     </div> 
                 </div>
                 <div class='case_select'>
@@ -269,9 +254,7 @@ elseif(isset($_GET['modifier_commande']) && isset($_GET['IdCmd'])){
                             <option value='Livrée'>Livrée</option>
                             <option value='Annulée'>Annulée</option>
                         </select>
-                        <div class='icon_select'>
-                            <i class='bx bxs-down-arrow'></i>
-                        </div>
+                       
                     </div> 
                 </div>
                 <script>
@@ -335,9 +318,6 @@ elseif(isset($_GET['ajouter_commande'])){
                         }
                         echo"
                         </select>
-                        <div class='icon_select'>
-                            <i class='bx bxs-down-arrow'></i>
-                        </div>
                     </div> 
                 </div>
                 <div class='case_text'>
@@ -361,9 +341,7 @@ elseif(isset($_GET['ajouter_commande'])){
                             <option value='Espèces'>Espèces</option>
                             <option value='Chèque'>Chèque</option>
                         </select>
-                        <div class='icon_select'>
-                            <i class='bx bxs-down-arrow'></i>
-                        </div>
+                       
                     </div> 
                 </div>
                 <div class='case_select'>
@@ -375,9 +353,7 @@ elseif(isset($_GET['ajouter_commande'])){
                             <option value='Livrée'>Livrée</option>
                             <option value='Annulée'>Annulée</option>
                         </select>
-                        <div class='icon_select'>
-                            <i class='bx bxs-down-arrow'></i>
-                        </div>
+                       
                     </div> 
                 </div>
                 <div class='case_text_area'>
@@ -579,7 +555,7 @@ elseif(isset($_GET['ficheClient']) && isset($_GET['id'])){
 }
 elseif(isset($_GET['modifier_RDV']) && isset($_GET['IdRDV'])){
     $IdRDV=$_GET['IdRDV'];
-    $rslt=mysqli_query($mysqli,"SELECT r.*,
+    $rslt=mysqli_query($mysqli,"SELECT r.*, m.IdMb,p.IdPart,
     CASE WHEN r.IdMb IS NOT NULL THEN m.NomMb ELSE p.NomPart END AS nom,
     CASE WHEN r.IdMb IS NOT NULL THEN m.PrénomMb ELSE p.PrénomPart END AS prenom,
     CASE WHEN r.IdMb IS NOT NULL THEN m.NumTélé ELSE p.NumTélé END AS télé,
@@ -588,11 +564,21 @@ elseif(isset($_GET['modifier_RDV']) && isset($_GET['IdRDV'])){
     LEFT JOIN membre m ON r.IdMb = m.IdMb
     LEFT JOIN participant p ON r.IdPart = p.IdPart where IdRdv=$IdRDV");
     $row=mysqli_fetch_assoc($rslt);
+    $IdMb=$row['IdMb'];
+    $IdPart=$row['IdPart'];
     echo "
     <div class='body_display_modif_rdv'>
-        <div class='div_modif_rdv'>  
+        <div class='div_modif_rdv'>
             <div class='haut'><i class='bx bxs-x-square icon_x_exit_rdv' onclick='history.back()'></i></div>
             <form id='modifRDV' action='controller.php?table=RDV&action=modifier&IdRDV=$IdRDV' method='post'>
+    ";
+    if($IdMb == NULL){
+        echo "<input type='hidden' name='Id' value='IdPart/$row[IdPart]'>";
+    }
+    elseif($IdPart==NULL){
+        echo " <input type='hidden' name='IdMb' value='IdMb/$row[IdMb]'>";
+    }
+    echo"
                 <div class='case_nmr'>
                     <label for=''>N° RDV</label>
                     <div class='input_text'>
@@ -603,12 +589,6 @@ elseif(isset($_GET['modifier_RDV']) && isset($_GET['IdRDV'])){
                     <label for=''>Date</label>
                     <div class='input_text'>
                         <input type='date' name='DateRDV' value='$row[DateRDV]'>
-                    </div> 
-                </div>
-                <div class='case'>
-                    <label for=''>Nom client</label>
-                    <div class='input_text'>
-                        <input type='text' name='NomMb' value='$row[nom] $row[prenom]'>
                     </div> 
                 </div>
                 <div class='case'>
@@ -629,15 +609,40 @@ elseif(isset($_GET['modifier_RDV']) && isset($_GET['IdRDV'])){
                     </script>
                 </div>
                 <div class='case'>
+                    <label for=''>Nom </label>
+                    <div class='input_text'>
+                        <input type='text' name='nom' value='$row[nom]'>
+                    </div> 
+                </div>
+                <div class='case'>
+                    <label for=''>Prénom</label>
+                    <div class='input_text'>
+                        <input type='text' name='prenom' value='$row[prenom]'>
+                    </div> 
+                </div>
+                <div class='case'>
+                    <label for=''>Type projet</label>
+                    <div class='input_select'>
+                            <select name='TypePrjt' >
+                            <option value='Motorisation porte garage'>Motorisation porte garage</option>
+                            <option value='Motorisation volet roulant'>Motorisation volet roulant</option>
+                            <option value='Télécommandes'>Télécommandes</option>
+                            <option value='Interphones & Visiophones'>Interphones & Visiophones</option>
+                            <option value='Pièces détachées & Accessoires'>Pièces détachées & Accessoires</option>
+                            <option value='Alarmes'>Alarmes</option>
+                        </select>
+                    </div> 
+                </div>
+                <div class='case'>
                     <label for=''>Télephone</label>
                     <div class='input_text'>
                         <input type='tel' name='NumTélé' value='$row[télé]'>
                     </div> 
                 </div>
                 <div class='case_adress'>
-                    <label for=''>Adress</label>
+                    <label for=''>Adresse</label>
                     <div class='input_text'>
-                        <input type='text' name='AdresseMb' value='$row[adresse]'>
+                        <input type='text' name='adresse' value='$row[adresse]'>
                     </div> 
                 </div>
                 <div class='form_bas'>
@@ -670,30 +675,49 @@ elseif(isset($_GET['ajouter_RDV'])){
                     </div> 
                 </div>
                 <div class='case'>
-                    <label for=''>Nom client</label>
-                    <div class='input_text'>
-                        <input type='text' name='NomMb' value=''>
-                    </div> 
-                </div>
-                <div class='case'>
                     <label for=''>Statut</label>
                     <div class='input_select'>
                             <select name='StatutRDV' >
                             <option value='Traité'>Traité</option>
-                            <option value=''Non traité>Non Traité</option>
+                            <option value='Non traité'>Non Traité</option>
                         </select>
                     </div> 
                 </div>
                 <div class='case'>
-                    <label for=''>Télephone</label>
+                    <label for=''>Nom</label>
+                    <div class='input_text'>
+                        <input type='text' name='nom' value=''>
+                    </div> 
+                </div>
+                <div class='case'>
+                    <label for=''>Prénom</label>
+                    <div class='input_text'>
+                        <input type='text' name='prenom' value=''>
+                    </div> 
+                </div>
+                <div class='case'>
+                    <label for=''>Type projet</label>
+                    <div class='input_select'>
+                        <select name='TypePrjt' >
+                            <option value='Motorisation porte garage'>Motorisation porte garage</option>
+                            <option value='Motorisation volet roulant'>Motorisation volet roulant</option>
+                            <option value='Télécommandes'>Télécommandes</option>
+                            <option value='Interphones & Visiophones'>Interphones & Visiophones</option>
+                            <option value='Pièces détachées & Accessoires'>Pièces détachées & Accessoires</option>
+                            <option value='Alarmes'>Alarmes</option>
+                        </select>
+                    </div> 
+                </div>
+                <div class='case'>
+                    <label for=''>Téléphone</label>
                     <div class='input_text'>
                         <input type='tel' name='NumTélé' value=''>
                     </div> 
                 </div>
                 <div class='case_adress'>
-                    <label for=''>Adress</label>
+                    <label for=''>Adresse</label>
                     <div class='input_text'>
-                        <input type='text' name='AdresseMb' value=''>
+                        <input type='text' name='adresse' value=''>
                     </div> 
                 </div>
                 <div class='form_bas'>
@@ -841,7 +865,7 @@ elseif(isset($_GET['détails_promos']) && isset($_GET['id'])){
                 <td><img src='../inc/img/produits/$row[ImagePr]'></td>
                 <td>$row[NomPr]</td>
                 <td>
-                    <lord-icon src='https://cdn.lordicon.com/qjwkduhc.json' trigger='hover' colors='primary:#e83a30,secondary:#e83a30,tertiary:#ffffff' state='hover-empty' style='width:35px;height:35px' onclick='confirmSupp(\"promos\",\"supprimer\",$row[IdPrmPrdt])'></lord-icon>
+                    <lord-icon src='https://cdn.lordicon.com/qjwkduhc.json' trigger='hover' colors='primary:#e83a30,secondary:#e83a30,tertiary:#ffffff' state='hover-empty' style='width:35px;height:35px' onclick='confirmSupp(\"promo_produit\",\"supprimer\",$row[IdPrmPrdt])'></lord-icon>
                 </td>
             </tr>
         ";
@@ -918,15 +942,14 @@ if (isset($_GET['table'])) {
             }
             echo "
             <section class='home'>
-                <header class='produit'>
-                    <div class='header_header_produit'></div>
-                    <div class='case_produit'>Nombre de produits : $nbreProduct </div>
-                    <div class='case_produit'>Nombre de produits vendus : $sum </div>
-                    <div class='case_produit'>Chiffre d'affaires : $sumPrix DH </div>
-                    <div class='case_produit'>Côut des produits en stock : $sumCout DH </div>
-                </header>
+            <header class='produit'>
+                <div class='case_produit border_blue'>Nombre de produits : $nbreProduct </div>
+                <div class='case_produit border_red'>Nombre de produits vendus : $sum </div>
+                <div class='case_produit border_vert'>Chiffre d'affaires : $sumPrix DH </div>
+                <div class='case_produit border_roz'>Côut des produits en stock : $sumCout DH </div>
+            </header>
                 <main>
-                    <div class='table_produit' >
+                    <div class='table' >
                         <div class='entete'>
                             <div class='element'>
                                 <div class='chercher'>
@@ -943,7 +966,7 @@ if (isset($_GET['table'])) {
                                         <p><span class='trie_par'>Trier par :</span> <span class='name_trie'></span></p>
                                         <span class='icon_select_trie'><i class='bx bxs-chevron-down'></i></span>
                                     </div>
-                                    <div class='display_trie cacher'>
+                                    <div class='display_trie'>
                                         <ul>
                                             <li><a href='gestion.php?table=produit&tri=NomPr'>Nom</a></li>
                                             <li><a href='gestion.php?table=produit&tri=NomCt'>Catégorie</a></li>
@@ -959,7 +982,7 @@ if (isset($_GET['table'])) {
                                         <p><span class='statut_par'>Statut : </span></p>
                                         <span class='icon_select_statut'><i class='bx bxs-chevron-down'></i></span>
                                     </div>
-                                <div class='display_statut cacher'>
+                                <div class='display_statut'>
                                     <ul>
                                         <li><a href='gestion.php?table=produit'>Tout</a></li>
                                         <li><a href='gestion.php?table=produit&statut=1'>Disponible</a></li>
@@ -1041,16 +1064,13 @@ if (isset($_GET['table'])) {
             echo "
             <section class='home'>
                 <header class='categorie'>
-                    <div class='header_header_categorie'></div>
-                    <div class='case_categorie'>Nombre de catégories : $nbreCt</div>
-                    <div class='case_categorie'>Catégorie la plus populaire :".$CtPop['NomCt']."</div>
-                    <div class='case_categorie'>Catégorie la moins populaire :". $CtMoinsPop['NomCt']."</div>
+                    <div class='case_categorie border_red'>Nombre de catégories : $nbreCt</div>
+                    <div class='case_categorie border_roz'>Catégorie la plus populaire :".$CtPop['NomCt']."</div>
+                    <div class='case_categorie border_orange'>Catégorie la moins populaire :". $CtMoinsPop['NomCt']."</div>
                 </header>
                 <main>
                     <div class='containner_main_categorie'>
-                    <div class='ajouter_category'>
-                            <button class='btn_ajouter_category' ><i class='fa-solid fa-plus'></i> Ajouter catégorie</button>
-                        </div>
+                   
                         
             ";
                         $rslt = mysqli_query($mysqli, 'select * from catégorie order by NomCt');
@@ -1063,6 +1083,7 @@ if (isset($_GET['table'])) {
                             <div class='name_category'>
                                 <input type='text' value='".$row['NomCt']."' name='NomCt' readonly class='nom_categorie'>
                                 <button type='button' class='valider_modif_categorie cacher_icon' onclick=\"confirmModifAjt('modifCt$IdCt','Voulez-vous vraiment modifier le nom de la catégorie?','Modifier')\"><i class='bx bxs-check-square icon_valider_modif_categorie'></i></button>
+                                <button type='reset' class='exit_modif_categorie cacher_icon'><i class='bx bxs-x-square icon_exit_modif_categorie''></i></button>
                             </div> 
                             <div class='nbr_produit'>
                                 <p>Nombre de produits :</p> <span>".mysqli_num_rows($rslt2)."</span>
@@ -1070,6 +1091,7 @@ if (isset($_GET['table'])) {
                             <div class='action_category'>
                             
                                 <i class=\"bx bx-edit btn_modifier_categorie\" ></i>
+                                <div class='border_vertical'></div>
                                 <lord-icon class='btn_supprimer_categorie' src=\"https://cdn.lordicon.com/qjwkduhc.json\" trigger=\"hover\"  colors=\"primary:#e83a30,secondary:#e83a30,tertiary:#ffffff\" state=\"hover-empty\" style=\"width:35px;height:35px\" onclick=\"confirmSupp('catégorie','supprimer',$IdCt)\" ></lord-icon>
                             </div> 
                         </div>
@@ -1079,6 +1101,9 @@ if (isset($_GET['table'])) {
                         // <input  type='submit' value='Valider' class='btn_valider_categorie'>
                                 // <input  type='button' value='Modifier' class='btn_modifier_categorie cacher'>
                     echo "
+                    </div>
+                    <div class='ajouter_category'>
+                        <button class='btn_ajouter_category' ><i class='fa-solid fa-plus'></i> Ajouter catégorie</button>
                     </div>
                     ";
         ;break;
@@ -1096,15 +1121,14 @@ if (isset($_GET['table'])) {
             echo "
             <section class='home'>
                 <header class='commande'>
-                    <div class='header_header_commande'></div>
-                    <div class='case_commande'> Total commandes : $row </div>
-                    <div class='case_commande'> En cours : $row1 </div>
-                    <div class='case_commande'> Expédiée : $row2 </div>
-                    <div class='case_commande'> Livrée : $row3 </div>
-                    <div class='case_commande'> Annulée : $row4 </div>
+                    <div class='case_commande border_red'> Total commandes : $row </div>
+                    <div class='case_commande border_vert'> En cours : $row1 </div>
+                    <div class='case_commande border_orange'> Expédiée : $row2 </div>
+                    <div class='case_commande border_roz'> Livrée : $row3 </div>
+                    <div class='case_commande border_maron'> Annulée : $row4 </div>
                 </header>
                 <main>
-                    <div class='table_commande'>
+                    <div class='table'>
                         <div class='entete'>
                             <div class='element'>
                                 <div class='chercher'>
@@ -1121,7 +1145,7 @@ if (isset($_GET['table'])) {
                                     <p><span class='trie_par'>Trier par :</span> <span class='name_trie'></span></p>
                                     <span class='icon_select_trie'><i class='bx bxs-chevron-down'></i></span>
                                 </div>
-                                <div class='display_trie cacher'>
+                                <div class='display_trie '>
                                     <ul>
                                         <li><a href='gestion.php?table=commande&tri=NomMb'>Nom client</a></li>
                                         <li><a href='gestion.php?table=commande&tri=DateCmd'>Date commande</a></li>
@@ -1138,7 +1162,7 @@ if (isset($_GET['table'])) {
                                     <p><span class='statut_par'>Statut : </span></p>
                                     <span class='icon_select_statut'><i class='bx bxs-chevron-down'></i></span>
                                 </div>
-                                <div class='display_statut cacher'>
+                                <div class='display_statut '>
                                     <ul>
                                         <li><a href='gestion.php?table=commande'>Tout</a></li>
                                         <li><a href='gestion.php?table=commande&statut=En cours'>En cours</a></li>
@@ -1218,13 +1242,12 @@ if (isset($_GET['table'])) {
             echo"
                 <section class='home '>
                     <header class='rdv'>
-                        <div class='header_header_rdv'></div>
-                        <div class='case_rdv'>Nombre de RDV : $nbre</div>
-                        <div class='case_rdv'>RDV Traité : $nbreTr</div>
-                        <div class='case_rdv'>RDV Non traité : $nbreNonTr</div>
+                        <div class='case_rdv border_red'>Nombre de RDV : $nbre</div>
+                        <div class='case_rdv border_orange'>RDV Traité : $nbreTr</div>
+                        <div class='case_rdv border_vert'>RDV Non traité : $nbreNonTr</div>
                     </header>
                     <main>
-                        <div class='table_rdv'>
+                        <div class='table'>
                             <div class='entete'>
                                 <div class='element'>
                                     <div class='chercher '>
@@ -1241,10 +1264,10 @@ if (isset($_GET['table'])) {
                                             <p><span class='trie_par'>Trie par :</span> <span class='name_trie'></span></p>
                                             <span class='icon_select_trie'><i class='bx bxs-chevron-down'></i></span>
                                         </div>
-                                        <div class='display_trie cacher'>
+                                        <div class='display_trie'>
                                             <ul>
                                                 <li><a href='gestion.php?table=RDV&tri=IdRDV'>N° RDV</a></li>
-                                                <li><a href='gestion.php?table=RDV&tri=NomMb'>Nom client</a></li>
+                                                <li><a href='gestion.php?table=RDV&tri=nom'>Nom client</a></li>
                                                 <li><a href='gestion.php?table=RDV&tri=DateRDV'>Date</a></li>
                                                 <li><a href='gestion.php?table=RDV&tri=TypePrjt'>Type projet</a></li>
                                                 <li><a href='gestion.php?table=RDV&tri=StatutRDV'>StatutRDV</a></li>
@@ -1258,7 +1281,7 @@ if (isset($_GET['table'])) {
                                             <p><span class='statut_par'>statut :</span> <span class='name_statut'></span></p>
                                             <span class='icon_select_statut'><i class='bx bxs-chevron-down'></i></span>
                                         </div>
-                                        <div class='display_statut cacher'>
+                                        <div class='display_statut'>
                                             <ul>
                                                 <li><a href='gestion.php?table=RDV'>Tout</a></li>
                                                 <li><a href='gestion.php?table=RDV&statut=Traité'>Traité</a></li>
@@ -1289,49 +1312,70 @@ if (isset($_GET['table'])) {
                                 </thead>
                                 <tbody>
                 ";
-                                if(isset($_GET['tri'])){
-                                    $tri=$_GET['tri'];
-                                    $rslt = mysqli_query($mysqli, "select * from rdv  order by $tri ");
-                                }
-                                elseif(isset($_GET['statut'])){
-                                    $statut=$_GET['statut'];
-                                    $rslt = mysqli_query($mysqli, "select * from rdv where StatutRDV='$statut' order by IdRDV");
-                                }
-                                elseif(isset($_GET['recherche']) && isset($_GET['mot'])){
-                                    $mot=$_GET['mot'];
-                                    $rslt = mysqli_query($mysqli, "select * from rdv  where IdRDV like '%$mot%' order by IdRDV");
-                                }
-                                else{
-                                    $rslt=mysqli_query($mysqli,"SELECT r.*, 
-                                    CASE WHEN r.IdMb IS NOT NULL THEN m.NomMb ELSE p.NomPart END AS nom,
-                                    CASE WHEN r.IdMb IS NOT NULL THEN m.PrénomMb ELSE p.PrénomPart END AS prenom,
-                                    CASE WHEN r.IdMb IS NOT NULL THEN m.NumTélé ELSE p.NumTélé END AS télé,
-                                    CASE WHEN r.IdMb IS NOT NULL THEN m.AdresseMb ELSE p.AdressePart END AS adresse
-                                    FROM rdv r
-                                    LEFT JOIN membre m ON r.IdMb = m.IdMb
-                                    LEFT JOIN participant p ON r.IdPart = p.IdPart;");
-                                }
-                                while($row=mysqli_fetch_assoc($rslt)){
-                                    $IdRDV=$row['IdRDV'];
-                                    echo "
-                                    <tr>
-                                        <td>$row[IdRDV]</td>
-                                        <td>$row[nom] $row[prenom]</td>
-                                        <td>$row[adresse]</td>
-                                        <td>$row[télé]</td>
-                                        <td>$row[TypePrjt]</td>
-                                        <td>$row[DateRDV]</td>
-                                        <td>$row[StatutRDV]</td>
-                                        <td class='action'>
-                                            <i class='bx bx-edit btn_modifier_rdv' onclick='document.location.href=\"gestion.php?table=RDV&modifier_RDV=true&IdRDV=$IdRDV\"'></i>
-                                            <lord-icon src='https://cdn.lordicon.com/qjwkduhc.json' trigger='hover' colors='primary:#e83a30,secondary:#e83a30,tertiary:#ffffff' state='hover-empty' style='width:35px;height:35px' onClick=\"confirmSupp('RDV','supprimer',$IdRDV)\"></lord-icon>
-                                        </td>
-                                    </tr>";
-                                }
-                                echo "
-                                </tbody>
-                            </table>
-                        </div>";
+                if(isset($_GET['tri'])){
+                    $tri=$_GET['tri'];
+                    $rslt = mysqli_query($mysqli, "SELECT r.*, 
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.NomMb ELSE p.NomPart END AS nom,
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.PrénomMb ELSE p.PrénomPart END AS prenom,
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.NumTélé ELSE p.NumTélé END AS télé,
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.AdresseMb ELSE p.AdressePart END AS adresse
+                    FROM rdv r
+                    LEFT JOIN membre m ON r.IdMb = m.IdMb
+                    LEFT JOIN participant p ON r.IdPart = p.IdPart order by $tri ");
+                }
+                elseif(isset($_GET['statut'])){
+                    $statut=$_GET['statut'];
+                    $rslt = mysqli_query($mysqli, "SELECT r.*, 
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.NomMb ELSE p.NomPart END AS nom,
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.PrénomMb ELSE p.PrénomPart END AS prenom,
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.NumTélé ELSE p.NumTélé END AS télé,
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.AdresseMb ELSE p.AdressePart END AS adresse
+                    FROM rdv r
+                    LEFT JOIN membre m ON r.IdMb = m.IdMb
+                    LEFT JOIN participant p ON r.IdPart = p.IdPart where StatutRDV='$statut' order by IdRDV");
+                }
+                elseif(isset($_GET['recherche']) && isset($_GET['mot'])){
+                    $mot=$_GET['mot'];
+                    $rslt = mysqli_query($mysqli, "SELECT r.*, 
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.NomMb ELSE p.NomPart END AS nom,
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.PrénomMb ELSE p.PrénomPart END AS prenom,
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.NumTélé ELSE p.NumTélé END AS télé,
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.AdresseMb ELSE p.AdressePart END AS adresse
+                    FROM rdv r
+                    LEFT JOIN membre m ON r.IdMb = m.IdMb
+                    LEFT JOIN participant p ON r.IdPart = p.IdPart where IdRDV like '%$mot%' order by IdRDV");
+                }
+                else{
+                    $rslt=mysqli_query($mysqli,"SELECT r.*, 
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.NomMb ELSE p.NomPart END AS nom,
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.PrénomMb ELSE p.PrénomPart END AS prenom,
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.NumTélé ELSE p.NumTélé END AS télé,
+                    CASE WHEN r.IdMb IS NOT NULL THEN m.AdresseMb ELSE p.AdressePart END AS adresse
+                    FROM rdv r
+                    LEFT JOIN membre m ON r.IdMb = m.IdMb
+                    LEFT JOIN participant p ON r.IdPart = p.IdPart;");
+                }
+                while($row=mysqli_fetch_assoc($rslt)){
+                    $IdRDV=$row['IdRDV'];
+                    echo "
+                    <tr>
+                        <td>$IdRDV</td>
+                        <td>$row[nom] $row[prenom]</td>
+                        <td>$row[adresse]</td>
+                        <td>$row[télé]</td>
+                        <td>$row[TypePrjt]</td>
+                        <td>$row[DateRDV]</td>
+                        <td>$row[StatutRDV]</td>
+                        <td class='action'>
+                            <i class='bx bx-edit btn_modifier_rdv' onclick='document.location.href=\"gestion.php?table=RDV&modifier_RDV=true&IdRDV=$IdRDV\"'></i>
+                            <lord-icon src='https://cdn.lordicon.com/qjwkduhc.json' trigger='hover' colors='primary:#e83a30,secondary:#e83a30,tertiary:#ffffff' state='hover-empty' style='width:35px;height:35px' onClick=\"confirmSupp('RDV','supprimer',$IdRDV)\"></lord-icon>
+                        </td>
+                    </tr>";
+                }
+                echo "
+                </tbody>
+            </table>
+        </div>";
         ;break;
         case 'promos' :
             $rslt1=mysqli_query($mysqli,"select * from promos");
@@ -1343,10 +1387,9 @@ if (isset($_GET['table'])) {
             echo"
             <section class='home'>
                 <header class='promos'>
-                    <div class='header_header_promos'></div>
-                    <div class='case_promos'>Nombre de promos : $nbre</div>
-                    <div class='case_promos'>Promos En cours : $nbreEnCrs</div>
-                    <div class='case_promos'>Promos Terminées : $nbreTerm</div>
+                    <div class='case_promos border_red'>Nombre de promos : $nbre</div>
+                    <div class='case_promos border_blue'>Promos En cours : $nbreEnCrs</div>
+                    <div class='case_promos border_orange'>Promos Terminées : $nbreTerm</div>
                 </header>
                 <main>
                     <div class='table_promos'>
@@ -1366,7 +1409,7 @@ if (isset($_GET['table'])) {
                                         <p><span class='trie_par'>Trier par :</span> <span class='name_trie'></span></p>
                                         <span class='icon_select_trie'><i class='bx bxs-chevron-down'></i></span>
                                     </div>
-                                    <div class='display_trie cacher'>
+                                    <div class='display_trie'>
                                         <ul>
                                             <li><a href='gestion.php?table=promos&tri=DateDéb'>Date début</a></li>
                                             <li><a href='gestion.php?table=promos&tri=DateFin'>Date fin</a></li>
@@ -1382,7 +1425,7 @@ if (isset($_GET['table'])) {
                                         <p><span class='statut_par'>Statut : </span></p>
                                         <span class='icon_select_statut'><i class='bx bxs-chevron-down'></i></span>
                                     </div>
-                                <div class='display_statut cacher'>
+                                <div class='display_statut'>
                                     <ul>
                                         <li><a href='gestion.php?table=promos'>Tout</a></li>
                                         <li><a href='gestion.php?table=promos&statut=En cours'>En cours</a></li>
@@ -1453,14 +1496,13 @@ if (isset($_GET['table'])) {
 else{
     header("location:accueil.php");
 }
-if(isset($_GET['success'])){
-    echo "<script>success('$_GET[success]','$_GET[table]');</script>";
+if(isset($_SESSION['success'])){
+    echo "<script>success('$_SESSION[success]');</script>";
+    unset($_SESSION['success']);
 }
-if(isset($_GET['successDétails'])){
-    echo "<script>successDétails('$_GET[successDétails]');</script>";
-}
-if(isset($_GET['erreur'])){
-    echo "<script>erreur('$_GET[erreur]');</script>";
+if(isset($_SESSION['erreur'])){
+    echo "<script>erreur('$_SESSION[erreur]');</script>";
+    unset($_SESSION['erreur']);
 }
 ?>
 <?php include('./inc_ADMIN/footer.html');?>

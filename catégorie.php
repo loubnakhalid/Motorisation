@@ -31,11 +31,12 @@ elseif(isset($_GET['rechercher']) && isset($_GET['mot'])){
 }
 
 ?>
+     <div class="container_categorie">
         <div class='name_categorie'>
             <h2><?= $titre ?></h2>
             <p><?= $nbre ?> produits trouvés</p>
         </div>
-        <div class='entete_categorie'>
+        <div class='entete_mes_categorie'>
             <div class='element'>
                 <div class='trie'>
                     <div class='input_trie'>
@@ -69,16 +70,8 @@ elseif(isset($_GET['rechercher']) && isset($_GET['mot'])){
                             <li><a href='catégorie.php?IdCt=<?=$IdCt?>&statut=promo'>En promo</a></li>
                         </ul>
                     </div>
-                   
                 </div>
-
             </div>
-            <div class='interval_prix'>
-               <div class='min'> Min  <input type='number'></div>
-               <div class='max'> Max <input type='number'></div>
-           </div>
-           
-
         </div>
         <div class='Les_produit_categorie'>
         <?php
@@ -101,5 +94,6 @@ elseif(isset($_GET['rechercher']) && isset($_GET['mot'])){
         }
         ?>
         </div>
+    </div>
 
 <?php include('./inc/bas.inc.html'); ?>

@@ -1,3 +1,6 @@
+section#MotorVolet {
+    padding: 50px;
+}
 .VoletT1 {
     font-size: 29px;
     font-weight: 900;
@@ -7,7 +10,7 @@
 }
 
 .voletPara1 {
-    width: 1280px;
+    width: 100%;
     line-height: 26px;
     font-size: 15px;
     font-weight: 600;
