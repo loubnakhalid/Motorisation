@@ -1,3 +1,6 @@
+let btn_ajouter_category = document.querySelector(".btn_ajouter_category"),
+    containner_main_categorie = document.querySelector(".containner_main_categorie");
+btn_ajouter_category.addEventListener("click", ajouterFormulaire);
 let change = document.querySelector(".change"),
     menu = document.querySelector(".menu");
 change.addEventListener("click", () => {
@@ -60,9 +63,7 @@ input_image.onchange = () => {
         image_telecharger.setAttribute("src", reader.result);
     }
 };
-let btn_ajouter_category = document.querySelector(".btn_ajouter_category"),
-    containner_main_categorie = document.querySelector(".containner_main_categorie");
-btn_ajouter_category.addEventListener("click", ajouterFormulaire);
+
 
 document.addEventListener("DOMContentLoaded", function(event) {
     var scrollpos = localStorage.getItem('scrollpos');

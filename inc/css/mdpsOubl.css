@@ -2,7 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 114px;
+    /* margin: 114px; */
+    height: 74vh;
 }
 
 .TitleMtdpsOub {

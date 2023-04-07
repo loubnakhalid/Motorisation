@@ -23,7 +23,7 @@ section.fiche_produit {
 .fiche_produit_left img {
     width: 100%;
     height: 100%;
-    object-fit: revert;
+    object-fit: contain;
     border-radius: 20px;
     border: 1px solid #ecedf0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .04);

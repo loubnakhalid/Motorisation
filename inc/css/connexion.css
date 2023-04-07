@@ -2,9 +2,9 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
-    margin-top: 46px;
-    margin-bottom: 22px;
-    padding: 79px 50px;
+    align-items: center;
+    height: 74vh;
+
 }
 
 .formCnx {

@@ -117,6 +117,7 @@ include('./inc/init.inc.php');
     </header>
     <main>
         <!--Formulaire RDV-->
+        <form id='RDV' action='controller.php' method='post' class='Rdv' onsubmit='return ValidationRdv()' style='display:none;'>
         <?php
         if(isset($_SESSION['membre']['IdMb'])){
             $rqt='SELECT * FROM membre WHERE IdMb='.$_SESSION['membre']['IdMb'];
@@ -134,7 +135,6 @@ include('./inc/init.inc.php');
             $Adresse="";
         }
         ?>
-        <form id='RDV' action='controller.php' method='post' class='Rdv' onsubmit='return ValidationRdv()' style='display:none;'>
             <div class='Formulaire'>
                 <div class='Form-header'>
                     <div class='Form-title'>Demander RDV</div>

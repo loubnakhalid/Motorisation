@@ -41,7 +41,7 @@ if(isset($_POST['inscr']) || (isset($_GET['action'])) && $_GET['action'] == "ins
 			$subject="Bonjour ".$NomMb." ".$PrénomMb;
             $_POST['MDPS']=password_hash($_POST['MDPS'],PASSWORD_DEFAULT,['cost'=>14]);
             //Insertion dans la base de données et envoi d'email de Bienvenu------------------------------------------------------------//
-			if(mysqli_query($mysqli,"INSERT INTO membre (NomMb,PrénomMb,NumTélé,DateNc,Ville,CP,AdresseMb,EmailMb,MDPS) VALUES ('$NomMb','$PrénomMb','$_POST[NumTélé]','$_POST[DateNc]','$Ville','$_POST[CP]','$AdresseMb','$EmailMb','$_POST[MDPS]'")){
+			if(mysqli_query($mysqli,"INSERT INTO membre (NomMb,PrénomMb,NumTélé,DateNc,Ville,CP,AdresseMb,EmailMb,MDPS) VALUES ('$NomMb','$PrénomMb','$_POST[NumTélé]','$_POST[DateNc]','$Ville','$_POST[CP]','$AdresseMb','$EmailMb','$_POST[MDPS]')")){
                 mail($EmailMb,$subject,$message,$header);
                 unset($_COOKIE['login']);
                 $_SESSION['success']='Vous êtes inscris avec succés ! Veuillez vous connecter à votre compte';
@@ -241,7 +241,7 @@ if(isset($_POST['Finaliser'])){
             }
         }
         else{
-            $_SESSION['erreur']='Erreur à la finalisation de commande ! Veuillez contacter-nous et merci 1';
+            $_SESSION['erreur']='Erreur à la finalisation de commande ! Veuillez contacter-nous et merci';
             header("location:panier.php");
         }
         //Modifiaction des informations du membre---------------------------------------------------------------------------------------//
@@ -268,7 +268,7 @@ if(isset($_POST['Finaliser'])){
             mail($to,$subject,$message,$header);
         }
         else{
-            $_SESSION['erreur']='Erreur à la finalisation de commande ! Veuillez contacter-nous et merci 2';
+            $_SESSION['erreur']='Erreur à la finalisation de commande ! Veuillez contacter-nous et merci';
             header("location:panier.php");
         }
         //Diminuer la quantité des produits commandés------------------------------------------------------------------------------------//
@@ -285,18 +285,18 @@ if(isset($_POST['Finaliser'])){
                     header("location:profil.php");
                 }
                 else{
-                    $_SESSION['erreur']='Erreur à la finalisation de commande ! Veuillez contacter-nous et merci 3 ';
+                    $_SESSION['erreur']='Erreur à la finalisation de commande ! Veuillez contacter-nous et merci';
                     header("location:panier.php");
                 }
             }
             else{
-                $_SESSION['erreur']='Erreur à la finalisation de commande ! Veuillez contacter-nous et merci 4';
+                $_SESSION['erreur']='Erreur à la finalisation de commande ! Veuillez contacter-nous et merci';
                 header("location:panier.php");
             }
         }
     }
     catch(Exception | Error $e){
-        $_SESSION['erreur']='Erreur à la finalisation de commande ! Veuillez contacter-nous et merci 5';
+        $_SESSION['erreur']='Erreur à la finalisation de commande ! Veuillez contacter-nous et merci';
         header("location:panier.php");
     }
 }

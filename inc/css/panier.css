@@ -1,10 +1,12 @@
 #panier {
     display: flex;
     flex-wrap: nowrap;
+    align-items: center;
     justify-content: space-between;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 28px 0px;
+    height: 74vh;
+    /* margin-left: 5px; */
+    /* margin-right: 5px; */
+    /* padding: 79px 0px; */
 }
 
 #Total {
@@ -17,13 +19,10 @@
     padding: 30px;
     height: 260px;
     position: relative;
-    /* border-radius: 25px; */
-    /* box-shadow: 10px 5px 5px rgb(199, 194, 194); */
     display: flex;
     flex-direction: column;
-    /* justify-items: center; */
-    /* align-content: center; */
     align-items: center;
+   
 }
 
 #Total table {
@@ -43,7 +42,6 @@
 #Total h3 {
     padding-bottom: 15px;
     color: #014a6e;
-    /* margin-left: 54px; */
 }
 
 #Total button {
@@ -65,8 +63,6 @@
     width: 850Px;
     height: 200px;
     border: 1px solid #e2e9e1;
-    /* box-shadow: 0 5px 10px rgba(110, 108, 108, 0.2); */
-    /* border-radius: 25px; */
     margin-left: 10px;
     background-color: white;
     margin-bottom: 13px;
@@ -196,7 +192,6 @@
 .panier_vide {
     width: -8%;
     height: 50vh;
-    /* position: relative; */
     margin-left: 270px;
     display: flex;
     flex-direction: column;

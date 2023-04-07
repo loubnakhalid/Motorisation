@@ -3,47 +3,66 @@
     flex-wrap: nowrap;
     justify-content: space-between;
     padding: 40px;
+    background: #f4f8fb;
 }
-
+.InforPersonnelle {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
 .ProfTitle {
     font-size: 24px;
     font-weight: 900;
     color: #044570;
     display: flex;
     justify-content: center;
-    margin-bottom: 35px;
+    /* margin-bottom: 35px; */
 }
 
 .Identité,
 .Identifiant2,
 .Adresses2 {
-    border: 1px solid rgb(192, 191, 191);
-    border-radius: 10px;
+    /* border: 1px solid rgb(192, 191, 191); */
+    /* border-radius: 10px; */
+    border: 1px solid rgb(0 159 242);
+    border-radius: 8px;
     width: 503px;
     height: 140px;
-    margin-bottom: 36px;
+    /* margin-bottom: 36px; */
     background-color: #f4f8fb;
+    background: #e8f5ff;
+    position: relative;
 }
 
 .SousTitle1 {
     font-size: 16px;
     font-weight: 600;
-    color: black;
-    border-bottom: 1px solid rgb(192, 191, 191);
-    padding: 10px;
-    padding-left: 173px;
+    color: #ff822f;
+    border-bottom: 1px solid rgb(0 175 246);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+ 
 }
 
 .NomPr {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-around;
-    margin-left: -43px;
+    justify-content: space-between;
+    /* margin-left: -43px; */
     margin-top: 20px;
+    padding: 0 18px;
 }
 
 .MpPrEmPr {
     padding: 14px 18px;
+    height: 99px;
+    /* background: navajowhite; */
+    position: relative;
+}
+fieldset {
+    border-color: #96d3ff;
 }
 
 .MpsPr {
@@ -56,23 +75,38 @@
 
 .DateModif {
     padding: 10px;
-    margin-left: 63px;
+    margin-left: 7px;
 }
 
-.LienProf1,
-.LienProf2,
-.LienProf3 {
-    float: right;
-    margin-right: 19px;
+.LienProf1 , .LienProf2 , .LienProf3  {
+    position: absolute;
+    right: 14px;
+    bottom: 0px;
+    color: #0037ff;
+
+}
+
+.LienProf1 a, .LienProf2 a, .LienProf3 a {
+    color: #0037ff;
+
+}
+.ProfCommande {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 .Commande {
-    border: 1px solid rgb(192, 191, 191);
+    border: 1px solid rgb(0 159 242);
     border-radius: 10px;
     width: 650px;
     height: 68px;
-    box-shadow: 20px 20px 20px rgb(229, 229, 229);
-    margin-bottom: 25px;
+    /* box-shadow: 20px 20px 20px rgb(229, 229, 229); */
+    /* margin-bottom: 25px; */
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+    background: #e8f5ff;
 }
 
 .ProfIdCmd,
@@ -81,18 +115,23 @@
 .ProfNtCmd {
     border: none;
     background-color: transparent;
-    margin-top: 21px;
+    /* margin-top: 21px; */
     font-size: 14px;
     font-weight: 500;
 }
 
+.InfoCmd {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
 .ProfIdCmd {
     font-size: 16px;
     font-weight: 800;
     width: 50px;
-    margin-left: 28px;
-    margin-right: 20px;
-    color: orange;
+    /* margin-left: 28px; */
+    /* margin-right: 20px; */
+    color: #ff822f;
 }
 
 .cmdVide {
@@ -123,6 +162,8 @@
     border: none;
     background-color: transparent;
     height: 20px;
+    width: 100%;
+    padding-left: 5px;
 }
 
 .InputNmPr:focus,
@@ -143,10 +184,12 @@
 .legendInput {
     padding-left: 5px;
     padding-right: 5px;
+    color: #ff822f;
 }
 
 .identifiantModif {
     width: 400px;
+    border-color: #ace4ff;
     margin-left: 43px;
     margin-top: 21px;
 }
@@ -157,6 +200,7 @@
 
 .InputDtMdf {
     display: flex;
+    width: 100%;
     flex-wrap: nowrap;
     justify-content: space-between;
 }
@@ -174,7 +218,7 @@
     background: #015E9b;
     border: none;
     color: white;
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 15px;
     font-weight: 600;
 }
