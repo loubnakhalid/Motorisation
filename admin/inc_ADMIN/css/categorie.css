@@ -12,11 +12,12 @@
     background-color: white;
     display: flex;
     align-items: center;
+    border: aliceblue;
     justify-content: center;
     border: none;
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, .08);
     cursor: pointer;
-    width: 503px;
+    width: 538px;
     height: 70px;
 }
 
@@ -38,6 +39,7 @@
     box-shadow: rgba(163, 163, 163, 0.39) 0px 2px 5px -1.5px;
     border-radius: 3px;
 }
+
 .home main .category .name_category {
     width: 45%;
     height: 100%;
@@ -48,7 +50,7 @@
     margin-left: 16px;
 }
 
-.home main .category .name_category  .nmr_categorie{
+.home main .category .name_category .nmr_categorie {
     background-color: #e5f4ff;
     /* padding: 25px; */
     height: 47px;
@@ -57,7 +59,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #9107bc;
+    color: #08309e;
     font-size: 19px;
     font-weight: 900;
     margin-right: 5px;
@@ -78,6 +80,7 @@
     color: #08a775;
     cursor: pointer;
 }
+
 .home main .category .name_category .icon_exit_modif_categorie {
     font-size: 25px;
     color: #f83030;
@@ -134,7 +137,8 @@
     z-index: 5;
     cursor: pointer;
 }
-.home main .category .action_category .border_vertical{
+
+.home main .category .action_category .border_vertical {
     border-right: 1px solid #d3cdcd;
     height: 100%;
     width: 18px;
@@ -158,7 +162,7 @@ i.bx.bx-edit.btn_modifier_categorie {
     justify-content: flex-end;
 }
 
- .ajouter_category button {
+.ajouter_category button {
     color: #ffffff;
     background-color: #0833a7;
     border: none;

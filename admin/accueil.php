@@ -1,9 +1,5 @@
 <?php
 include('./inc_ADMIN/menu.inc.php');
-if(! Admin()){
-	header('location:../index.php');
-	exit();
-}
 require_once '../vendor/autoload.php';
 echo "<section class='home'>";
 try{

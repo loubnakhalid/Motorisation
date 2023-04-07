@@ -36,7 +36,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
         }
         else{
             $NomPr=$_POST['NomPr'];
-            $DescriptionPr=$_POST['DescriptionPr'];
+            $DescriptionPr=addslashes($_POST['DescriptionPr']);
             $PrixPr=$_POST['PrixPr'];
             $StatutPr=$_POST['StatutPr'];
             $StockPr=$_POST['StockPr'];
@@ -148,12 +148,12 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             $id=$_GET['id'];
             try{
                 if($rslt=mysqli_query($mysqli,"delete from promo_produit where IdPrmPrdt=$id")){
-                    $_SESSION['success']='Vous-avez annulé la promotion sur ce produit avec succés !';
+                    $_SESSION['success']='Vous-avez supprimmer le produit avec succés !';
                     header("location:$lienPr");
                 }
             }
             catch(Exception | Error $e){
-                $_SESSION['erreur']="Erreur à la suppression de produit ! Veuillez contacter l'équipe de développement .";
+                $_SESSION['erreur']="Erreur à la suppression de produit ! Veuillez contacter l'équipe de développement";
                 header("location:$lienPr");
             }
         }
@@ -164,7 +164,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                 for($i=0;$i<count($IdPr);$i++){
                     $rslt=mysqli_query($mysqli,"insert into promo_produit (IdPromo,IdPr) values('$IdPromo','$IdPr[$i]')");
                 }
-                $_SESSION['success']='Vous-avez effectuer la promotion sur les produits avec succés !';
+                $_SESSION['success']='Vous-avez ajouter le(s) produit(s) avec succès !';
                 header("location:$lienPr");
             }
             catch(Exception | Error $e){
@@ -233,7 +233,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                 }
                 }
                 catch(Exception | Error $e){
-                    $_SESSION['erreur']='Vous-avez modifié la quantité du produit avec succès !';
+                    $_SESSION['erreur']='Erreur à la modification ! Veuillez contacter l\équipe de développement !';
                     header("location:$lienPr");
                 }
             }
@@ -243,37 +243,44 @@ if(isset($_GET['table']) && isset($_GET['action'])){
         }
         elseif($action=='ajouter'){
             if(isset($_POST['IdCmd']) && isset($_POST['IdPr'])){
-            $IdCmd=$_POST['IdCmd'];
-            $IdPr=$_POST['IdPr'];
-            try{
-                foreach($IdPr as $value ){
-                    $rqt4="insert into détails_commande (IdCmd,IdPr,qt) values('$IdCmd','$value','1')";
-                    $rslt=mysqli_query($mysqli,$rqt4);
-                    $rslt2=mysqli_query($mysqli,"select * from produit where IdPr=$value");
-                    $row2=mysqli_fetch_assoc($rslt2);
-                    $nvStock=$row2['StockPr']-1;
-                    $rslt2=mysqli_query($mysqli,"update produit set StockPr=$nvStock where IdPr=$value");
+                $IdCmd=$_POST['IdCmd'];
+                $IdPr=$_POST['IdPr'];
+                try{
+                    foreach($IdPr as $value ){
+                        $rqt4="insert into détails_commande (IdCmd,IdPr,qt) values('$IdCmd','$value','1')";
+                        $rslt=mysqli_query($mysqli,$rqt4);
+                        $rslt2=mysqli_query($mysqli,"select * from produit where IdPr=$value");
+                        $row2=mysqli_fetch_assoc($rslt2);
+                        $nvStock=$row2['StockPr']-1;
+                        $rslt2=mysqli_query($mysqli,"update produit set StockPr=$nvStock where IdPr=$value");
+                    }
+                    if($rsltdét=mysqli_query($mysqli,"select * from détails_commande natural join produit where IdCmd=$IdCmd")){
+                        $prixTT=0;
+                        while($row=mysqli_fetch_assoc($rsltdét)){
+                            $IdPr=$row['IdPr'];
+                            if(verifPromo($IdPr)){
+                                $PrixPr=nvPrix($IdPr);
+                            }
+                            else{
+                                $PrixPr=$row['PrixPr'];
+                            }
+                            $prixTT=$prixTT+($row['qt']*$PrixPr);
+                        }
+                        if($rsltdét1=mysqli_query($mysqli,"update commande set prixTT='$prixTT' where IdCmd=$IdCmd")){
+                            $_SESSION['success']='Vous-avez ajouté le(s) produit(s) à la commande avec succés !';
+                            header("location:$lienPr");
+                        }
+                    }
                 }
-                if($rsltdét=mysqli_query($mysqli,"select * from détails_commande natural join produit where IdCmd=$IdCmd")){
-                    $prixTT=0;
-                    while($row=mysqli_fetch_assoc($rsltdét)){
-                        $prixTT=$prixTT+($row['qt']*$row['PrixPr']);
-                    }
-                    if($rsltdét1=mysqli_query($mysqli,"update commande set prixTT='$prixTT' where IdCmd=$IdCmd")){
-                        $_SESSION['success']='Vous-avez ajouté le(s) produit(s) à la commande avec succés !';
-                        header("location:$lienPr");
-                    }
+                catch(Exception | Error $e){
+                    $_SESSION['erreur']="Erreur à l'ajout de(s) produit(s) ! Veuillez contacter l\'équipe de développement";
+                    header("location:$lienPr");
                 }
             }
-            catch(Exception | Error $e){
-                $_SESSION['erreur']="Erreur lors de l'ajout de(s) produit(s) ! Veuillez contacter l\'équipe de développement";
+            else{
+                $_SESSION['erreur']="Veuillez sélectionner un produit !";
                 header("location:$lienPr");
             }
-        }
-        else{
-            $_SESSION['erreur']="Veuillez sélectionner un produit!t";
-            header("location:$lienPr");
-        }
         }
         elseif($action=='ajouterCmd'){
             if(isset($_POST['IdCmd']) && isset($_POST['IdCmdAjt'])){

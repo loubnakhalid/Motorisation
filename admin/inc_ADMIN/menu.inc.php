@@ -1,4 +1,9 @@
-<?php include("../inc/init.inc.php"); ?>
+<?php 
+include("../inc/init.inc.php"); 
+if(! Admin()){
+    header("location:../index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +20,6 @@
     <script src="./inc_ADMIN/js/function.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  
 </head>
 
 <body>
@@ -31,7 +35,7 @@
             <ul>
                 <li class="lien acceuil">
                     <a href="./accueil.php">
-                        <i class='bx bx-home  icon'></i>
+                        <i class='bx bx-home icon'></i>
                         <span class="text">Acceuil</span>
                     </a>
                 </li>

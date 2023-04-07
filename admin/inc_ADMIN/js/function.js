@@ -80,19 +80,13 @@ function confirmModifAjt(formModif, mssg, action) {
         });
 }
 
-function success(success, table) {
+function success(success) {
     swal({
-            title: '',
-            text: success,
-            icon: 'success',
-            button: 'Ok',
-        })
-        .then((value) => {
-            let params = new URLSearchParams(window.location.search);
-            params.delete("success");
-            let newUrl = "gestion.php?" + (params.toString());
-            location.replace(newUrl);
-        });
+        title: '',
+        text: success,
+        icon: 'success',
+        button: 'Ok',
+    });
 }
 
 function erreur(erreur) {
@@ -104,3 +98,17 @@ function erreur(erreur) {
     });
 }
 
+function ajouterFormulaire() {
+    containner_main_categorie.innerHTML = containner_main_categorie.innerHTML + "<form action='controller.php?table=catégorie&action=ajouter' method='post'><div class='category inner'> <div class='name_category inner'><input type='text' value='' name='NomCt' class='nom_categorie display' style='border-color:#00c985'><button type='submit' class='valider_modif_categorie '><i class='bx bxs-check-square icon_valider_modif_categorie '></i></button><button type='reset' class='exit_modif_categorie'><i class='bx bxs-x-square icon_exit_modif_categorie inner''></i></button> </div> </div></form>";
+    document.querySelector(".nom_categorie.display").style.borderColor = '#00c985';
+    containner_main_categorie.lastChild.scrollIntoView({ behavior: 'smooth' });
+    btn_ajouter_category.removeEventListener('click', ajouterFormulaire);
+
+    let icon_exit_modif_categorie_inner = document.querySelector(".icon_exit_modif_categorie.inner");
+    icon_exit_modif_categorie_inner.addEventListener("click", function() {
+        const category_inner = this.closest(".category.inner");
+        category_inner.remove();
+        btn_ajouter_category.addEventListener('click', ajouterFormulaire);
+        location.reload(true);
+    });
+}

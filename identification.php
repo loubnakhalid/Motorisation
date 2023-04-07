@@ -11,12 +11,6 @@ if(isset($_GET['action'])&&$_GET['action']=='connexion'){
         		<div class='input-Email'> 
              		<input type='email' name='EmailMb' value='$EmailMb' placeholder='Email' id='EmCnx' class='inpCnx'>
 					<p class='ErMsg1'>*Ce champ est obligatoire.</p>
-	";
-					if(isset($_GET['erreurEmailMb'])){
-						echo "<script>document.getElementById(\"EmCnx\").style.borderColor = 'red';</script>";
-						echo "<p class='ErMsg1' style='display:block'>*$_GET[erreurEmailMb]</p>";
-					}
-	echo"
        			</div>
        			<div class='input-Cnx'>
              		<input type='password' name='MDPS' placeholder='Mot de passe'  id='MdpCnx' class='inpCnx'>
@@ -76,21 +70,6 @@ if(isset($_GET['action'])&&$_GET['action']=='inscription'){
                     <div>
                         <input type='text' name='AdresseMb' placeholder='Votre adresse'  class='inputInsc' value='$AdresseMb' id='InpAdrs'>
                         <input type='email' name='EmailMb' placeholder='Email'  class='inputInsc' value='$EmailMb' id='InpEm'><br>
-		";
-						if(isset($_GET['erreurEmailMb'])){
-							echo "<script>document.getElementById(\"InpEm\").style.borderColor = 'red';
-							document.getElementById(\"InpAdrs\").style.borderColor = 'green';
-							document.getElementById(\"InpNom\").style.borderColor = 'green';
-							document.getElementById(\"InpPrénom\").style.borderColor = 'green';
-							document.getElementById(\"InpTélé\").style.borderColor = 'green';
-							document.getElementById(\"InpDT\").style.borderColor = 'green';
-							document.getElementById(\"InpVille\").style.borderColor = 'green';
-							document.getElementById(\"InpCP\").style.borderColor = 'green';
-							</script>";
-							echo "<span class='ErEmlOb' style='visibility:visible;left:324px;'>*$_GET[erreurEmailMb]</span>";
-						}
-		
-		echo"
 						<span class='ErAdsOb'>*Ce champs est obligatoire .</span>
                         <span class='ErEmlOb'>*Ce champs est obligatoire .</span>
                     </div>
@@ -110,9 +89,6 @@ if(isset($_GET['action'])&&$_GET['action']=='inscription'){
 }
 //Formulaire mot de passe oublié--------------------------------------------------------------//
 if(isset($_GET['action'])&&$_GET['action']=='mdpsOubl'){
-	if(isset($_GET['erreur'])){
-		echo $_GET['erreur'];
-	}
 	echo"
     <section id='MtdpsOubl'>
       	<div class='FormOubl'>
@@ -137,59 +113,49 @@ if(isset($_GET['action'])&&$_GET['action']=='verifCode'){
 	if(! isset($_SESSION['EmailMb']) || ! isset($_SESSION['code'])){
         echo "<script>document.location.href='identification.php?action=mdpsOubl'</script>";
     }
-	else{
-		if(isset($_GET['erreur'])){
-			echo $_GET['erreur'];
-		}
-		echo"
-		<section id='CodeSec'>
-			<div class='FormCode'>
-				<h2 class='TitleCodeSec'>Entrez votre code de sécurité</h2>
-				<h4 class='PrgCode'>Merci de vérifier dans vos e-mails que vous avez reçu un message avec votre code. Celui-ci est composé de 8 chiffres.</h4>
-				<form name='Code' action='controller.php' method='post' onsubmit='return ValidationCodeSéc()'>
-					<div class='InputCode'>
-						<input type='text' name='code' placeholder='Votre Code' id='InputCS' class='inputCodeSec'><br>
-						<span class='ErCodeSéc'>*Ce champs est obligatoire.</span>
-					</div>
-					<div class='BtnCode'>
-						<input type='submit' name='verifCode' value='Continuer' class='btnCode'>
-						<input type='button' value='Retour' class='btnRetour'>
-					</div>
-				</form>
-			</div>
-		</section>
-		";
-	}
-}
+	echo"
+	<section id='CodeSec'>
+		<div class='FormCode'>
+			<h2 class='TitleCodeSec'>Entrez votre code de sécurité</h2>
+			<h4 class='PrgCode'>Merci de vérifier dans vos e-mails que vous avez reçu un message avec votre code. Celui-ci est composé de 8 chiffres.</h4>
+			<form name='Code' action='controller.php' method='post' onsubmit='return ValidationCodeSéc()'>
+				<div class='InputCode'>
+					<input type='text' name='code' placeholder='Votre Code' id='InputCS' class='inputCodeSec'><br>
+					<span class='ErCodeSéc'>*Ce champs est obligatoire.</span>
+				</div>
+				<div class='BtnCode'>
+					<input type='submit' name='verifCode' value='Continuer' class='btnCode'>
+					<input type='button' value='Retour' class='btnRetour'>
+				</div>
+			</form>
+		</div>
+	</section>
+	";}
+
 //Formulaire de changement de mot de passe----------------------------------------------------//
 if(isset($_GET['action'])&&$_GET['action']=='nvPass'){
 	if(! isset($_SESSION['EmailMb']) || ! isset($_SESSION['code'])){
         echo "<script>document.location.href='identification.php?action=mdpsOubl'</script>";
     }
-	else{
-		if(isset($_GET['erreur'])){
-			echo $_GET['erreur'];
-		}
-		echo"
-		<section id='ReinMdps'>
-			  <div class='FormRein'>
-				<h2 class='TitleReinc'>Choisissez votre mot de passe</h2>
-				 <form name='Reini' action='controller.php' method='post' onsubmit='return ValiderReinMdps()'>
-					<div class='InputRein'>
-						<input type='password' name='MDPS' placeholder='Entrez votre nouveau mot de passe' id='InputRéinMdps' class='inputReinMdps'><br>
-						<span class='ErReinMdps'>*Ce champs est obligatoire .</span><br>
-						<input type='password' name='confMDPS' placeholder='Confirmer votre mot de passe ' id='InputRéinConfMdps'  class='ConfRein'><br>
-						<span class='ErReinConfMdps'>*Ce champs est obligatoire .</span><br>
-					</div>
-					<div class='BtnRein'>
-						<input type='submit' name='nvPass' value='Soumettre' class='btnReinMdps'>
-						<input type='reset' value='Annuler' class='btnAnnul'>
-					</div>
-				  </form>
-			  </div>
-		</section>
-		";
-	}
+	echo"
+	<section id='ReinMdps'>
+			<div class='FormRein'>
+			<h2 class='TitleReinc'>Choisissez votre mot de passe</h2>
+				<form name='Reini' action='controller.php' method='post' onsubmit='return ValiderReinMdps()'>
+				<div class='InputRein'>
+					<input type='password' name='MDPS' placeholder='Entrez votre nouveau mot de passe' id='InputRéinMdps' class='inputReinMdps'><br>
+					<span class='ErReinMdps'>*Ce champs est obligatoire .</span><br>
+					<input type='password' name='confMDPS' placeholder='Confirmer votre mot de passe ' id='InputRéinConfMdps'  class='ConfRein'><br>
+					<span class='ErReinConfMdps'>*Ce champs est obligatoire .</span><br>
+				</div>
+				<div class='BtnRein'>
+					<input type='submit' name='nvPass' value='Soumettre' class='btnReinMdps'>
+					<input type='reset' value='Annuler' class='btnAnnul'>
+				</div>
+				</form>
+			</div>
+	</section>
+	";
 }
 ?>
 <?php require_once("./inc/bas.inc.html"); ?>

@@ -1,8 +1,5 @@
 <?php
 include('./inc_ADMIN/menu.inc.php'); 
-if(! Admin()){
-    echo "<script>document.location.href='../index.php'</script>";
-}
 ?>
 <?php
 if(isset($_GET['modifier_produit']) && isset($_GET['IdPr'])){
@@ -429,7 +426,7 @@ elseif(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
         echo "
         <div class='body_display_commande'>
             <div class='ajouter_cmd_details_cmd'>
-            <i class='bx bxs-x-square icon_x_exit' onclick=\"document.location.href='gestion.php?table=commande&btn_détails_commande=true'\"  style='right: 0'></i>
+            <i class='bx bxs-x-square icon_x_exit' onclick=\"document.location.href='gestion.php?table=commande&détails_commande=true&btn_détails_commande=true&IdCmd=$IdCmd'\"  style='right: 0'></i>
                 <form id='ajtCmdDt' action='controller.php?table=détails_commande&action=ajouterCmd' method='post'>
                     <table cellspacing='0 '>
                         <thead>
@@ -470,14 +467,14 @@ elseif(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
         echo "
         <div class='body_display_commande'>
             <div class='ajouter_prd_details_cmd'>
-                <i class='bx bxs-x-square icon_x_exit' onclick=\"document.location.href='gestion.php?table=commande&btn_détails_commande=true'\"  style='right: 0'></i>
+                <i class='bx bxs-x-square icon_x_exit' onclick=\"document.location.href='gestion.php?table=commande&détails_commande=true&btn_détails_commande=true'\"  style='right: 0'></i>
                 <form id='ajtPrdtDt' action='controller.php?table=détails_commande&action=ajouter' method='post'>
                     <table cellspacing='0 '>
                         <thead>
                             <tr>
-                                <th></th>
                                 <th>Nom produit</th>
                                 <th>Image</th>
+                                <th>Prix</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -487,14 +484,20 @@ elseif(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
                             $IdPr=$row['IdPr'];
                             echo"
                             <tr>
-                                <td class='prd'><input type='checkbox' value='$IdPr' name='IdPr[]' id='chek1'></td>
+                                <td class='prd'><input type='checkbox' value='$IdPr' name='IdPr[]' id='chek1'><img src='../inc/img/produits/$row[ImagePr]'></td>
                                 <td>$row[NomPr]</td>
-                                <td><img src='../inc/img/produits/$row[ImagePr]'></td>
                                 <input type='hidden' name='IdCmd' value='$IdCmd'>
-                            </tr>
                             ";
+                            if(verifPromo($IdPr)){
+                                $PrixPr=nvPrix($IdPr);
+                                echo "<td>$PrixPr DH <sup style='color:red'><strike>$row[PrixPr] DH</strike></sup></td>";
+                            }
+                            else{
+                                echo "<td>$row[PrixPr] DH</td>";
+                            }
                         }
         echo"
+                            </tr>
                         </tbody>
                     </table>
                     <div class='bas'>
@@ -851,7 +854,7 @@ elseif(isset($_GET['ajouter_promos'])){
 elseif(isset($_GET['détails_promos']) && isset($_GET['id'])){
     $id=$_GET['id'];
     echo "  <div class='body_display_modif_promo '><div class='div_details_promo'>
-    <i class='bx bxs-x-square icon_x_exit' onclick='history.back();'  style='right: 0'></i>
+    <i class='bx bxs-x-square icon_x_exit' onclick='document.location.href=\"gestion.php?table=promos\"'  style='right: 0'></i>
     <table cellspacing='0'>
         <thead>
             <tr>
@@ -888,7 +891,7 @@ elseif(isset($_GET['ajouter_prmprdt']) && isset($_GET['id'])){
     echo "
     <div class='body_display_modif_promo '>
         <div class='div_ajouter_prd_details_promo'>
-            <div class='haut'><i class='bx bxs-x-square icon_x_exit_promo' onclick='history.back();'></i></div>
+            <div class='haut'><i class='bx bxs-x-square icon_x_exit_promo' onclick='document.location.href=\"gestion.php?table=promos&détails_promos=true&id=$id\"'></i></div>
             <form action='controller.php?table=promo_produit&action=ajouter' method='post'>
                 <table cellspacing='0 '>
                     <thead>
@@ -906,7 +909,7 @@ elseif(isset($_GET['ajouter_prmprdt']) && isset($_GET['id'])){
                     <tr>
                         <input type='hidden' name='IdPromo' value='$id'>
                         <td class='td_check'><input type='checkbox' id='chek1'name='IdPr[]' value='$IdPr'  class='checkbox'><img src='../inc/img/produits/$row[ImagePr]'></td>
-                        <td><label for='chek1' class='chek_prd'>$row[NomPr]</label></td>
+                        <td>$row[NomPr]</td>
                     </tr>";
                 }
                     echo"
@@ -948,9 +951,9 @@ if (isset($_GET['table'])) {
             <section class='home'>
             <header class='produit'>
                 <div class='case_produit border_blue'>Nombre de produits : &nbsp;$nbreProduct </div>
-                <div class='case_produit border_red'>Nombre de produits vendus : &nbsp;$sum </div>
-                <div class='case_produit border_vert'>Chiffre d'affaires : &nbsp; $sumPrix DH </div>
-                <div class='case_produit border_roz'>Côut des produits en stock : &nbsp; $sumCout  DH </div>
+                <div class='case_produit border_vert'>Nombre de produits vendus : &nbsp;$sum </div>
+                <div class='case_produit border_gray'>Chiffre d'affaires : &nbsp; $sumPrix DH </div>
+                <div class='case_produit border_red'>Côut des produits en stock : &nbsp; $sumCout  DH </div>
             </header>
                 <main>
                     <div class='table' >
@@ -1068,15 +1071,14 @@ if (isset($_GET['table'])) {
             echo "
             <section class='home'>
                 <header class='categorie'>
-                    <div class='case_categorie border_roz'>Catégorie la plus populaire : &nbsp;".$CtPop['NomCt']."</div>
-                    <div class='case_categorie border_orange'>Catégorie la moins populaire : &nbsp;". $CtMoinsPop['NomCt']."</div>
+                    <div class='case_categorie border_vert'>Catégorie la plus populaire : &nbsp;".$CtPop['NomCt']."</div>
+                    <div class='case_categorie border_red'>Catégorie la moins populaire : &nbsp;". $CtMoinsPop['NomCt']."</div>
                 </header>
                 <main>
                     <div class='containner_main_categorie'>
-                   
-                        
             ";
                         $rslt = mysqli_query($mysqli, 'select * from catégorie order by NomCt');
+                        $nmr_categorie=1;
                         while ($row = mysqli_fetch_assoc($rslt)) {
                         $IdCt=$row['IdCt'];
                         $rslt2=mysqli_query($mysqli,"select * from produit where IdCt = $IdCt");
@@ -1084,6 +1086,7 @@ if (isset($_GET['table'])) {
                         <form action='controller.php?table=catégorie&action=modifier&IdCt=$IdCt' id='modifCt$IdCt' method='post'>
                         <div class='category'>
                             <div class='name_category'>
+                                <div class='nmr_categorie'>$nmr_categorie</div>
                                 <input type='text' value='".$row['NomCt']."' name='NomCt' readonly class='nom_categorie'>
                                 <button type='button' class='valider_modif_categorie cacher_icon' onclick=\"confirmModifAjt('modifCt$IdCt','Voulez-vous vraiment modifier le nom de la catégorie?','Modifier')\"><i class='bx bxs-check-square icon_valider_modif_categorie'></i></button>
                                 <button type='reset' class='exit_modif_categorie cacher_icon'><i class='bx bxs-x-square icon_exit_modif_categorie''></i></button>
@@ -1100,9 +1103,8 @@ if (isset($_GET['table'])) {
                         </div>
                         </form>
                         ";
+                        $nmr_categorie++;
                         }
-                        // <input  type='submit' value='Valider' class='btn_valider_categorie'>
-                                // <input  type='button' value='Modifier' class='btn_modifier_categorie cacher'>
                     echo "
                     </div>
                     <div class='ajouter_category'>
@@ -1124,11 +1126,11 @@ if (isset($_GET['table'])) {
             echo "
             <section class='home'>
                 <header class='commande'>
-                    <div class='case_commande border_red'> Total commandes : &nbsp; $row </div>
-                    <div class='case_commande border_vert'> En cours : &nbsp; $row1 </div>
+                    <div class='case_commande border_blue'> Total commandes : &nbsp; $row </div>
+                    <div class='case_commande border_gray'> En cours : &nbsp; $row1 </div>
                     <div class='case_commande border_orange'> Expédiée : &nbsp; $row2 </div>
-                    <div class='case_commande border_roz'> Livrée : &nbsp; $row3 </div>
-                    <div class='case_commande border_maron'> Annulée : &nbsp; $row4 </div>
+                    <div class='case_commande border_vert'> Livrée : &nbsp; $row3 </div>
+                    <div class='case_commande border_red'> Annulée : &nbsp; $row4 </div>
                 </header>
                 <main>
                     <div class='table'>
@@ -1245,9 +1247,9 @@ if (isset($_GET['table'])) {
             echo"
                 <section class='home '>
                     <header class='rdv'>
-                        <div class='case_rdv border_red'>Nombre de RDV : &nbsp;$nbre</div>
-                        <div class='case_rdv border_orange'>RDV Traité : &nbsp; $nbreTr</div>
-                        <div class='case_rdv border_vert'>RDV Non traité : &nbsp; $nbreNonTr</div>
+                        <div class='case_rdv border_blue'>Nombre de RDV : &nbsp;$nbre</div>
+                        <div class='case_rdv border_vert'>RDV Traité : &nbsp; $nbreTr</div>
+                        <div class='case_rdv border_red'>RDV Non traité : &nbsp; $nbreNonTr</div>
                     </header>
                     <main>
                         <div class='table'>
@@ -1390,9 +1392,9 @@ if (isset($_GET['table'])) {
             echo"
             <section class='home'>
                 <header class='promos'>
-                    <div class='case_promos border_red'>Nombre de promos : &nbsp; $nbre</div>
-                    <div class='case_promos border_blue'>Promos En cours : &nbsp; $nbreEnCrs</div>
-                    <div class='case_promos border_orange'>Promos Terminées : &nbsp; $nbreTerm</div>
+                    <div class='case_promos border_blue'>Nombre de promos : &nbsp; $nbre</div>
+                    <div class='case_promos border_vert'>Promos En cours : &nbsp; $nbreEnCrs</div>
+                    <div class='case_promos border_red'>Promos Terminées : &nbsp; $nbreTerm</div>
                 </header>
                 <main>
                     <div class='table_promos'>

@@ -11,7 +11,6 @@ body {
     display: flex;
     position: relative;
     background-color: #f4f8fb;
-
     min-height: 100vh;
 }
 
@@ -85,7 +84,6 @@ nav.menu .change {
 nav.menu.fermer header .change {
     transform: translateY(-50%) rotate(180deg);
 }
-
 
 .main_menu ul li.acceuil {
     border-radius: 10px;
@@ -171,14 +169,17 @@ nav.menu.fermer~section.home {
     width: 100%;
     align-items: flex-start;
 }
+
 .home header.statis {
     display: flex;
     align-items: center;
     height: 80px;
 }
-textarea{
+
+textarea {
     resize: none;
 }
+
 .table {
     box-shadow: rgba(163, 163, 163, 0.39) 0px 5px 11px -4.5px;
     height: auto;
@@ -188,7 +189,8 @@ textarea{
     transition: all 0.8s ease;
     position: relative;
 }
- table {
+
+table {
     gap: 60px;
     width: 100%;
     border: 1px solid whitesmoke;
@@ -196,6 +198,7 @@ textarea{
     height: auto;
     background-color: #ffffff;
 }
+
 table thead {
     font-weight: normal;
     color: #2368cf;
@@ -203,7 +206,7 @@ table thead {
     font-size: 13px;
 }
 
- table tbody {
+table tbody {
     overflow-y: auto;
     height: auto;
     margin-top: 10px;
@@ -217,12 +220,14 @@ table td {
     font-size: 14px;
     color: rgb(69, 87, 106);
 }
+
 table td.action {
     display: flex;
     justify-content: space-around;
     align-items: center;
     cursor: pointer;
 }
+
 table td.action input {
     padding-bottom: 2px;
     height: 27px;
@@ -233,7 +238,6 @@ table td.action input {
     border-radius: 4px;
 }
 
-
 .entete {
     width: 100%;
     height: 50px;
@@ -243,7 +247,7 @@ table td.action input {
     grid-row: auto;
 }
 
- .entete .element {
+.entete .element {
     height: 100%;
     width: 100%;
     display: flex;
@@ -251,7 +255,7 @@ table td.action input {
     justify-content: center;
 }
 
- .entete .element .chercher {
+.entete .element .chercher {
     width: 90%;
     height: 75%;
     background-color: #d4e1ff;
@@ -262,14 +266,14 @@ table td.action input {
     overflow: hidden;
 }
 
- .entete .element .chercher form {
+.entete .element .chercher form {
     display: flex;
     width: 100%;
     height: 100%;
     justify-content: space-between;
 }
 
- .entete .element .chercher button {
+.entete .element .chercher button {
     width: 10%;
     background: inherit;
     border: none;
@@ -278,7 +282,7 @@ table td.action input {
     font-size: 17px;
 }
 
- .entete .element .chercher input {
+.entete .element .chercher input {
     background: inherit;
     border: none;
     width: 80%;
@@ -291,8 +295,8 @@ table td.action input {
     border: none;
 }
 
- .entete .element .trie,
- .entete .element .statut {
+.entete .element .trie,
+.entete .element .statut {
     display: flex;
     width: 100%;
     height: 100%;
@@ -301,8 +305,8 @@ table td.action input {
     position: relative;
 }
 
- .entete .element .trie .input_trie,
- .entete .element .statut .input_statut {
+.entete .element .trie .input_trie,
+.entete .element .statut .input_statut {
     display: flex;
     border: 1px solid rgb(220, 220, 220);
     width: 90%;
@@ -315,12 +319,12 @@ table td.action input {
 }
 
 .entete .element .trie .cacher,
- .entete .element .statut .cacher {
+.entete .element .statut .cacher {
     display: none;
 }
 
- .entete .element .trie .input_trie span.icon_select_trie,
- .entete .element .statut .input_statut span.icon_select_statut {
+.entete .element .trie .input_trie span.icon_select_trie,
+.entete .element .statut .input_statut span.icon_select_statut {
     height: 100%;
     border-left: 1px solid rgb(220, 220, 220);
     display: flex;
@@ -330,34 +334,35 @@ table td.action input {
     color: #0f82d3;
 }
 
- .entete .element .statut .input_statut p {
+.entete .element .statut .input_statut p {
     padding-bottom: 2.5px;
 }
 
- .entete .element .trie .input_trie p {
+.entete .element .trie .input_trie p {
     padding-bottom: 2.5px;
 }
 
- .entete .element .trie .input_trie span.trie_par,
- .entete .element .statut .input_statut span.statut_par {
+.entete .element .trie .input_trie span.trie_par,
+.entete .element .statut .input_statut span.statut_par {
     font-size: 13px;
     font-weight: 600;
     color: #919ba8;
 }
 
- .entete .element .trie .input_trie span.name_trie,
- .entete .element .statut .input_statut span.name_statut {
+.entete .element .trie .input_trie span.name_trie,
+.entete .element .statut .input_statut span.name_statut {
     font-weight: bold;
     color: #43465e;
     font-size: 14px;
 }
- .entete .element .trie:not(:hover) .display_trie,
- .entete .element .statut:not(:hover) .display_statut {
+
+.entete .element .trie:not(:hover) .display_trie,
+.entete .element .statut:not(:hover) .display_statut {
     display: none;
 }
 
 .entete .element .trie .display_trie,
- .entete .element .statut .display_statut {
+.entete .element .statut .display_statut {
     position: absolute;
     background-color: rgb(255, 255, 255);
     width: 82%;
@@ -366,13 +371,13 @@ table td.action input {
     padding: 10px 0 10px 0;
 }
 
- .entete .element .trie .display_trie ul,
- .entete .element .statut .display_statut ul {
+.entete .element .trie .display_trie ul,
+.entete .element .statut .display_statut ul {
     margin: 0 5px 0 5px;
 }
 
- .entete .element .trie .display_trie ul li,
- .entete .element .statut .display_statut ul li {
+.entete .element .trie .display_trie ul li,
+.entete .element .statut .display_statut ul li {
     list-style: none;
     margin-top: 5px;
     padding-left: 10px;
@@ -384,37 +389,38 @@ table td.action input {
     border-radius: 3px;
 }
 
- .entete .element .trie .display_trie ul li::before,
- .entete .element .statut .display_statut ul li::before {
+.entete .element .trie .display_trie ul li::before,
+.entete .element .statut .display_statut ul li::before {
     content: "•";
     padding-right: 10px;
     color: rgb(100, 101, 206);
 }
 
- .entete .element .trie .display_trie ul li:hover,
- .entete .element .statut .display_statut ul li:hover {
+.entete .element .trie .display_trie ul li:hover,
+.entete .element .statut .display_statut ul li:hover {
     background-color: #eaf0ff;
 }
 
 .entete .element .trie .display_trie ul li a,
- .entete .element .statut .display_statut ul li a {
+.entete .element .statut .display_statut ul li a {
     width: 100%;
     text-decoration: none;
     font-size: 14px;
     color: #404586;
 }
 
- .entete .element .trie .display_trie ul li:hover a,
- .entete .element .statut .display_statut ul li:hover a {
+.entete .element .trie .display_trie ul li:hover a,
+.entete .element .statut .display_statut ul li:hover a {
     text-decoration: none;
     color: #202cd1;
 }
 
- .entete .produit {
+.entete .produit {
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
+
 .entete .produit button {
     background-color: #0833a7;
     padding: 10px 12px;
@@ -425,26 +431,24 @@ table td.action input {
     margin-right: 10px;
     font-weight: bold;
     cursor: pointer;
-    
-} 
-
-.home .border_red{
-    border-left: 5px solid red;
-
-}
-.home .border_blue{
-    border-left: 5px solid rgb(43, 0, 255);
-}
-.home  .border_vert{
-    border-left: 5px solid rgb(0, 255, 110);
 }
 
-.home .border_maron{
-    border-left: 5px solid rgb(153, 0, 255);
+.home .border_red {
+    border-left: 5px solid rgb(255 9 9);
 }
-.home .border_orange{
-    border-left: 5px solid rgb(255, 174, 0);
+
+.home .border_blue {
+    border-left: 5px solid #08309d;
 }
-.home .border_roz{
-    border-left: 5px solid rgb(255, 0, 170);
+
+.home .border_vert {
+    border-left: 5px solid rgb(0 255 29);
+}
+
+.home .border_orange {
+    border-left: 5px solid #ffba00;
+}
+
+.home .border_gray {
+    border-left: 5px solid rgb(159 159 159);
 }

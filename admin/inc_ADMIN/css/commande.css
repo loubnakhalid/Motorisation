@@ -11,24 +11,25 @@
 
 .case_commande {
     background-color: white;
-    height: 70px;
+    height: 61px;
     display: flex;
     align-items: center;
-    width: 195px;
+    width: 213px;
     justify-content: center;
     border: none;
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, .08);
     cursor: pointer;
 }
-.home main .table table td a.nom_client{
-    color:rgb(69, 87, 106);;
+
+.home main .table table td a.nom_client {
+    color: rgb(69, 87, 106);
+    ;
 }
 
 .icon_modifier_commande {
     font-size: 25px;
     color: #0833a7;
 }
-
 
 .fiche_client {
     position: fixed;
@@ -145,7 +146,6 @@ form label {
 }
 
 .case_text .input_text input {
-
     background-color: #e6f4ff;
     border: none;
     outline: none;
@@ -168,7 +168,6 @@ form label {
     position: relative;
     margin-left: 35px;
     margin-top: 20px;
-
 }
 
 .case_select .input_select {
@@ -262,5 +261,3 @@ input.btn_effacer_form_modifier_cmd {
     cursor: pointer;
     border-radius: 3px;
 }
-
-
