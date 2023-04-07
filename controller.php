@@ -229,7 +229,6 @@ if(isset($_POST['Finaliser'])){
     $StatutCmd='En cours';
     $prixTT=montantTotal();
     $modePaiement=$_POST['modePaiement'];
-    try{
     //Insertion de commande et détails commande -------------------------------------------------------------------------------------//
         if(mysqli_query($mysqli,"INSERT INTO commande (DateCmd,IdMb,StatutCmd,prixTT,modePaiement) values('$DateCmd',$IdMb,'$StatutCmd',$prixTT,'$modePaiement')")){
             $IdCmd = $mysqli->insert_id;
@@ -294,11 +293,6 @@ if(isset($_POST['Finaliser'])){
                 header("location:panier.php");
             }
         }
-    }
-    catch(Exception | Error $e){
-        $_SESSION['erreur']='Erreur à la finalisation de commande ! Veuillez contacter-nous et merci';
-        header("location:panier.php");
-    }
 }
 //Traitement d'envoi dun RDV--------------------------------------------------------------------------------------------------------//
 if(isset($_POST['envoiRDV'])){
