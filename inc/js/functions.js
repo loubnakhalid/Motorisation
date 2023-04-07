@@ -38,3 +38,11 @@ function augmenterQt(pos, stock) {
     }
 
 }
+
+function ouvrirRDV() {
+    document.getElementById('RDV').style = '';
+}
+
+function fermerRDV() {
+    document.getElementById('RDV').style.display = 'none';
+}

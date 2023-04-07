@@ -1,5 +1,7 @@
 /* *======================================  display  ======================================================= */
-
+.visible_icon{
+    visibility: hidden;
+}
 .body_display_commande {
     background-color: #051540cc;
     position: absolute;
@@ -9,11 +11,6 @@
     left: 0;
     z-index: 10;
 }
-
-body .cacher_body_display_commande {
-    display: none;
-}
-
 .div_details_display_commande {
     position: fixed;
     width: 50%;
@@ -36,7 +33,16 @@ body .cacher_body_display_commande {
     cursor: pointer;
 }
 
-.div_details_display_commande table button.valider_modif_display_cmd {
+.div_details_display_commande table td .td_valider{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.div_details_display_commande table button.valider_modif_display_cmd,
+.div_details_display_commande table button.exit__modif_display_cmd {
     border: none;
     background-color: inherit;
 }
@@ -51,7 +57,11 @@ body .cacher_body_display_commande {
     color: #08a775;
     cursor: pointer;
 }
-
+.div_details_display_commande table td .icon_exit__modif_display_cmd {
+    font-size: 25px;
+    color: #ff1010;
+    cursor: pointer;
+}
 .div_details_display_commande table td .cacher_icon {
     display: none;
 }
@@ -60,6 +70,9 @@ body .cacher_body_display_commande {
     text-align: center;
     border: 1px solid white;
     outline: none;
+    height: 30px;
+    width: 100px;
+    
 }
 
 .div_details_display_commande table td .modif_qnt_vert {

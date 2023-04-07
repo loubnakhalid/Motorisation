@@ -1,6 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* *======================================  home  ======================================================= */
+.home header.rdv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    height: 85px;
+}
+
+ .case_rdv {
+    background-color: white;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    /* padding: 0 20px; */
+    width: 220px;
+    justify-content: center;
+    border: none;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, .08);
+    margin-right: 0px;
+    margin-right: 11px;
+}
+/* .home header.rdv .case_rdv:hover {
+    background-color: #010535;
+    color: white;
+    transition: all 0.3s;
+} */
+
+.home main .table table td.action .btn_modifier_rdv {
+    font-size: 25px;
+    color: #0833a7;
+}
 
 .body_display_modif_rdv {
     background-color: #051540db;
@@ -34,7 +64,7 @@
     width: 100%;
 }
 
-.icon_x_exit_rdv {
+.div_modif_rdv .haut .icon_x_exit_rdv {
     position: absolute;
     top: -2px;
     right: 0px;
@@ -199,344 +229,3 @@
     border-radius: 3px;
 }
 
-.home header.rdv {
-    grid-area: header;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-}
-
-.case_rdv {
-    background-color: white;
-    height: 55px;
-    display: flex;
-    align-items: center;
-    width: 180px;
-    justify-content: center;
-    border: none;
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, .08);
-    cursor: pointer;
-    margin-right: 17px;
-}
-
-.case_rdv:hover {
-    background-color: #010535;
-    color: white;
-    transition: all 0.3s;
-}
-
-.header_header_rdv {
-    width: 100%;
-    height: 40px;
-}
-
-
-/* .home main {
-    grid-area: main;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    align-items: flex-start;
-} */
-
-/* .home main .table {
-    box-shadow: rgba(163, 163, 163, 0.39) 0px 0px 11px 0px;
-    height: auto;
-    margin-bottom: 30px;
-    border-radius: 5px;
-    width: 100%;
-    transition: all 0.8s ease;
-    position: relative;
-} */
-
-/* .home main .table table {
-    width: 100%;
-    border: 1px solid whitesmoke;
-    overflow-y: auto;
-    height: auto;
-    background-color: #ffffff;
-    transition: all 0.7s ease;
-}
-
-.home main .table table thead {
-    font-weight: normal;
-    color: #2368cf;
-    height: 50px;
-    font-size: 13px;
-}
-
-.home main .table table tbody {
-    overflow-y: auto;
-    height: auto;
-    margin-top: 10px;
-}
-
-
-
-.home main .table table td {
-    height: 50px;
-    background-color: inherit;
-    text-align: center;
-    border-top: 1px solid rgb(240, 240, 240);
-    font-size: 14px;
-    color: rgb(69, 87, 106);
-}
-
-.home main .table table td img {
-    height: 50px;
-    background-color: inherit;
-    margin: 0 4px 0 4px;
-} */
-
-/* .home main .table table td.action {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    cursor: pointer;
-} */
-
-.home main .table table td.action .btn_modifier_rdv {
-    font-size: 25px;
-    color: #0833a7;
-}
-
-
-/* 
-.home main .table table td input{
-	background-color: inherit;
-	font-size: 13px;
-	color: #365380;
-	font-weight: 400;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	outline: none;
-	border: none;
-	word-wrap: break-word;
-	white-space: pre-wrap;
-} */
-/* 
-.home main .table .entete {
-    width: 100%;
-    height: 50px;
-    background-color: #ffffff;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-row: auto;
-}
-
-.home main .table .entete .element {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.home main .table .entete .element .chercher {
-    width: 90%;
-    height: 75%;
-    background-color: #d4e1ff;
-    padding-left: 15px;
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.home main .table .entete .element .chercher form {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: space-between;
-}
-
-.home main .table .entete .element .chercher button {
-    width: 10%;
-    background: inherit;
-    border: none;
-    outline: none;
-    color: rgb(47, 141, 199);
-    font-size: 17px;
-}
-
-.home main .table .entete .element .chercher input {
-    background: inherit;
-    border: none;
-    width: 80%;
-    height: 100%;
-}
-
-.home main .table .entete .element .chercher input:focus {
-    outline: none;
-    border: none;
-}
-
-.home main .table .entete .element .trie,
-.home main .table .entete .element .statut {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.home main .table .entete .element .trie .input_trie,
-.home main .table .entete .element .statut .input_statut {
-    display: flex;
-    border: 1px solid rgb(220, 220, 220);
-    width: 90%;
-    height: 70%;
-    padding: 0 0 0 9px;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.home main .table .entete .element .trie .cacher,
-.home main .table .entete .element .statut .cacher {
-    display: none;
-}
-
-.home main .table .entete .element .trie .input_trie span.icon_select_trie,
-.home main .table .entete .element .statut .input_statut span.icon_select_statut {
-    height: 100%;
-    border-left: 1px solid rgb(220, 220, 220);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 19px;
-}
-
-.home main .table .entete .element .statut .input_statut p {
-    padding-bottom: 2.5px;
-}
-
-.home main .table .entete .element .trie .input_trie p {
-    padding-bottom: 2.5px;
-}
-
-.home main .table .entete .element .trie .input_trie span.trie_par,
-.home main .table .entete .element .statut .input_statut span.statut_par {
-    font-size: 13px;
-    font-weight: 600;
-    color: #919ba8;
-}
-
-.home main .table .entete .element .trie .input_trie span.name_trie,
-.home main .table .entete .element .statut .input_statut span.name_statut {
-    font-weight: bold;
-    color: #43465e;
-    font-size: 14px;
-}
-
-.home main .table .entete .element .trie .display_trie,
-.home main .table .entete .element .statut .display_statut {
-    position: absolute;
-    background-color: rgb(255, 255, 255);
-    width: 82%;
-    top: 43px;
-    box-shadow: rgba(163, 163, 163, 0.39) 0px 3px 11px 0px;
-    padding: 10px 0 10px 0;
-}
-
-.home main .table .entete .element .trie .display_trie ul,
-.home main .table .entete .element .statut .display_statut ul {
-    margin: 0 5px 0 5px;
-}
-
-.home main .table .entete .element .trie .display_trie ul li,
-.home main .table .entete .element .statut .display_statut ul li {
-    list-style: none;
-    margin-top: 5px;
-    padding-left: 10px;
-    height: 25px;
-    display: flex;
-    align-items: center;
-    border: none;
-    outline: none;
-    border-radius: 3px;
-}
-
-.home main .table .entete .element .trie .display_trie ul li::before,
-.home main .table .entete .element .statut .display_statut ul li::before {
-    content: "•";
-    padding-right: 10px;
-    color: rgb(100, 101, 206);
-}
-
-.home main .table .entete .element .trie .display_trie ul li:hover,
-.home main .table .entete .element .statut .display_statut ul li:hover {
-    background-color: #eaf0ff;
-}
-
-.home main .table .entete .element .trie .display_trie ul li a,
-.home main .table .entete .element .statut .display_statut ul li a {
-    text-decoration: none;
-    font-size: 14px;
-    color: #404586;
-}
-
-.home main .table .entete .element .trie .display_trie ul li:hover a,
-.home main .table .entete .element .statut .display_statut ul li:hover a {
-    text-decoration: none;
-    color: #202cd1;
-}
-
-.home main .table .entete .produit {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.bxs-chevron-down {
-    color: #2368cf;
-}
-
-.home main .table .entete .produit button {
-    background-color: #0833a7;
-    height: 35px;
-    border: none;
-    outline: none;
-    border-radius: 10px;
-    color: #ffffff;
-    width: 115px;
-    margin-right: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
- */
-
-/* 
-.case {
-    background-color: white;
-    height: 55px;
-    display: flex;
-    align-items: center;
-    width: 180px;
-    justify-content: center;
-    border: none;
-   
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, .08);
-    cursor: pointer;
-    border-left: 5px solid #2368cf;
-    margin-right: 17px;
-}
-
-.case:hover {
-    background-color: #010535;
-    color: white;
-    transition: all 0.3s;
-}
-
-.header_header {
-    width: 100%;
-    
-    height: 40px;
-} */

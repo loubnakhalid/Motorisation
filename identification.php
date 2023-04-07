@@ -1,11 +1,12 @@
-<?php include('./inc/haut.inc.php'); ?>
+<?php include('./inc/haut.inc.php');?>
 <?php
+//Formulaire de connexion-----------------------------------------------------------------------//
 if(isset($_GET['action'])&&$_GET['action']=='connexion'){
 	$EmailMb= isset($_COOKIE['login']['EmailMb']) ? $_COOKIE['login']['EmailMb'] : "";
 	echo "
 	<section id='connexion'>
   		<div class='formCnx'>
-  			<h2 class='titleIden'>Identifiez-vous </h2>
+  			<h2 class='titleIden'>Identifiez-vous</h2>
     		<form name='connexion' action='controller.php' method='post' onsubmit='return ValidationConnexion()'>
         		<div class='input-Email'> 
              		<input type='email' name='EmailMb' value='$EmailMb' placeholder='Email' id='EmCnx' class='inpCnx'>
@@ -20,12 +21,6 @@ if(isset($_GET['action'])&&$_GET['action']=='connexion'){
        			<div class='input-Cnx'>
              		<input type='password' name='MDPS' placeholder='Mot de passe'  id='MdpCnx' class='inpCnx'>
 					<p class='ErMsg2'>*Ce champ est obligatoire.</p>
-	";
-					if(isset($_GET['erreurMDPS'])){
-						echo "<script>document.getElementById(\"MdpCnx\").style.borderColor = 'red';document.getElementById(\"EmCnx\").style.borderColor = 'green';</script>";
-						echo "<p class='ErMsg1' style='display:block'>*$_GET[erreurMDPS]</p>";
-					}
-	echo"
        			</div>
        			<div class='btn-Cnx'>
              		<input type='submit' name='con' value='Se connecter' id='FRmbtnCnx' class='btnGn' >
@@ -45,6 +40,7 @@ if(isset($_GET['action'])&&$_GET['action']=='connexion'){
 	</section>
 	";
 }
+//Formulaire d'inscription---------------------------------------------------------------------//
 if(isset($_GET['action'])&&$_GET['action']=='inscription'){
 	$NomMb= isset($_COOKIE['login']['NomMb']) ? $_COOKIE['login']['NomMb'] : "";
 	$PrénomMb= isset($_COOKIE['login']['PrénomMb']) ? $_COOKIE['login']['PrénomMb'] : "";
@@ -112,6 +108,7 @@ if(isset($_GET['action'])&&$_GET['action']=='inscription'){
 	</section>
 	";
 }
+//Formulaire mot de passe oublié--------------------------------------------------------------//
 if(isset($_GET['action'])&&$_GET['action']=='mdpsOubl'){
 	if(isset($_GET['erreur'])){
 		echo $_GET['erreur'];
@@ -135,8 +132,9 @@ if(isset($_GET['action'])&&$_GET['action']=='mdpsOubl'){
 	</section>
 	";
 }
-if(isset($_GET['action'])&&$_GET['action']=='verifEmail'){
-	if(! isset($_SESSION['EmailMb'])){
+//Formulaire du code d esécurité--------------------------------------------------------------//
+if(isset($_GET['action'])&&$_GET['action']=='verifCode'){
+	if(! isset($_SESSION['EmailMb']) || ! isset($_SESSION['code'])){
         echo "<script>document.location.href='identification.php?action=mdpsOubl'</script>";
     }
 	else{
@@ -150,11 +148,11 @@ if(isset($_GET['action'])&&$_GET['action']=='verifEmail'){
 				<h4 class='PrgCode'>Merci de vérifier dans vos e-mails que vous avez reçu un message avec votre code. Celui-ci est composé de 8 chiffres.</h4>
 				<form name='Code' action='controller.php' method='post' onsubmit='return ValidationCodeSéc()'>
 					<div class='InputCode'>
-						<input type='text' name='verifCode' placeholder='Votre Code' id='InputCS' class='inputCodeSec'><br>
-						<span class='ErCodeSéc'>*Ce champs est obligatoire .</span>
+						<input type='text' name='code' placeholder='Votre Code' id='InputCS' class='inputCodeSec'><br>
+						<span class='ErCodeSéc'>*Ce champs est obligatoire.</span>
 					</div>
 					<div class='BtnCode'>
-						<input type='submit' name='verifEmail' value='Continuer' class='btnCode'>
+						<input type='submit' name='verifCode' value='Continuer' class='btnCode'>
 						<input type='button' value='Retour' class='btnRetour'>
 					</div>
 				</form>
@@ -163,6 +161,7 @@ if(isset($_GET['action'])&&$_GET['action']=='verifEmail'){
 		";
 	}
 }
+//Formulaire de changement de mot de passe----------------------------------------------------//
 if(isset($_GET['action'])&&$_GET['action']=='nvPass'){
 	if(! isset($_SESSION['EmailMb']) || ! isset($_SESSION['code'])){
         echo "<script>document.location.href='identification.php?action=mdpsOubl'</script>";
@@ -191,19 +190,6 @@ if(isset($_GET['action'])&&$_GET['action']=='nvPass'){
 		</section>
 		";
 	}
-}
-?>
-<?php
-if(isset($_GET['successInscr'])){
-	echo "<script>swal({
-		title: '$_GET[success]',
-		text: '',
-		icon: 'success',
-		button: 'Ok',
-	})
-	.then((value) => {
-		document.location.href = 'identification.php?action=connexion';
-	});</script>";
 }
 ?>
 <?php require_once("./inc/bas.inc.html"); ?>

@@ -10,7 +10,7 @@ if(verifPromo($row['IdPr'])){
     $row2=mysqli_fetch_assoc($rslt2);
     $taux=$row2['Taux'];
 }
-?> 
+?>
         <section class="fiche_produit">
            <div class="fiche_produit_left">
                 <img src="./inc/img/produits/<?= $row['ImagePr'] ?>" alt="">

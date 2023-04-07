@@ -10,29 +10,30 @@ include('./inc/init.inc.php');
     <meta name='description' content=''>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="icon" type="png" href="./inc/img/logo5.png">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src='https://cdn.lordicon.com/ritcuqlt.js'></script>
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v6.3.0/css/all.css'>
     <link rel='stylesheet' href='inc/css/style.css'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v6.3.0/css/all.css'>
+    <script src='https://cdn.lordicon.com/ritcuqlt.js'></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="./inc/js/functions.js"></script>
 </head>
 <body>
+    <!--Formulaire contactez-nous-->
     <div class="display_body_contacter_nous cacher">
-    
-            <div class="contacter_nous">
+        <div class="contacter_nous">
             <i class='bx bxs-x-square icon_x_exit_contacter_nous' onclick='history.back();'></i>
-                <h3>Contactez-nous</h3>
-                <div class="contacter">
-                    <form action="controller.php?envEml=true" method="post">
-                        <input type="text" name="subject" placeholder="Objet" class="inpp">
-                        <input type="text" name="from" placeholder="Email" class="inpp">
-                        <textarea name="message" id="" cols="30" rows="10" placeholder="Description"></textarea>
-                        <input type="submit" name="envEml" value="Envoyer" class="envoyer">
-                    </form>
-                </div>
+            <h3>Contactez-nous</h3>
+            <div class="contacter">
+                <form action="controller.php?envEml=true" method="post">
+                    <input type="text" name="subject" placeholder="Objet" class="inpp">
+                    <input type="text" name="from" placeholder="Email" class="inpp">
+                    <textarea name="message" id="" cols="30" rows="10" placeholder="Description"></textarea>
+                    <input type="submit" name="envEml" value="Envoyer" class="envoyer">
+                </form>
             </div>
+        </div>
     </div>
+    <!------------------------------>
     <header id='header'>
         <div class='logo'>
             <a href='index.php'><img src='inc/img/logo3.png' alt='' class='logo3'></a>
@@ -42,7 +43,7 @@ include('./inc/init.inc.php');
             <div class='div_input'>
                 <form action='catégorie.php' method='get' name='form_recherche' class='recherche_form'>
                     <input type='text' name='mot' id='cherche_input' value='' placeholder='Article, produit, marque...'>
-                    <button type='submit' name='rechercher' class='btn_recherche'><i class='fa-solid fa-magnifying-glass' aria-hidden='true'></i></button>
+                    <button type='submit' name='rechercher' value='true' class='btn_recherche'><i class='fa-solid fa-magnifying-glass' aria-hidden='true'></i></button>
                 </form>
             </div>
         </div>
@@ -100,18 +101,44 @@ include('./inc/init.inc.php');
                 </ul>
             </nav>
             <?php
-            if(isset($_GET['action']) && $_GET['action']=='connexion'){
-                echo "<nav class='nav_identifier' >Veuillez vous connectez ou créer un compte pour voir votre panier et faire des achats !</p></nav>";
+            if(isset($_SESSION['erreurLog'])){
+                echo "<nav class='nav_identifier' style='background-color:red'>$_SESSION[erreurLog]</nav>";
+                unset($_SESSION['erreurLog']);
+            }
+            elseif(isset($_SESSION['successMssg'])){
+                echo "<nav class='nav_identifier' style='background-color:#0dbd0d'>$_SESSION[successMssg]</nav>";
+                unset($_SESSION['successMssg']);
+            }
+            elseif(isset($_GET['action']) && $_GET['action']=='connexion'){
+                echo "<nav class='nav_identifier' >Veuillez vous connectez ou créer un compte pour voir votre panier et faire des achats !</nav>";
             }
             ?>
         </div>
     </header>
     <main>
-        <form id='RDV' action="controller.php" method="post" class='Rdv' onsubmit='return ValidationRdv()' style="display:none;">
-            <div class='Formulaire '>
+        <!--Formulaire RDV-->
+        <?php
+        if(isset($_SESSION['membre']['IdMb'])){
+            $rqt='SELECT * FROM membre WHERE IdMb='.$_SESSION['membre']['IdMb'];
+            $rslt=mysqli_execute_query($mysqli,$rqt);
+            $row=mysqli_fetch_assoc($rslt);
+            $Nom=$row['NomMb'];
+            $Prénom=$row['PrénomMb'];
+            $NumTélé=$row['NumTélé'];
+            $Adresse=$row['AdresseMb'];
+        }
+        else{
+            $Nom="";
+            $Prénom="";
+            $NumTélé="";
+            $Adresse="";
+        }
+        ?>
+        <form id='RDV' action='controller.php' method='post' class='Rdv' onsubmit='return ValidationRdv()' style='display:none;'>
+            <div class='Formulaire'>
                 <div class='Form-header'>
                     <div class='Form-title'>Demander RDV</div>
-                    <button class='btn-ferm' onclick='history.back();'>&times;</button>
+                    <input type="button" class='btn-ferm' onclick='fermerRDV()' value="&times;">
                 </div>
                 <div class='Form-content'>
                     <div class='PrgDate'>
@@ -126,7 +153,7 @@ include('./inc/init.inc.php');
                             <option value='Motorisation porte garage'>Motorisation porte de garage</option>
                             <option value='Motorisation volet roulant'>Motorisation de volet roulant</option>
                             <option value='Télécommandes'>Télécommandes</option>
-                            <option value='Interphones & Visiophones'>Interphone&Visiophone</option>
+                            <option value='Interphones & Visiophones'>Interphones & Visiophones</option>
                             <option value='Pièces détachées & Accessoires'>Pièces détachées & Accessoires</option>
                             <option value='Alarmes'>Alarmes</option>
                         </select>
@@ -136,17 +163,17 @@ include('./inc/init.inc.php');
                     </div>
                     <div class='Rjd'>
                         <div class='RjdNP'>
-                            <input type='text' name='NomMb' value='' placeholder='Nom' id='InputRdvNm' class='RjdN'>
-                            <input type='text' name='PrénomMb' value='' placeholder='Prénom' id='InputRdvPr' class='RjdP'><br>
+                            <input type='text' name='NomMb' value='<?=$Nom?>' placeholder='Nom' id='InputRdvNm' class='RjdN'>
+                            <input type='text' name='PrénomMb' value='<?=$Prénom?>' placeholder='Prénom' id='InputRdvPr' class='RjdP'><br>
                             <span class='ErRdvNom'>*Ce champs est obligatoire .</span>
                             <span class='ErRdvPr'>*Ce champs est obligatoire .</span>
                         </div>
                         <div class='RjdE'>
-                            <input type='text' name='AdresseMb' value='' placeholder='Adresse' id='InputRdvEml' class='RjdEm'><br>
+                            <input type='text' name='AdresseMb' value='<?=$Adresse?>' placeholder='Adresse' id='InputRdvEml' class='RjdEm'><br>
                             <span class='ErRdvEmail'>*Ce champs est obligatoire .</span>
                         </div>
                         <div class='RjdT'>
-                            <input type='tel' name='NumTélé' value='' placeholder='Téléphone' id='InputRdvtel' class='RjdTel'><br>
+                            <input type='tel' name='NumTélé' value='<?=$NumTélé?>' placeholder='Téléphone' id='InputRdvtel' class='RjdTel'><br>
                             <span class='ErRdvtel'>*Ce champs est obligatoire .</span>
                         </div>
                     </div>
@@ -157,32 +184,29 @@ include('./inc/init.inc.php');
             </div>
             <div id='Sur'></div>
         </form>
-        <?php
-        if(isset($_GET['erreur'])){
-	    echo "
-            <script>
+<?php
+if(isset($_SESSION['erreur'])){
+    echo "
+    <script>
+        swal({
+            title: \"$_SESSION[erreur]\",
+            text: '',
+            icon: 'warning',
+            button: 'Ok',
+        });
+    </script>";
+    unset($_SESSION['erreur']);
+}
+elseif(isset($_SESSION['success'])){
+        echo "
+        <script>
             swal({
-		        title: '$_GET[erreur]',
-		        text: '',
-		        icon: 'warning',
-		        button: 'Ok',
-	        })
-	        .then((value) => {
-		        history.back();
-	        });
-            </script>";
-        }
-        if(isset($_GET['success'])){
-            echo "
-            <script>
-                swal({
-                    title: '$_GET[success]',
-                    text: '',
-                    icon: 'success',
-                    button: 'Ok',
-                })
-                .then((value) => {
-                    history.back();
-                });</script>";
-        }
-        ?>
+                title: '$_SESSION[success]',
+                text: '',
+                icon: 'success',
+                button: 'Ok',
+            });
+        </script>";
+        unset($_SESSION['success']);
+}
+?>

@@ -398,8 +398,12 @@ elseif(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
                         <form action='controller.php?table=détails_commande&action=modifier&IdDétailsCmd=$IdDétailsCmd&IdCmd=$IdCmd' method='post'>
                             <tr>
                                 <td>$row[NomPr]</td>
-                                <td class='td_valider'><input type='text' value='$row[qt]' name='qt' class='input_quantite' onchange='if(this.value>$StockPr){erreur2(\"Le stock est épuisée ! \");this.value=$StockPr;}' readonly autofocus>
-                                    <button type='submit' class='valider_modif_display_cmd cacher_icon'><i class='bx bxs-check-square icon_valider_modif_display_cmd '></i></button>
+                                <td >
+                                    <div class='td_valider'>
+                                        <input type='text' value='$row[qt]' name='qt' class='input_quantite' onchange='if(this.value>$StockPr){erreur2(\"Le stock est épuisée ! \");this.value=$StockPr;}' readonly autofocus>
+                                        <button type='submit' class='valider_modif_display_cmd cacher_icon'><i class='bx bxs-check-square icon_valider_modif_display_cmd '></i></button>
+                                        <button type='reset' class='exit_modif_display_cmd cacher_icon'><i class='bx bxs-x-square icon_exit_modif_display_cmd''></i></button>
+                                    </div>
                                 </td>
                                 <td class='action'>
                                     <i class='bx bx-edit icon_modifier_commande_display'  ></i>
@@ -943,10 +947,10 @@ if (isset($_GET['table'])) {
             echo "
             <section class='home'>
             <header class='produit'>
-                <div class='case_produit border_blue'>Nombre de produits : $nbreProduct </div>
-                <div class='case_produit border_red'>Nombre de produits vendus : $sum </div>
-                <div class='case_produit border_vert'>Chiffre d'affaires : $sumPrix DH </div>
-                <div class='case_produit border_roz'>Côut des produits en stock : $sumCout DH </div>
+                <div class='case_produit border_blue'>Nombre de produits : &nbsp;$nbreProduct </div>
+                <div class='case_produit border_red'>Nombre de produits vendus : &nbsp;$sum </div>
+                <div class='case_produit border_vert'>Chiffre d'affaires : &nbsp; $sumPrix DH </div>
+                <div class='case_produit border_roz'>Côut des produits en stock : &nbsp; $sumCout  DH </div>
             </header>
                 <main>
                     <div class='table' >
@@ -1064,9 +1068,8 @@ if (isset($_GET['table'])) {
             echo "
             <section class='home'>
                 <header class='categorie'>
-                    <div class='case_categorie border_red'>Nombre de catégories : $nbreCt</div>
-                    <div class='case_categorie border_roz'>Catégorie la plus populaire :".$CtPop['NomCt']."</div>
-                    <div class='case_categorie border_orange'>Catégorie la moins populaire :". $CtMoinsPop['NomCt']."</div>
+                    <div class='case_categorie border_roz'>Catégorie la plus populaire : &nbsp;".$CtPop['NomCt']."</div>
+                    <div class='case_categorie border_orange'>Catégorie la moins populaire : &nbsp;". $CtMoinsPop['NomCt']."</div>
                 </header>
                 <main>
                     <div class='containner_main_categorie'>
@@ -1121,11 +1124,11 @@ if (isset($_GET['table'])) {
             echo "
             <section class='home'>
                 <header class='commande'>
-                    <div class='case_commande border_red'> Total commandes : $row </div>
-                    <div class='case_commande border_vert'> En cours : $row1 </div>
-                    <div class='case_commande border_orange'> Expédiée : $row2 </div>
-                    <div class='case_commande border_roz'> Livrée : $row3 </div>
-                    <div class='case_commande border_maron'> Annulée : $row4 </div>
+                    <div class='case_commande border_red'> Total commandes : &nbsp; $row </div>
+                    <div class='case_commande border_vert'> En cours : &nbsp; $row1 </div>
+                    <div class='case_commande border_orange'> Expédiée : &nbsp; $row2 </div>
+                    <div class='case_commande border_roz'> Livrée : &nbsp; $row3 </div>
+                    <div class='case_commande border_maron'> Annulée : &nbsp; $row4 </div>
                 </header>
                 <main>
                     <div class='table'>
@@ -1242,9 +1245,9 @@ if (isset($_GET['table'])) {
             echo"
                 <section class='home '>
                     <header class='rdv'>
-                        <div class='case_rdv border_red'>Nombre de RDV : $nbre</div>
-                        <div class='case_rdv border_orange'>RDV Traité : $nbreTr</div>
-                        <div class='case_rdv border_vert'>RDV Non traité : $nbreNonTr</div>
+                        <div class='case_rdv border_red'>Nombre de RDV : &nbsp;$nbre</div>
+                        <div class='case_rdv border_orange'>RDV Traité : &nbsp; $nbreTr</div>
+                        <div class='case_rdv border_vert'>RDV Non traité : &nbsp; $nbreNonTr</div>
                     </header>
                     <main>
                         <div class='table'>
@@ -1387,9 +1390,9 @@ if (isset($_GET['table'])) {
             echo"
             <section class='home'>
                 <header class='promos'>
-                    <div class='case_promos border_red'>Nombre de promos : $nbre</div>
-                    <div class='case_promos border_blue'>Promos En cours : $nbreEnCrs</div>
-                    <div class='case_promos border_orange'>Promos Terminées : $nbreTerm</div>
+                    <div class='case_promos border_red'>Nombre de promos : &nbsp; $nbre</div>
+                    <div class='case_promos border_blue'>Promos En cours : &nbsp; $nbreEnCrs</div>
+                    <div class='case_promos border_orange'>Promos Terminées : &nbsp; $nbreTerm</div>
                 </header>
                 <main>
                     <div class='table_promos'>
@@ -1496,13 +1499,14 @@ if (isset($_GET['table'])) {
 else{
     header("location:accueil.php");
 }
+if(isset($_SESSION['erreur'])){
+    echo "<script>erreur(\"$_SESSION[erreur]\");</script>";
+    unset($_SESSION['erreur']);
+}
 if(isset($_SESSION['success'])){
     echo "<script>success('$_SESSION[success]');</script>";
     unset($_SESSION['success']);
 }
-if(isset($_SESSION['erreur'])){
-    echo "<script>erreur('$_SESSION[erreur]');</script>";
-    unset($_SESSION['erreur']);
-}
+
 ?>
 <?php include('./inc_ADMIN/footer.html');?>

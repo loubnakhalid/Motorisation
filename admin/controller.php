@@ -88,7 +88,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
     case 'RDV':
         if($action=='supprimer'){
             $id=$_GET['id'];
-            $rqt="delete from rdv where IdRDV=$id";
+            $rqt="delete from rdv  where IdRDV=$id";
             $success="Vous-avez supprimé le rendez-vous avec succés ! ";
         }
         else{
@@ -359,7 +359,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             }
         }
         catch(Exception | Error $e){
-            $_SESSION['erreur']='Erreur ! Veuillez contacter l\'équipe de développement .';
+            $_SESSION['erreur']='Erreur ! Veuillez contacter l\'équipe de développement';
             header("location:gestion.php?table=$table");
         }
     }

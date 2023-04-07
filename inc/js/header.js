@@ -1,11 +1,3 @@
-document.addEventListener("DOMContentLoaded", function(event) {
-    var scrollpos = localStorage.getItem('scrollpos');
-    if (scrollpos) window.scrollTo(0, scrollpos);
-});
-
-window.onbeforeunload = function(e) {
-    localStorage.setItem('scrollpos', window.scrollY);
-};
 let login_hover = document.querySelector(".login_hover");
 let icon_user = document.querySelector(".icon_user");
 
@@ -22,12 +14,6 @@ function login() {
     login_hover.addEventListener("mouseover", affiche);
     icon_user.addEventListener("mouseleave", hide);
     login_hover.addEventListener("mouseleave", hide);
-}
-
-
-
-function ouvrirRDV() {
-    document.getElementById('RDV').style = '';
 }
 /* ------------------------------------------------------------------------------- */
 let fleche_left_btn = document.getElementsByClassName("fleche_left_btn"),

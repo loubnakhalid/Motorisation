@@ -391,13 +391,17 @@ nav.panier_identifier ul li a {
 
 nav.nav_identifier {
     padding: 9px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
     margin-top: 2px;
     align-items: center;
     font-size: 16px;
     font-weight: bold;
+    align-items: center;
     color: white;
     background-color: #ff9200;
-    padding-left: 370px;
+    /* padding-left: 370px; */
 }
 
 

@@ -11,24 +11,20 @@
     <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <!-- Replace "test" with your own sandbox Business account app client ID -->
     <script src="https://www.paypal.com/sdk/js?client-id=ASPxcd5frMaueHLGEQxTi2BO9tpV77s51-fKg1XduObyJyLXB4VrlZ0j0CprL9tb0CHg43b2GZW1Jpab&currency=USD"></script>
     <script>
         paypal.Buttons({
-            //sets up the transaction when a payment button is clicked 
             createOrder: (data, actions) => {
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '<?=montantTotal();?>' //can also reference
+                            value: '<?=montantTotal();?>'
                         }
                     }]
                 });
             },
-            //Finalize the transaction after payer approval 
             onApprove: (data, actions) => {
                 return actions.order.capture().then(function(orderData) {
-                    //Successful capturel for dev/demo purposes:
                     console.log("Capture result", orderData, JSON.stringify(orderData, null, 2));
                     const transaction = orderData.purchase_units[0].payments.captures[0];
                     alert("Transaction ${transaction.status}: ${transaction.id} ");
@@ -36,12 +32,6 @@
                 });
             }
         }).render("#paypal-button-container");
-        //affiche boutton paypal
-        /*const btnPaypal = document.getElementById("paypal");
-        const AffichPaypal=document.querySelector(".btn-Paypal");
-        btnPaypal.addEventListener("click", () => {
-            AffichPaypal.style.display="block";
-        })*/
         function AffichePaypal()
         {
             let AffichePaypal =document.getElementById("paypal-button-container");
@@ -89,7 +79,6 @@
                     <span class="qst">Quel moyen de paiement voulez-vous utiliser?</span><br>
                     <input type="radio" name="modePaiement" value="Paypal" id="paypal" class="paiement-input" onclick="AffichePaypal()">
                     <label for="paypal">Paiement avec Paypal </label><br>
-                    <!-- Set up a container element for the button -->
                     <div id="paypal-button-container" class="btn-Paypal"></div>
                     <input type="radio" name="modePaiement" value="Espèces" id="espece" class="paiement-input" onclick="MasquePaypal()">
                     <label for="espece">Paiement cash à la livraison </label></label>
@@ -104,7 +93,6 @@
                 </form>
             </div>
             <div class="active" id="overlay"></div>
-    
 </body>
 
 </html>
