@@ -89,10 +89,49 @@ if(! Client() && ! Admin()){
                         <td><strong>$total DH</strong></td>
                     </tr>
                 </table>
-            <button class='bouttonCmd' onclick='document.location.href=\"finalisationcommande.php\"'>Passer à la caisse</button>
+            <button class='bouttonCmd' onclick=\"document.getElementById('FinirCommande').style.display='block'\">Passer à la caisse</button>
         </div>
         "; 
     }
     ?>
 </section>
+<div class="container" id="FinirCommande" style="display:none">
+            <div class="container-header">
+                <div class="title">Finalisation de la commande</div>
+                <button class="close-boutton" onclick="document.getElementById('FinirCommande').style.display='none';document.getElementById('overlay').style.opacity='0';">&times;</button>
+            </div>
+            <form action="controller.php" method="post">
+            <?php
+            $id=$_SESSION['membre']['IdMb'];
+            $rslt=mysqli_query($mysqli,"select * from membre where IdMb=$id");
+            $row=mysqli_fetch_assoc($rslt);
+            ?>
+            <div class="container-body">
+                <div class="title-sec1">Contact :</div>
+                <div class="input-perso">
+                    <label>Nom :<input type="text" name="NomMb" value="<?=$row['NomMb'];?>" class="nom-input"></label>
+                    <span class="prénom"><label>Prénom :<input type="text" name="PrénomMb" value="<?=$row['PrénomMb'];?>"  class="prénom-input"></label><br></span>
+                    <span class="tele"><label>Email :<input type="email" name="EmailMb" value="<?=$row['EmailMb'];?>"  class="tele-input"></label></span>
+                    <span class="tele"><label> Téléphone :<input type="tel" name="NumTélé" value="<?=$row['NumTélé'];?>"  class="tele-input"></label></span>
+                    <div class="adresse"><label>Adresse :<input type="text" name="AdresseMb" value="<?=$row['AdresseMb'];?>"  class="adresse-input"></label></div>
+                </div>
+                <div class="title-sec3">Mode de paiement :</div>
+                <div class="input-paim">
+                    <span class="qst">Quel moyen de paiement voulez-vous utiliser?</span><br>
+                    <input type="radio" name="modePaiement" value="Paypal" id="paypal" class="paiement-input" onclick="AffichePaypal()">
+                    <label for="paypal">Paiement avec Paypal </label><br>
+                    <div id="paypal-button-container" class="btn-Paypal"></div>
+                    <input type="radio" name="modePaiement" value="Espèces" id="espece" class="paiement-input" onclick="MasquePaypal()">
+                    <label for="espece">Paiement cash à la livraison </label></label>
+                </div>
+            </div>
+            <div class="container-footer">
+                <div class="input-fin" id="Fin">
+                    <input type="submit" value="Confirmer" name="Finaliser" class="input-Conf">
+                    <input type="reset" value="Annuler" name="Annuler" class="input-Annul">
+                   </div>
+                </div>
+                </form>
+    </div>
+    <div class="active" id="overlay"></div>
 <?php include("./inc/bas.inc.html") ?>

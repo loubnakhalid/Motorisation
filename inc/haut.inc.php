@@ -21,7 +21,7 @@ include('./inc/init.inc.php');
     <!--Formulaire contactez-nous-->
     <div class="display_body_contacter_nous cacher">
         <div class="contacter_nous">
-            <i class='bx bxs-x-square icon_x_exit_contacter_nous' onclick='history.back();'></i>
+            <i class='bx bxs-x-square icon_x_exit_contacter_nous fermer-contact'></i>
             <h3>Contactez-nous</h3>
             <div class="contacter">
                 <form action="controller.php?envEml=true" method="post">
@@ -49,13 +49,13 @@ include('./inc/init.inc.php');
         </div>
         <div class='navigation'>
             <div class='login_hover hover'>
-                <h2>indentifiez-vous</h2>
+                <h2>Identifiez-vous</h2>
                 <form action='controller.php' method='post' class='form_hover_identifier'>
                     <div class='input_hover_identifier'>
                         <input type='text' name='EmailMb' id='' placeholder='Email'>
                     </div>
                     <div class='input_hover_identifier'>
-                        <input type='text' name='MDPS' id='' placeholder='Mot de passe'>
+                        <input type='password' name='MDPS' id='' placeholder='Mot de passe'>
                     </div>
                     <div class='input_hover_identifier'>
                         <input type='submit' name='con' id='btn'>

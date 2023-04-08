@@ -1,3 +1,15 @@
+let btn_contacter_nous = document.querySelector(".btn_contacter_nous"),
+    display_body_contacter_nous = document.querySelector(".display_body_contacter_nous");
+btn_contacter_nous.addEventListener("click", () => {
+    display_body_contacter_nous.classList.remove("cacher");
+    document.body.style.overflowY = 'hidden';
+});
+let btn_fermer_contact = document.querySelector(".fermer-contact");
+btn_fermer_contact.addEventListener("click", () => {
+    display_body_contacter_nous.classList.add("cacher");
+    document.body.style.overflowY = 'auto';
+});
+/*-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 let login_hover = document.querySelector(".login_hover");
 let icon_user = document.querySelector(".icon_user");
 
@@ -66,8 +78,22 @@ fleche_pub_right.addEventListener("click", () => {
     }
 });
 //---------------------------------------------------------------------------------------------------
-let btn_contacter_nous = document.querySelector(".btn_contacter_nous"),
-    display_body_contacter_nous = document.querySelector(".display_body_contacter_nous");
-btn_contacter_nous.addEventListener("click", () => {
-    display_body_contacter_nous.classList.remove("cacher");
-});
+paypal.Buttons({
+    createOrder: (data, actions) => {
+        return actions.order.create({
+            purchase_units: [{
+                amount: {
+                    value: '<?=montantTotal();?>'
+                }
+            }]
+        });
+    },
+    onApprove: (data, actions) => {
+        return actions.order.capture().then(function(orderData) {
+            console.log("Capture result", orderData, JSON.stringify(orderData, null, 2));
+            const transaction = orderData.purchase_units[0].payments.captures[0];
+            alert("Transaction ${transaction.status}: ${transaction.id} ");
+
+        });
+    }
+}).render("#paypal-button-container");

@@ -41,8 +41,28 @@ function augmenterQt(pos, stock) {
 
 function ouvrirRDV() {
     document.getElementById('RDV').style = '';
+    document.body.style.overflowY = 'hidden';
 }
 
 function fermerRDV() {
     document.getElementById('RDV').style.display = 'none';
+    document.body.style.overflowY = 'auto';
+}
+
+function AffichePaypal() {
+    let AffichePaypal = document.getElementById("paypal-button-container");
+    AffichePaypal.style.display = "block";
+    let Form = document.getElementById("FinirCommande");
+    Form.style.height = "650px";
+    let FormFooter = document.getElementById("Fin");
+    FormFooter.style.marginTop = "0px";
+}
+
+function MasquePaypal() {
+    let AffichePaypal = document.getElementById("paypal-button-container");
+    AffichePaypal.style.display = "none";
+    let Form = document.getElementById("FinirCommande");
+    Form.style.height = "550px";
+    let FormFooter = document.getElementById("Fin");
+    FormFooter.style.marginTop = "29px";
 }
