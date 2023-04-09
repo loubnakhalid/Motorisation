@@ -9,7 +9,7 @@
 }
 
 .TitleReinc {
-    font-size: 25px;
+    font-size: 30px;
     color: #015E9B;
     font-weight: 800;
     display: flex;
@@ -22,7 +22,8 @@
 .inputReinMdps,
 .ConfRein {
     width: 378px;
-    padding: 14px;
+    padding: 17px;
+    border-radius: 8px;
     border: 1px solid rgb(215 214 214);
 }
 
@@ -32,7 +33,7 @@
 }
 
 .inputReinMdps {
-    margin-bottom: 20px;
+    margin-bottom: 13px;
 }
 
 .InputRein {
@@ -42,8 +43,8 @@
 }
 
 .BtnRein {
-    margin-left: 91px;
-    margin-top: 25px;
+    margin-left: 58px;
+    margin-top: 16px;
 }
 
 .btnReinMdps,
@@ -69,19 +70,22 @@
     border: none;
     border-radius: 5px;
     font-weight: 600;
+    margin-left: 76px;
     font-size: 14px;
 }
 
 .ErReinMdps {
     color: red;
     position: relative;
-    top: -19px;
-    visibility: hidden;
+    display: none;
+    top: -7px;
+    /* visibility: hidden; */
 }
 
 .ErReinConfMdps {
     color: red;
     position: relative;
-    top: 1px;
-    visibility: hidden;
+    top: 7px;
+    /* visibility: hidden; */
+    display: none;
 }

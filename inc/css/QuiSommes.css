@@ -2,6 +2,10 @@
     border: none;
 }
 
+#Qui {
+    padding: 21px 9px;
+}
+
 .img1 {
     width: 382px;
     height: 340px;
@@ -29,7 +33,7 @@
     font-weight: 900;
     position: relative;
     top: 79px;
-    right: 15px;
+    right: 83px;
     color: #015E9B;
 }
 
@@ -42,6 +46,7 @@
     width: 550px;
     right: 80px;
     line-height: 21px;
+    text-align: justify;
 }
 
 .img2 {
@@ -64,6 +69,7 @@
     position: relative;
     top: 74px;
     left: 90px;
+    text-align: justify;
 }
 
 .TitleNs2 {
@@ -89,7 +95,7 @@
     font-weight: 900;
     color: #015E9B;
     position: relative;
-    right: -164px;
+    right: 34px;
     top: 53px;
 }
 
@@ -114,6 +120,7 @@
     position: relative;
     top: 84px;
     right: 35px;
+    text-align: justify;
 }
 
 .img5 {
@@ -133,6 +140,7 @@
     left: 42px;
     font-size: 17px;
     font-weight: 600;
+    text-align: justify;
 }
 
 .horaires {

@@ -490,9 +490,9 @@ elseif(isset($_GET['Liv'])){
                 <img src='inc/img/Amana.png' class='MarocExp'>
                 <div >
                     <p class='typePara1'>La société Amana assure l’expédition, l’arrivage,
-                    le ramassage, la livraison, le retour des fonds, la gestion documentaire et 
-                    propose à chaque client professionnel, particulier ou e-commerçants une offre 
-                    de prestation complète, variée et optimale grâce à une expérience riche et professionnelle 
+                    le ramassage, la livraison, le retour des fonds, il
+                    propose à chaque client professionnel une offre 
+                    de prestation complète grâce à une expérience professionnelle 
                     sur le marché de la messagerie express nationale.</p>
                 </div>
             </div>   

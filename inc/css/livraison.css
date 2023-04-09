@@ -1,8 +1,13 @@
+#livraison {
+    padding: 30px 19px;
+}
+
 .livrimg1 {
     width: 850px;
     height: 198px;
     position: relative;
     left: 192px;
+    margin-top: 23px;
 }
 
 .TitleLiv1 {
@@ -10,7 +15,7 @@
     font-weight: 900;
     color: #044570;
     margin-top: 50px;
-    margin-left: 170px;
+    margin-left: 24px;
 }
 
 .Livpara1 {
@@ -21,11 +26,12 @@
     font-weight: 600;
     margin-top: 20px;
     margin-left: 20px;
+    text-align: justify;
 }
 
 .MarocExp {
     width: 250px;
-    margin-left: 98px;
+    margin-left: 82px;
 }
 
 .typeLiv {
@@ -33,6 +39,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
+    margin-right: 14px;
 }
 
 .typePara1 {
@@ -42,13 +49,14 @@
     font-weight: 600;
     margin-left: 114px;
     margin-top: 16px;
+    text-align: justify;
 }
 
 .Titledetail {
     font-size: 29px;
     font-weight: 900;
     color: #044570;
-    margin-left: 170px;
+    margin-left: 24px;
     margin-top: 20px;
 }
 
@@ -59,6 +67,7 @@
     font-weight: 600;
     margin-top: 23px;
     margin-left: 20px;
+    text-align: justify;
 }
 
 #tableau {

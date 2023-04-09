@@ -114,9 +114,10 @@ function ajouterProduitDansPanier($IdPr,$NomPr,$qt,$PrixPr,$ImagePr){
 }
 function montantTotal(){
    $total=0;
-   for($i = 0; $i < count($_SESSION['panier']['IdPr']); $i++) 
-   {
+   if(isset($_SESSION['panier'])){
+	for($i = 0; $i < count($_SESSION['panier']['IdPr']); $i++) {
       $total += $_SESSION['panier']['qt'][$i] * $_SESSION['panier']['PrixPr'][$i];
+   	}
    }
    return round($total,2);
 }

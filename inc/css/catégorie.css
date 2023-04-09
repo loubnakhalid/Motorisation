@@ -4,7 +4,7 @@
     grid-area: main;
     display: flex;
     flex-direction: column;
-    background-color: #f5f6f7;
+    background-color: #f9f9f9;
     scroll-behavior: smooth;
     font-family: 'Kumbh Sans', sans-serif;
     gap: 20px;
@@ -94,10 +94,12 @@
     color: #43465e;
     font-size: 14px;
 }
+
 .container_categorie .entete_mes_categorie .element .trie:not(:hover) .display_trie,
 .container_categorie .entete_mes_categorie .element .statut:not(:hover) .display_statut {
     display: none;
 }
+
 .container_categorie .entete_mes_categorie .element .trie .display_trie,
 .container_categorie .entete_mes_categorie .element .statut .display_statut {
     position: absolute;
@@ -183,170 +185,4 @@
     display: flex;
     gap: 15.55px;
     flex-wrap: wrap;
-}
-
-
-/** ====================================== footer=========================================== */
-
-footer {
-    grid-area: footer;
-    margin-top: 50px;
-    background-color: #051133;
-}
-
-footer .footer_entete {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 20px;
-}
-
-footer .footer_entete .dkchi {
-    width: 60%;
-    display: flex;
-    justify-content: space-between;
-}
-
-footer .footer_entete .dkchi h3 {
-    color: #ffffff;
-}
-
-footer .footer_entete .contacter_nous {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 30%;
-}
-
-footer .footer_entete .contacter_nous h3 {
-    color: #ffffff;
-}
-
-footer .footer_entete .contacter_nous .contacter {
-    border: 2px solid #ffffff;
-    width: 100%;
-    height: auto;
-    padding: 20px;
-}
-
-footer .footer_entete .contacter_nous .contacter form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-footer .footer_entete .contacter_nous .contacter input.inpp {
-    width: 100%;
-    height: 40px;
-    border: none;
-    outline: none;
-    background-color: #151d32;
-    color: #ffffff;
-    padding-left: 10px;
-}
-
-footer .footer_entete .contacter_nous .contacter input.inpp::placeholder {
-    color: #ffffff;
-    font-size: 14px;
-}
-
-footer .footer_entete .contacter_nous .contacter textarea {
-    padding: 10px;
-    border: none;
-    outline: none;
-    background-color: #151d32;
-    color: #ffffff;
-    height: 70px;
-}
-
-footer .footer_entete .contacter_nous .contacter textarea::placeholder {
-    color: #ffffff;
-    font-size: 14px;
-}
-
-footer .footer_entete .contacter_nous .contacter input.envoyer {
-    width: 70px;
-    height: 30px;
-    background-color: inherit;
-    color: #ffffff;
-    border: 1px solid white;
-    outline: none;
-    cursor: pointer;
-}
-
-
-/* 
-
-
-footer .footer_entete .livraison {
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-height: 100%;
-width: 25%;
-}
-
-footer .footer_entete span.title {
-font-weight: bolder;
-font-size: 17px;
-} */
-
-footer .bas_footer {
-    width: 100%;
-    height: 90px;
-    background-color: #051133;
-    border-top: 1px solid #374957;
-    display: flex;
-    align-items: center;
-    padding-left: 30px;
-}
-
-footer .bas_footer img {
-    width: 200px;
-    color: #215e8c;
-}
-
-footer .bas_footer .copyright {
-    margin-left: 20px;
-    color: #bac8d3;
-    font-size: 14px;
-    display: flex;
-    flex-wrap: nowrap;
-}
-
-footer .bas_footer .reseux_sociaux {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    align-self: flex-end;
-    width: 40%;
-}
-
-footer .bas_footer .reseux_sociaux a i {
-    font-size: 24px;
-    color: #a2aed2;
-    margin-right: 30px;
-}
-
-footer .bas_footer .arrow_bas {
-    width: 10%;
-    display: flex;
-    justify-content: center;
-}
-
-footer .bas_footer .arrow_bas a {
-    text-decoration: none;
-}
-
-footer .bas_footer .arrow_bas a i {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    background-color: #a2aed2;
-    width: 45px;
-    height: 45px;
-    border-radius: 50px;
 }

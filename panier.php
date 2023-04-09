@@ -4,22 +4,27 @@ if(! Client() && ! Admin()){
     echo "<script>document.location.href='identification.php?action=connexion';</script>";
 }
 ?>
-<section id="panier" class="pagePanier"> 
-    <div>
     <?php
     if(empty($_SESSION['panier']['IdPr'])){
     echo "
-        <div class='div_panier_vide'>
-            <div class='panier_vide'>
-                <lord-icon src='https://cdn.lordicon.com/slkvcfos.json' trigger='hover' colors='primary:#1663c7,secondary:#ff840a' style='width:150px;height:150px'></lord-icon>
-                <h1 class='text_panier_vide'>
-                    <strong class='bold'>Votre panier </strong>est actuellement <strong class='bold'>vide</strong>
-                </h1>
-                <a href='index.php' >Commencer mes achats</a>
+    <section id='panierVide' class='pagePanier'>
+        <div>
+            <div class='div_panier_vide'>
+                <div class='panier_vide'>
+                    <lord-icon src='https://cdn.lordicon.com/slkvcfos.json' trigger='hover' colors='primary:#1663c7,secondary:#ff840a' style='width:150px;height:150px'></lord-icon>
+                    <h1 class='text_panier_vide'>
+                        <strong class='bold'>Votre panier </strong>est actuellement <strong class='bold'>vide</strong>
+                    </h1>
+                    <a href='index.php' >Commencer mes achats</a>
+                </div>
             </div>
-        </div> ";
+        </div>
+    </section>";
     }
     else{
+        echo "
+        <section id='panier' class='pagePanier'> 
+        <div>";
         for($i = 0; $i < count($_SESSION['panier']['IdPr']); $i++){
             $IdPr=$_SESSION['panier']['IdPr'][$i];
             $rslt=mysqli_query($mysqli,"select * from produit where IdPr=$IdPr");
@@ -89,18 +94,20 @@ if(! Client() && ! Admin()){
                         <td><strong>$total DH</strong></td>
                     </tr>
                 </table>
-            <button class='bouttonCmd' onclick=\"document.getElementById('FinirCommande').style.display='block'\">Passer à la caisse</button>
+            <button class='bouttonCmd' onclick=\"afficherFinalisation()\">Passer à la caisse</button>
         </div>
+        </div>
+        </section>
         "; 
     }
     ?>
-</section>
+
 <div class="container" id="FinirCommande" style="display:none">
-            <div class="container-header">
-                <div class="title">Finalisation de la commande</div>
-                <button class="close-boutton" onclick="document.getElementById('FinirCommande').style.display='none';document.getElementById('overlay').style.opacity='0';">&times;</button>
-            </div>
-            <form action="controller.php" method="post">
+    <div class="container-header">
+        <div class="title">Finalisation de la commande</div>
+        <button class="close-boutton" onclick="masquerFinalisation()">&times;</button>
+    </div>
+    <form action="controller.php" method="post" onsubmit="return VérifCmd()">
             <?php
             $id=$_SESSION['membre']['IdMb'];
             $rslt=mysqli_query($mysqli,"select * from membre where IdMb=$id");
@@ -109,20 +116,41 @@ if(! Client() && ! Admin()){
             <div class="container-body">
                 <div class="title-sec1">Contact :</div>
                 <div class="input-perso">
-                    <label>Nom :<input type="text" name="NomMb" value="<?=$row['NomMb'];?>" class="nom-input"></label>
-                    <span class="prénom"><label>Prénom :<input type="text" name="PrénomMb" value="<?=$row['PrénomMb'];?>"  class="prénom-input"></label><br></span>
-                    <span class="tele"><label>Email :<input type="email" name="EmailMb" value="<?=$row['EmailMb'];?>"  class="tele-input"></label></span>
-                    <span class="tele"><label> Téléphone :<input type="tel" name="NumTélé" value="<?=$row['NumTélé'];?>"  class="tele-input"></label></span>
-                    <div class="adresse"><label>Adresse :<input type="text" name="AdresseMb" value="<?=$row['AdresseMb'];?>"  class="adresse-input"></label></div>
+                    <div class='CmdNmP'>
+                        <div>
+                            <label>Nom :<input type="text" name="NomMb" value="<?=$row['NomMb'];?>" class="nom-input"></label><br>
+                            <span class='ErCmdNom'></span>
+                        </div>
+                        <div>
+                           <label>Prénom :<input type="text" name="PrénomMb" value="<?=$row['PrénomMb'];?>"  class="prénom-input"></label><br>
+                           <span class='ErCmdPrénom'></span>
+                        </div>
+                    </div>
+                    <div class='CmdET'>
+                        <div>
+                            <label>Email :<input type="text" name="EmailMb" value="<?=$row['EmailMb'];?>"  class="Eml-input"></label><br>
+                            <span class='ErCmdEml'></span>
+                        </div>
+                        <div>
+                           <label> Téléphone :<input type="tel" name="NumTélé" value="<?=$row['NumTélé'];?>"  class="tele-input"></label><br>
+                           <span class='ErCmdTél'></span>
+                        </div>
+                    </div>
+                    <div class="adresse">
+                        <label>Adresse :<input type="text" name="AdresseMb" value="<?=$row['AdresseMb'];?>"  class="adresse-input"></label><br>
+                        <span class='ErCmdAds'></span>
+                    </div>
                 </div>
                 <div class="title-sec3">Mode de paiement :</div>
                 <div class="input-paim">
                     <span class="qst">Quel moyen de paiement voulez-vous utiliser?</span><br>
                     <input type="radio" name="modePaiement" value="Paypal" id="paypal" class="paiement-input" onclick="AffichePaypal()">
                     <label for="paypal">Paiement avec Paypal </label><br>
+                    <!-- Set up a container element for the button -->
                     <div id="paypal-button-container" class="btn-Paypal"></div>
                     <input type="radio" name="modePaiement" value="Espèces" id="espece" class="paiement-input" onclick="MasquePaypal()">
-                    <label for="espece">Paiement cash à la livraison </label></label>
+                    <label for="espece">Paiement cash à la livraison </label></label><br>
+                    <span class='ErCmdPai'></span>
                 </div>
             </div>
             <div class="container-footer">
@@ -133,5 +161,26 @@ if(! Client() && ! Admin()){
                 </div>
                 </form>
     </div>
-    <div class="active" id="overlay"></div>
+    <div class="" id="overlay"></div>
+<script>
+paypal.Buttons({
+    createOrder: (data, actions) => {
+        return actions.order.create({
+            purchase_units: [{
+                amount: {
+                    value: '<?=montantTotal();?>'
+                }
+            }]
+        });
+    },
+    onApprove: (data, actions) => {
+        return actions.order.capture().then(function(orderData) {
+            console.log("Capture result", orderData, JSON.stringify(orderData, null, 2));
+            const transaction = orderData.purchase_units[0].payments.captures[0];
+            swal("Transaction ${transaction.status}: ${transaction.id} ","","success;");
+
+        });
+    }
+}).render("#paypal-button-container");
+</script>
 <?php include("./inc/bas.inc.html") ?>

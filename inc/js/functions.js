@@ -53,7 +53,7 @@ function AffichePaypal() {
     let AffichePaypal = document.getElementById("paypal-button-container");
     AffichePaypal.style.display = "block";
     let Form = document.getElementById("FinirCommande");
-    Form.style.height = "650px";
+    Form.style.height = "595px";
     let FormFooter = document.getElementById("Fin");
     FormFooter.style.marginTop = "0px";
 }
@@ -62,7 +62,19 @@ function MasquePaypal() {
     let AffichePaypal = document.getElementById("paypal-button-container");
     AffichePaypal.style.display = "none";
     let Form = document.getElementById("FinirCommande");
-    Form.style.height = "550px";
+    Form.style.height = "500px";
     let FormFooter = document.getElementById("Fin");
     FormFooter.style.marginTop = "29px";
+}
+
+function afficherFinalisation() {
+    document.getElementById('FinirCommande').style.display = 'block';
+    document.getElementById('overlay').classList.add('active');
+    document.body.style.overflowY = 'hidden';
+}
+
+function masquerFinalisation() {
+    document.getElementById('FinirCommande').style.display = 'none';
+    document.getElementById('overlay').classList.remove('active');
+    document.body.style.overflowY = 'auto';
 }

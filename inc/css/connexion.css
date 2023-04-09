@@ -4,18 +4,18 @@
     justify-content: space-between;
     align-items: center;
     height: 74vh;
-
 }
 
 .formCnx {
     margin-left: 161px;
+    margin-top: 112px;
 }
 
 .titleIden {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 25px;
+    font-size: 30px;
     color: #015E9B;
     margin-bottom: 24px;
     font-weight: 800;
@@ -40,10 +40,16 @@
 }
 
 .inpCnx {
-    width: 309px;
+    width: 345px;
     padding: 12px;
     margin-bottom: 21px;
     border: 1px solid rgb(215 214 214);
+    /* width: 382px; */
+    border-radius: 8px;
+    padding: 17px;
+    border: 1px solid rgb(215 214 214);
+    /* margin-bottom: 15px; */
+    /* margin-right: 10px; */
 }
 
 .input-Email {
@@ -52,11 +58,12 @@
 
 .CreerCmpt {
     width: 391px;
+    margin-top: 82px;
     margin-right: 66px;
 }
 
 .MtdpsOubl {
-    margin-left: 92px;
+    margin-left: 109px;
     margin-top: 8px;
 }
 
@@ -66,16 +73,17 @@
 }
 
 .descCmpt {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 485;
     margin-top: 37px;
+    text-align: justify;
     line-height: 1.5;
     display: flex;
     justify-content: center
 }
 
 .TitleCmpt {
-    font-size: 25px;
+    font-size: 30px;
     color: #015E9B;
     margin-bottom: 24px;
     font-weight: 800;

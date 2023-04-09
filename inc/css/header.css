@@ -17,7 +17,7 @@ body {
     grid-template-columns: 1fr;
     grid-template-rows: 120px auto auto;
     grid-template-areas: "header" "main" "footer";
-    background-color: rgb(245, 246, 247);
+    background-color: rgb(249 249 249);
 }
 
 body .cacher {
@@ -78,7 +78,7 @@ i.icon_x_exit_contacter_nous {
 }
 
 .contacter_nous .contacter input.inpp {
-    width: 48%;
+    width: 100%;
     height: 40px;
     border: none;
     outline: none;
@@ -125,6 +125,29 @@ i.icon_x_exit_contacter_nous {
     cursor: pointer;
     /* display: flex; */
     /* align-self: flex-end; */
+}
+
+.CntObjEml {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.CntEml {
+    position: relative;
+    left: 59px;
+    width: 262px;
+}
+
+.CntObj {
+    width: 262px;
+}
+
+.ErCntObj,
+.ErCntEml,
+.ErCntdesc {
+    color: red;
+    visibility: hidden;
 }
 
 
@@ -239,6 +262,17 @@ header {
     padding-bottom: 3px;
 }
 
+.info_travaille button {
+    width: 152px;
+    border: solid 1px;
+    background-color: #ffffff;
+    color: #ff8c02;
+    height: 35px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
 .navigation nav ul {
     width: 100%;
     display: flex;
@@ -263,16 +297,27 @@ nav.panier_identifier ul {
     height: 100%;
 }
 
+nav .panier_identifier ul li {
+    display: flex;
+    align-items: center;
+}
+
 nav.panier_identifier ul li a {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
 }
 
-.panier_identifier ul li {
-    display: flex;
-    align-items: center;
+nav.panier_identifier ul li a i.icon {
+    font-size: 24px;
+}
+
+nav.panier_identifier ul li a span {
+    color: #015e9b;
 }
 
 

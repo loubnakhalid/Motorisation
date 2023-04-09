@@ -902,7 +902,7 @@ elseif(isset($_GET['ajouter_prmprdt']) && isset($_GET['id'])){
                     </thead>
                     <tbody>
     ";
-                $rslt=mysqli_query($mysqli,"select * from produit where IdPr not in (select IdPr from promo_produit where IdPromo=$id) order by NomPr");
+                $rslt=mysqli_query($mysqli,"select * from produit where IdPr not in (select IdPr from promo_produit where IdPromo=$id) and StockPr>0 order by NomPr");
                 while($row=mysqli_fetch_assoc($rslt)){
                     $IdPr=$row['IdPr'];
                     echo"
@@ -921,9 +921,6 @@ elseif(isset($_GET['ajouter_prmprdt']) && isset($_GET['id'])){
             </form>
         </div>
     </div>";
-}
-else{
-    echo "";
 }
 ?>
 <?php
@@ -1035,7 +1032,8 @@ if (isset($_GET['table'])) {
                         }
                         while ($row = mysqli_fetch_assoc($rslt)) {
                             $IdPr=$row['IdPr'];
-                            if($row['StatutPr']==1){
+                            $StockPr=$row['StockPr'];
+                            if($row['StockPr']>0){
                                 $statut='Disponible';
                                 $color='#28dd28';
                             }
@@ -1050,7 +1048,7 @@ if (isset($_GET['table'])) {
                                 <td>" . $row['NomCt'] . "</td>
                                 <td>" . $row['PrixPr'] ."DH</td>
                                 <td style='color:$color'>" . $statut . "</td>
-                                <td>" . $row['StockPr'] . "</td>
+                                <td>" . $StockPr . "</td>
                                 <td class=\"action\">
                                     <i class=\"bx bx-edit icon_modifier_produit\" onclick='document.location.href=\"$url&modifier_produit=true&IdPr=$IdPr\"'></i>
                                     <lord-icon src=\"https://cdn.lordicon.com/qjwkduhc.json\" trigger=\"hover\" colors=\"primary:#e83a30,secondary:#e83a30,tertiary:#ffffff\" state=\"hover-empty\" style=\"width:35px;height:35px\" onClick=\"confirmSupp('produit','supprimer',$IdPr)\"></lord-icon>

@@ -1,8 +1,13 @@
+#garanties {
+    padding: 35px 45px;
+}
+
 .Garantimg1 {
     width: 850px;
     height: 210px;
     position: relative;
     left: 192px;
+    margin-top: 51px;
 }
 
 .Stitle1 {
@@ -17,4 +22,5 @@
     font-size: 15px;
     font-weight: 600;
     margin-top: 13px;
+    text-align: justify;
 }

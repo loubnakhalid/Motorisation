@@ -2,12 +2,13 @@
 <?php
 if(isset($_GET['IdCt'])){
     $IdCt=$_GET['IdCt'];
+    $rqt1="select * from catégorie where IdCt=$_GET[IdCt]";
     if(isset($_GET['tri']) && isset($_GET['order'])){
         $rqt="select * from produit natural join catégorie where IdCt=$IdCt order by $_GET[tri] $_GET[order]";
     }
     elseif(isset($_GET['statut'])){
         if($_GET['statut']=='dispo'){
-            $rqt="select * from produit  natural join catégorie where StatutPr=1 and IdCt=$IdCt";
+            $rqt="select * from produit  natural join catégorie where StockPr>0 and IdCt=$IdCt";
         }
         elseif($_GET['statut']=='promo'){
             $rqt="select * from promo_produit natural join produit  natural join catégorie where IdCt=$IdCt";
@@ -16,10 +17,11 @@ if(isset($_GET['IdCt'])){
     else{
         $rqt="select * from produit  natural join catégorie where IdCt=$IdCt order by NomCt";
     }
-    $rslt=mysqli_query($mysqli,$rqt);
+    $rslt=mysqli_query($mysqli,$rqt1);
+    $rslt2=mysqli_query($mysqli,$rqt);
     $row=mysqli_fetch_assoc($rslt);
     $titre=$row['NomCt'];
-    $nbre=mysqli_num_rows($rslt);
+    $nbre=mysqli_num_rows($rslt2);
 
 }
 elseif(isset($_GET['rechercher']) && isset($_GET['mot'])){
@@ -28,7 +30,7 @@ elseif(isset($_GET['rechercher']) && isset($_GET['mot'])){
     }
     elseif(isset($_GET['statut'])){
         if($_GET['statut']=='dispo'){
-            $rqt="select * from produit  where NomPr like '%$_GET[mot]% and StatutPr=1";
+            $rqt="select * from produit  where NomPr like '%$_GET[mot]% and StockPr>0";
         }
         elseif($_GET['statut']=='promo'){
             $rqt="select * from promo_produit natural join produit natural join catégorie where NomPr like '%$_GET[mot]%'";
@@ -57,9 +59,9 @@ elseif(isset($_GET['rechercher']) && isset($_GET['mot'])){
                             <i class='bx bxs-chevron-down'></i>
                         </span>
                     </div>
-                    <div class='display_trie cacher'>
+                    <div class='display_trie'>
                         <ul>
-                            <li><a href="catégorie.php?IdCt=<?=$IdCt?>&tri=NomCt&order=asc">Nom produit</a></li>
+                            <li><a href="catégorie.php?IdCt=<?=$IdCt?>&tri=NomPr&order=asc">Nom produit</a></li>
                             <li><a href="catégorie.php?IdCt=<?=$IdCt?>&tri=PrixPr&order=asc">Prix croissant</a></li>
                             <li><a href="catégorie.php?IdCt=<?=$IdCt?>&order=desc">Prix décroissant</a></li>
                         </ul>
@@ -74,7 +76,7 @@ elseif(isset($_GET['rechercher']) && isset($_GET['mot'])){
                             <i class='bx bxs-chevron-down'></i>
                         </span>
                     </div>
-                    <div class='display_statut cacher'>
+                    <div class='display_statut'>
                         <ul>
                             <li><a href='catégorie.php?IdCt=<?=$IdCt?>&statut=dispo'>Disponible</a></li>
                             <li><a href='catégorie.php?IdCt=<?=$IdCt?>&statut=promo'>En promo</a></li>

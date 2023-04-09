@@ -20,6 +20,7 @@ if(! Admin()){
     <script src="./inc_ADMIN/js/function.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  
 </head>
 
 <body>
@@ -35,7 +36,7 @@ if(! Admin()){
             <ul>
                 <li class="lien acceuil">
                     <a href="./accueil.php">
-                        <i class='bx bx-home icon'></i>
+                        <i class='bx bx-home  icon'></i>
                         <span class="text">Acceuil</span>
                     </a>
                 </li>
@@ -70,12 +71,19 @@ if(! Admin()){
                         <span class="text">Promos</span>
                     </a>
                 </li>
+                <li class="lien">
+                    <a href="../index.php">
+                    <i class='bx bx-store icon'></i>
+                        <span class="text">Boutique</span>
+                    </a>
+                </li>
                 <li class="lien dec">
                     <a href="../controller.php?action=déconnexion">
                         <i class='bx bx-log-out icon'></i>
                         <span class="text">Déconnexion</span>
                     </a>
                 </li>
+                
             </ul>
         </div>
     </nav>

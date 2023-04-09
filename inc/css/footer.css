@@ -6,17 +6,20 @@ html {
 
 footer {
     grid-area: footer;
-    margin-top: 50px;
-    background-color: #232323;
+    /* margin-bottom: 0px; */
+    margin-top: 101px;
+    background-color: #0b0f47;
 }
-.container_footer{
+
+.container_footer {
     width: 100%;
     height: 180px;
-    background-color:  #0b0f47;
+    background-color: #0b0f47;
     display: flex;
     align-items: center;
 }
-.div1{
+
+.div1 {
     width: 25%;
     height: 70%;
     border-right: 1px solid gray;
@@ -25,10 +28,11 @@ footer {
     justify-content: center;
 }
 
-.div1 img{
+.div1 img {
     width: 200px;
 }
-.div2{
+
+.div2 {
     width: 35%;
     height: 80%;
     display: flex;
@@ -37,41 +41,45 @@ footer {
     flex-direction: column;
     gap: 15px;
 }
-.div2 .lien_footer{
+
+.div2 .lien_footer {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
 }
 
-.div2 .lien_footer a{
-    text-decoration:none;
+.div2 .lien_footer a {
+    text-decoration: none;
     font-size: 13px;
     color: #abdbff;
-
 }
-.div2 .copyrigth{
+
+.div2 .copyrigth {
     font-size: 12px;
     color: white;
     width: 100%;
     display: flex;
     justify-content: center;
 }
-.div3{
+
+.div3 {
     width: 15%;
     height: 80%;
 }
-.div4{
+
+.div4 {
     width: 25%;
     height: 80%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
-.div4 a{
+
+.div4 a {
     font-size: 23px;
     color: #abdbff;
-   
 }
+
 .arrow_bas {
     display: flex;
     justify-content: center;
@@ -82,12 +90,15 @@ footer {
     border: 1px solid #abdbff;
     border-radius: 50%;
 }
-a{
+
+a {
     cursor: pointer;
 }
-i{
+
+i {
     cursor: pointer;
 }
+
 
 /* footer .footer_entete {
     display: flex;
@@ -193,6 +204,8 @@ footer .footer_entete span.title {
     font-weight: bolder;
     font-size: 17px;
 } */
+
+
 /* 
 footer .bas_footer {
     width: 100%;

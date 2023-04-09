@@ -153,6 +153,7 @@ if (isset($_POST['mdpsOubl']) || ((isset($_GET['action'])) && $_GET['action'] ==
 if(isset($_POST['verifCode'])){
     $code=$_POST['code'];
     if($code==$_SESSION['code']){
+        unset($_SESSION['code']);
         header("location: identification.php?action=nvPass");
     }
     else{

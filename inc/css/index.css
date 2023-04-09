@@ -1,16 +1,29 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    border: 1px solid rgb(215 214 214);
+    -webkit-text-fill-color: black;
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 main {
     width: 100%;
     overflow: hidden;
     grid-area: main;
     display: flex;
     flex-direction: column;
-    background-color: #f5f6f7;
+    background-color: #f9f9f9;
     scroll-behavior: smooth;
     font-family: 'Kumbh Sans', sans-serif;
     gap: 41px;
 }
-
-
 
 section.publicite {
     padding: 0 24px;
@@ -117,11 +130,11 @@ section.publicite {
 
 
 /* #r3:checked~.first {
-    margin-left: -40%;
+margin-left: -40%;
 }
 
 #r4:checked~.first {
-    margin-left: -60%;
+margin-left: -60%;
 } */
 
 .publicite_content .slider .btn_radio_back {
@@ -155,11 +168,11 @@ section.publicite {
 
 
 /* #r3:checked~.btn_radio_back .btn3 {
-    background-color: rgb(220, 220, 220);
+background-color: rgb(220, 220, 220);
 }
 
 #r4:checked~.btn_radio_back .btn4 {
-    background-color: rgb(220, 220, 220);
+background-color: rgb(220, 220, 220);
 } */
 
 section.categorie {
@@ -232,7 +245,7 @@ section.categorie .tout_produit_categorie::-webkit-scrollbar {
     display: none;
 }
 
- .produit {
+.produit {
     text-decoration: none;
     min-width: 210px;
     max-width: 210px;
@@ -252,9 +265,10 @@ section.categorie .tout_produit_categorie::-webkit-scrollbar {
     font-family: 'Kumbh Sans', sans-serif;
 }
 
- .produit:hover {
+.produit:hover {
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, .08);
 }
+
 .produit:hover {
     box-shadow: 0 0 2px #12bbff;
 }
@@ -268,6 +282,7 @@ section.categorie .tout_produit_categorie::-webkit-scrollbar {
     align-items: center;
     justify-content: center;
 }
+
 .produit .photo_produit img {
     width: 100%;
     height: 100%;
@@ -377,6 +392,8 @@ section.information_pourquoi {
     height: 350px;
     width: 100%;
     padding: 20px 40px;
+    margin-top: 40px;
+    /* margin-bottom: 66px; */
 }
 
 .entete h2 {
@@ -434,6 +451,7 @@ a.mon_categorie .photo_categorie img {
     height: 100%;
     border-radius: 4px;
 }
-textarea{
+
+textarea {
     resize: none;
 }

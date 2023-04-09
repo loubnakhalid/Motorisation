@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100;200;300;400;500;600;700;800;900&family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;300;400;500;600;800;900&family=Open+Sans:wght@300;800&family=Poppins:wght@100;300;400;500;600;700&display=swap');
 .container {
     position: fixed;
     top: 50%;
@@ -13,6 +12,7 @@
     max-width: 80%;
     font-size: 15px;
     font-family: 'Lato', sans-serif;
+    overflow-y: scroll;
 }
 
 .container-header {
@@ -89,17 +89,19 @@
 
 .nom-input,
 .tele-input,
-.prénom-input {
-    width: 180px;
-    padding: 5px;
+.prénom-input,
+.Eml-input {
+    width: 218px;
+    padding: 16px 5px;
     margin: 8px;
     border-radius: 13px;
     border: 1px solid rgb(233, 230, 230);
     height: 25px
 }
 
-.tele-input {
-    width: 180px;
+.tele-input,
+.Eml-input {
+    width: 213px;
     /* margin-left: 12px; */
 }
 
@@ -114,8 +116,8 @@
 }
 
 .adresse-input {
-    width: 450px;
-    padding: 5px;
+    width: 510px;
+    padding: 16px 5px;
     margin-left: 6px;
     margin-top: 10px;
     border-radius: 13px;
@@ -156,29 +158,31 @@
 }
 
 .input-fin {
-    padding-left: 45px;
-    margin-top: 29px;
+    padding-left: 40px;
+    margin-top: -17px;
 }
 
 .input-Conf {
+    background-color: #015e9b;
     width: 140px;
-    padding: 8px;
-    border-radius: 15px;
+    padding: 11px;
+    border-radius: 8px;
     font-size: 14px;
     font-weight: 600;
     border: none;
-    background: linear-gradient(to bottom right, rgb(2, 2, 80), rgb(23, 49, 215));
+    /* background: beige; */
     color: white;
 }
 
 .input-Annul {
     width: 140px;
-    padding: 8px;
-    border-radius: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: white;
     font-size: 14px;
     font-weight: 600;
-    margin-left: 20px;
-    border: 1px solid rgb(233, 230, 230);
+    margin-left: 6px;
+    border: 1px solid #EF6C00;
 }
 
 input[type="text"]:focus {
@@ -192,4 +196,40 @@ input[type="text"]:focus {
 
 .btn-Paypal {
     display: none;
+}
+
+#FinalCmd {
+    display: none;
+}
+
+.CmdNmP,
+.CmdET {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+.ErCmdNom,
+.ErCmdPrénom,
+.ErCmdEml,
+.ErCmdTél,
+.ErCmdAds,
+.ErCmdPai {
+    color: red;
+    visibility: hidden;
+}
+
+.ErCmdNom,
+.ErCmdEml {
+    margin-left: 56px;
+}
+
+.ErCmdPrénom,
+.ErCmdTél {
+    margin-left: 42px;
+}
+
+.ErCmdAds,
+.ErCmdPai {
+    margin-left: 73px;
 }
