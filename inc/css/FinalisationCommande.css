@@ -159,7 +159,7 @@
 
 .input-fin {
     padding-left: 40px;
-    margin-top: -17px;
+    margin-top: -39px;
 }
 
 .input-Conf {
@@ -222,6 +222,7 @@ input[type="text"]:focus {
 .ErCmdNom,
 .ErCmdEml {
     margin-left: 56px;
+    font-size: 13px;
 }
 
 .ErCmdPrénom,
@@ -231,5 +232,12 @@ input[type="text"]:focus {
 
 .ErCmdAds,
 .ErCmdPai {
-    margin-left: 73px;
+    margin-left: 27px;
+    font-size: 14px;
+}
+
+.InfoCmdPai {
+    display: none;
+    margin-left: 57px;
+    color: #939393;
 }

@@ -56,15 +56,26 @@ function AffichePaypal() {
     Form.style.height = "595px";
     let FormFooter = document.getElementById("Fin");
     FormFooter.style.marginTop = "0px";
+    FormFooter.style.marginBottom = "24px";
+    document.getElementById("inptConfirm").type = 'button';
+    document.getElementById("inptConfirm").style.backgroundColor = '#b5b5b5';
+    let errPayer = document.querySelector(".InfoCmdPai");
+    errPayer.innerHTML = '<i class="fa fa-circle-info" style="color: #ababab;"></i> Veuillez payer pour finaliser la commande ';
+    errPayer.style.display = 'block';
 }
 
 function MasquePaypal() {
     let AffichePaypal = document.getElementById("paypal-button-container");
     AffichePaypal.style.display = "none";
     let Form = document.getElementById("FinirCommande");
-    Form.style.height = "500px";
+    Form.style.height = "550px";
     let FormFooter = document.getElementById("Fin");
-    FormFooter.style.marginTop = "29px";
+    FormFooter.style.marginTop = "-40px";
+    FormFooter.style.marginBottom = "0px";
+    document.getElementById("inptConfirm").type = 'submit';
+    document.getElementById("inptConfirm").style.backgroundColor = '#015e9b';
+    let errPayer = document.querySelector(".InfoCmdPai");
+    errPayer.style.display = 'none';
 }
 
 function afficherFinalisation() {

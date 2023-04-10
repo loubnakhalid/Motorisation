@@ -66,7 +66,8 @@ const CmdPr = document.querySelector('.prénom-input');
 const CmdEml = document.querySelector('.Eml-input');
 const CmdTél = document.querySelector('.tele-input');
 const CmdAds = document.querySelector('.adresse-input');
-const CmdPai = document.querySelector('.paiement-input');
+//const CmdPpl = document.getElementById('paypal');
+//const CmdEspc = document.getElementById('espece');
 /*****Ereurs*** ********/
 let ErCmdNm = document.querySelector('.ErCmdNom');
 let ErCmdPr = document.querySelector('.ErCmdPrénom');
@@ -350,6 +351,8 @@ function VérifInscription() {
 }
 
 function VérifCmd() {
+    const CmdPpl = document.getElementById('paypal');
+    const CmdEspc = document.getElementById('espece');
     var aide = true;
 
     ErCmdNm.style.visibility = 'hidden';
@@ -364,7 +367,6 @@ function VérifCmd() {
     CmdEml.style.borderColor = "#1cdd1c";
     CmdTél.style.borderColor = "#1cdd1c";
     CmdAds.style.borderColor = "#1cdd1c";
-    CmdPai.style.borderColor = "#1cdd1c";
 
     /****Vérifier champs vide*** */
     if (!ChampsOb(CmdNm.value)) {
@@ -429,6 +431,11 @@ function VérifCmd() {
         ErCmdNm.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le nom ne contient pas des chifres ';
         CmdNm.style.borderColor = "red";
         ErCmdNm.style.visibility = "visible";
+        aide = false;
+    }
+    if (CmdPpl.checked == false && CmdEspc.checked == false) {
+        ErCmdPai.innerHTML = ' Veuillez sélectionner un mode de paiement ';
+        ErCmdPai.style.visibility = "visible";
         aide = false;
     }
     return aide;

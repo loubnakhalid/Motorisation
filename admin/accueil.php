@@ -57,7 +57,7 @@ $profile = getFirstProfileId($analytics); // Récupère le profil Google Analyti
 function getResults($analytics, $profileId, $metric) {
   return $analytics->data_ga->get(
  'ga:' . $profileId, // Précise le profil Google Analytics à utiliser
- '30daysAgo', // Précise la date de début
+ '90daysAgo', // Précise la date de début
  'today', // Précise la date de fin
  'ga:'.$metric // Précise le métrique utilisé (session, users...)
   );
@@ -86,7 +86,7 @@ $percentNewSessions = getResults($analytics, $profile, 'percentNewSessions');
 function getChartResults($analytics, $profileId, $metric) {
 	return $analytics->data_ga->get(
 		'ga:' . $profileId,
-		'14daysAgo',
+		'90daysAgo',
 		'today',
 		$metric,
 		array(

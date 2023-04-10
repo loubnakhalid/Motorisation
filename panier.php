@@ -154,8 +154,9 @@ if(! Client() && ! Admin()){
                 </div>
             </div>
             <div class="container-footer">
+            <span class='InfoCmdPai' ></span><br>
                 <div class="input-fin" id="Fin">
-                    <input type="submit" value="Confirmer" name="Finaliser" class="input-Conf">
+                    <input type="submit" value="Confirmer" name="Finaliser" id="inptConfirm" class="input-Conf">
                     <input type="reset" value="Annuler" name="Annuler" class="input-Annul">
                    </div>
                 </div>
@@ -177,8 +178,13 @@ paypal.Buttons({
         return actions.order.capture().then(function(orderData) {
             console.log("Capture result", orderData, JSON.stringify(orderData, null, 2));
             const transaction = orderData.purchase_units[0].payments.captures[0];
-            swal("Transaction ${transaction.status}: ${transaction.id} ","","success;");
-
+            swal({
+                title: 'Paiement avec succès',
+                text: '',
+                icon: 'success',
+                button: 'Ok',
+            });
+            MasquePaypal();
         });
     }
 }).render("#paypal-button-container");
