@@ -1377,7 +1377,6 @@ if (isset($_GET['table'])) {
                                             <li><a href='gestion.php?table=promos&tri=DateDéb'>Date début</a></li>
                                             <li><a href='gestion.php?table=promos&tri=DateFin'>Date fin</a></li>
                                             <li><a href='gestion.php?table=promos&tri=Taux'>Taux</a></li>
-                                            <li><a href='gestion.php?table=promos&tri=StatutPromo'>Statut</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -1391,8 +1390,8 @@ if (isset($_GET['table'])) {
                                 <div class='display_statut'>
                                     <ul>
                                         <li><a href='gestion.php?table=promos'>Tout</a></li>
-                                        <li><a href='gestion.php?table=promos&statut=En cours'>En cours</a></li>
-                                        <li><a href='gestion.php?table=promos&statut=Terminée'>Terminée</a></li>
+                                        <li><a href='gestion.php?table=promos&statut=1'>En cours</a></li>
+                                        <li><a href='gestion.php?table=promos&statut=0'>Terminée</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -1423,7 +1422,12 @@ if (isset($_GET['table'])) {
                         }
                         elseif(isset($_GET['statut'])){
                             $statut=$_GET['statut'];
-                            $rslt = mysqli_query($mysqli, "select * from promos where StatutPromo='$statut' order by IdPromo");
+                            if($statut==1){
+                                $rslt = mysqli_query($mysqli, "select * from promos where DateFin >= CURDATE() and DateDéb <= CURDATE() order by IdPromo");
+                            }
+                            else{
+                                $rslt = mysqli_query($mysqli, "select * from promos where DateFin <= CURDATE() and DateDéb <= CURDATE() order by IdPromo");
+                            }
                         }
                         elseif(isset($_GET['recherche']) && isset($_GET['mot'])){
                             $mot=$_GET['mot'];

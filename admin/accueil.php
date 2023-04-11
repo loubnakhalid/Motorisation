@@ -173,7 +173,7 @@ catch(Exception $e){
 		chart.draw(data, options);
 	}
   function drawPieChart(){
-  var data = google.visualization.arrayToDataTable([['users','new users'],['Returning Visitor',<?=$result2;?>],['New Visitor',<?= $result1;?>]]);
+  var data = google.visualization.arrayToDataTable([['users','new users'],['Visiteurs retournés',<?=$result2;?>],['Nouveaux visiteurs',<?= $result1;?>]]);
   var options = {
   title: ''
   };
