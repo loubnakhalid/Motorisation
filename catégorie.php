@@ -41,7 +41,7 @@ elseif(isset($_GET['rechercher']) && isset($_GET['mot'])){
     }
     $rslt=mysqli_query($mysqli,$rqt);
     $row=mysqli_fetch_assoc($rslt);
-    $titre="Produits cherchés";
+    $titre="Produits recherchés";
     $nbre=mysqli_num_rows($rslt);
 }
 ?>

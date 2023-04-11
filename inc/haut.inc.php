@@ -151,7 +151,7 @@ include('./inc/init.inc.php');
                 unset($_SESSION['successMssg']);
             }
             elseif(isset($_GET['action']) && ($_GET['action']=='connexion' || $_GET['action']=='inscription')){
-                echo "<nav class='nav_identifier' >Veuillez vous connectez ou créer un compte pour voir votre panier et faire des achats !</nav>";
+                echo "<nav class='nav_identifier' >Veuillez vous connectez ou créer un compte pour consulter votre panier et faire des achats !</nav>";
             }
             ?>
         </div>

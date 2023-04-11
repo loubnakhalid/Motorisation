@@ -153,7 +153,6 @@ if (isset($_POST['mdpsOubl']) || ((isset($_GET['action'])) && $_GET['action'] ==
 if(isset($_POST['verifCode'])){
     $code=$_POST['code'];
     if($code==$_SESSION['code']){
-        unset($_SESSION['code']);
         header("location: identification.php?action=nvPass");
     }
     else{
@@ -163,6 +162,7 @@ if(isset($_POST['verifCode'])){
 }
 //Traitement mot de passe oublié (changement de mot de passe)--------------------------------------------------------------------------//
 if(isset($_POST['nvPass'])){
+        unset($_SESSION['code']);
         $MDPS = password_hash( $_POST['MDPS'] ,PASSWORD_DEFAULT);
         $EmailMb = $_SESSION['EmailMb'];
         try{
