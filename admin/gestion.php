@@ -43,22 +43,19 @@ if(isset($_GET['modifier_produit']) && isset($_GET['IdPr'])){
                     </div>
                     <div class='case'>
                         <label for=''>Statut</label>
-                        <div class='input_select'>
-                            <select name='StatutPr' id='StatutPr'>
-                                <option value='1'>Disponible</option>
-                            ";
-                            if($row['StatutPr']=='0'){
-                                echo "
-                                <option value='0' selected>Indisponible</option>
-                                ";
-                            }
-                            else{
-                                echo "
-                                <option value='0'>Indisponible</option>
-                                ";
-                            }
+                        <div class='input_text'>
+                        ";
+                        if($row['StockPr']>'0'){
                             echo "
-                            </select>
+                            <input type='text' id='StatutPr' name='StatutPr' value='Disponible' readonly>
+                            ";
+                        }
+                        else{
+                            echo "
+                            <input type='text' id='StatutPr' name='StatutPr' value='Indisponible'  readonly>
+                            ";
+                        }
+                        echo"
                         </div> 
                     </div>
                     <div class='case_prix_qauntite'>
@@ -85,7 +82,7 @@ if(isset($_GET['modifier_produit']) && isset($_GET['IdPr'])){
                         <label for=''>Image</label>
                         <div class='zone_image'>
                             <input type='hidden' name='NomImage' value='$row[ImagePr]'>
-                            <input type='file' class='input_image' name='ImagePr' >
+                            <input type='file' class='input_image' name='ImagePr' onchange='uploadImg()'>
                             <img src='../inc/img/produits/$row[ImagePr]' id='image_telecharger'>
                         </div>
                     </div>
@@ -136,12 +133,9 @@ elseif(isset($_GET['ajouter_produit'])){
                     </div>
                     <div class='case'>
                         <label for=''>Statut</label>
-                        <div class='input_select'>
-                            <select name='StatutPr'>
-                                <option value='1'>Disponible</option>
-                                <option value='0'>Indisponible</option>
-                            </select>
-                    </div> 
+                        <div class='input_text'>
+                            <input type='text' name='StatutPr' id='StatutPr' value='disponible' readonly>
+                        </div> 
                     </div>
                     <div class='case_prix_qauntite'>
                         <label for=''>Prix</label>
@@ -152,7 +146,7 @@ elseif(isset($_GET['ajouter_produit'])){
                     <div class='case_prix_qauntite'>
                         <label for=''>Quantite</label>
                         <div class='input_text'>
-                            <input type='number' name='StockPr'>
+                            <input type='number' name='StockPr' onchange='dispo()'>
                         </div> 
                     </div>
                     <div class='case_text_area'>
@@ -166,7 +160,7 @@ elseif(isset($_GET['ajouter_produit'])){
                     <div class='case_image'>
                         <label for=''>Image</label>
                         <div class='zone_image'>
-                            <input type='file' class='input_image' name='ImagePr' >
+                            <input type='file' class='input_image' name='ImagePr' onchange='uploadImg()' >
                             <img src='./inc_ADMIN/img/telecharger_image.png' id='image_telecharger'>
                         </div>
                     </div>
@@ -219,24 +213,16 @@ elseif(isset($_GET['modifier_commande']) && isset($_GET['IdCmd'])){
                     <label for=''>Mode paiement</label>
                     <div class='input_select'>
                         <select name='modePaiement' id='mode'>
-                            <option value='Carte'>Carte</option>
-                            <option value='Chèque'>Chèque</option>
                             <option value='Espèces'>Espèces</option>
                             <option value='Paypal'>Paypal</option>
                         </select>
                         <script>
                             selectd='$row[modePaiement]';
-                            if(selectd=='Carte'){
+                            if(selectd=='Espèces'){
                                 selectd=0;
                             }
-                            else if(selectd=='Chèque'){
-                                selectd=1;
-                            }
-                            else if(selectd=='Espèces'){
-                                selectd=2;
-                            }
                             else if(selectd=='Paypal'){
-                                selectd=3;
+                                selectd=1;
                             }
                             document.getElementById('mode').getElementsByTagName('option')[selectd].selected= 'selected';
                         </script>
@@ -329,16 +315,10 @@ elseif(isset($_GET['ajouter_commande'])){
                         <input type='number' name='prixTT'>
                     </div> 
                 </div>
-                <div class='case_select'>
+                <div class='case_text'>
                     <label for=''>Mode paiement</label>
-                    <div class='input_select'>
-                        <select name='modePaiement'>
-                            <option value='Paypal'>Paypal</option>
-                            <option value='Carte'>Carte</option>
-                            <option value='Espèces'>Espèces</option>
-                            <option value='Chèque'>Chèque</option>
-                        </select>
-                       
+                    <div class='input_text'>
+                        <input type='text' name='modePaiement' value='Espèces' readonly>
                     </div> 
                 </div>
                 <div class='case_select'>
@@ -350,7 +330,6 @@ elseif(isset($_GET['ajouter_commande'])){
                             <option value='Livrée'>Livrée</option>
                             <option value='Annulée'>Annulée</option>
                         </select>
-                       
                     </div> 
                 </div>
                 <div class='case_text_area'>
@@ -403,7 +382,7 @@ elseif(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
                                     </div>
                                 </td>
                                 <td class='action'>
-                                    <i class='bx bx-edit icon_modifier_commande_display'  ></i>
+                                    <i class='bx bx-edit icon_modifier_commande_display'></i>
                                     <lord-icon src='https://cdn.lordicon.com/qjwkduhc.json' trigger='hover' colors='primary:#e83a30,secondary:#e83a30,tertiary:#ffffff' state='hover-empty' style='width:35px;height:35px' onClick=\"confirmSupp('détails_commande','supprimer',$IdDétailsCmd,$IdCmd);\"></lord-icon>
                                 </td>
                             </tr> 
@@ -423,45 +402,49 @@ elseif(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
 
     }
     elseif(isset($_GET['ajouter_commande_détails'])){
-        echo "
-        <div class='body_display_commande'>
-            <div class='ajouter_cmd_details_cmd'>
-            <i class='bx bxs-x-square icon_x_exit' onclick=\"document.location.href='gestion.php?table=commande&détails_commande=true&btn_détails_commande=true&IdCmd=$IdCmd'\"  style='right: 0'></i>
-                <form id='ajtCmdDt' action='controller.php?table=détails_commande&action=ajouterCmd' method='post'>
-                    <table cellspacing='0 '>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>N° commande</th>
-                                <th>Nom client</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-        ";
-                    $rslt=mysqli_query($mysqli,"select * from commande natural join membre");
-                    while($row=mysqli_fetch_assoc($rslt)){
-                        $IdCmdAjt=$row['IdCmd'];
-                        if($IdCmd != $IdCmdAjt){
+        $rslt=mysqli_query($mysqli,"select * from commande natural join membre where IdCmd NOT IN ($IdCmd)");
+        if(mysqli_num_rows($rslt) >0){
+            echo "
+            <div class='body_display_commande'>
+                <div class='ajouter_cmd_details_cmd'>
+                <i class='bx bxs-x-square icon_x_exit' onclick=\"document.location.href='gestion.php?table=commande&détails_commande=true&btn_détails_commande=true&IdCmd=$IdCmd'\"  style='right: 0'></i>
+                    <form id='ajtCmdDt' action='controller.php?table=détails_commande&action=ajouterCmd' method='post'>
+                        <table cellspacing='0 '>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>N° commande</th>
+                                    <th>Nom client</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            ";
+                        while($row=mysqli_fetch_assoc($rslt)){
+                            $IdCmdAjt=$row['IdCmd'];
                             echo"
-                            <input type='hidden' name='IdCmd' value='$IdCmd'>
-                            <tr>
-                                <td><input type='radio' name='IdCmdAjt' value='$IdCmdAjt' id='chek1'></td>
-                                <td>$IdCmdAjt</td>
-                                <td>$row[NomMb] $row[PrénomMb] </td>
-                            </tr>
+                                <input type='hidden' name='IdCmd' value='$IdCmd'>
+                                <tr>
+                                    <td><input type='radio' name='IdCmdAjt' value='$IdCmdAjt' id='chek1'></td>
+                                    <td>$IdCmdAjt</td>
+                                    <td>$row[NomMb] $row[PrénomMb] </td>
+                                </tr>
                             ";
-                            }
                         }
-                        echo"
-                        </tbody>
-                    </table>
-                    <div class='bas'>
-                        <button type='button' onclick=\"confirmModifAjt('ajtCmdDt','Voulez-vous vraiment ajouter la commande $IdCmdAjt à la commande $IdCmd?','Ajouter')\">Ajouter</button>
-                    </div>
-                </form>
+            echo"
+                            </tbody>
+                        </table>
+                        <div class='bas'>
+                            <button type='button' onclick=\"confirmModifAjt('ajtCmdDt','Voulez-vous vraiment ajouter la commande $IdCmdAjt à la commande $IdCmd?','Ajouter')\">Ajouter</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-        ";
+            ";
+        }
+        else{
+            $_SESSION["erreur"]='Pas de commande à ajouter ! ';
+            //echo "<script>document.location.href='gestion.php?table=commande&détails_commande=true&btn_détails_commande=true&IdCmd=$IdCmd'</script>";
+        }
     }
     elseif(isset($_GET['ajouter_produit_détails'])){
         echo "
@@ -479,7 +462,7 @@ elseif(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
                         </thead>
                         <tbody>
         ";
-                        $rslt=mysqli_query($mysqli,"select * from produit where IdPr NOT IN (select IdPr from détails_commande where IdCmd=$IdCmd ) AND StatutPr=1 order by NomPr");
+                        $rslt=mysqli_query($mysqli,"select * from produit where IdPr NOT IN (select IdPr from détails_commande where IdCmd=$IdCmd ) AND StockPr>0 order by NomPr");
                         while($row=mysqli_fetch_assoc($rslt)){
                             $IdPr=$row['IdPr'];
                             echo"
@@ -516,7 +499,7 @@ elseif(isset($_GET['ficheClient']) && isset($_GET['id'])){
     echo "
     <div class='body_cmd'>
     <div class='fiche_client'>
-    <div class='haut'><i class='bx bxs-x-square icon_x_exit_rdv' onclick='history.back()'></i></div>
+    <i class='bx bxs-x-square icon_x_exit_fiche_client' onclick='history.back()'></i>
     <div class='client'>
         <h1>Contact</h1>
     </div>
@@ -672,13 +655,13 @@ elseif(isset($_GET['ajouter_RDV'])){
                 <div class='case_nmr'>
                     <label for=''>N RDV</label>
                     <div class='input_text'>
-                        <input type='text' name='' value='' readonly>
+                        <input type='text' name='' readonly>
                     </div> 
                 </div>
                 <div class='case_date'>
                     <label for=''>Date</label>
                     <div class='input_text'>
-                        <input type='date' name='DateRDV' value=''>
+                        <input type='date' name='DateRDV'>
                     </div> 
                 </div>
                 <div class='case'>
@@ -693,13 +676,13 @@ elseif(isset($_GET['ajouter_RDV'])){
                 <div class='case'>
                     <label for=''>Nom</label>
                     <div class='input_text'>
-                        <input type='text' name='nom' value=''>
+                        <input type='text' name='nom'>
                     </div> 
                 </div>
                 <div class='case'>
                     <label for=''>Prénom</label>
                     <div class='input_text'>
-                        <input type='text' name='prenom' value=''>
+                        <input type='text' name='prenom'>
                     </div> 
                 </div>
                 <div class='case'>
@@ -718,13 +701,13 @@ elseif(isset($_GET['ajouter_RDV'])){
                 <div class='case'>
                     <label for=''>Téléphone</label>
                     <div class='input_text'>
-                        <input type='tel' name='NumTélé' value=''>
+                        <input type='tel' name='NumTélé'>
                     </div> 
                 </div>
                 <div class='case_adress'>
                     <label for=''>Adresse</label>
                     <div class='input_text'>
-                        <input type='text' name='adresse' value=''>
+                        <input type='text' name='adresse'>
                     </div> 
                 </div>
                 <div class='form_bas'>
@@ -759,24 +742,6 @@ elseif(isset($_GET['modifier_promos']) && isset($_GET['id'])){
                     <input type='number' name='Taux' value='$row[Taux]'>
                 </div>
             </div>
-            <div class='case'>
-                <label for=''>Statut</label>
-                <div class='input_select'>
-                    <select name='StatutPromo'>
-        ";
-        if($row['StatutPromo']=='En cours'){
-            echo "<option value='En cours' selected>En cours </option>
-                <option value='Terminée'>Terminée </option>";
-        }
-        else{
-            echo "<option value='En cours' selected>En cours </option>
-            <option value='Terminée' selected>Terminée </option>";
-        }
-        echo"
-                    </select>
-                </div>
-            </div>
-
             <div class='case_date'>
                 <label for=''>Date début</label>
                 <div class='input_text'>
@@ -810,34 +775,25 @@ elseif(isset($_GET['ajouter_promos'])){
                 <div class='case_nmr'>
                     <label for=''>N promo</label>
                     <div class='input_text'>
-                        <input type='number' name='IdPromo' value='' readonly>
+                        <input type='number' name='IdPromo' readonly>
                     </div>
                 </div>
                 <div class='case_nmr'>
                     <label for=''>Taux</label>
                     <div class='input_text'>
-                        <input type='number' name='Taux' value=''>
-                    </div>
-                </div>
-                <div class='case'>
-                    <label for=''>Statut</label>
-                    <div class='input_select'>
-                        <select name='StatutPromo'>
-                        <option value='En cours'>En cours</option>
-                        <option value='Terminée'>Terminée</option> 
-                        </select>
+                        <input type='number' name='Taux'>
                     </div>
                 </div>
                 <div class='case_date'>
                     <label for=''>Date début</label>
                     <div class='input_text'>
-                        <input type='date' name='DateDéb' value=''>
+                        <input type='date' name='DateDéb'>
                     </div>
                 </div>
                 <div class='case_date'>
                     <label for=''>Date fin</label>
                     <div class='input_text'>
-                        <input type='date' name='DateFin' value=''>
+                        <input type='date' name='DateFin' on>
                     </div>
                 </div>
                 <div class='form_bas'>
@@ -1021,7 +977,12 @@ if (isset($_GET['table'])) {
                         }
                         elseif(isset($_GET['statut'])){
                             $statut=$_GET['statut'];
-                            $rslt = mysqli_query($mysqli, "select * from produit natural join catégorie where StatutPr=$statut order by NomPr");
+                            if($statut==1){
+                                $rslt = mysqli_query($mysqli, "select * from produit natural join catégorie where StockPr>0 order by NomPr");
+                            }
+                            else{
+                                $rslt = mysqli_query($mysqli, "select * from produit natural join catégorie where StockPr<=0 order by NomPr");
+                            }
                         }
                         elseif(isset($_GET['recherche']) && isset($_GET['mot'])){
                             $mot=$_GET['mot'];
@@ -1093,8 +1054,7 @@ if (isset($_GET['table'])) {
                                 <p>Nombre de produits :</p> <span>".mysqli_num_rows($rslt2)."</span>
                             </div>
                             <div class='action_category'>
-                            
-                                <i class=\"bx bx-edit btn_modifier_categorie\" ></i>
+                                <i class=\"bx bx-edit btn_modifier_categorie\"></i>
                                 <div class='border_vertical'></div>
                                 <lord-icon class='btn_supprimer_categorie' src=\"https://cdn.lordicon.com/qjwkduhc.json\" trigger=\"hover\"  colors=\"primary:#e83a30,secondary:#e83a30,tertiary:#ffffff\" state=\"hover-empty\" style=\"width:35px;height:35px\" onclick=\"confirmSupp('catégorie','supprimer',$IdCt)\" ></lord-icon>
                             </div> 
@@ -1106,7 +1066,7 @@ if (isset($_GET['table'])) {
                     echo "
                     </div>
                     <div class='ajouter_category'>
-                        <button class='btn_ajouter_category' ><i class='fa-solid fa-plus'></i> Ajouter catégorie</button>
+                        <button class='btn_ajouter_category'><i class='fa-solid fa-plus'></i> Ajouter catégorie</button>
                     </div>
                     ";
         ;break;
@@ -1378,14 +1338,14 @@ if (isset($_GET['table'])) {
                 echo "
                 </tbody>
             </table>
-        </div>";
+            </div>";
         ;break;
         case 'promos' :
             $rslt1=mysqli_query($mysqli,"select * from promos");
             $nbre=mysqli_num_rows($rslt1);
-            $rslt2=mysqli_query($mysqli,"select * from promos where StatutPromo='En cours'");
+            $rslt2=mysqli_query($mysqli,"select * from promos where DateFin >= CURDATE() ");
             $nbreEnCrs=mysqli_num_rows($rslt2);
-            $rslt3=mysqli_query($mysqli,"select * from promos where StatutPromo='Terminée'");
+            $rslt3=mysqli_query($mysqli,"select * from promos where DateFin <= CURDATE()");
             $nbreTerm=mysqli_num_rows($rslt3);
             echo"
             <section class='home'>
@@ -1474,13 +1434,23 @@ if (isset($_GET['table'])) {
                         }
                         while ($row = mysqli_fetch_assoc($rslt)) {
                             $id=$row['IdPromo'];
+                            $DateNow=Date("20y-m-d");
+                            $DateFin=$row['DateFin'];
+		                    if($DateFin <= $DateNow){
+                                $Statut='Terminée';
+                                $color='red';
+                            }
+                            else{
+                                $Statut='En cours';
+                                $color='#28dd28';
+                            }
                             echo " 
                             <tr>
                                 <td>".$row['IdPromo']."</td>
                                 <td>".$row['Taux']."</td>
                                 <td>".$row['DateDéb']."</td>
                                 <td>".$row['DateFin']."</td>
-                                <td>".$row['StatutPromo']."</td>
+                                <td style='color:$color'>".$Statut."</td>
                                 <td class=\"action\">
                                     <input type='button' value='détails' onclick='document.location.href=\"gestion.php?table=promos&détails_promos=true&id=$id\"'>
                                     <i class=\"bx bx-edit icon_modifier_commande\" onclick='document.location.href=\"gestion.php?table=promos&modifier_promos=true&id=$id\"' ></i>
@@ -1507,6 +1477,5 @@ if(isset($_SESSION['success'])){
     echo "<script>success('$_SESSION[success]');</script>";
     unset($_SESSION['success']);
 }
-
 ?>
 <?php include('./inc_ADMIN/footer.html');?>

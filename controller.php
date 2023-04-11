@@ -337,8 +337,8 @@ if(isset($_POST['envoiRDV'])){
         header("location:$lienPr");
     }
 }
-//Traitement de modification des informations du membre 
-//modification d'identité
+//Traitement de modification des informations du membre-----------------------------------------------------------------------------//
+//modification d'identité-----------------------------//
 if(isset($_POST['modifIdentit'])){
     $IdMb=$_SESSION['membre']['IdMb'];
     $NomMb=strtoupper($_POST['NomMb']);
@@ -359,7 +359,7 @@ if(isset($_POST['modifIdentit'])){
         header("location:profil.php");
     }
 }
-//modification des identifiants
+//modification des identifiants----------------------//
 if(isset($_POST['modifIdentif'])){
     $IdMb=$_SESSION['membre']['IdMb'];
     $rslt=mysqli_query($mysqli,"select * from membre where IdMb=$IdMb");
@@ -370,14 +370,14 @@ if(isset($_POST['modifIdentif'])){
     $nvMDPS=$_POST['nvMDPS'];
     try{
         if(password_verify($MDPS,$mdps)){
-            $mdps=password_hash($MDPS,PASSWORD_DEFAULT);
+            $mdps=password_hash($nvMDPS,PASSWORD_DEFAULT);
             if($rslt=mysqli_query($mysqli,"update membre set EmailMb='$EmailMb', MDPS='$mdps' where IdMb=$IdMb")){
                 $_SESSION['success']='Les modifications ont été enregistrées avec succès !';
                 header("location:profil.php");
             }
         }
         else{
-            $_SESSION['erreur']='Erreur à la modification des identifiants ! Veuillez réssayer plus tard ou contactez-nous';
+            $_SESSION['erreur']='Mot de passe incorrecte ! Veuillez réssayer ';
             header("location:profil.php");
         }
     }
@@ -386,7 +386,7 @@ if(isset($_POST['modifIdentif'])){
         header("location:profil.php");
     }
 }
-//modification de cantact
+//modification de cantact---------------------------//
 if(isset($_POST['modifContact'])){
     $IdMb=$_SESSION['membre']['IdMb'];
     $AdresseMb=ucfirst($_POST['AdresseMb']);
@@ -406,7 +406,7 @@ if(isset($_POST['modifContact'])){
         header("location:profil.php?erreur=Erreur à la modificaton des informations de contact ! Veuillez réssayer plus tard ou contactez-nous");
     }
 }
-//Traitement de contactez-nous
+//Traitement de contactez-nous---------------------//
 if(isset($_GET['envEml'])){
     $subject=$_POST['subject'];
     $from=$_POST['from'];
@@ -424,7 +424,7 @@ if(isset($_GET['envEml'])){
         echo "<script>alert('echec de l'envoi.);document.location.href='$lienPr';</script>";
     }
 }
-//Traitement de déconnexion
+//Traitement de déconnexion-----------------------//
 if(isset($_GET['action']) && $_GET['action'] == "déconnexion") {
 	$_SESSION = array();
     setcookie(session_name(),' ', time()-1);

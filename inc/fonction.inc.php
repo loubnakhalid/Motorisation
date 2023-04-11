@@ -93,7 +93,7 @@ function creationDuPanier(){
 }
 function ajouterProduitDansPanier($IdPr,$NomPr,$qt,$PrixPr,$ImagePr){
 	creationDuPanier(); 
-    $posPr = array_search($IdPr,  $_SESSION['panier']['IdPr']); 
+    $posPr = array_search($IdPr, $_SESSION['panier']['IdPr']); 
     if ($posPr !== false)
     {
          $_SESSION['panier']['qt'][$posPr] += $qt;
@@ -125,7 +125,7 @@ function retirerproduitDuPanier($id_produit_a_supprimer){
 	$posPr = array_search($id_produit_a_supprimer,  $_SESSION['panier']['IdPr']);
 	if ($posPr !== false)
     {
-		array_splice($_SESSION['panier']['NomPr'], $posPr, 1);
+		array_splice($_SESSION['panier']['NomPr'], $posPr,1);
 		array_splice($_SESSION['panier']['ImagePr'] ,$posPr,1);
 		array_splice($_SESSION['panier']['IdPr'], $posPr, 1);
 		array_splice($_SESSION['panier']['qt'], $posPr, 1);

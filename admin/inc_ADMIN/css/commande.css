@@ -45,6 +45,14 @@
     padding: 20px;
 }
 
+.icon_x_exit_fiche_client {
+    position: absolute;
+    top: -2px;
+    right: 0px;
+    font-size: 30px;
+    color: red;
+}
+
 .fiche_client .client {
     height: 50px;
     border-bottom: 1px solid;

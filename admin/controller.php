@@ -38,7 +38,6 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             $NomPr=$_POST['NomPr'];
             $DescriptionPr=addslashes($_POST['DescriptionPr']);
             $PrixPr=$_POST['PrixPr'];
-            $StatutPr=$_POST['StatutPr'];
             $StockPr=$_POST['StockPr'];
             $IdCt =$_POST['IdCt'];
             $ImagePr=$_FILES['ImagePr'];
@@ -49,14 +48,14 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                     $chemin="../inc/img/produits/$NomImage";
                 }while(file_exists($chemin));
                 move_uploaded_file($ImagePr['tmp_name'],$chemin);
-                $rqt="insert into produit (NomPr,DescriptionPr,PrixPr,StatutPr,StockPr,IdCt,ImagePr) values ('$NomPr','$DescriptionPr',$PrixPr,$StatutPr,$StockPr,'$IdCt','$NomImage')";
+                $rqt="insert into produit (NomPr,DescriptionPr,PrixPr,StockPr,IdCt,ImagePr) values ('$NomPr','$DescriptionPr',$PrixPr,$StockPr,'$IdCt','$NomImage')";
                 $success="Vous-avez ajouté le produit avec succés ! ";
             }
             elseif($action=='modifier'){
                 $IdPr=$_GET['IdPr'];
                 $NomImage=$_POST['NomImage'];
                 move_uploaded_file($ImagePr['tmp_name'],"../inc/img/produits/$NomImage");
-                $rqt="update produit set NomPr='$NomPr',DescriptionPr='$DescriptionPr',PrixPr='$PrixPr',StatutPr='$StatutPr',StockPr='$StockPr',IdCt='$IdCt' where IdPr=$IdPr";
+                $rqt="update produit set NomPr='$NomPr',DescriptionPr='$DescriptionPr',PrixPr='$PrixPr',StockPr='$StockPr',IdCt='$IdCt' where IdPr=$IdPr";
                 $success="Vous-avez modifié le produit avec succés ! ";
             }
         }
@@ -322,7 +321,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
         }
     ;break;
     }
-    if(isset($rqt)){
+    if(isset($rqt) ){
         try{
             if($rslt=mysqli_query($mysqli,$rqt)){
                 if($table=='commande' && $action=='modifier'){
@@ -348,12 +347,12 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                         $to=$row2['EmailMb'];
                         mail($to,$subject,$message,$header);
                     }
-                }
-                if($StatutCmd=='Annulée'){
-                    $rslt=mysqli_query($mysqli,"select * from détails_commande natural join produit where IdCmd=$IdCmd");
-                    while($row=mysqli_fetch_assoc($rslt)){
-                        $nvQt=$row['StockPr']+$row['qt'];
-                        $rslt2=mysqli_query($mysqli,"update produit set StockPr=$nvQt where IdPr=$row[IdPr]");
+                    if($StatutCmd=='Annulée'){
+                        $rslt=mysqli_query($mysqli,"select * from détails_commande natural join produit where IdCmd=$IdCmd");
+                        while($row=mysqli_fetch_assoc($rslt)){
+                            $nvQt=$row['StockPr']+$row['qt'];
+                            $rslt2=mysqli_query($mysqli,"update produit set StockPr=$nvQt where IdPr=$row[IdPr]");
+                        }
                     }
                 }
                 if(isset($success)){

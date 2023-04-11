@@ -1,8 +1,16 @@
 function dispo() {
     if (document.getElementById('modifPrdt').StockPr.value <= 0) {
-        document.getElementById('StatutPr').getElementsByTagName('option')[1].selected = 'selected';
+        document.getElementById('StatutPr').value = 'Indisponible';
     } else {
-        document.getElementById('StatutPr').getElementsByTagName('option')[0].selected = 'selected';
+        document.getElementById('StatutPr').value = 'Disponible';
+    }
+}
+
+function dispo() {
+    if (document.getElementById('ajtPrdt').StockPr.value <= 0) {
+        document.getElementById('StatutPr').value = 'Indisponible';
+    } else {
+        document.getElementById('StatutPr').value = 'Disponible';
     }
 }
 
@@ -99,6 +107,8 @@ function erreur(erreur) {
 }
 
 function ajouterFormulaire() {
+    let btn_ajouter_category = document.querySelector(".btn_ajouter_category"),
+        containner_main_categorie = document.querySelector(".containner_main_categorie");
     containner_main_categorie.innerHTML = containner_main_categorie.innerHTML + "<form action='controller.php?table=catégorie&action=ajouter' method='post'><div class='category inner'> <div class='name_category inner'><input type='text' value='' name='NomCt' class='nom_categorie display' style='border-color:#00c985'><button type='submit' class='valider_modif_categorie '><i class='bx bxs-check-square icon_valider_modif_categorie '></i></button><button type='reset' class='exit_modif_categorie'><i class='bx bxs-x-square icon_exit_modif_categorie inner''></i></button> </div> </div></form>";
     document.querySelector(".nom_categorie.display").style.borderColor = '#00c985';
     containner_main_categorie.lastChild.scrollIntoView({ behavior: 'smooth' });
@@ -111,4 +121,14 @@ function ajouterFormulaire() {
         btn_ajouter_category.addEventListener('click', ajouterFormulaire);
         location.reload(true);
     });
+}
+
+function uploadImg() {
+    let input_image = document.querySelector(".input_image"),
+        image_telecharger = document.querySelector("#image_telecharger");
+    let reader = new FileReader();
+    reader.readAsDataURL(input_image.files[0]);
+    reader.onload = () => {
+        image_telecharger.setAttribute("src", reader.result);
+    }
 }

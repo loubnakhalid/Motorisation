@@ -5,10 +5,7 @@ include('./inc/init.inc.php');
 <html>
 <head>
     <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Motorify</title>
-    <meta name='description' content=''>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="icon" type="png" href="./inc/img/logo5.png">
     <link rel='stylesheet' href='inc/css/style.css'>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>

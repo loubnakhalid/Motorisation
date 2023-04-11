@@ -8,39 +8,28 @@ include("inc/haut.inc.php");
                     <i class='bx bx-chevron-right' id="fleche_pub_right"></i>
                     <input type="radio" name="radio" class="rd" id="r1" checked>
                     <input type="radio" name="radio" class="rd" id="r2">
-                    <!-- <input type="radio" name="radio" class="rd" id="r3">
-                    <input type="radio" name="radio" class="rd" id="r4"> -->
                     <div class="img first">
                         <img src="./inc/img/test.png" alt="">
                     </div>
                     <div class="img">
                         <img src="./inc/img/help4.png" alt="">
                     </div>
-                    
                     <div class="btn_radio_back">
                         <div  class="btn1" ></div>
                         <div  class="btn2" ></div>
-                        <!-- <div  class="btn3" ></div>
-                        <div  class="btn4" ></div> -->
                     </div>
-                    
                 </div>
                 <div class="btn_radio">
                     <label for="r1" class="btn" ></label>
                     <label for="r2" class="btn" ></label>
-                    <!-- <label for="r3" class="btn" ></label>
-                    <label for="r4" class="btn" ></label> -->
                 </div>
-            
             </div>
-        
         </section>
         <section class="categorie">
             <div class="entete_categorie">
                 <div class="titre_categorie">
                     <h2>Nos top ventes</h2>
                     <p>Oui, ces produits sont vraiment top </p>
-
                 </div>
                 <div class="flech_categorie">
                     <button class="fleche_left_btn"><i class='bx bx-chevron-left'></i></button>
@@ -97,8 +86,6 @@ include("inc/haut.inc.php");
             echo "</div></section>";
         }
         ?>
-     
-
         <section class="mes_categorie">
             <div class="entete">
                 <h2>Guide d'achats</h2>
@@ -108,43 +95,34 @@ include("inc/haut.inc.php");
                 <a href="footer.php?Guide=MotorisationPorteGarage" class="mon_categorie">
                     <div class="photo_categorie">
                        <img src="./inc/img/garage.jpg" alt="">
-
                     </div>
                     <p>Porte de garage</p>
-
                 </a>
                 <a  href="footer.php?Guide=MotorisationVolet" class="mon_categorie">
                     <div class="photo_categorie">
                         <img src="./inc/img/roulant.jpg" alt="">
                     </div>
                     <p>Volet roulant</p>
-
                 </a>
                 <a class="mon_categorie">
                     <div class="photo_categorie">
                     <img src="./inc/img/telecomande.jpg" alt="">
                     </div>
                     <p>Télécommandes</p>
-
                 </a>
                 <a href="footer.php?Guide=Interphonie" class="mon_categorie">
                     <div class="photo_categorie">
                     <img src="./inc/img/inter.jpg" alt="">
-
                     </div>
                     <p>Interphone & Visiophone</p>
                     
-
                 </a>
                 <a href="footer.php?Guide=Alarme" class="mon_categorie">
                     <div class="photo_categorie">
                         <img src="./inc/img/alarme.jpg" alt="">
                     </div>
                     <p>Alarmes</p>
-
                 </a>
-
-
             </div>
         </section>
 <?php include("inc/bas.inc.html"); ?>
