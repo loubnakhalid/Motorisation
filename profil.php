@@ -77,7 +77,7 @@
          }
      }
      else{
-        echo "<div class='cmdVide'>Commande vide</div>";
+        echo "<div class='cmdVide'>Pas de Commandes effectuées</div>";
      }
      ?>
     </div>
@@ -101,22 +101,22 @@ function AnnulerContact() {
 function afficherIdentité() {
     identité = document.querySelector('.Identité');
     identitéDiv = document.querySelector('.identitéInfo');
-    identitéDiv.innerHTML = '<form action="controller.php" method="post" onsubmit="return VérifIdentité()"><div class="NomPr"><div><fieldset><legend class="legendInput">Nom</legend><input type="text" name="NomMb" value="<?=$NomMb?>" class="InputNmPr"></fieldset><br><span class="ErPrNm"></span></div><div><fieldset><legend class="legendInput">Prénom</legend><input type="text" value="<?=$PrénomMb?>" name="PrénomMb" class="InputPrenPr"></fieldset><br><span class="ErPrpr"></span></div></div><div class="DateNsModif"><h4>Date de naissance</h4><div class="InputDtMdf"><div><fieldset><legend class="legendInput">Jour</legend><input type="number" name="DateJr" value="<?=$DateJr?>" class="InputDtJr"></fieldset></div><div><fieldset><legend class="legendInput">Mois</legend><input type="number" value="<?=$DateMs?>" name="DateMs" class="InputDtMs"></fieldset></div><div><fieldset><legend class="legendInput">Année</legend><input type="number" value="<?=$DateAnn?>" name="DateAnn" class="InputDtAns"></fieldset></div></div><span class="ErPrDT"></span><div class="btnMf"><input type="submit" name="modifIdentit" value="Valider" class="BtnMfValider"><input type="button" value="Annuler" class="BtnMfAnnuler" onclick="AnnulerIdentité()"></div></div></form>';
+    identitéDiv.innerHTML = '<form action="controller.php" method="post" onsubmit="return VérifIdentité()"><div class="NomPr"><div><input type="text" name="NomMb" value="<?=$NomMb?>" class="InputNmPr" placeholder="Nom"><br><span class="ErPrNm"></span></div><div><input type="text" value="<?=$PrénomMb?>" name="PrénomMb" class="InputPrenPr" placeholder="Prénom"><br><span class="ErPrpr"></span></div></div><div class="DateNsModif"><h4>Date de naissance</h4><div class="InputDtMdf"><div><input type="number" name="DateJr" value="<?=$DateJr?>" class="InputDtJr" placeholder="Jours"></div><div><input type="number" value="<?=$DateMs?>" name="DateMs" class="InputDtMs" placeholder="Mois"></div><div><input type="number" value="<?=$DateAnn?>" name="DateAnn" class="InputDtAns" placeholder="Année"></div></div><span class="ErPrDT"></span><div class="btnMf"><input type="submit" name="modifIdentit" value="Valider" class="BtnMfValider"><input type="button" value="Annuler" class="BtnMfAnnuler" onclick="AnnulerIdentité()"></div></div></form>';
     identité.style.height = "275px";
 }
 
 function afficherIdentif() {
     identifiant = document.querySelector('.Identifiant2');
     identifiantDiv = document.querySelector('.identifiantInfo');
-    identifiantDiv.innerHTML = '<form action="controller.php" method="post" onsubmit="return VérifIdentifiant()"><fieldset class="identifiantModif"><legend class="legendInput">Email</legend><input type="text" value="<?=$EmailMb?>" name="EmailMb" class="InputEmPr"></fieldset><br><span class=ErPrIdentif1></span><fieldset class="identifiantModif"><legend class="legendInput">Mot de passe actuel</legend><input type="text" name="MDPS" class="InputMpsPr"></fieldset><br><span class=ErPrIdentif2></span><fieldset class="identifiantModif"><legend class="legendInput"> Nouveau Mot de passe </legend><input type="text" name="nvMDPS" class="InputNvMpsPr"></fieldset><br><span class=ErPrIdentif3></span><fieldset class="identifiantModif"><legend class="legendInput">Confirmer le nouveau Mot de passe </legend><input type="text" name="confNvMDPS" class="InputCnNVMpsPr"></fieldset><br><span class=ErPrIdentif4></span><div class="btnMf"><input type="submit" name="modifIdentif" value="Valider" class="BtnMfValider"><input type="button" value="Annuler" class="BtnMfAnnuler" onclick="AnnulerIdentifiant()"></div></form>';
-    identifiant.style.height = '421px';
+    identifiantDiv.innerHTML = '<form action="controller.php" method="post" onsubmit="return VérifIdentifiant()"><input type="text" value="<?=$EmailMb?>" name="EmailMb" class="InputEmPr" placeholder="Email"><br><span class=ErPrIdentif1></span><br><input type="password" name="MDPS" class="InputMpsPr" placeholder="Mot de passe actuel"><br><span class=ErPrIdentif2></span><br><input type="password" name="nvMDPS" class="InputNvMpsPr" placeholder="Nouveau Mot de passe"><br><span class=ErPrIdentif3></span><bR><input type="password" name="confNvMDPS" class="InputCnNVMpsPr" placeholder="Confirmer le nouveau Mot de passe"><br><span class=ErPrIdentif4></span><div class="btnMf"><input type="submit" name="modifIdentif" value="Valider" class="BtnMfValider"><input type="button" value="Annuler" class="BtnMfAnnuler" onclick="AnnulerIdentifiant()"></div></form>';
+    identifiant.style.height = '389px';
 }
 
 function afficherContact() {
     adresses = document.querySelector('.Adresses2');
     adressesDiv = document.querySelector('.AdressesInfo');
-    adressesDiv.innerHTML = '<form action="controller.php" method="post" onsubmit="return  VérifContact()"><fieldset class="identifiantModif"><legend class="legendInput">Téléphone</legend><input type="tel" value="<?=$NumTélé?>" name="NumTélé" class="InputTélPr"></fieldset><br><span class="ErContactTel"></span><fieldset class="identifiantModif"><legend class="legendInput">Ville</legend><input type="text" value="<?=$Ville?>" name="Ville" class="InputVillePr"></fieldset><br><span class="ErContactVille"></span><fieldset class="identifiantModif"><legend class="legendInput">Code postal</legend><input type="number" value="<?=$CP?>" name="CP" class="InputCPPr"></fieldset><br><span class="ErContactCP"></span><fieldset class="identifiantModif"><legend class="legendInput">Adresse</legend><input type="text" value="<?=$AdresseMb?>" name="AdresseMb" class="InputAdrsPr"></fieldset><br><span class="ErContactAds"></span><div class="btnMf"><input type="submit" name="modifContact" value="Valider" class="BtnMfValider"><input type="button" value="Annuler" class="BtnMfAnnuler" onclick="AnnulerContact()"></div></form>';
-    adresses.style.height = '421px';
+    adressesDiv.innerHTML = '<form action="controller.php" method="post" onsubmit="return  VérifContact()"><input type="tel" value="<?=$NumTélé?>" name="NumTélé" class="InputTélPr" placeholder="Téléphone"><br><span class="ErContactTel"></span><br><input type="text" value="<?=$Ville?>" name="Ville" class="InputVillePr" placeholder="Ville"><br><span class="ErContactVille"></span><br><input type="number" value="<?=$CP?>" name="CP" class="InputCPPr" placeholder="Code postal"><br><span class="ErContactCP"></span><br><input type="text" value="<?=$AdresseMb?>" name="AdresseMb" class="InputAdrsPr" placeholder="Adresse"><br><span class="ErContactAds"></span><div class="btnMf"><input type="submit" name="modifContact" value="Valider" class="BtnMfValider"><input type="button" value="Annuler" class="BtnMfAnnuler" onclick="AnnulerContact()"></div></form>';
+    adresses.style.height = '394px';
 }
 </script>
 <?php 

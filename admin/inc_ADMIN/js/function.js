@@ -70,12 +70,55 @@ function confirmSupp(table, action, id, id2) {
         });
 }
 
+function verifSelectCmd(IdCmd) {
+    let cmd = document.getElementsByName('IdCmdAjt');
+    let aide = false;
+    for (let i = 0; i < cmd.length; i++) {
+        if (cmd[i].checked) {
+            aide = true;
+            break;
+        }
+    }
+    if (aide == false) {
+        swal({
+            title: '',
+            text: 'Veuillez sélectionner une commande !',
+            icon: 'warning',
+            button: 'Ok',
+        });
+    } else {
+        confirmModifAjt('ajtCmdDt', 'Voulez-vous vraiment ajouter cette commande à la commande' + IdCmd + ' ? ', 'Ajouter');
+    }
+}
+
+function verifSelectedPrdt(Id, table) {
+    let prdt = document.getElementsByName('IdPr[]');
+    let aide = false;
+    for (let i = 0; i < prdt.length; i++) {
+        if (prdt[i].checked) {
+            aide = true;
+            break;
+        }
+    }
+    if (aide == false) {
+        swal({
+            title: '',
+            text: 'Veuillez sélectionner un produit !',
+            icon: 'warning',
+            button: 'Ok',
+        });
+    } else {
+        if (table == 'cmd') confirmModifAjt('ajtPrdtDt', 'Voulez-vous vraiment ajouter le(s) produit(s) à la commande ' + Id + '?', 'Ajouter');
+        else if (table == 'promos') confirmModifAjt('ajtPrmPrdt', 'Voulez-vous vraiment ajouter le(s) produit(s) à la promo ' + Id + '?', 'Ajouter');
+    }
+}
+
+
 function confirmModifAjt(formModif, mssg, action) {
     swal({
             title: " ",
             text: mssg,
             icon: "warning",
-
             buttons: [
                 "Annuler",
                 action,

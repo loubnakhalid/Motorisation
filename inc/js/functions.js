@@ -194,7 +194,7 @@ function VérifCnt() {
         ErCnt2.style.visibility = "visible";
         aide = false;
     } else if (!verifEmail(EmailCnt.value)) {
-        ErCnt2.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Veuillez entrer un email valide';
+        ErCnt2.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Veuillez entrer une adresse email valide';
         EmailCnt.style.borderColor = "red";
         ErCnt2.style.visibility = "visible";
         aide = false;
@@ -245,18 +245,18 @@ function VérifInscription() {
         ErTél.style.borderColor = "red";
         ObTél.style.visibility = "visible";
         aide = false;
+    } else if (!LongueurChamps(ErTél.value, 10)) {
+        ObTél.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le numéro doit contenir 10 chiffres ';
+        ErTél.style.borderColor = "red";
+        ObTél.style.visibility = "visible";
+        aide = false;
     } else if (!ChampsChiffre(ErTél.value)) {
-        ObTél.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le Télé ne doit pas contenir pas des lettres ';
+        ObTél.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le numéro ne doit pas contenir des lettres ';
         ErTél.style.borderColor = "red";
         ObTél.style.visibility = "visible";
         aide = false;
     } else if (!VerifTélé(ErTél.value)) {
-        ObTél.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le Télé débute avec 06 ou 07 ';
-        ErTél.style.borderColor = "red";
-        ObTél.style.visibility = "visible";
-        aide = false;
-    } else if (!LongueurChamps(ErTél.value, 10)) {
-        ObTél.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le Télé ne contient que 10 chiffres ';
+        ObTél.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le numéro doit débuter avec 06 ou 07 ';
         ErTél.style.borderColor = "red";
         ObTél.style.visibility = "visible";
         aide = false;
@@ -282,12 +282,12 @@ function VérifInscription() {
         ObCP.style.visibility = "visible";
         aide = false;
     } else if (!ChampsChiffre(ErCP.value)) {
-        ObCP.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le code postal ne doit pas contenir des lettres ';
+        ObCP.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le code postal doit contenir que des lettres ';
         ErCP.style.borderColor = "red";
         ObCP.style.visibility = "visible";
         aide = false;
     } else if (!LongueurChamps(ErCP.value, 5)) {
-        ObCP.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le code postal contient que 5 chiffres ';
+        ObCP.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le code postal doit contenir 5 chiffres ';
         ErCP.style.borderColor = "red";
         ObCP.style.visibility = "visible";
         aide = false;
@@ -331,7 +331,7 @@ function VérifInscription() {
         ObConfMps.style.visibility = "visible";
         aide = false;
     } else if (!VerifCnfMps(ErCnMps.value, ErMps.value)) {
-        ObConfMps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Les deux mots de passe doivent correspondre ';
+        ObConfMps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Les mots de passe ne sont pas identiques';
         ErCnMps.style.borderColor = "red";
         ObConfMps.style.visibility = "visible";
         aide = false;
@@ -339,21 +339,21 @@ function VérifInscription() {
     /*----------------------------------------- */
     /********Vérifier champs texte******** */
     if (!ChampsText(ErNom.value)) {
-        ObNom.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le nom ne contient pas des chifres ';
+        ObNom.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le nom ne doit pas contenir des chiffres ';
         ErNom.style.borderColor = "red";
         ObNom.style.visibility = "visible";
         aide = false;
     }
 
     if (!ChampsText(ErPrenom.value)) {
-        ObPrénom.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le prénom ne contient pas des chifres ';
+        ObPrénom.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le prénom ne doit pas contenir des chiffres ';
         ErPrenom.style.borderColor = "red";
         ObPrénom.style.visibility = "visible";
         aide = false;
     }
 
     if (!ChampsText(ErVille.value)) {
-        ObVille.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> La ville ne contient pas des chifres ';
+        ObVille.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> La ville ne doit pas contenir des chiffres ';
         ErVille.style.borderColor = "red";
         ObVille.style.visibility = "visible";
         aide = false;
@@ -410,18 +410,18 @@ function VérifCmd() {
         CmdTél.style.borderColor = "red";
         ErCmdTel.style.visibility = "visible";
         aide = false;
+    } else if (!LongueurChamps(CmdTél.value, 10)) {
+        ErCmdTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le numéro doit contenir 10 chiffres ';
+        CmdTél.style.borderColor = "red";
+        ErCmdTel.style.visibility = "visible";
+        aide = false;
     } else if (!ChampsChiffre(CmdTél.value)) {
-        ErCmdTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Télé ne contient pas des lettres ';
+        ErCmdTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le numéro ne doit pas contenir des lettres ';
         CmdTél.style.borderColor = "red";
         ErCmdTel.style.visibility = "visible";
         aide = false;
     } else if (!VerifTélé(CmdTél.value)) {
-        ErCmdTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Télé débute avec 06 ou 07 ';
-        CmdTél.style.borderColor = "red";
-        ErCmdTel.style.visibility = "visible";
-        aide = false;
-    } else if (!LongueurChamps(CmdTél.value, 10)) {
-        ErCmdTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Télé contient 10 chiffres ';
+        ErCmdTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le numéro doit débuter avec 06 ou 07 ';
         CmdTél.style.borderColor = "red";
         ErCmdTel.style.visibility = "visible";
         aide = false;
@@ -435,13 +435,13 @@ function VérifCmd() {
     }
     /***Vérifier champs text */
     if (!ChampsText(CmdPr.value)) {
-        ErCmdPr.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le prénom ne contient pas des chifres ';
+        ErCmdPr.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le prénom ne doit pas contenir des chiffres ';
         CmdPr.style.borderColor = "red";
         ErCmdPr.style.visibility = "visible";
         aide = false;
     }
     if (!ChampsText(CmdNm.value)) {
-        ErCmdNm.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le nom ne contient pas des chifres ';
+        ErCmdNm.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le nom ne doit pas contenir pas des chiffres ';
         CmdNm.style.borderColor = "red";
         ErCmdNm.style.visibility = "visible";
         aide = false;
@@ -468,7 +468,7 @@ function VérifCS() {
         ObCodeSec.style.display = "block";
         aide = false;
     } else if (!LongueurChamps(CodeSécr.value, 6)) {
-        ObCodeSec.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le code sécurité est composé de 6 chiffres ';
+        ObCodeSec.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le code sécurité doit être composé de 6 chiffres ';
         CodeSécr.style.borderColor = "red";
         ObCodeSec.style.display = "block";
         aide = false;
@@ -483,33 +483,12 @@ function VérifNvMps() {
 
     ReinMdps.style.borderColor = "#1cdd1c";
     ReinConfMps.style.borderColor = "#1cdd1c";
-    if (!ChampsOb(ReinMdps.value)) {
-        ObReinMdps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>  Champ obligatoire';
-        ReinMdps.style.borderColor = "red";
-        ObReinMdps.style.display = 'block';
-        aide = false;
-    } else if (!VérifLongMps(ReinMdps.value)) {
-        ObReinMdps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le mot de passe doit contenir plus de 8 caractères ';
-        ReinMdps.style.borderColor = "red";
-        ObReinMdps.style.display = 'block';
-        aide = false;
-    } else if (!VerifMajMIn(ReinMdps.value)) {
-        ObReinMdps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le mot de passe doit contenir des lettre majuscules et miniscules ';
-        ReinMdps.style.borderColor = "red";
-        ObReinMdps.style.display = 'block';
-        aide = false;
-    } else if (!VerifCarctSpec(ReinMdps.value)) {
-        ObReinMdps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le mot de passe doit contenir des caractères spéciaux ';
-        ReinMdps.style.borderColor = "red";
-        ObReinMdps.style.display = 'block';
-        aide = false;
-    } else if (ChampsText(ReinMdps.value)) {
-        ObReinMdps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le mot de passe doit contenir des chiffres ';
+    if (!ChampsOb(ReinMdps.value) || !VérifLongMps(ReinMdps.value) || !VerifMajMIn(ReinMdps.value) || !VerifCarctSpec(ReinMdps.value) || ChampsText(ReinMdps.value)) {
+        ObReinMdps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le mot de passe doit contenir au moins :<div style="margin-left:15px"> 8 caractères <br> 1 chiffre<br> 1 caractère spécial <br> 1 majuscule</div> ';
         ReinMdps.style.borderColor = "red";
         ObReinMdps.style.display = 'block';
         aide = false;
     }
-
 
     if (!ChampsOb(ReinConfMps.value)) {
         ObReinConfMps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>  Champ obligatoire';
@@ -517,7 +496,7 @@ function VérifNvMps() {
         ObReinConfMps.style.display = 'block';
         aide = false;
     } else if (!VerifCnfMps(ReinConfMps.value, ReinMdps.value)) {
-        ObReinConfMps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Les deux mots de passe doivent correspondre ';
+        ObReinConfMps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Les mots de passe ne sont pas identiques';
         ReinConfMps.style.borderColor = "red";
         ObReinConfMps.style.display = 'block';
         aide = false;
@@ -621,31 +600,31 @@ function VérifRDV() {
         ObRdvTel.style.visibility = "visible";
         aide = false;
     } else if (!ChampsChiffre(RdvTel.value)) {
-        ObRdvTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Télé ne contient pas des lettres ';
+        ObRdvTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le numéro ne doit pas contenir des lettres ';
         RdvTel.style.borderColor = "red";
         ObRdvTel.style.visibility = "visible";
         aide = false;
     } else if (!VerifTélé(RdvTel.value)) {
-        ObRdvTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Télé débute avec 06 ou 07 ';
+        ObRdvTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le numéro doit débuter avec 06 ou 07 ';
         RdvTel.style.borderColor = "red";
         ObRdvTel.style.visibility = "visible";
         aide = false;
     } else if (!LongueurChamps(RdvTel.value, 10)) {
-        ObRdvTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Télé contient 10 chiffres ';
+        ObRdvTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le numéro doit contenir 10 chiffres ';
         RdvTel.style.borderColor = "red";
         ObRdvTel.style.visibility = "visible";
         aide = false;
     }
     /***********Vérifier champs vide ******* */
     if (!ChampsText(RdvNm.value)) {
-        ObRdvNm.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le nom ne contient pas des chifres ';
+        ObRdvNm.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le nom ne doit pas contenir des chiffres ';
         RdvNm.style.borderColor = "red";
         ObRdvNm.style.visibility = "visible";
         aide = false;
     }
 
     if (!ChampsText(RdvPr.value)) {
-        ObRdvPr.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le prénom ne contient pas des chifres ';
+        ObRdvPr.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> Le prénom ne doit pas contenir pas des chiffres ';
         RdvPr.style.borderColor = "red";
         ObRdvPr.style.visibility = "visible";
         aide = false;
@@ -659,6 +638,7 @@ function VérifIdentité() {
     const ProfJrs = document.querySelector('.InputDtJr');
     const ProfMs = document.querySelector('.InputDtMs');
     const ProfJAns = document.querySelector('.InputDtAns');
+    const Identité = document.querySelector('.Identité');
 
     let ErPrNm = document.querySelector('.ErPrNm');
     let ErPrPr = document.querySelector('.ErPrpr');
@@ -670,34 +650,40 @@ function VérifIdentité() {
     ErPrDt.style.visibility = 'hidden';
     //--------Champs obligatoire
     if (!ChampsOb(ProfilNm.value)) {
-        ErPrNm.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champs obligatoire';
+        ErPrNm.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champ obligatoire';
         ErPrNm.style.visibility = 'visible';
         aide = false;
+        Identité.style.height = '296px';
     }
     if (!ChampsOb(ProfilPr.value)) {
-        ErPrPr.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champs obligatoire';
+        ErPrPr.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champ obligatoire';
         ErPrPr.style.visibility = 'visible';
         aide = false;
+        Identité.style.height = '296px';
     }
     if (!ChampsOb(ProfJrs.value) || !ChampsOb(ProfMs.value) || !ChampsOb(ProfJAns.value)) {
-        ErPrDt.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champs obligatoire';
+        ErPrDt.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champ obligatoire';
         ErPrDt.style.visibility = 'visible';
         aide = false;
+        Identité.style.height = '296px';
     } else if (!Comparer(ProfJrs.value, 1, 30) || !Comparer(ProfMs.value, 1, 12) || !Comparer(ProfJAns.value, 1933, 2005)) {
         ErPrDt.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Date non valide';
         ErPrDt.style.visibility = 'visible';
         aide = false;
+        Identité.style.height = '296px';
     }
     //---------------Vérifier champs texte 
     if (!ChampsText(ProfilNm.value)) {
-        ErPrNm.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Nom ne contient pas des chiffres';
+        ErPrNm.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Le nom ne doit pas contenir des chiffres';
         ErPrNm.style.visibility = 'visible';
         aide = false;
+        Identité.style.height = '296px';
     }
     if (!ChampsText(ProfilPr.value)) {
-        ErPrPr.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Prénom ne contient pas des chiffres';
+        ErPrPr.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Le prénom ne doit pas contenir des chiffres';
         ErPrPr.style.visibility = 'visible';
         aide = false;
+        Identité.style.height = '296px';
     }
     //--------------Vérifier champs date 
     //---comparer date
@@ -730,39 +716,44 @@ function VérifIdentifiant() {
     ProfErMps.style.display = 'none';
     ProfErNvMps.style.display = 'none';
     ProfErConfMps.style.display = 'none';
-    //---Vérifier champs vide
+    //---Vérifier email
     if (!ChampsOb(ProfModifEml.value)) {
-        ProfErEml.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champs obligatoire';
+        ProfErEml.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champ obligatoire';
         ProfErEml.style.display = "block";
-        identifiant.style.height = '470px';
+        identifiant.style.height = '445px';
+        aide = false;
+    } else if (!verifEmail(ProfModifEml.value)) {
+        ProfErEml.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Adresse email invalide';
+        ProfErEml.style.display = "block";
+        identifiant.style.height = '445px';
         aide = false;
     }
 
     if (!ChampsOb(ProfModifMps.value)) {
-        ProfErMps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champs obligatoire';
+        ProfErMps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champ obligatoire';
         ProfErMps.style.display = "block";
-        identifiant.style.height = '470px';
+        identifiant.style.height = '445px';
         aide = false;
     }
     //-------Confirmer Mot de passe
     if (!ChampsOb(ProfModifConfMps.value)) {
-        ProfErConfMps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champs obligatoire';
+        ProfErConfMps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champ obligatoire';
         ProfErConfMps.style.display = "block";
-        identifiant.style.height = '470px';
+        identifiant.style.height = '445px';
         aide = false;
     } else if (!VerifCnfMps(ProfModifConfMps.value, ProfModifNvMps.value)) {
         ProfErConfMps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Les deux mots de passe doivent correspondre';
         ProfErConfMps.style.display = "block";
-        identifiant.style.height = '470px';
+        identifiant.style.height = '445px';
         aide = false;
     }
     if (!ChampsOb(ProfModifNvMps.value)) {
-        ProfErNvMps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champs obligatoire';
+        ProfErNvMps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champ obligatoire';
         ProfErNvMps.style.display = "block";
-        identifiant.style.height = '470px';
+        identifiant.style.height = '445px';
         aide = false;
     } else if (!VerifMajMIn(ProfModifNvMps.value) || !VerifCarctSpec(ProfModifNvMps.value) || ChampsText(ProfModifNvMps.value) || !VérifLongMps(ProfModifNvMps.value)) {
-        ProfErNvMps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Le mot de passe doit contenir au mois :<br>8 caractères<br>1 chiffre<br>1 caractère spécial<br>1 majucsule';
+        ProfErNvMps.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Le mot de passe doit contenir au moins :<br>8 caractères<br>1 chiffre<br>1 caractère spécial<br>1 majucsule';
         ProfErNvMps.style.display = "block";
         aide = false;
         identifiant = document.querySelector('.Identifiant2');
@@ -776,6 +767,7 @@ function VérifContact() {
     const ContactVille = document.querySelector('.InputVillePr');
     const ContactCp = document.querySelector('.InputCPPr');
     const ContactAds = document.querySelector('.InputAdrsPr');
+    const Contact = document.querySelector('.Adresses2');
 
     let ErContactTel = document.querySelector('.ErContactTel');
     let ErContactVille = document.querySelector('.ErContactVille');
@@ -789,47 +781,60 @@ function VérifContact() {
     ErContactAds.style.display = 'none';
     //Vérifier Télé
     if (!ChampsOb(ContactTel.value)) {
-        ErContactTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champs obligatoire';
+        ErContactTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champ obligatoire';
         ErContactTel.style.display = 'block';
         aide = false;
+        Contact.style.height = '452px';
     } else if (!ChampsChiffre(ContactTel.value)) {
-        ErContactTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Télé ne contient pas des caractères';
+        ErContactTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Le numéro ne doit pas contenir des caractères';
         ErContactTel.style.display = 'block';
         aide = false;
+        Contact.style.height = '452px';
     } else if (!VerifTélé(ContactTel.value)) {
-        ErContactTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Télé débute avec 06 ou 07';
+        ErContactTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Le numéro doit débuter avec 06 ou 07';
         ErContactTel.style.display = 'block';
         aide = false;
+        Contact.style.height = '452px';
     } else if (!LongueurChamps(ContactTel.value, 10)) {
-        ErContactTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Télé contient 10 chiffres';
+        ErContactTel.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Le numéro doit contenir 10 chiffres';
         ErContactTel.style.display = 'block';
         aide = false;
+        Contact.style.height = '452px';
     }
     //Vérifier Ville
     if (!ChampsOb(ContactVille.value)) {
-        ErContactVille.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champs obligatoire';
+        ErContactVille.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champ obligatoire';
+        ErContactVille.style.display = 'block';
+        aide = false;
+        Contact.style.height = '452px';
+    } else if (!ChampsText(ContactVille.value)) {
+        ErContactVille.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i> La ville ne doit pas contenir des chiffres ';
         ErContactVille.style.display = 'block';
         aide = false;
     }
     //Vérifier CP
     if (!ChampsOb(ContactCp.value)) {
-        ErContactCp.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champs obligatoire';
+        ErContactCp.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champ obligatoire';
         ErContactCp.style.display = 'block';
         aide = false;
+        Contact.style.height = '452px';
     } else if (!ChampsChiffre(ContactCp.value)) {
-        ErContactCp.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;le code postal ne contient pas des lettres';
+        ErContactCp.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;le code postal ne doit pas contenir des lettres';
         ErContactCp.style.display = 'block';
         aide = false;
+        Contact.style.height = '452px';
     } else if (!LongueurChamps(ContactCp.value, 5)) {
-        ErContactCp.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;le code postal contient 5 chiffres';
+        ErContactCp.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;le code postal doit contenir 5 chiffres';
         ErContactCp.style.display = 'block';
         aide = false;
+        Contact.style.height = '452px';
     }
     //Vérifier Adresse
     if (!ChampsOb(ContactAds.value)) {
-        ErContactAds.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champs obligatoire';
+        ErContactAds.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i>&nbsp;Champ obligatoire';
         ErContactAds.style.display = 'block';
         aide = false;
+        Contact.style.height = '452px';
     }
     return aide;
 }

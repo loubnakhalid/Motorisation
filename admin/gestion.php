@@ -434,7 +434,7 @@ elseif(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
                             </tbody>
                         </table>
                         <div class='bas'>
-                            <button type='button' onclick=\"confirmModifAjt('ajtCmdDt','Voulez-vous vraiment ajouter la commande $IdCmdAjt à la commande $IdCmd?','Ajouter')\">Ajouter</button>
+                            <button type='button' onclick=\"verifSelectCmd($IdCmd);\">Ajouter</button>
                         </div>
                     </form>
                 </div>
@@ -484,7 +484,7 @@ elseif(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
                         </tbody>
                     </table>
                     <div class='bas'>
-                        <button type='button' onclick=\"confirmModifAjt('ajtPrdtDt','Voulez-vous vraiment ajouter les produits à la commande $IdCmd?','Ajouter')\">Ajouter</button>
+                        <button type='button' onclick=\"verifSelectedPrdt($IdCmd,'cmd')\">Ajouter</button>
                     </div>
                 </form>
             </div>
@@ -848,7 +848,7 @@ elseif(isset($_GET['ajouter_prmprdt']) && isset($_GET['id'])){
     <div class='body_display_modif_promo '>
         <div class='div_ajouter_prd_details_promo'>
             <div class='haut'><i class='bx bxs-x-square icon_x_exit_promo' onclick='document.location.href=\"gestion.php?table=promos&détails_promos=true&id=$id\"'></i></div>
-            <form action='controller.php?table=promo_produit&action=ajouter' method='post'>
+            <form action='controller.php?table=promo_produit&action=ajouter' id='ajtPrmPrdt' method='post'>
                 <table cellspacing='0 '>
                     <thead>
                         <tr>
@@ -864,7 +864,7 @@ elseif(isset($_GET['ajouter_prmprdt']) && isset($_GET['id'])){
                     echo"
                     <tr>
                         <input type='hidden' name='IdPromo' value='$id'>
-                        <td class='td_check'><input type='checkbox' id='chek1'name='IdPr[]' value='$IdPr'  class='checkbox'><img src='../inc/img/produits/$row[ImagePr]'></td>
+                        <td class='td_check'><input type='checkbox' id='chek1' name='IdPr[]' value='$IdPr'  class='checkbox'><img src='../inc/img/produits/$row[ImagePr]'></td>
                         <td>$row[NomPr]</td>
                     </tr>";
                 }
@@ -872,7 +872,7 @@ elseif(isset($_GET['ajouter_prmprdt']) && isset($_GET['id'])){
                     </tbody>
                 </table>
                 <div class='bas'>
-                    <button type='submit'>Ajouter</button>
+                    <button type='button' onclick=\"verifSelectedPrdt($id,'promos')\">Ajouter</button>
                 </div>
             </form>
         </div>
@@ -1112,7 +1112,7 @@ if (isset($_GET['table'])) {
                                     <ul>
                                         <li><a href='gestion.php?table=commande&tri=NomMb'>Nom client</a></li>
                                         <li><a href='gestion.php?table=commande&tri=DateCmd'>Date commande</a></li>
-                                        <li><a href='gestion.php?table=commande&tri=prixTT'>Totale</a></li>
+                                        <li><a href='gestion.php?table=commande&tri=prixTT'>Total</a></li>
                                         <li><a href='gestion.php?table=commande&tri=modePaiement'>Mode paiement</a></li>
                                         <li><a href='gestion.php?table=commande&tri=StatutCmd'>Statut</a></li>
                                     </ul>
@@ -1149,7 +1149,7 @@ if (isset($_GET['table'])) {
                                 <th>N° commande</th>
                                 <th>Nom client</th>
                                 <th>Date commande</th>
-                                <th>Totale</th>
+                                <th>Total</th>
                                 <th>Mode paiement</th>
                                 <th>Statut</th>
                                 <th>Actions</th>
@@ -1224,7 +1224,7 @@ if (isset($_GET['table'])) {
                                 <div class='element'>
                                     <div class='trie'>
                                         <div class='input_trie'>
-                                            <p><span class='trie_par'>Trie par :</span> <span class='name_trie'></span></p>
+                                            <p><span class='trie_par'>Trier par :</span> <span class='name_trie'></span></p>
                                             <span class='icon_select_trie'><i class='bx bxs-chevron-down'></i></span>
                                         </div>
                                         <div class='display_trie'>
@@ -1241,7 +1241,7 @@ if (isset($_GET['table'])) {
                                 <div class='element'>
                                     <div class='statut'>
                                         <div class='input_statut'>
-                                            <p><span class='statut_par'>statut :</span> <span class='name_statut'></span></p>
+                                            <p><span class='statut_par'>Statut :</span> <span class='name_statut'></span></p>
                                             <span class='icon_select_statut'><i class='bx bxs-chevron-down'></i></span>
                                         </div>
                                         <div class='display_statut'>
@@ -1264,13 +1264,13 @@ if (isset($_GET['table'])) {
                                 <thead>
                                     <tr>
                                         <th>N° RDV</th>
-                                        <th>Client</th>
+                                        <th>Nom client</th>
                                         <th>Adresse</th>
                                         <th>Télé</th>
                                         <th>Type de projet</th>
                                         <th>Date</th>
                                         <th>Statut</th>
-                                        <th>Action</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
