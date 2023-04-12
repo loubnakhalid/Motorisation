@@ -1,4 +1,10 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "", "motorisation");
-if ($mysqli->connect_error) die('Un problème est survenu lors de la tentative de connexion à la BDD : ' . $mysqli->connect_error);
+try{
+    $mysqli = mysqli_connect("localhost", "root", "", "motorisation");
+}
+catch (Exception | Error $e){
+    echo "Erreur à la connexion avec la base de données !";
+    die();
+}
+
 ?>

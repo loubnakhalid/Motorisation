@@ -2,6 +2,7 @@
 include('./inc_ADMIN/menu.inc.php'); 
 ?>
 <?php
+//Formulaire de modification du produit 
 if(isset($_GET['modifier_produit']) && isset($_GET['IdPr'])){
     $IdPr=$_GET['IdPr'];
     try{
@@ -103,6 +104,7 @@ if(isset($_GET['modifier_produit']) && isset($_GET['IdPr'])){
     }
 
 }
+//Formulaire d'ajout du produit
 elseif(isset($_GET['ajouter_produit'])){
     echo "
     <div class='body'>
@@ -176,6 +178,7 @@ elseif(isset($_GET['ajouter_produit'])){
     </div>
     ";
 }
+//Formulaire de modification de commande
 elseif(isset($_GET['modifier_commande']) && isset($_GET['IdCmd'])){
     $IdCmd=$_GET['IdCmd'];
     $rslt=mysqli_query($mysqli,"select * from commande natural join membre where IdCmd=$IdCmd");
@@ -276,6 +279,7 @@ elseif(isset($_GET['modifier_commande']) && isset($_GET['IdCmd'])){
     </div>
     ";
 }
+//Formulaire d'ajout de commande
 elseif(isset($_GET['ajouter_commande'])){
     echo "
     <div class='body_cmd'>
@@ -349,6 +353,7 @@ elseif(isset($_GET['ajouter_commande'])){
     </div>
     ";
 }
+//Le tableau détails_commande
 elseif(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
     $IdCmd=$_GET['IdCmd'];
     if(isset($_GET['btn_détails_commande']) ){
@@ -492,6 +497,7 @@ elseif(isset($_GET['détails_commande']) && isset($_GET['IdCmd'])){
         ";
     }
 }
+//La fiche du client (commande)
 elseif(isset($_GET['ficheClient']) && isset($_GET['id'])){
     $id=$_GET['id'];
     $rslt=mysqli_query($mysqli,"select * from membre where IdMb=$id");
@@ -543,6 +549,7 @@ elseif(isset($_GET['ficheClient']) && isset($_GET['id'])){
     </div>
     </div>";
 }
+//Formulaire de modification de RDV
 elseif(isset($_GET['modifier_RDV']) && isset($_GET['IdRDV'])){
     $IdRDV=$_GET['IdRDV'];
     $rslt=mysqli_query($mysqli,"SELECT r.*, m.IdMb,p.IdPart,
@@ -646,6 +653,7 @@ elseif(isset($_GET['modifier_RDV']) && isset($_GET['IdRDV'])){
     </div>
     ";
 }
+//Formulaire d'ajout de RDV
 elseif(isset($_GET['ajouter_RDV'])){
     echo "
     <div class='body_display_modif_rdv'>
@@ -721,6 +729,7 @@ elseif(isset($_GET['ajouter_RDV'])){
     </div>
     ";
 }
+//Formulaire de modification de promos
 elseif(isset($_GET['modifier_promos']) && isset($_GET['id'])){
     $id=$_GET['id'];
     $rslt=mysqli_query($mysqli,"select * from promos where IdPromo=$id");
@@ -766,6 +775,7 @@ elseif(isset($_GET['modifier_promos']) && isset($_GET['id'])){
     </div>
     </div>";
 }
+//Formulaire d'ajout de promos
 elseif(isset($_GET['ajouter_promos'])){
     echo" 
     <div class='body_display_modif_promo'>
@@ -807,6 +817,7 @@ elseif(isset($_GET['ajouter_promos'])){
     </div>
     ";
 }
+//Le tableau détails_promos
 elseif(isset($_GET['détails_promos']) && isset($_GET['id'])){
     $id=$_GET['id'];
     echo "  <div class='body_display_modif_promo '><div class='div_details_promo'>
@@ -842,6 +853,7 @@ elseif(isset($_GET['détails_promos']) && isset($_GET['id'])){
         </div>
         </div>";
 }
+//Liste d'ajout de produits à une promo
 elseif(isset($_GET['ajouter_prmprdt']) && isset($_GET['id'])){
     $id=$_GET['id'];
     echo "
@@ -882,6 +894,7 @@ elseif(isset($_GET['ajouter_prmprdt']) && isset($_GET['id'])){
 <?php
 if (isset($_GET['table'])) {
     switch($_GET['table']){
+        //Affichage de la page produit
         case 'produit' :
             $CountProduct=mysqli_query($mysqli,"select * from produit");
             $nbreProduct=mysqli_num_rows($CountProduct);
@@ -1020,6 +1033,7 @@ if (isset($_GET['table'])) {
                         </tbody>
                     </table>";
         ;break;
+        //Affichage de la page catégorie
         case 'catégorie' :
             $CountCt=mysqli_query($mysqli,"select * from catégorie");
             $nbreCt=mysqli_num_rows($CountCt);
@@ -1070,6 +1084,7 @@ if (isset($_GET['table'])) {
                     </div>
                     ";
         ;break;
+        //Affichage de la page commande
         case 'commande' :
             $totale=mysqli_query($mysqli,"select * from commande");
             $row=mysqli_num_rows($totale);
@@ -1195,6 +1210,7 @@ if (isset($_GET['table'])) {
                         </table>
                             ";
         ;break;
+        //Affichage de la page RDV
         case 'RDV' :
             $rslt1=mysqli_query($mysqli,"select * from rdv");
             $nbre=mysqli_num_rows($rslt1);
@@ -1340,6 +1356,7 @@ if (isset($_GET['table'])) {
             </table>
             </div>";
         ;break;
+        //Affichage de la page promos
         case 'promos' :
             $rslt1=mysqli_query($mysqli,"select * from promos");
             $nbre=mysqli_num_rows($rslt1);
@@ -1471,8 +1488,9 @@ if (isset($_GET['table'])) {
     }
 }
 else{
-    header("location:accueil.php");
+    header("location:index.php");
 }
+//Les alertes d'erreurs et succès
 if(isset($_SESSION['erreur'])){
     echo "<script>erreur(\"$_SESSION[erreur]\");</script>";
     unset($_SESSION['erreur']);

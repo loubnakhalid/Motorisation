@@ -34,7 +34,7 @@ if(! Admin()){
         <div class="main_menu">
             <ul>
                 <li class="lien acceuil">
-                    <a href="./accueil.php">
+                    <a href="./index.php">
                         <i class='bx bx-home  icon'></i>
                         <span class="text">Acceuil</span>
                     </a>

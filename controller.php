@@ -80,7 +80,7 @@ if(isset($_POST['con'])){
                     }
                     //Redirection selon le type de membre (Admin ou client)----------------------------------------------------------------------------------//
                     if(Admin()){
-                        header("location:./admin/accueil.php");
+                        header("location:./admin/index.php");
                     }
                     elseif(Client()){
                         header("location:./profil.php");

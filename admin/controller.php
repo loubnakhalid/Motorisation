@@ -1,5 +1,6 @@
 <?php 
-include("../inc/init.inc.php"); 
+include("../inc/init.inc.php");
+//Vérification si le membre est un Admin
 if(!Admin()){
     header("location:../index.php");
 }
@@ -9,6 +10,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
     $table=$_GET['table'];
     $action=$_GET['action'];
     switch($table){
+        //Traitement de la table catégorie
         case 'catégorie' :
             if($action=='supprimer'){
                 $id=$_GET['id'];
@@ -28,6 +30,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                 }
             }
         ;break;
+        //Traitement de la table produit
         case 'produit':
             if($action=='supprimer'){
                 $id=$_GET['id'];
@@ -60,6 +63,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                 }
             }
         ;break;
+        //Traitement de la table commande
         case 'commande' :
             if($action=='supprimer'){
                 $id=$_GET['id'];
@@ -84,6 +88,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                 }
             }
         ;break;
+        //Traitement de la table RDV
         case 'RDV':
             if($action=='supprimer'){
                 $id=$_GET['id'];
@@ -120,6 +125,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                 }
             }
         ;break;
+        //Traitement de la table promos
         case 'promos':
             if($action=='supprimer'){
                 $id=$_GET['id'];
@@ -142,6 +148,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                 }
             }
         ;break;
+        //Traitement de la table promo_produit
         case 'promo_produit':
             if($action=='supprimer'){
                 $id=$_GET['id'];
@@ -172,6 +179,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
                 }
             }
         ;break;
+        //Traitement de la table détails_commande
         case 'détails_commande':
             if($action=='supprimer'){
                 if(isset($_GET['id']) && isset($_GET['id2'])){
@@ -309,6 +317,7 @@ if(isset($_GET['table']) && isset($_GET['action'])){
             }
         ;break;
     }
+    //l'éxecution de la requête 
     if(isset($rqt) ){
         try{
             if($rslt=mysqli_query($mysqli,$rqt)){

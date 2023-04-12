@@ -66,8 +66,6 @@ const CmdPr = document.querySelector('.prénom-input');
 const CmdEml = document.querySelector('.Eml-input');
 const CmdTél = document.querySelector('.tele-input');
 const CmdAds = document.querySelector('.adresse-input');
-//const CmdPpl = document.getElementById('paypal');
-//const CmdEspc = document.getElementById('espece');
 /*****Ereurs*** ********/
 let ErCmdNm = document.querySelector('.ErCmdNom');
 let ErCmdPr = document.querySelector('.ErCmdPrénom');

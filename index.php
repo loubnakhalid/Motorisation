@@ -9,7 +9,7 @@ include("inc/haut.inc.php");
                     <input type="radio" name="radio" class="rd" id="r1" checked>
                     <input type="radio" name="radio" class="rd" id="r2">
                     <div class="img first">
-                        <img src="./inc/img/test.png" alt="">
+                        <img src="./inc/img/pub_liv.png" alt="">
                     </div>
                     <div class="img">
                         <img src="./inc/img/help4.png" alt="">

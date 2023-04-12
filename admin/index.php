@@ -1,8 +1,8 @@
 <?php
 include('./inc_ADMIN/menu.inc.php');
+try{
 require_once '../vendor/autoload.php';
 echo "<section class='home'>";
-try{
 // Fonction d'initialisation et d'authentification
 	function initializeAnalytics(){
 		// Précise où trouver la clé du compte de service

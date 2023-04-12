@@ -134,7 +134,7 @@ include('./inc/init.inc.php');
                 <ul>
                     <?php
                         $rqt='SELECT * FROM catégorie';
-                        $rslt=mysqli_execute_query($mysqli,$rqt);
+                        $rslt=mysqli_query($mysqli,$rqt);
                         while($row=mysqli_fetch_assoc($rslt)){
                             echo "<li><a href='catégorie.php?IdCt=".$row['IdCt']."'>".$row['NomCt']."</a></li>";
                         }
@@ -162,7 +162,7 @@ include('./inc/init.inc.php');
        <?php
         if(isset($_SESSION['membre']['IdMb'])){
             $rqt='SELECT * FROM membre WHERE IdMb='.$_SESSION['membre']['IdMb'];
-            $rslt=mysqli_execute_query($mysqli,$rqt);
+            $rslt=mysqli_query($mysqli,$rqt);
             $row=mysqli_fetch_assoc($rslt);
             $Nom=$row['NomMb'];
             $Prénom=$row['PrénomMb'];
